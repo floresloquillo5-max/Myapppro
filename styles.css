@@ -1,1 +1,467 @@
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.app-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Panel Principal */
+.main-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background: #f5f5f5;
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.main-panel.shifted {
+    transform: translateX(-100%);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.tasa-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.tasa-bcv {
+    background: rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.label-tasa {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.valor-tasa {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.nivel-cashea {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nivel-cashea label {
+    font-size: 14px;
+}
+
+#nivelCashea {
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    background: rgba(255,255,255,0.9);
+}
+
+/* Main Content */
+.main-content {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Formulario */
+.form-agregar {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.form-agregar h2 {
+    margin-bottom: 15px;
+    color: #667eea;
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.input-group input {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.btn-agregar {
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-agregar:hover {
+    background: #5a67d8;
+}
+
+/* Lista de productos */
+.lista-container {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.lista-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.lista-header h2 {
+    color: #667eea;
+}
+
+.btn-limpiar {
+    padding: 8px 15px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-limpiar:hover {
+    background: #dc2626;
+}
+
+.lista-productos {
+    list-style: none;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.producto-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background 0.3s;
+}
+
+.producto-item:hover {
+    background: #f8f9ff;
+}
+
+.producto-checkbox {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.producto-info {
+    flex: 1;
+}
+
+.producto-nombre {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.producto-detalles {
+    font-size: 12px;
+    color: #666;
+}
+
+.producto-precio {
+    font-weight: 600;
+    color: #667eea;
+    margin-right: 15px;
+}
+
+.btn-eliminar {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s;
+}
+
+.btn-eliminar:hover {
+    transform: scale(1.2);
+}
+
+.producto-vacio {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+/* Totales */
+.totales-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.total-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.total-card h3 {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.total-valores {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.total-valores span:first-child {
+    font-size: 20px;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.total-valores span:last-child {
+    font-size: 14px;
+    color: #666;
+}
+
+.cashea-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.cashea-card h3 {
+    color: white;
+}
+
+.cashea-card .total-valores span:first-child {
+    color: white;
+}
+
+.cashea-card .total-valores span:last-child {
+    color: rgba(255,255,255,0.8);
+}
+
+/* Panel de Calculadora */
+.calculator-panel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    transition: transform 0.3s ease;
+    z-index: 2;
+    overflow-y: auto;
+}
+
+.calculator-panel.visible {
+    transform: translateX(-100%);
+}
+
+.calc-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calc-header h2 {
+    font-size: 20px;
+}
+
+.btn-cerrar {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.calc-content {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.calc-section {
+    background: #f8f9ff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.calc-section h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+/* Conversor */
+.conversor-container {
+    display: grid;
+    gap: 20px;
+}
+
+.conversor-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.conversor-input label {
+    font-weight: 500;
+    color: #666;
+}
+
+.conversor-input input {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.btn-convertir {
+    padding: 10px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-convertir:hover {
+    background: #5a67d8;
+}
+
+/* Compra Imaginaria y Calculadora Manual */
+.compra-imaginaria,
+.calculadora-manual {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.compra-imaginaria label,
+.calculadora-manual label {
+    font-weight: 500;
+    color: #666;
+}
+
+.compra-imaginaria input,
+.calculadora-manual input {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.btn-calcular {
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-calcular:hover {
+    background: #5a67d8;
+}
+
+.resultado-imaginaria,
+.resultado-manual {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.resultado-imaginaria p,
+.resultado-manual p {
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.resultado-imaginaria span,
+.resultado-manual span {
+    font-weight: 600;
+    color: #667eea;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .input-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .totales-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .tasa-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
