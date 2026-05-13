@@ -15,6 +15,8 @@
             --danger-dark: #EE5A5A;
             --success: #00B894;
             --warning: #FDCB6E;
+            --expense-red: #FF4757;
+            --expense-red-dark: #FF3838;
             --bg: #0F0F1A;
             --bg-card: #1A1A2E;
             --bg-input: #16213E;
@@ -28,6 +30,9 @@
             --radius: 16px;
             --radius-sm: 10px;
             --radius-xs: 6px;
+            /* Cashea brand colors */
+            --cashea-yellow: #FFD700;
+            --cashea-black: #1A1A1A;
         }
 
         * {
@@ -42,12 +47,11 @@
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            overflow-x: hidden;
-            padding-bottom: 100px;
+            overflow-x: hidden;            padding-bottom: 100px;
         }
 
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar { width: 6px; }        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
 
         /* ===== HEADER ===== */
@@ -92,10 +96,10 @@
             gap: 6px;
         }
 
-        .calc-toggle:hover, .calc-toggle:active {
-            background: var(--primary-dark);
+        .calc-toggle:hover, .calc-toggle:active {            background: var(--primary-dark);
             transform: scale(1.05);
         }
+
         .header-info {
             display: flex;
             gap: 10px;
@@ -141,11 +145,11 @@
         .rate-selector {
             position: relative;
         }
-
         .rate-selector select {
             appearance: none;
             background: var(--bg-input);
-            border: 1px solid var(--border);            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
             padding: 8px 32px 8px 14px;
             color: var(--text);
             font-size: 0.85rem;
@@ -191,10 +195,10 @@
             margin-top: 8px;
             text-align: center;
         }
-
         /* ===== MAIN CONTAINER ===== */
         .app-container {
-            position: relative;            overflow: hidden;
+            position: relative;
+            overflow: hidden;
         }
 
         .pages-wrapper {
@@ -239,11 +243,11 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-        }
+            gap: 4px;        }
 
         .form-group label {
-            font-size: 0.7rem;            color: var(--text-muted);
+            font-size: 0.7rem;
+            color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -283,28 +287,20 @@
             gap: 6px;
         }
 
-        .btn:active {
-            transform: scale(0.96);
-        }
+        .btn:active { transform: scale(0.96); }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            width: 100%;
-            margin-top: 4px;
+            width: 100%;            margin-top: 4px;
         }
+
         .btn-primary:hover {
             box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
         }
 
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: var(--danger-dark);
-        }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-danger:hover { background: var(--danger-dark); }
 
         .btn-sm {
             padding: 6px 12px;
@@ -341,11 +337,11 @@
             gap: 6px;
         }
 
-        .product-list {            display: flex;
+        .product-list {
+            display: flex;
             flex-direction: column;
             gap: 8px;
-            margin-bottom: 16px;
-        }
+            margin-bottom: 16px;        }
 
         .product-item {
             background: var(--bg-card);
@@ -390,11 +386,11 @@
             content: '✓';
             position: absolute;
             top: 50%;
-            left: 50%;            transform: translate(-50%, -50%);
+            left: 50%;
+            transform: translate(-50%, -50%);
             color: white;
             font-size: 0.75rem;
-            font-weight: bold;
-        }
+            font-weight: bold;        }
 
         .product-info {
             flex: 1;
@@ -439,11 +435,11 @@
             color: var(--text-dim);
             cursor: pointer;
             font-size: 1.1rem;
-            padding: 4px;            border-radius: 50%;
+            padding: 4px;
+            border-radius: 50%;
             transition: all 0.3s;
             flex-shrink: 0;
-            width: 30px;
-            height: 30px;
+            width: 30px;            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -460,14 +456,8 @@
             color: var(--text-dim);
         }
 
-        .empty-state .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 12px;
-        }
-
-        .empty-state p {
-            font-size: 0.85rem;
-        }
+        .empty-state .empty-icon { font-size: 3rem; margin-bottom: 12px; }
+        .empty-state p { font-size: 0.85rem; }
 
         /* ===== TOTALS ===== */
         .totals-section {
@@ -487,16 +477,28 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .total-row:last-child {
-            border-bottom: none;        }
+        .total-row:last-child { border-bottom: none; }
 
         .total-row.highlight {
             background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(0, 206, 201, 0.1));
         }
 
         .total-row.cashea {
-            background: linear-gradient(135deg, rgba(0, 184, 148, 0.1), rgba(108, 92, 231, 0.08));
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.03));
             border-bottom: none;
+        }
+
+        /* CORRECCIÓN: Tu pagas en ROJO */        .total-row.expense {
+            background: linear-gradient(135deg, rgba(255, 71, 87, 0.08), rgba(255, 56, 56, 0.03));
+        }
+
+        .total-row.expense .total-usd {
+            color: var(--expense-red) !important;
+        }
+
+        .total-row.expense .total-bs {
+            color: var(--expense-red) !important;
+            opacity: 0.8;
         }
 
         .total-label {
@@ -507,9 +509,7 @@
             gap: 6px;
         }
 
-        .total-values {
-            text-align: right;
-        }
+        .total-values { text-align: right; }
 
         .total-usd {
             font-size: 1rem;
@@ -528,17 +528,44 @@
         }
 
         .total-row.cashea .total-usd {
-            color: var(--success);
+            color: var(--cashea-yellow);
         }
 
         .total-row.cashea .total-label {
-            color: var(--success);
+            color: var(--cashea-yellow);
             font-weight: 600;
         }
 
-        /* ===== CALCULATOR PANEL ===== */
-        .calculator-panel {            position: relative;
+        /* ===== CASHEA LOGO ===== */
+        .cashea-logo {            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--cashea-yellow);
+            border-radius: 50%;
+            flex-shrink: 0;
         }
+
+        .cashea-logo .c-letter {
+            font-family: 'Arial Black', 'Segoe UI', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: var(--cashea-black);
+            line-height: 1;
+        }
+
+        .cashea-logo-lg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .cashea-logo-lg .c-letter {
+            font-size: 1.1rem;
+        }
+
+        /* ===== CALCULATOR PANEL ===== */
+        .calculator-panel { position: relative; }
 
         .calc-back-btn {
             position: absolute;
@@ -559,8 +586,7 @@
         }
 
         .calc-back-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary-light);
+            border-color: var(--primary);            color: var(--primary-light);
         }
 
         .calc-section {
@@ -587,11 +613,11 @@
             margin-bottom: 10px;
             align-items: flex-end;
         }
-        .calc-input-group .form-group {
-            flex: 1;
-        }
 
-        .calc-input-group input, .calc-input-group select {
+        .calc-input-group .form-group { flex: 1; }
+
+        .calc-input-group input,
+        .calc-input-group select {
             background: var(--bg-input);
             border: 1px solid var(--border);
             border-radius: var(--radius-xs);
@@ -609,8 +635,7 @@
         .swap-btn {
             background: var(--primary);
             border: none;
-            color: white;
-            width: 38px;
+            color: white;            width: 38px;
             height: 38px;
             border-radius: 50%;
             font-size: 1rem;
@@ -635,6 +660,7 @@
             margin-top: 10px;
             display: none;
         }
+
         .calc-result.visible {
             display: block;
             animation: fadeIn 0.3s ease;
@@ -658,20 +684,16 @@
             margin-top: 4px;
         }
 
-        .calc-result-label {
-            font-size: 0.8rem;
+        .calc-result-label {            font-size: 0.8rem;
             color: var(--text-muted);
         }
 
-        .calc-result-value {
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
-
+        .calc-result-value { font-size: 0.95rem; font-weight: 700; }
         .calc-result-value.usd { color: var(--accent); }
         .calc-result-value.bs { color: var(--primary-light); }
-        .calc-result-value.cashea-val { color: var(--success); }
-        .calc-result-value.user-val { color: var(--warning); }
+        .calc-result-value.cashea-val { color: var(--cashea-yellow); }
+        /* CORRECCIÓN: valor usuario en rojo */
+        .calc-result-value.user-val { color: var(--expense-red); }
 
         .calc-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
@@ -685,13 +707,12 @@
             transition: all 0.3s;
             width: 100%;
         }
+
         .calc-btn:hover {
             box-shadow: 0 4px 15px rgba(0, 206, 201, 0.3);
         }
 
-        .calc-btn:active {
-            transform: scale(0.97);
-        }
+        .calc-btn:active { transform: scale(0.97); }
 
         .manual-toggle {
             display: flex;
@@ -713,14 +734,10 @@
             width: 0;
             height: 0;
         }
-
         .toggle-slider {
             position: absolute;
             cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: var(--bg-input);
             border: 1px solid var(--border);
             border-radius: 12px;
@@ -733,7 +750,8 @@
             width: 18px;
             height: 18px;
             left: 2px;
-            bottom: 2px;            background: var(--text-muted);
+            bottom: 2px;
+            background: var(--text-muted);
             border-radius: 50%;
             transition: all 0.3s;
         }
@@ -748,19 +766,14 @@
             background: white;
         }
 
-        .toggle-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
+        .toggle-label { font-size: 0.8rem; color: var(--text-muted); }
 
         .manual-inputs {
             display: none;
             margin-bottom: 10px;
         }
 
-        .manual-inputs.visible {
-            display: block;
-        }
+        .manual-inputs.visible { display: block; }
 
         .info-badge {
             display: inline-flex;
@@ -769,8 +782,7 @@
             background: rgba(108, 92, 231, 0.15);
             color: var(--primary-light);
             padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.7rem;
+            border-radius: 12px;            font-size: 0.7rem;
             font-weight: 600;
             margin-bottom: 10px;
         }
@@ -782,7 +794,8 @@
             transform: translateY(-50%);
             background: var(--primary);
             color: white;
-            padding: 12px 8px;            border-radius: 10px 0 0 10px;
+            padding: 12px 8px;
+            border-radius: 10px 0 0 10px;
             font-size: 0.7rem;
             writing-mode: vertical-rl;
             letter-spacing: 1px;
@@ -792,10 +805,7 @@
             opacity: 0.7;
         }
 
-        .swipe-hint:hover {
-            opacity: 1;
-            padding-right: 14px;
-        }
+        .swipe-hint:hover { opacity: 1; padding-right: 14px; }
 
         .swipe-hint-left {
             left: 0;
@@ -804,15 +814,9 @@
             display: none;
         }
 
-        .swipe-hint-left.visible {
-            display: block;
-        }
+        .swipe-hint-left.visible { display: block; }
+        .swipe-hint-right.hidden { display: none; }
 
-        .swipe-hint-right.hidden {
-            display: none;
-        }
-
-        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -827,24 +831,16 @@
             font-weight: 500;
             box-shadow: var(--shadow-lg);
             z-index: 1000;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);            display: flex;
             align-items: center;
             gap: 8px;
         }
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
 
-        /* ===== RESPONSIVE ===== */
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
         @media (min-width: 500px) {
-            .page {
-                max-width: 500px;
-                margin: 0 auto;
-            }
-            .swipe-hint {
-                display: none !important;
-            }
+            .page { max-width: 500px; margin: 0 auto; }
+            .swipe-hint { display: none !important; }
         }
 
         .page-title {
@@ -857,11 +853,7 @@
             gap: 8px;
         }
 
-        .divider {
-            height: 1px;
-            background: var(--border);
-            margin: 12px 0;
-        }
+        .divider { height: 1px; background: var(--border); margin: 12px 0; }
 
         .tag {
             display: inline-block;
@@ -871,19 +863,9 @@
             font-weight: 600;
         }
 
-        .tag-cashea {
-            background: rgba(0, 184, 148, 0.15);
-            color: var(--success);
-        }
-
-        .tag-user {
-            background: rgba(253, 203, 110, 0.15);
-            color: var(--warning);
-        }
-        .tag-total {
-            background: rgba(108, 92, 231, 0.15);
-            color: var(--primary-light);
-        }
+        .tag-cashea { background: rgba(255, 215, 0, 0.15); color: var(--cashea-yellow); }
+        .tag-user { background: rgba(255, 71, 87, 0.15); color: var(--expense-red); }
+        .tag-total { background: rgba(108, 92, 231, 0.15); color: var(--primary-light); }
 
         .imaginary-result {
             background: var(--bg-input);
@@ -898,7 +880,6 @@
             display: block;
             animation: fadeIn 0.3s ease;
         }
-
         .imaginary-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -921,41 +902,21 @@
             letter-spacing: 0.5px;
         }
 
-        .imaginary-card .ic-value {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-top: 4px;
-        }
+        .imaginary-card .ic-value { font-size: 1rem; font-weight: 700; margin-top: 4px; }
+        .imaginary-card .ic-sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
 
-        .imaginary-card .ic-sub {
-            font-size: 0.7rem;
-            color: var(--text-muted);            margin-top: 2px;
-        }
+        .imaginary-card.cashea-card { border-color: rgba(255, 215, 0, 0.3); }
+        .imaginary-card.cashea-card .ic-value { color: var(--cashea-yellow); }
 
-        .imaginary-card.cashea-card {
-            border-color: rgba(0, 184, 148, 0.3);
-        }
-
-        .imaginary-card.cashea-card .ic-value {
-            color: var(--success);
-        }
-
-        .imaginary-card.user-card {
-            border-color: rgba(253, 203, 110, 0.3);
-        }
-
-        .imaginary-card.user-card .ic-value {
-            color: var(--warning);
-        }
+        .imaginary-card.user-card { border-color: rgba(255, 71, 87, 0.3); }
+        .imaginary-card.user-card .ic-value { color: var(--expense-red); }
 
         .imaginary-card.total-card {
             border-color: rgba(108, 92, 231, 0.3);
             grid-column: span 2;
         }
 
-        .imaginary-card.total-card .ic-value {
-            color: var(--accent);
-        }
+        .imaginary-card.total-card .ic-value { color: var(--accent); }
     </style>
 </head>
 <body>
@@ -968,8 +929,7 @@
             🧮 Calculadora
         </button>
     </div>
-    <div class="header-info">
-        <div class="info-chip">
+    <div class="header-info">        <div class="info-chip">
             <span class="chip-icon">💵</span>
             <div class="chip-content">
                 <span class="chip-label">Tasa BCV</span>
@@ -978,13 +938,18 @@
                 </span>
             </div>
         </div>
-        <div class="info-chip rate-selector">            <span class="chip-icon">🏦</span>
+        <div class="info-chip rate-selector">
+            <span class="chip-icon">
+                <div class="cashea-logo">
+                    <span class="c-letter">C</span>
+                </div>
+            </span>
             <div class="chip-content">
                 <span class="chip-label">Nivel Cashea</span>
                 <select id="casheaLevel" onchange="updateTotals()">
-                    <option value="1">Nivel 1 — 30%</option>
+                    <option value="1">Nivel 1 — 60%</option>
                     <option value="2" selected>Nivel 2 — 50%</option>
-                    <option value="3">Nivel 3 — 70%</option>
+                    <option value="3">Nivel 3 — 40%</option>
                 </select>
             </div>
         </div>
@@ -1006,7 +971,6 @@
 
         <!-- ===== PAGE 1: LISTA ===== -->
         <div class="page" id="pageList">
-            <!-- Add Form -->
             <div class="add-form">
                 <h3>➕ Agregar Producto</h3>
                 <div class="form-row">
@@ -1014,8 +978,7 @@
                         <label>Producto</label>
                         <input type="text" id="prodName" placeholder="Ej: Harina Pan">
                     </div>
-                    <div class="form-group">
-                        <label>Cantidad</label>
+                    <div class="form-group">                        <label>Cantidad</label>
                         <input type="number" id="prodQty" placeholder="1" min="1" value="1">
                     </div>
                 </div>
@@ -1027,19 +990,18 @@
                     <div class="form-group" style="flex:0 0 auto; display:flex; align-items:flex-end;">
                         <button class="btn btn-primary" onclick="addProduct()" style="margin-top:0; padding:10px 24px;">
                             Agregar
-                        </button>                    </div>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- List Header -->
             <div class="list-header">
-                <h3>📋 Mi Lista (<span id="itemCount">0</span>)</h3>
+                <h3> Mi Lista (<span id="itemCount">0</span>)</h3>
                 <div class="list-actions">
                     <button class="btn btn-sm btn-outline" onclick="clearList()">🗑️ Borrar todo</button>
                 </div>
             </div>
 
-            <!-- Product List -->
             <div class="product-list" id="productList">
                 <div class="empty-state">
                     <div class="empty-icon">🛒</div>
@@ -1047,10 +1009,10 @@
                 </div>
             </div>
 
-            <!-- Totals -->
+            <!-- Totals con correcciones -->
             <div class="totals-section" id="totalsSection" style="display:none;">
                 <div class="total-row">
-                    <span class="total-label">📦 Total lista</span>
+                    <span class="total-label"> Total lista</span>
                     <div class="total-values">
                         <div class="total-usd" id="totalUsd">$0.00</div>
                         <div class="total-bs" id="totalBs">Bs. 0,00</div>
@@ -1064,19 +1026,25 @@
                     </div>
                 </div>
                 <div class="total-row cashea">
-                    <span class="total-label">🏦 Cashea cubre (<span id="casheaPercent">50</span>%)</span>
+                    <span class="total-label">
+                        <div class="cashea-logo">                            <span class="c-letter">C</span>
+                        </div>
+                        Cashea cubre (<span id="casheaPercent">50</span>%)
+                    </span>
                     <div class="total-values">
                         <div class="total-usd" id="casheaUsd">$0.00</div>
                         <div class="total-bs" id="casheaBs">Bs. 0,00</div>
                     </div>
                 </div>
-                <div class="total-row">
-                    <span class="total-label">💰 Tú pagas</span>
+                <!-- CORRECCIÓN: clase expense para texto rojo -->
+                <div class="total-row expense">
+                    <span class="total-label">💸 Tu pagas</span>
                     <div class="total-values">
                         <div class="total-usd" id="userPayUsd">$0.00</div>
                         <div class="total-bs" id="userPayBs">Bs. 0,00</div>
                     </div>
-                </div>            </div>
+                </div>
+            </div>
         </div>
 
         <!-- ===== PAGE 2: CALCULADORA ===== -->
@@ -1108,12 +1076,11 @@
                     </div>
                     <div class="calc-result-row">
                         <span class="calc-result-label">Tasa usada:</span>
-                        <span class="calc-result-value bs" id="convRateUsed"></span>
-                    </div>
+                        <span class="calc-result-value bs" id="convRateUsed"></span>                    </div>
                 </div>
             </div>
 
-            <!-- 2. Calculadora de Precios / Cobertura -->
+            <!-- 2. Calculadora de Cobertura -->
             <div class="calc-section">
                 <h3>🧾 Calculadora de Cobertura</h3>
                 <div class="manual-toggle">
@@ -1123,10 +1090,7 @@
                     </label>
                     <span class="toggle-label">Ingresar monto manual</span>
                 </div>
-
-                <div id="listInfo" class="info-badge">
-                    📋 Usando total de la lista                </div>
-
+                <div id="listInfo" class="info-badge">📋 Usando total de la lista</div>
                 <div class="manual-inputs" id="manualInputs">
                     <div class="calc-input-group">
                         <div class="form-group">
@@ -1135,23 +1099,20 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="calc-input-group">
                     <div class="form-group">
                         <label>Nivel Cashea</label>
                         <select id="calcCasheaLevel">
-                            <option value="1">Nivel 1 — 30%</option>
+                            <option value="1">Nivel 1 — 60%</option>
                             <option value="2" selected>Nivel 2 — 50%</option>
-                            <option value="3">Nivel 3 — 70%</option>
+                            <option value="3">Nivel 3 — 40%</option>
                         </select>
                     </div>
                 </div>
-
                 <button class="calc-btn" onclick="calculateCoverage()">Calcular Cobertura</button>
-
                 <div class="calc-result" id="coverageResult">
                     <div class="calc-result-row">
-                        <span class="calc-result-label">📦 Total compra:</span>
+                        <span class="calc-result-label"> Total compra:</span>
                         <span class="calc-result-value usd" id="covTotalUsd"></span>
                     </div>
                     <div class="calc-result-row">
@@ -1159,22 +1120,27 @@
                         <span class="calc-result-value bs" id="covTotalBs"></span>
                     </div>
                     <div class="calc-result-row">
-                        <span class="calc-result-label">🏦 Cashea cubre:</span>
-                        <span class="calc-result-value cashea-val" id="covCasheaUsd"></span>
+                        <span class="calc-result-label">
+                            <div class="cashea-logo" style="width:20px;height:20px;">
+                                <span class="c-letter" style="font-size:0.7rem;">C</span>
+                            </div>
+                            Cashea cubre:
+                        </span>                        <span class="calc-result-value cashea-val" id="covCasheaUsd"></span>
                     </div>
                     <div class="calc-result-row">
                         <span class="calc-result-label"> </span>
                         <span class="calc-result-value cashea-val" id="covCasheaBs"></span>
                     </div>
                     <div class="calc-result-row">
-                        <span class="calc-result-label">💰 Tú pagas:</span>
+                        <span class="calc-result-label">💸 Tú pagas:</span>
                         <span class="calc-result-value user-val" id="covUserUsd"></span>
                     </div>
                     <div class="calc-result-row">
                         <span class="calc-result-label"> </span>
                         <span class="calc-result-value user-val" id="covUserBs"></span>
                     </div>
-                </div>            </div>
+                </div>
+            </div>
 
             <!-- 3. Compra Imaginaria -->
             <div class="calc-section">
@@ -1198,32 +1164,36 @@
                     <div class="form-group">
                         <label>Nivel Cashea</label>
                         <select id="imagCasheaLevel">
-                            <option value="1">Nivel 1 — 30%</option>
+                            <option value="1">Nivel 1 — 60%</option>
                             <option value="2" selected>Nivel 2 — 50%</option>
-                            <option value="3">Nivel 3 — 70%</option>
+                            <option value="3">Nivel 3 — 40%</option>
                         </select>
                     </div>
                 </div>
                 <button class="calc-btn" onclick="calculateImaginary()">Calcular</button>
-
                 <div class="imaginary-result" id="imaginaryResult">
                     <div style="text-align:center; margin-bottom:10px;">
                         <span class="tag tag-total">COMPRA QUE DEBES HACER</span>
-                    </div>
-                    <div class="imaginary-grid">
+                    </div>                    <div class="imaginary-grid">
                         <div class="imaginary-card total-card">
                             <div class="ic-label">Total de tu compra</div>
                             <div class="ic-value" id="imagPurchaseUsd">$0.00</div>
                             <div class="ic-sub" id="imagPurchaseBs">Bs. 0,00</div>
                         </div>
                         <div class="imaginary-card cashea-card">
-                            <div class="ic-label">🏦 Cashea cubre</div>
+                            <div class="ic-label">
+                                <div class="cashea-logo" style="width:18px;height:18px;margin:0 auto 4px;">
+                                    <span class="c-letter" style="font-size:0.65rem;">C</span>
+                                </div>
+                                Cashea cubre
+                            </div>
                             <div class="ic-value" id="imagCasheaUsd">$0.00</div>
                             <div class="ic-sub" id="imagCasheaBs">Bs. 0,00</div>
                         </div>
                         <div class="imaginary-card user-card">
-                            <div class="ic-label">💰 Tú pagas</div>
-                            <div class="ic-value" id="imagUserUsd">$0.00</div>                            <div class="ic-sub" id="imagUserBs">Bs. 0,00</div>
+                            <div class="ic-label"> Tú pagas</div>
+                            <div class="ic-value" id="imagUserUsd">$0.00</div>
+                            <div class="ic-sub" id="imagUserBs">Bs. 0,00</div>
                         </div>
                     </div>
                     <div style="text-align:center; margin-top:12px;">
@@ -1237,22 +1207,23 @@
     </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
 <script>
     // ===== STATE =====
     let dollarRate = 0;
     let products = [];
-    let currentPage = 0; // 0 = list, 1 = calc
+    let currentPage = 0;
 
-    // Cashea percentages
+    // ===== CORRECCIÓN PRINCIPAL: Porcentajes de Cashea =====
+    // Nivel 1 = Cashea cubre 60%, tú pagas 40%
+    // Nivel 2 = Cashea cubre 50%, tú pagas 50%
+    // Nivel 3 = Cashea cubre 40%, tú pagas 60%
     const CASHEA_LEVELS = {
-        1: 0.30,
+        1: 0.60,
         2: 0.50,
-        3: 0.70
+        3: 0.40
     };
-
     // ===== INIT =====
     document.addEventListener('DOMContentLoaded', () => {
         fetchRate();
@@ -1264,20 +1235,18 @@
     async function fetchRate() {
         const display = document.getElementById('rateDisplay');
         try {
-            // Try multiple APIs for redundancy
             let rate = null;
 
-            // API 1: pydolarve.org
             if (!rate) {
                 try {
                     const res = await fetch('https://pydolarve.org/api/v1/dollar?page=bcv');
                     const data = await res.json();
-                    if (data && data.monitors && data.monitors.usd) {                        rate = data.monitors.usd.price;
+                    if (data && data.monitors && data.monitors.usd) {
+                        rate = data.monitors.usd.price;
                     }
                 } catch(e) { console.log('API 1 failed:', e); }
             }
 
-            // API 2: dolarapi.com
             if (!rate) {
                 try {
                     const res = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
@@ -1288,7 +1257,6 @@
                 } catch(e) { console.log('API 2 failed:', e); }
             }
 
-            // API 3: pydolarvenezuela-api
             if (!rate) {
                 try {
                     const res = await fetch('https://pydolarvenezuela-api.vercel.app/api/v1/dollar?page=bcv');
@@ -1303,9 +1271,8 @@
                 dollarRate = rate;
                 display.textContent = `Bs. ${formatNumber(rate, 2)}`;
                 const now = new Date();
-                document.getElementById('lastUpdate').textContent = 
-                    `Última actualización: ${now.toLocaleDateString('es-VE')} ${now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'})}`;
-                updateTotals();
+                document.getElementById('lastUpdate').textContent =
+                    `Última actualización: ${now.toLocaleDateString('es-VE')} ${now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'})}`;                updateTotals();
             } else {
                 display.textContent = '⚠️ Sin conexión';
                 showToast('⚠️ No se pudo obtener la tasa. Verifica tu conexión.');
@@ -1321,23 +1288,13 @@
         return Number(num).toLocaleString('es-VE', {
             minimumFractionDigits: decimals,
             maximumFractionDigits: decimals
-        });    }
-
-    function formatUSD(num) {
-        return `$${formatNumber(num, 2)}`;
+        });
     }
 
-    function formatBS(num) {
-        return `Bs. ${formatNumber(num, 2)}`;
-    }
-
-    function usdToBs(usd) {
-        return usd * dollarRate;
-    }
-
-    function bsToUsd(bs) {
-        return bs / dollarRate;
-    }
+    function formatUSD(num) { return `$${formatNumber(num, 2)}`; }
+    function formatBS(num) { return `Bs. ${formatNumber(num, 2)}`; }
+    function usdToBs(usd) { return usd * dollarRate; }
+    function bsToUsd(bs) { return bs / dollarRate; }
 
     // ===== PRODUCTS =====
     function addProduct() {
@@ -1345,33 +1302,18 @@
         const qty = parseInt(document.getElementById('prodQty').value) || 1;
         const price = parseFloat(document.getElementById('prodPrice').value) || 0;
 
-        if (!name) {
-            showToast('⚠️ Ingresa el nombre del producto');
-            return;
-        }
-        if (price <= 0) {
-            showToast('⚠️ Ingresa un precio válido');
-            return;
-        }
+        if (!name) { showToast('️ Ingresa el nombre del producto'); return; }
+        if (price <= 0) { showToast('⚠️ Ingresa un precio válido'); return; }
 
-        const product = {
-            id: Date.now(),
-            name,
-            qty,
-            price,
-            checked: true
-        };
-
-        products.push(product);
+        products.push({ id: Date.now(), name, qty, price, checked: true });
         saveProducts();
         renderProducts();
         updateTotals();
 
-        // Clear form
         document.getElementById('prodName').value = '';
         document.getElementById('prodQty').value = '1';
-        document.getElementById('prodPrice').value = '';        document.getElementById('prodName').focus();
-
+        document.getElementById('prodPrice').value = '';
+        document.getElementById('prodName').focus();
         showToast(`✅ ${name} agregado`);
     }
 
@@ -1379,13 +1321,7 @@
         const container = document.getElementById('productList');
         document.getElementById('itemCount').textContent = products.length;
 
-        if (products.length === 0) {
-            container.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-icon">🛒</div>
-                    <p>Tu lista está vacía.<br>Agrega productos para empezar.</p>
-                </div>
-            `;
+        if (products.length === 0) {            container.innerHTML = `<div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.<br>Agrega productos para empezar.</p></div>`;
             return;
         }
 
@@ -1394,9 +1330,8 @@
             const subtotalBs = usdToBs(subtotal);
             return `
                 <div class="product-item ${p.checked ? 'checked' : ''}" id="prod-${p.id}">
-                    <input type="checkbox" class="product-checkbox" 
-                        ${p.checked ? 'checked' : ''} 
-                        onchange="toggleProduct(${p.id})">
+                    <input type="checkbox" class="product-checkbox"
+                        ${p.checked ? 'checked' : ''} onchange="toggleProduct(${p.id})">
                     <div class="product-info">
                         <div class="product-name">${p.name}</div>
                         <div class="product-details">${p.qty} × ${formatUSD(p.price)}</div>
@@ -1406,8 +1341,7 @@
                         <div class="product-price-bs">${formatBS(subtotalBs)}</div>
                     </div>
                     <button class="product-delete" onclick="deleteProduct(${p.id})" title="Eliminar">✕</button>
-                </div>
-            `;
+                </div>`;
         }).join('');
     }
 
@@ -1420,6 +1354,7 @@
             updateTotals();
         }
     }
+
     function deleteProduct(id) {
         const product = products.find(p => p.id === id);
         products = products.filter(p => p.id !== id);
@@ -1435,8 +1370,7 @@
             products = [];
             saveProducts();
             renderProducts();
-            updateTotals();
-            showToast('🗑️ Lista borrada');
+            updateTotals();            showToast('🗑️ Lista borrada');
         }
     }
 
@@ -1447,11 +1381,7 @@
     function loadProducts() {
         try {
             const saved = localStorage.getItem('market_products');
-            if (saved) {
-                products = JSON.parse(saved);
-                renderProducts();
-                updateTotals();
-            }
+            if (saved) { products = JSON.parse(saved); renderProducts(); updateTotals(); }
         } catch(e) {}
     }
 
@@ -1461,14 +1391,11 @@
         const level = parseInt(document.getElementById('casheaLevel').value);
         const percent = CASHEA_LEVELS[level];
 
-        if (products.length === 0) {
-            section.style.display = 'none';
-            return;
-        }
-
+        if (products.length === 0) { section.style.display = 'none'; return; }
         section.style.display = 'block';
 
-        const total = products.reduce((sum, p) => sum + (p.qty * p.price), 0);        const checked = products.filter(p => p.checked).reduce((sum, p) => sum + (p.qty * p.price), 0);
+        const total = products.reduce((sum, p) => sum + (p.qty * p.price), 0);
+        const checked = products.filter(p => p.checked).reduce((sum, p) => sum + (p.qty * p.price), 0);
         const totalBs = usdToBs(total);
         const checkedBs = usdToBs(checked);
         const casheaUsd = checked * percent;
@@ -1486,38 +1413,31 @@
         document.getElementById('userPayUsd').textContent = formatUSD(userUsd);
         document.getElementById('userPayBs').textContent = formatBS(userBs);
 
-        // Update calc cashea level select to match
+        // Sync other selects
         document.getElementById('calcCasheaLevel').value = level;
         document.getElementById('imagCasheaLevel').value = level;
     }
 
     // ===== SWIPE =====
-    function setupSwipe() {
-        let startX = 0;
-        let startY = 0;
-
+    function setupSwipe() {        let startX = 0, startY = 0;
         document.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             startY = e.touches[0].clientY;
         }, { passive: true });
-
         document.addEventListener('touchend', (e) => {
             const endX = e.changedTouches[0].clientX;
             const endY = e.changedTouches[0].clientY;
             const diffX = endX - startX;
             const diffY = endY - startY;
-
             if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 80) {
-                if (diffX < 0 && currentPage === 0) {
-                    openCalculator();
-                } else if (diffX > 0 && currentPage === 1) {
-                    closeCalculator();
-                }
+                if (diffX < 0 && currentPage === 0) openCalculator();
+                else if (diffX > 0 && currentPage === 1) closeCalculator();
             }
         }, { passive: true });
     }
 
-    function openCalculator() {        currentPage = 1;
+    function openCalculator() {
+        currentPage = 1;
         document.getElementById('pagesWrapper').style.transform = 'translateX(-50%)';
         document.getElementById('swipeHintRight').classList.add('hidden');
         document.getElementById('swipeHintLeft').classList.add('visible');
@@ -1539,15 +1459,8 @@
     function calculateConversion() {
         const amount = parseFloat(document.getElementById('convAmount').value);
         const from = document.getElementById('convFrom').value;
-
-        if (!amount || amount <= 0) {
-            showToast('⚠️ Ingresa un monto válido');
-            return;
-        }
-        if (dollarRate <= 0) {
-            showToast('⚠️ No hay tasa disponible');
-            return;
-        }
+        if (!amount || amount <= 0) { showToast('️ Ingresa un monto válido'); return; }
+        if (dollarRate <= 0) { showToast('⚠️ No hay tasa disponible'); return; }
 
         let result, resultLabel;
         if (from === 'USD') {
@@ -1555,8 +1468,7 @@
             resultLabel = formatBS(result);
         } else {
             result = bsToUsd(amount);
-            resultLabel = formatUSD(result);
-        }
+            resultLabel = formatUSD(result);        }
 
         document.getElementById('convResultValue').textContent = resultLabel;
         document.getElementById('convRateUsed').textContent = `1 USD = Bs. ${formatNumber(dollarRate, 2)}`;
@@ -1566,7 +1478,8 @@
     // ===== CALCULATOR: COVERAGE =====
     function toggleManualInput() {
         const isManual = document.getElementById('manualToggle').checked;
-        document.getElementById('manualInputs').classList.toggle('visible', isManual);        document.getElementById('listInfo').style.display = isManual ? 'none' : 'flex';
+        document.getElementById('manualInputs').classList.toggle('visible', isManual);
+        document.getElementById('listInfo').style.display = isManual ? 'none' : 'flex';
     }
 
     function calculateCoverage() {
@@ -1574,25 +1487,15 @@
         const level = parseInt(document.getElementById('calcCasheaLevel').value);
         const percent = CASHEA_LEVELS[level];
 
-        if (dollarRate <= 0) {
-            showToast('⚠️ No hay tasa disponible');
-            return;
-        }
+        if (dollarRate <= 0) { showToast('⚠️ No hay tasa disponible'); return; }
 
         let totalUsd;
-
         if (isManual) {
             totalUsd = parseFloat(document.getElementById('manualAmount').value);
-            if (!totalUsd || totalUsd <= 0) {
-                showToast('⚠️ Ingresa un monto válido');
-                return;
-            }
+            if (!totalUsd || totalUsd <= 0) { showToast('⚠️ Ingresa un monto válido'); return; }
         } else {
             totalUsd = products.filter(p => p.checked).reduce((sum, p) => sum + (p.qty * p.price), 0);
-            if (totalUsd <= 0) {
-                showToast('⚠️ No hay productos seleccionados en la lista');
-                return;
-            }
+            if (totalUsd <= 0) { showToast('⚠️ No hay productos seleccionados en la lista'); return; }
         }
 
         const totalBs = usdToBs(totalUsd);
@@ -1614,36 +1517,13 @@
     function calculateImaginary() {
         const capital = parseFloat(document.getElementById('imagCapital').value);
         const remain = parseFloat(document.getElementById('imagRemain').value);
-        const level = parseInt(document.getElementById('imagCasheaLevel').value);
-        const percent = CASHEA_LEVELS[level];
-        if (!capital || capital <= 0) {
-            showToast('⚠️ Ingresa un capital válido');
-            return;
-        }
-        if (!remain || remain < 0) {
-            showToast('⚠️ Ingresa un monto a剩余 válido');
-            return;
-        }
-        if (remain >= capital) {
-            showToast('⚠️ El monto a剩余 debe ser menor al capital');
-            return;
-        }
-        if (dollarRate <= 0) {
-            showToast('⚠️ No hay tasa disponible');
-            return;
-        }
+        const level = parseInt(document.getElementById('imagCasheaLevel').value);        const percent = CASHEA_LEVELS[level];
 
-        // Formula:
-        // capital = purchase_price + remain
-        // But with Cashea: capital = (purchase_price - cashea_covers) + remain
-        // cashea_covers = purchase_price * percent
-        // So: capital = purchase_price * (1 - percent) + remain
-        // purchase_price = (capital - remain) / (1 - percent)
-
-        if (percent >= 1) {
-            showToast('⚠️ El nivel de Cashea no puede ser 100%');
-            return;
-        }
+        if (!capital || capital <= 0) { showToast('⚠️ Ingresa un capital válido'); return; }
+        if (isNaN(remain) || remain < 0) { showToast('⚠️ Ingresa un monto a quedar válido'); return; }
+        if (remain >= capital) { showToast('⚠️ El monto a quedar debe ser menor al capital'); return; }
+        if (dollarRate <= 0) { showToast('⚠️ No hay tasa disponible'); return; }
+        if (percent >= 1) { showToast('⚠️ El nivel de Cashea no puede ser 100%'); return; }
 
         const purchaseUsd = (capital - remain) / (1 - percent);
         const purchaseBs = usdToBs(purchaseUsd);
@@ -1664,22 +1544,17 @@
     }
 
     // ===== TOAST =====
-    function showToast(message) {        const toast = document.getElementById('toast');
+    function showToast(message) {
+        const toast = document.getElementById('toast');
         toast.textContent = message;
         toast.classList.add('show');
         clearTimeout(toast._timeout);
-        toast._timeout = setTimeout(() => {
-            toast.classList.remove('show');
-        }, 2500);
+        toast._timeout = setTimeout(() => toast.classList.remove('show'), 2500);
     }
 
-    // ===== KEYBOARD SUPPORT =====
+    // ===== KEYBOARD =====
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            if (currentPage === 0) {
-                addProduct();
-            }
-        }
+        if (e.key === 'Enter' && currentPage === 0) addProduct();
     });
 </script>
 
