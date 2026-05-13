@@ -4,12 +4,664 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Compras - BCV + Cashea</title>
-    <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .app-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* Panel Principal */
+        .main-panel {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background: #f5f5f5;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+
+        .main-panel.shifted {
+            transform: translateX(-100%);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .tasa-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tasa-bcv {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .label-tasa {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .valor-tasa {
+            font-size: 24px;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .nivel-cashea {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nivel-cashea label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        #nivelCashea {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            font-weight: 500;
+            background: rgba(255,255,255,0.9);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        #nivelCashea:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Formulario */
+        .form-agregar {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .form-agregar:hover {
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .form-agregar h2 {
+            margin-bottom: 15px;
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .input-group input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-agregar {
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-agregar:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-agregar:active {
+            transform: translateY(0);
+        }
+
+        /* Lista de productos */
+        .lista-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .lista-container:hover {
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .lista-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .lista-header h2 {
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        .btn-limpiar {
+            padding: 8px 15px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
+        }
+
+        .btn-limpiar:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+
+        .lista-productos {
+            list-style: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .lista-productos::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .lista-productos::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 3px;
+        }
+
+        .producto-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            transition: all 0.3s;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .producto-item:hover {
+            background: #f8f9ff;
+        }
+
+        .producto-checkbox {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .producto-info {
+            flex: 1;
+        }
+
+        .producto-nombre {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .producto-detalles {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .producto-precio {
+            font-weight: 600;
+            color: #667eea;
+            margin-right: 15px;
+            font-size: 16px;
+        }
+
+        .btn-eliminar {
+            background: none;
+            border: none;
+            color: #ef4444;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn-eliminar:hover {
+            transform: scale(1.2);
+            color: #dc2626;
+        }
+
+        .producto-vacio {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+            font-style: italic;
+        }
+
+        /* Totales */
+        .totales-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .total-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .total-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .total-card h3 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .total-valores {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .total-valores span:first-child {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .total-valores span:last-child {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .cashea-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .cashea-card h3 {
+            color: white;
+        }
+
+        .cashea-card .total-valores span:first-child {
+            color: white;
+        }
+
+        .cashea-card .total-valores span:last-child {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Panel de Calculadora */
+        .calculator-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .calculator-panel.visible {
+            transform: translateX(-100%);
+        }
+
+        .calc-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .calc-header h2 {
+            font-size: 20px;
+        }
+
+        .btn-cerrar {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .btn-cerrar:hover {
+            background: rgba(255,255,255,0.2);
+            transform: rotate(90deg);
+        }
+
+        .calc-content {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .calc-section {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .calc-section:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .calc-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        /* Conversor */
+        .conversor-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .conversor-input {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .conversor-input label {
+            font-weight: 500;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .conversor-input input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .conversor-input input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn-convertir {
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        .btn-convertir:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        /* Compra Imaginaria y Calculadora Manual */
+        .compra-imaginaria,
+        .calculadora-manual {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .compra-imaginaria label,
+        .calculadora-manual label {
+            font-weight: 500;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .compra-imaginaria input,
+        .calculadora-manual input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .compra-imaginaria input:focus,
+        .calculadora-manual input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn-calcular {
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-calcular:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .resultado-imaginaria,
+        .resultado-manual {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .resultado-imaginaria p,
+        .resultado-manual p {
+            margin-bottom: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .resultado-imaginaria span,
+        .resultado-manual span {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        /* Indicador de swipe */
+        .swipe-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 15px 10px;
+            border-radius: 20px 0 0 20px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s;
+            animation: bounce 2s infinite;
+            font-size: 12px;
+            writing-mode: vertical-lr;
+            letter-spacing: 2px;
+        }
+
+        .swipe-indicator:hover {
+            background: #667eea;
+            padding-right: 20px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(-10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .input-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .totales-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .tasa-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .swipe-indicator {
+                right: 10px;
+                padding: 10px 8px;
+                font-size: 10px;
+            }
+        }
+
+        /* Notificación */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 2000;
+            animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 2.7s forwards;
+            display: none;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .notification.error {
+            background: #f44336;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
-        <!-- Panel Principal (Lista de Compras) -->
+        <!-- Panel Principal -->
         <div class="main-panel" id="mainPanel">
             <header class="header">
                 <div class="tasa-container">
@@ -20,27 +672,25 @@
                     <div class="nivel-cashea">
                         <label for="nivelCashea">Nivel Cashea:</label>
                         <select id="nivelCashea">
-                            <option value="1">Nivel 1</option>
-                            <option value="2">Nivel 2</option>
-                            <option value="3" selected>Nivel 3</option>
+                            <option value="1">Nivel 1 (33%)</option>
+                            <option value="2">Nivel 2 (50%)</option>
+                            <option value="3" selected>Nivel 3 (60%)</option>
                         </select>
                     </div>
                 </div>
             </header>
 
             <main class="main-content">
-                <!-- Formulario para agregar productos -->
                 <div class="form-agregar">
                     <h2>Agregar Producto</h2>
                     <div class="input-group">
                         <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-                        <input type="number" id="cantidadProducto" placeholder="Cantidad" min="1">
+                        <input type="number" id="cantidadProducto" placeholder="Cantidad" min="1" value="1">
                         <input type="number" id="precioProducto" placeholder="Precio en $" step="0.01" min="0">
                         <button id="btnAgregar" class="btn-agregar">Agregar</button>
                     </div>
                 </div>
 
-                <!-- Lista de productos -->
                 <div class="lista-container">
                     <div class="lista-header">
                         <h2>Lista de Compras</h2>
@@ -51,7 +701,6 @@
                     </ul>
                 </div>
 
-                <!-- Totales -->
                 <div class="totales-container">
                     <div class="total-card">
                         <h3>Total Lista</h3>
@@ -78,7 +727,12 @@
             </main>
         </div>
 
-        <!-- Panel de Calculadora (Swipe desde la derecha) -->
+        <!-- Indicador de swipe -->
+        <div class="swipe-indicator" id="swipeIndicator">
+            CALCULADORA ←
+        </div>
+
+        <!-- Panel de Calculadora -->
         <div class="calculator-panel" id="calculatorPanel">
             <div class="calc-header">
                 <h2>Calculadora Avanzada</h2>
@@ -86,24 +740,22 @@
             </div>
 
             <div class="calc-content">
-                <!-- Conversor de Moneda -->
                 <div class="calc-section">
                     <h3>Conversor de Moneda</h3>
                     <div class="conversor-container">
                         <div class="conversor-input">
                             <label>Dólares ($)</label>
                             <input type="number" id="inputDolares" placeholder="0.00" step="0.01">
-                            <button id="btnConvertirABolivares" class="btn-convertir">↓ Convertir a Bs.</button>
+                            <button id="btnConvertirABolivares" class="btn-convertir">↓ Convertir a Bolívares</button>
                         </div>
                         <div class="conversor-input">
                             <label>Bolívares (Bs.)</label>
                             <input type="number" id="inputBolivares" placeholder="0.00" step="0.01">
-                            <button id="btnConvertirADolares" class="btn-convertir">↑ Convertir a $</button>
+                            <button id="btnConvertirADolares" class="btn-convertir">↑ Convertir a Dólares</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Calculadora de Compra Imaginaria -->
                 <div class="calc-section">
                     <h3>Compra Imaginaria</h3>
                     <div class="compra-imaginaria">
@@ -120,7 +772,6 @@
                     </div>
                 </div>
 
-                <!-- Calculadora Manual -->
                 <div class="calc-section">
                     <h3>Calculadora Manual</h3>
                     <div class="calculadora-manual">
@@ -137,11 +788,396 @@
         </div>
     </div>
 
-    <script src="js/api.js"></script>
-    <script src="js/calculator.js"></script>
-    <script src="js/lista.js"></script>
-    <script src="js/cashea.js"></script>
-    <script src="js/swipe.js"></script>
-    <script src="js/main.js"></script>
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // ============ CLASE PRINCIPAL DE LA APLICACIÓN ============
+        class App {
+            constructor() {
+                // Propiedades
+                this.tasaBCV = 0;
+                this.productos = [];
+                this.nivelCashea = 3;
+                this.coberturasCashea = {
+                    1: 0.33,
+                    2: 0.50,
+                    3: 0.60
+                };
+                this.isCalculatorVisible = false;
+                this.touchStartX = 0;
+                this.touchEndX = 0;
+                
+                // Inicializar
+                this.init();
+            }
+
+            async init() {
+                try {
+                    await this.cargarTasaBCV();
+                } catch (error) {
+                    console.log('Usando tasa de respaldo');
+                    this.tasaBCV = 35.5;
+                    this.actualizarTasaDisplay();
+                }
+                
+                this.configurarEventListeners();
+                this.actualizarListaUI();
+                this.actualizarTotales();
+            }
+
+            // ============ API Y TASA ============
+            async cargarTasaBCV() {
+                try {
+                    const response = await fetch('https://pydolarvenezuela-api.vercel.app/api/v1/dollar?page=bcv');
+                    if (!response.ok) throw new Error('Error en la respuesta');
+                    
+                    const data = await response.json();
+                    if (data && data.monitors && data.monitors.usd) {
+                        this.tasaBCV = data.monitors.usd.price;
+                        this.actualizarTasaDisplay();
+                        this.mostrarNotificacion('Tasa BCV actualizada correctamente');
+                    } else {
+                        throw new Error('Formato de datos inválido');
+                    }
+                } catch (error) {
+                    console.error('Error al cargar tasa BCV:', error);
+                    this.tasaBCV = 35.5;
+                    this.actualizarTasaDisplay();
+                    this.mostrarNotificacion('Usando tasa de respaldo (Bs. 35.50)', 'error');
+                }
+            }
+
+            actualizarTasaDisplay() {
+                const tasaElement = document.getElementById('tasaBCV');
+                if (tasaElement) {
+                    tasaElement.textContent = `Bs. ${this.tasaBCV.toFixed(2)}`;
+                }
+            }
+
+            // ============ CONFIGURACIÓN DE EVENTOS ============
+            configurarEventListeners() {
+                // Botones principales
+                document.getElementById('btnAgregar').addEventListener('click', () => this.agregarProducto());
+                document.getElementById('btnLimpiarLista').addEventListener('click', () => this.limpiarLista());
+                
+                // Nivel Cashea
+                document.getElementById('nivelCashea').addEventListener('change', (e) => {
+                    this.nivelCashea = parseInt(e.target.value);
+                    this.actualizarTotales();
+                });
+                
+                // Conversor
+                document.getElementById('btnConvertirABolivares').addEventListener('click', () => this.convertirABolivares());
+                document.getElementById('btnConvertirADolares').addEventListener('click', () => this.convertirADolares());
+                
+                // Calculadora imaginaria
+                document.getElementById('btnCalcularImaginaria').addEventListener('click', () => this.calcularCompraImaginaria());
+                
+                // Calculadora manual
+                document.getElementById('btnCalcularManual').addEventListener('click', () => this.calcularManual());
+                
+                // Panel de calculadora
+                document.getElementById('btnCerrarCalc').addEventListener('click', () => this.ocultarCalculadora());
+                document.getElementById('swipeIndicator').addEventListener('click', () => this.mostrarCalculadora());
+                
+                // Eventos de swipe
+                document.addEventListener('touchstart', (e) => this.handleTouchStart(e), {passive: true});
+                document.addEventListener('touchend', (e) => this.handleTouchEnd(e), {passive: true});
+                document.addEventListener('mousedown', (e) => this.handleTouchStart(e));
+                document.addEventListener('mouseup', (e) => this.handleTouchEnd(e));
+                
+                // Tecla Enter
+                document.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const activeElement = document.activeElement;
+                        if (activeElement && ['nombreProducto', 'cantidadProducto', 'precioProducto'].includes(activeElement.id)) {
+                            this.agregarProducto();
+                        }
+                    }
+                });
+
+                // Actualizar conversiones en tiempo real
+                document.getElementById('inputDolares').addEventListener('input', () => this.convertirABolivares());
+                document.getElementById('inputBolivares').addEventListener('input', () => this.convertirADolares());
+            }
+
+            // ============ GESTIÓN DE PRODUCTOS ============
+            agregarProducto() {
+                const nombre = document.getElementById('nombreProducto').value.trim();
+                const cantidad = parseInt(document.getElementById('cantidadProducto').value);
+                const precio = parseFloat(document.getElementById('precioProducto').value);
+                
+                if (!nombre) {
+                    this.mostrarNotificacion('Por favor ingresa el nombre del producto', 'error');
+                    return;
+                }
+                
+                if (!cantidad || cantidad < 1) {
+                    this.mostrarNotificacion('La cantidad debe ser mayor a 0', 'error');
+                    return;
+                }
+                
+                if (!precio || precio < 0) {
+                    this.mostrarNotificacion('El precio debe ser un valor válido', 'error');
+                    return;
+                }
+                
+                const producto = {
+                    id: Date.now(),
+                    nombre: nombre,
+                    cantidad: cantidad,
+                    precio: precio,
+                    seleccionado: true
+                };
+                
+                this.productos.push(producto);
+                this.actualizarListaUI();
+                this.actualizarTotales();
+                this.limpiarFormulario();
+                this.mostrarNotificacion(`${nombre} agregado correctamente`);
+            }
+
+            limpiarFormulario() {
+                document.getElementById('nombreProducto').value = '';
+                document.getElementById('cantidadProducto').value = '1';
+                document.getElementById('precioProducto').value = '';
+                document.getElementById('nombreProducto').focus();
+            }
+
+            limpiarLista() {
+                if (this.productos.length === 0) return;
+                
+                if (confirm('¿Estás seguro de limpiar toda la lista?')) {
+                    this.productos = [];
+                    this.actualizarListaUI();
+                    this.actualizarTotales();
+                    this.mostrarNotificacion('Lista limpiada correctamente');
+                }
+            }
+
+            eliminarProducto(id) {
+                this.productos = this.productos.filter(p => p.id !== id);
+                this.actualizarListaUI();
+                this.actualizarTotales();
+                this.mostrarNotificacion('Producto eliminado');
+            }
+
+            toggleSeleccion(id) {
+                const producto = this.productos.find(p => p.id === id);
+                if (producto) {
+                    producto.seleccionado = !producto.seleccionado;
+                    this.actualizarTotales();
+                }
+            }
+
+            actualizarListaUI() {
+                const listaElement = document.getElementById('listaProductos');
+                
+                if (this.productos.length === 0) {
+                    listaElement.innerHTML = '<li class="producto-vacio">No hay productos en la lista</li>';
+                } else {
+                    listaElement.innerHTML = this.productos.map(producto => `
+                        <li class="producto-item">
+                            <input type="checkbox" 
+                                   class="producto-checkbox" 
+                                   ${producto.seleccionado ? 'checked' : ''} 
+                                   onchange="app.toggleSeleccion(${producto.id})">
+                            <div class="producto-info">
+                                <div class="producto-nombre">${this.escapeHTML(producto.nombre)}</div>
+                                <div class="producto-detalles">
+                                    ${producto.cantidad} unidad(es) x $${producto.precio.toFixed(2)}
+                                </div>
+                            </div>
+                            <div class="producto-precio">
+                                $${(producto.cantidad * producto.precio).toFixed(2)}
+                            </div>
+                            <button class="btn-eliminar" onclick="app.eliminarProducto(${producto.id})">🗑️</button>
+                        </li>
+                    `).join('');
+                }
+            }
+
+            // ============ CÁLCULOS ============
+            actualizarTotales() {
+                if (this.tasaBCV === 0) return;
+                
+                const totalLista = this.getTotalLista();
+                const totalSeleccionado = this.getTotalSeleccionado();
+                const cobertura = this.getCoberturaCashea(totalSeleccionado);
+                
+                // Total lista
+                document.getElementById('totalListaDolares').textContent = this.formatearMoneda(totalLista, 'USD');
+                document.getElementById('totalListaBolivares').textContent = this.formatearMoneda(this.dolaresABolivares(totalLista), 'VES');
+                
+                // Total seleccionado
+                document.getElementById('totalSeleccionadoDolares').textContent = this.formatearMoneda(totalSeleccionado, 'USD');
+                document.getElementById('totalSeleccionadoBolivares').textContent = this.formatearMoneda(this.dolaresABolivares(totalSeleccionado), 'VES');
+                
+                // Cobertura Cashea
+                document.getElementById('coberturaCasheaDolares').textContent = this.formatearMoneda(cobertura, 'USD');
+                document.getElementById('coberturaCasheaBolivares').textContent = this.formatearMoneda(this.dolaresABolivares(cobertura), 'VES');
+            }
+
+            getTotalLista() {
+                return this.productos.reduce((total, p) => total + (p.cantidad * p.precio), 0);
+            }
+
+            getTotalSeleccionado() {
+                return this.productos.reduce((total, p) => {
+                    return p.seleccionado ? total + (p.cantidad * p.precio) : total;
+                }, 0);
+            }
+
+            getCoberturaCashea(monto) {
+                const porcentaje = this.coberturasCashea[this.nivelCashea] || 0;
+                return monto * porcentaje;
+            }
+
+            dolaresABolivares(dolares) {
+                return dolares * this.tasaBCV;
+            }
+
+            bolivaresADolares(bolivares) {
+                return bolivares / this.tasaBCV;
+            }
+
+            formatearMoneda(cantidad, tipo) {
+                if (tipo === 'USD') {
+                    return `$${cantidad.toFixed(2)}`;
+                } else {
+                    return `Bs. ${cantidad.toFixed(2)}`;
+                }
+            }
+
+            // ============ CONVERSOR ============
+            convertirABolivares() {
+                const dolares = parseFloat(document.getElementById('inputDolares').value) || 0;
+                const bolivares = this.dolaresABolivares(dolares);
+                document.getElementById('inputBolivares').value = bolivares.toFixed(2);
+            }
+
+            convertirADolares() {
+                const bolivares = parseFloat(document.getElementById('inputBolivares').value) || 0;
+                const dolares = this.bolivaresADolares(bolivares);
+                document.getElementById('inputDolares').value = dolares.toFixed(2);
+            }
+
+            // ============ COMPRA IMAGINARIA ============
+            calcularCompraImaginaria() {
+                const capital = parseFloat(document.getElementById('capitalDisponible').value) || 0;
+                const debeQuedar = parseFloat(document.getElementById('dineroQuedar').value) || 0;
+                
+                if (capital <= 0) {
+                    this.mostrarNotificacion('Ingresa un capital válido', 'error');
+                    return;
+                }
+                
+                if (debeQuedar >= capital) {
+                    this.mostrarNotificacion('El dinero que debe quedar no puede ser mayor al capital', 'error');
+                    return;
+                }
+                
+                const montoMaximo = capital - debeQuedar;
+                const cobertura = this.getCoberturaCashea(montoMaximo);
+                
+                document.getElementById('montoMaximoDolares').textContent = this.formatearMoneda(montoMaximo, 'USD');
+                document.getElementById('montoMaximoBolivares').textContent = this.formatearMoneda(this.dolaresABolivares(montoMaximo), 'VES');
+                document.getElementById('coberturaImaginariaDolares').textContent = this.formatearMoneda(cobertura, 'USD');
+                document.getElementById('coberturaImaginariaBolivares').textContent = this.formatearMoneda(this.dolaresABolivares(cobertura), 'VES');
+                
+                this.mostrarNotificacion('Cálculo realizado correctamente');
+            }
+
+            // ============ CALCULADORA MANUAL ============
+            calcularManual() {
+                const monto = parseFloat(document.getElementById('montoManual').value) || 0;
+                
+                if (monto <= 0) {
+                    this.mostrarNotificacion('Ingresa un monto válido', 'error');
+                    return;
+                }
+                
+                const equivalenteDolares = this.bolivaresADolares(monto);
+                const cobertura = this.getCoberturaCashea(equivalenteDolares);
+                
+                document.getElementById('equivalenteDolares').textContent = this.formatearMoneda(equivalenteDolares, 'USD');
+                document.getElementById('coberturaManualDolares').textContent = this.formatearMoneda(cobertura, 'USD');
+                document.getElementById('coberturaManualBolivares').textContent = this.formatearMoneda(this.dolaresABolivares(cobertura), 'VES');
+                
+                this.mostrarNotificacion('Cálculo realizado correctamente');
+            }
+
+            // ============ GESTIÓN DE PANELES ============
+            mostrarCalculadora() {
+                document.getElementById('mainPanel').classList.add('shifted');
+                document.getElementById('calculatorPanel').classList.add('visible');
+                document.getElementById('swipeIndicator').style.display = 'none';
+                this.isCalculatorVisible = true;
+            }
+
+            ocultarCalculadora() {
+                document.getElementById('mainPanel').classList.remove('shifted');
+                document.getElementById('calculatorPanel').classList.remove('visible');
+                document.getElementById('swipeIndicator').style.display = 'block';
+                this.isCalculatorVisible = false;
+            }
+
+            // ============ GESTIÓN DE SWIPE ============
+            handleTouchStart(e) {
+                this.touchStartX = e.type === 'mousedown' ? e.clientX : e.changedTouches[0].screenX;
+            }
+
+            handleTouchEnd(e) {
+                this.touchEndX = e.type === 'mouseup' ? e.clientX : e.changedTouches[0].screenX;
+                this.handleSwipe();
+            }
+
+            handleSwipe() {
+                const swipeDistance = this.touchEndX - this.touchStartX;
+                const threshold = 50;
+                
+                if (Math.abs(swipeDistance) > threshold) {
+                    if (swipeDistance < 0 && !this.isCalculatorVisible) {
+                        this.mostrarCalculadora();
+                    } else if (swipeDistance > 0 && this.isCalculatorVisible) {
+                        this.ocultarCalculadora();
+                    }
+                }
+            }
+
+            // ============ UTILIDADES ============
+            escapeHTML(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            mostrarNotificacion(mensaje, tipo = 'success') {
+                const notification = document.getElementById('notification');
+                notification.textContent = mensaje;
+                notification.className = `notification ${tipo}`;
+                notification.style.display = 'block';
+                
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // ============ INICIALIZAR APLICACIÓN ============
+        let app;
+        document.addEventListener('DOMContentLoaded', () => {
+            app = new App();
+            console.log('App de Calculadora de Compras inicializada correctamente');
+            console.log('Desliza hacia la izquierda para acceder a la calculadora avanzada');
+        });
+
+        // Recargar tasa cada 30 minutos
+        setInterval(() => {
+            if (app) {
+                app.cargarTasaBCV();
+            }
+        }, 1800000);
+    </script>
 </body>
 </html>
