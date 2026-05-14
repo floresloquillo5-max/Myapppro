@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Mi Mercado + Cashea</title>
     <style>
         :root {
+            /* Dark theme (default) */
             --bg: #0F0F1A;
             --bg-card: #1A1A2E;
             --bg-input: #16213E;
@@ -24,6 +25,7 @@
             --success: #00B894;
             --warning: #FDCB6E;
             --expense-red: #FF4757;
+            --expense-red-dark: #FF3838;
             --cashea-yellow: #FFD700;
             --cashea-black: #1A1A1A;
             --shadow: 0 4px 20px rgba(0,0,0,0.4);
@@ -33,6 +35,7 @@
             --radius-xs: 6px;
         }
 
+        /* Light theme */
         body.light-theme {
             --bg: #F5F5F5;
             --bg-card: #FFFFFF;
@@ -42,6 +45,19 @@
             --text-muted: #666688;
             --text-dim: #8888AA;
             --border: #D0D0E0;
+            --primary: #5A4BD1;
+            --primary-dark: #4A3BC1;
+            --primary-light: #6C5CE7;
+            --accent: #00B5B0;
+            --accent-dark: #009A95;
+            --danger: #EE5A5A;
+            --danger-dark: #DD4A4A;
+            --success: #00A384;
+            --warning: #E5B85E;
+            --expense-red: #E63946;
+            --expense-red-dark: #D32F3C;
+            --cashea-yellow: #FFC700;
+            --cashea-black: #1A1A1A;
             --shadow: 0 4px 20px rgba(0,0,0,0.1);
             --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
         }
@@ -67,6 +83,7 @@
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
 
+        /* ===== HEADER ===== */
         .header {
             background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-input) 100%);
             border-bottom: 1px solid var(--border);
@@ -82,8 +99,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 8px;
         }
 
         .header h1 {
@@ -99,10 +114,9 @@
             display: flex;
             gap: 8px;
             align-items: center;
-            flex-wrap: wrap;
         }
 
-        .calc-toggle, .theme-toggle, .list-toggle {
+        .calc-toggle, .theme-toggle {
             background: var(--primary);
             color: white;
             border: none;
@@ -117,7 +131,8 @@
             gap: 6px;
         }
 
-        .calc-toggle:hover, .theme-toggle:hover, .list-toggle:hover {
+        .calc-toggle:hover, .theme-toggle:hover,
+        .calc-toggle:active, .theme-toggle:active {
             background: var(--primary-dark);
             transform: scale(1.05);
         }
@@ -126,6 +141,10 @@
             background: var(--bg-input);
             border: 1px solid var(--border);
             color: var(--text);
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-hover);
         }
 
         .header-info {
@@ -204,6 +223,20 @@
             pointer-events: none;
         }
 
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         .last-update {
             font-size: 0.65rem;
             color: var(--text-dim);
@@ -211,60 +244,10 @@
             text-align: center;
         }
 
-        .manual-rate-section {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 12px;
-            margin-top: 12px;
-        }
-
-        .manual-rate-section .form-row {
-            display: flex;
-            gap: 8px;
-            align-items: flex-end;
-        }
-
-        .manual-rate-section .form-group {
-            flex: 1;
-        }
-
-        .manual-rate-section label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .manual-rate-section input {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xs);
-            padding: 8px 12px;
-            color: var(--text);
-            font-size: 0.9rem;
-            width: 100%;
-        }
-
-        .offline-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(255, 71, 87, 0.15);
-            color: var(--expense-red);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-top: 8px;
-        }
-
+        /* ===== MAIN CONTAINER ===== */
         .app-container {
             position: relative;
             overflow: hidden;
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
         }
 
         .pages-wrapper {
@@ -280,6 +263,7 @@
             min-height: calc(100vh - 160px);
         }
 
+        /* ===== ADD PRODUCT FORM ===== */
         .add-form {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -353,9 +337,7 @@
             gap: 6px;
         }
 
-        .btn:active {
-            transform: scale(0.96);
-        }
+        .btn:active { transform: scale(0.96); }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -367,6 +349,9 @@
         .btn-primary:hover {
             box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
         }
+
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-danger:hover { background: var(--danger-dark); }
 
         .btn-sm {
             padding: 6px 12px;
@@ -385,43 +370,22 @@
             color: var(--primary-light);
         }
 
-        .btn-icon {
-            padding: 6px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            border-radius: 50%;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-
-        .btn-icon:hover {
-            background: var(--bg-hover);
-            color: var(--primary-light);
-        }
-
+        /* ===== PRODUCT LIST ===== */
         .list-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 8px;
         }
 
         .list-header h3 {
             font-size: 0.95rem;
             color: var(--text);
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .list-actions {
             display: flex;
             gap: 6px;
-            flex-wrap: wrap;
         }
 
         .product-list {
@@ -534,7 +498,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .product-delete:hover {
             color: var(--danger);
             background: rgba(255, 107, 107, 0.1);
@@ -546,11 +509,10 @@
             color: var(--text-dim);
         }
 
-        .empty-state .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 12px;
-        }
+        .empty-state .empty-icon { font-size: 3rem; margin-bottom: 12px; }
+        .empty-state p { font-size: 0.85rem; }
 
+        /* ===== TOTALS ===== */
         .totals-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -568,9 +530,7 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .total-row:last-child {
-            border-bottom: none;
-        }
+        .total-row:last-child { border-bottom: none; }
 
         .total-row.highlight {
             background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(0, 206, 201, 0.1));
@@ -578,6 +538,7 @@
 
         .total-row.cashea {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.03));
+            border-bottom: none;
         }
 
         .total-row.expense {
@@ -601,9 +562,7 @@
             gap: 6px;
         }
 
-        .total-values {
-            text-align: right;
-        }
+        .total-values { text-align: right; }
 
         .total-usd {
             font-size: 1rem;
@@ -630,6 +589,7 @@
             font-weight: 600;
         }
 
+        /* ===== CASHEA LOGO ===== */
         .cashea-logo {
             display: inline-flex;
             align-items: center;
@@ -649,9 +609,17 @@
             line-height: 1;
         }
 
-        .calculator-panel {
-            position: relative;
+        .cashea-logo-lg {
+            width: 32px;
+            height: 32px;
         }
+
+        .cashea-logo-lg .c-letter {
+            font-size: 1.1rem;
+        }
+
+        /* ===== CALCULATOR PANEL ===== */
+        .calculator-panel { position: relative; }
 
         .calc-back-btn {
             position: absolute;
@@ -701,9 +669,7 @@
             align-items: flex-end;
         }
 
-        .calc-input-group .form-group {
-            flex: 1;
-        }
+        .calc-input-group .form-group { flex: 1; }
 
         .calc-input-group input,
         .calc-input-group select {
@@ -779,11 +745,7 @@
             color: var(--text-muted);
         }
 
-        .calc-result-value {
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
-
+        .calc-result-value { font-size: 0.95rem; font-weight: 700; }
         .calc-result-value.usd { color: var(--accent); }
         .calc-result-value.bs { color: var(--primary-light); }
         .calc-result-value.cashea-val { color: var(--cashea-yellow); }
@@ -805,6 +767,8 @@
         .calc-btn:hover {
             box-shadow: 0 4px 15px rgba(0, 206, 201, 0.3);
         }
+
+        .calc-btn:active { transform: scale(0.97); }
 
         .manual-toggle {
             display: flex;
@@ -859,19 +823,14 @@
             background: white;
         }
 
-        .toggle-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
+        .toggle-label { font-size: 0.8rem; color: var(--text-muted); }
 
         .manual-inputs {
             display: none;
             margin-bottom: 10px;
         }
 
-        .manual-inputs.visible {
-            display: block;
-        }
+        .manual-inputs.visible { display: block; }
 
         .info-badge {
             display: inline-flex;
@@ -904,10 +863,7 @@
             opacity: 0.7;
         }
 
-        .swipe-hint:hover {
-            opacity: 1;
-            padding-right: 14px;
-        }
+        .swipe-hint:hover { opacity: 1; padding-right: 14px; }
 
         .swipe-hint-left {
             left: 0;
@@ -916,13 +872,8 @@
             display: none;
         }
 
-        .swipe-hint-left.visible {
-            display: block;
-        }
-
-        .swipe-hint-right.hidden {
-            display: none;
-        }
+        .swipe-hint-left.visible { display: block; }
+        .swipe-hint-right.hidden { display: none; }
 
         .toast {
             position: fixed;
@@ -942,25 +893,25 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            justify-content: center;
         }
 
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
-
+        .toast.show { transform: translateX(-50%) translateY(0); }
         @media (min-width: 500px) {
-            .page {
-                max-width: 500px;
-                margin: 0 auto;
-            }
-            .swipe-hint {
-                display: none !important;
-            }
+            .page { max-width: 500px; margin: 0 auto; }
+            .swipe-hint { display: none !important; }
         }
+
+        .page-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .divider { height: 1px; background: var(--border); margin: 12px 0; }
 
         .tag {
             display: inline-block;
@@ -970,20 +921,9 @@
             font-weight: 600;
         }
 
-        .tag-cashea {
-            background: rgba(255, 215, 0, 0.15);
-            color: var(--cashea-yellow);
-        }
-
-        .tag-user {
-            background: rgba(255, 71, 87, 0.15);
-            color: var(--expense-red);
-        }
-
-        .tag-total {
-            background: rgba(108, 92, 231, 0.15);
-            color: var(--primary-light);
-        }
+        .tag-cashea { background: rgba(255, 215, 0, 0.15); color: var(--cashea-yellow); }
+        .tag-user { background: rgba(255, 71, 87, 0.15); color: var(--expense-red); }
+        .tag-total { background: rgba(108, 92, 231, 0.15); color: var(--primary-light); }
 
         .imaginary-result {
             background: var(--bg-input);
@@ -1005,7 +945,6 @@
             gap: 10px;
             margin-top: 8px;
         }
-
         .imaginary-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -1021,148 +960,32 @@
             letter-spacing: 0.5px;
         }
 
-        .imaginary-card .ic-value {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-top: 4px;
-        }
+        .imaginary-card .ic-value { font-size: 1rem; font-weight: 700; margin-top: 4px; }
+        .imaginary-card .ic-sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
 
-        .imaginary-card .ic-sub {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
+        .imaginary-card.cashea-card { border-color: rgba(255, 215, 0, 0.3); }
+        .imaginary-card.cashea-card .ic-value { color: var(--cashea-yellow); }
 
-        .imaginary-card.cashea-card {
-            border-color: rgba(255, 215, 0, 0.3);
-        }
-
-        .imaginary-card.cashea-card .ic-value {
-            color: var(--cashea-yellow);
-        }
-
-        .imaginary-card.user-card {
-            border-color: rgba(255, 71, 87, 0.3);
-        }
-
-        .imaginary-card.user-card .ic-value {
-            color: var(--expense-red);
-        }
+        .imaginary-card.user-card { border-color: rgba(255, 71, 87, 0.3); }
+        .imaginary-card.user-card .ic-value { color: var(--expense-red); }
 
         .imaginary-card.total-card {
             border-color: rgba(108, 92, 231, 0.3);
             grid-column: span 2;
         }
 
-        .imaginary-card.total-card .ic-value {
-            color: var(--accent);
-        }
-
-        .unit-badge {
-            display: inline-block;
-            background: var(--bg-hover);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xs);
-            padding: 2px 6px;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-left: 4px;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-
-        .modal-overlay.visible {
-            display: flex;
-        }
-
-        .modal {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
-            max-width: 500px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .modal h3 {
-            margin-bottom: 16px;
-            color: var(--primary-light);
-            font-size: 1.1rem;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 20px;
-        }
-
-        .modal-actions .btn {
-            flex: 1;
-        }
-
-        .list-selector {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 12px;
-            margin-bottom: 16px;
-        }
-
-        .list-selector label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .list-selector select {
-            width: 100%;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xs);
-            padding: 8px 12px;
-            color: var(--text);
-            font-size: 0.9rem;
-        }
-
-        .share-textarea {
-            width: 100%;
-            min-height: 150px;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xs);
-            padding: 12px;
-            color: var(--text);
-            font-family: monospace;
-            font-size: 0.85rem;
-            resize: vertical;
-        }
+        .imaginary-card.total-card .ic-value { color: var(--accent); }
     </style>
 </head>
 <body>
 
+<!-- ===== HEADER ===== -->
 <header class="header">
     <div class="header-top">
         <h1>🛒 Mi Mercado</h1>
         <div class="header-actions">
-            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙 Oscuro</button>
-            <button class="list-toggle" onclick="openListsModal()">📋 Listas</button>
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Cambiar tema">🌙</button>
+            <button class="calc-toggle" onclick="openListsModal()" style="background:var(--bg-input); border:1px solid var(--border); color:var(--text);">📋 Listas</button>
             <button class="calc-toggle" onclick="openCalculator()">🧮 Calculadora</button>
         </div>
     </div>
@@ -1174,18 +997,16 @@
                 <span class="chip-value" id="rateDisplay">Cargando...</span>
             </div>
         </div>
-        <div class="info-chip rate-selector">
+        <div class="info-chip" style="flex:0 0 auto;">
             <span class="chip-icon">
-                <div class="cashea-logo">
-                    <span class="c-letter">C</span>
-                </div>
+                <div class="cashea-logo"><span class="c-letter">C</span></div>
             </span>
             <div class="chip-content">
                 <span class="chip-label">Nivel Cashea</span>
-                <select id="casheaLevel" onchange="updateTotals()">
-                    <option value="1">Nivel 1 — 60%</option>
+                <select id="casheaLevel" onchange="updateTotals()" style="background:transparent; border:none; color:var(--text); font-size:0.85rem; font-weight:700; cursor:pointer; padding:0;">
+                    <option value="1">Nivel 1 — 40%</option>
                     <option value="2" selected>Nivel 2 — 50%</option>
-                    <option value="3">Nivel 3 — 40%</option>
+                    <option value="3">Nivel 3 — 60%</option>
                 </select>
             </div>
         </div>
@@ -1194,17 +1015,13 @@
     <div id="manualRateContainer"></div>
 </header>
 
-<div class="swipe-hint swipe-hint-right" id="swipeHintRight" onclick="openCalculator()">
-    🧮 CALCULADORA →
-</div>
-<div class="swipe-hint swipe-hint-left" id="swipeHintLeft" onclick="closeCalculator()">
-    ← LISTA
-</div>
+<div class="swipe-hint swipe-hint-right" id="swipeHintRight" onclick="openCalculator()">CALCULADORA</div>
+<div class="swipe-hint swipe-hint-left" id="swipeHintLeft" onclick="closeCalculator()">LISTA</div>
 
 <div class="app-container">
     <div class="pages-wrapper" id="pagesWrapper">
 
-        <!-- Página de Lista -->
+        <!-- ===== PAGE 1: LISTA ===== -->
         <div class="page" id="pageList">
             <div class="add-form">
                 <h3>➕ Agregar Producto</h3>
@@ -1232,13 +1049,10 @@
             </div>
 
             <div class="list-header">
-                <h3 id="listTitle">
-                    📋 Mi Lista (<span id="itemCount">0</span>)
-                    <button class="btn-icon" onclick="editListName()" title="Cambiar nombre">✏️</button>
-                </h3>
+                <h3 id="listTitle">📋 Mi Lista (<span id="itemCount">0</span>) <button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button></h3>
                 <div class="list-actions">
                     <button class="btn btn-sm btn-outline" onclick="clearList()">🗑️ Borrar todo</button>
-                    <button class="btn btn-sm btn-outline" onclick="shareCurrentList()">📤 Compartir</button>
+                    <button class="btn btn-sm btn-outline" onclick="exportCurrentList()">📤 Compartir</button>
                 </div>
             </div>
 
@@ -1251,7 +1065,7 @@
 
             <div class="totals-section" id="totalsSection" style="display:none;">
                 <div class="total-row">
-                    <span class="total-label">📊 Total lista</span>
+                    <span class="total-label">📦 Total lista</span>
                     <div class="total-values">
                         <div class="total-usd" id="totalUsd">$0.00</div>
                         <div class="total-bs" id="totalBs">Bs. 0,00</div>
@@ -1266,10 +1080,8 @@
                 </div>
                 <div class="total-row cashea">
                     <span class="total-label">
-                        <div class="cashea-logo">
-                            <span class="c-letter">C</span>
-                        </div>
-                        Monto a financiar (Cashea) (<span id="casheaPercent">50</span>%)
+                        <div class="cashea-logo"><span class="c-letter">C</span></div>
+                        Cashea financia (<span id="casheaPercent">50</span>%)
                     </span>
                     <div class="total-values">
                         <div class="total-usd" id="casheaUsd">$0.00</div>
@@ -1286,11 +1098,11 @@
             </div>
         </div>
 
-        <!-- Página de Calculadora -->
+        <!-- ===== PAGE 2: CALCULADORA ===== -->
         <div class="page calculator-panel" id="pageCalc">
             <button class="calc-back-btn" onclick="closeCalculator()">← Volver a la lista</button>
 
-            <div class="calc-section" style="margin-top: 40px;">
+            <div class="calc-section" style="margin-top:48px;">
                 <h3>💱 Conversión Dólar ↔ Bolívares</h3>
                 <div class="calc-input-group">
                     <div class="form-group">
@@ -1332,7 +1144,7 @@
                 <div class="manual-inputs" id="manualInputs">
                     <div class="calc-input-group">
                         <div class="form-group">
-                            <label>Tu monto disponible ($)</label>
+                            <label>Monto de la compra ($)</label>
                             <input type="number" id="manualAmount" placeholder="0.00" step="0.01" min="0">
                         </div>
                     </div>
@@ -1341,9 +1153,9 @@
                     <div class="form-group">
                         <label>Nivel Cashea</label>
                         <select id="calcCasheaLevel">
-                            <option value="1">Nivel 1 — 60%</option>
+                            <option value="1">Nivel 1 — 40%</option>
                             <option value="2" selected>Nivel 2 — 50%</option>
-                            <option value="3">Nivel 3 — 40%</option>
+                            <option value="3">Nivel 3 — 60%</option>
                         </select>
                     </div>
                 </div>
@@ -1358,12 +1170,7 @@
                         <span class="calc-result-value bs" id="covTotalBs"></span>
                     </div>
                     <div class="calc-result-row">
-                        <span class="calc-result-label">
-                            <div class="cashea-logo" style="width:20px;height:20px;">
-                                <span class="c-letter" style="font-size:0.7rem;">C</span>
-                            </div>
-                            Monto a financiar (Cashea):
-                        </span>
+                        <span class="calc-result-label">Cashea financia:</span>
                         <span class="calc-result-value cashea-val" id="covCasheaUsd"></span>
                     </div>
                     <div class="calc-result-row">
@@ -1402,9 +1209,9 @@
                     <div class="form-group">
                         <label>Nivel Cashea</label>
                         <select id="imagCasheaLevel">
-                            <option value="1">Nivel 1 — 60%</option>
+                            <option value="1">Nivel 1 — 40%</option>
                             <option value="2" selected>Nivel 2 — 50%</option>
-                            <option value="3">Nivel 3 — 40%</option>
+                            <option value="3">Nivel 3 — 60%</option>
                         </select>
                     </div>
                 </div>
@@ -1421,16 +1228,14 @@
                         </div>
                         <div class="imaginary-card cashea-card">
                             <div class="ic-label">
-                                <div class="cashea-logo" style="width:18px;height:18px;margin:0 auto 4px;">
-                                    <span class="c-letter" style="font-size:0.65rem;">C</span>
-                                </div>
+                                <div class="cashea-logo" style="width:18px;height:18px;margin:0 auto 4px;"><span class="c-letter" style="font-size:0.65rem;">C</span></div>
                                 Cashea financia
                             </div>
                             <div class="ic-value" id="imagCasheaUsd">$0.00</div>
                             <div class="ic-sub" id="imagCasheaBs">Bs. 0,00</div>
                         </div>
                         <div class="imaginary-card user-card">
-                            <div class="ic-label">Pago inicial</div>
+                            <div class="ic-label">💳 Pago inicial</div>
                             <div class="ic-value" id="imagUserUsd">$0.00</div>
                             <div class="ic-sub" id="imagUserBs">Bs. 0,00</div>
                         </div>
@@ -1443,60 +1248,53 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
-<!-- Modal de Gestión de Listas -->
-<div class="modal-overlay" id="listsModal">
+<!-- ===== MODAL: GESTIÓN DE LISTAS ===== -->
+<div class="modal-overlay" id="listsModal" onclick="if(event.target===this)closeListsModal()">
     <div class="modal">
         <h3>📋 Gestión de Listas</h3>
-        
-        <div class="list-selector">
-            <label>Seleccionar lista</label>
-            <select id="listSelect" onchange="loadSelectedList()">
-                <option value="">Cargando...</option>
-            </select>
+        <div style="margin-bottom:12px;">
+            <label style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; display:block; margin-bottom:6px;">Lista activa</label>
+            <select id="listSelect" onchange="switchList(this.value)" style="width:100%; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-xs); padding:10px 12px; color:var(--text); font-size:0.9rem;"></select>
         </div>
         <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
             <button class="btn btn-primary" onclick="createNewList()">➕ Crear Nueva Lista</button>
             <button class="btn btn-outline" onclick="copyCurrentList()">📋 Copiar Lista Actual</button>
-            <button class="btn btn-outline" onclick="exportCurrentList()">💾 Exportar Lista</button>
-            <button class="btn btn-outline" onclick="openImportModal()">📥 Importar Lista</button>
+            <button class="btn btn-outline" onclick="exportCurrentList(); closeListsModal();">📤 Exportar / Compartir</button>
+            <button class="btn btn-outline" onclick="closeListsModal(); openImportModal();">📥 Importar Lista</button>
             <button class="btn btn-outline" onclick="deleteCurrentList()" style="color:var(--danger); border-color:var(--danger);">🗑️ Eliminar Lista</button>
         </div>
-
-        <div class="modal-actions">
-            <button class="btn btn-outline" onclick="closeListsModal()">Cerrar</button>
-        </div>
+        <button class="btn btn-outline" onclick="closeListsModal()" style="width:100%;">Cerrar</button>
     </div>
 </div>
 
-<!-- Modal de Importación -->
-<div class="modal-overlay" id="importModal">
+<!-- ===== MODAL: IMPORTAR ===== -->
+<div class="modal-overlay" id="importModal" onclick="if(event.target===this)closeImportModal()">
     <div class="modal">
         <h3>📥 Importar Lista</h3>
-        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">
-            Pega el código de la lista que quieres importar:
-        </p>
-        <textarea class="share-textarea" id="importText" placeholder="Pega aquí el código de la lista..."></textarea>
-        <div class="modal-actions">
-            <button class="btn btn-outline" onclick="closeImportModal()">Cancelar</button>
-            <button class="btn btn-primary" onclick="importList()">Importar</button>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Pega el código de la lista que quieres importar:</p>
+        <textarea id="importText" style="width:100%; min-height:120px; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-xs); padding:12px; color:var(--text); font-family:monospace; font-size:0.8rem; resize:vertical;" placeholder="Pega aquí el código..."></textarea>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+            <button class="btn btn-outline" onclick="closeImportModal()" style="flex:1;">Cancelar</button>
+            <button class="btn btn-primary" onclick="importList()" style="flex:1;">Importar</button>
         </div>
     </div>
 </div>
 
-<!-- Modal de Renombrar -->
-<div class="modal-overlay" id="renameModal">
+<!-- ===== MODAL: RENOMBRAR ===== -->
+<div class="modal-overlay" id="renameModal" onclick="if(event.target===this)closeRenameModal()">
     <div class="modal">
-        <h3>✏️ Cambiar Nombre de la Lista</h3>
+        <h3>✏️ Renombrar Lista</h3>
         <div class="form-group" style="margin-bottom:16px;">
-            <label>Nombre de la lista</label>
-            <input type="text" id="newListName" placeholder="Ej: Mercado Central, Bodega, etc.">
+            <label>Nuevo nombre</label>
+            <input type="text" id="newListName" placeholder="Ej: Mercado Central">
         </div>
-        <div class="modal-actions">
-            <button class="btn btn-outline" onclick="closeRenameModal()">Cancelar</button>
-            <button class="btn btn-primary" onclick="saveListName()">Guardar</button>
+        <div style="display:flex; gap:8px;">
+            <button class="btn btn-outline" onclick="closeRenameModal()" style="flex:1;">Cancelar</button>
+            <button class="btn btn-primary" onclick="saveListName()" style="flex:1;">Guardar</button>
         </div>
     </div>
 </div>
@@ -1504,1088 +1302,620 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// Variables globales
-var dollarRate = 0;
-var currentListId = 'default';
-var currentPage = 0;
-var isOffline = false;
-var products = [];
-var marketLists = {};
+// ===== ESTADO GLOBAL =====
+let dollarRate = 0;
+let currentPage = 0;
+let currentListId = 'default';
+let marketLists = {};
 
-// Definición clara de niveles Cashea (Porcentaje que FINANCIAN)
-// Nivel 1: 60% financiado (Usuario paga 40%)
-// Nivel 2: 50% financiado (Usuario paga 50%)
-// Nivel 3: 40% financiado (Usuario paga 60%)
-var CASHEA_LEVELS = {
-    1: 0.60,
+// CASHEA_LEVELS: porcentaje que CASHEA FINANCIA (lo que paga Cashea)
+// Nivel 1: Cashea financia 40% → usuario paga 60%
+// Nivel 2: Cashea financia 50% → usuario paga 50%
+// Nivel 3: Cashea financia 60% → usuario paga 40%
+const CASHEA_LEVELS = {
+    1: 0.40,
     2: 0.50,
-    3: 0.40
+    3: 0.60
 };
 
-// Inicialización
-document.addEventListener('DOMContentLoaded', function() {
-    fetchRate();
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
     loadLists();
+    fetchRate();
     loadTheme();
     setupSwipe();
-    updateThemeIcon(document.body.classList.contains('light-theme'));
 });
 
-// Funciones de Listas
+// ===== GESTIÓN DE LISTAS =====
 function loadLists() {
-    var savedLists = localStorage.getItem('market_lists');
-    
-    if (savedLists) {
-        try {
-            marketLists = JSON.parse(savedLists);
-        } catch(e) {
-            console.error('Error cargando listas:', e);
-            marketLists = {};
-        }
+    try {
+        const saved = localStorage.getItem('market_lists_v2');
+        if (saved) marketLists = JSON.parse(saved);
+    } catch(e) {
+        marketLists = {};
     }
-    
-    // Asegurar que existe la lista por defecto
+
+    // Migrar datos del sistema antiguo (market_products) si existen
     if (!marketLists['default']) {
+        let migratedProducts = [];
+        try {
+            const old = localStorage.getItem('market_products');
+            if (old) migratedProducts = JSON.parse(old);
+        } catch(e) {}
         marketLists['default'] = {
             id: 'default',
             name: 'Mi Lista',
-            products: [],
+            products: migratedProducts,
             createdAt: new Date().toISOString()
         };
         saveLists();
     }
-    
-    updateListSelector();
-    loadCurrentList();
+
+    // Asegurar que currentListId es válido
+    if (!marketLists[currentListId]) currentListId = 'default';
+
+    renderListTitle();
+    renderProducts();
+    updateTotals();
 }
 
 function saveLists() {
     try {
-        localStorage.setItem('market_lists', JSON.stringify(marketLists));
+        localStorage.setItem('market_lists_v2', JSON.stringify(marketLists));
     } catch(e) {
-        console.error('Error guardando listas:', e);
-        showToast('Error al guardar las listas');
+        showToast('⚠️ Error al guardar');
     }
 }
 
 function getCurrentList() {
-    if (!marketLists[currentListId]) {
-        currentListId = 'default';
-        if (!marketLists['default']) {
-            marketLists['default'] = {
-                id: 'default',
-                name: 'Mi Lista',
-                products: [],
-                createdAt: new Date().toISOString()
-            };
-        }
-    }
+    if (!marketLists[currentListId]) currentListId = 'default';
     return marketLists[currentListId];
 }
 
-function saveCurrentList() {
+function getProducts() {
+    return getCurrentList().products || [];
+}
+
+function setProducts(arr) {
+    getCurrentList().products = arr;
     saveLists();
+}
+
+function renderListTitle() {
+    const list = getCurrentList();
+    const titleEl = document.getElementById('listTitle');
+    const countEl = document.getElementById('itemCount');
+    if (titleEl) {
+        titleEl.innerHTML = `📋 ${escapeHtml(list.name)} (<span id="itemCount">${getProducts().length}</span>) <button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button>`;
+    } else if (countEl) {
+        countEl.textContent = getProducts().length;
+    }
+}
+
+function switchList(id) {
+    if (!marketLists[id]) return;
+    currentListId = id;
+    renderListTitle();
+    renderProducts();
+    updateTotals();
+    showToast(`📋 Lista "${marketLists[id].name}" cargada`);
 }
 
 function updateListSelector() {
-    var select = document.getElementById('listSelect');
+    const select = document.getElementById('listSelect');
     if (!select) return;
-    
-    var html = '';
-    
-    for (var id in marketLists) {
-        if (marketLists.hasOwnProperty(id)) {
-            var list = marketLists[id];
-            var selected = id === currentListId ? 'selected' : '';
-            var productCount = list.products ? list.products.length : 0;
-            html += '<option value="' + id + '" ' + selected + '>' + 
-                    escapeHtml(list.name) + ' (' + productCount + ' productos)</option>';
-        }
-    }
-    
-    select.innerHTML = html;
+    select.innerHTML = Object.values(marketLists).map(list => {
+        const count = (list.products || []).length;
+        const sel = list.id === currentListId ? 'selected' : '';
+        return `<option value="${list.id}" ${sel}>${escapeHtml(list.name)} (${count})</option>`;
+    }).join('');
 }
 
-function loadCurrentList() {
-    var list = getCurrentList();
-    var listName = escapeHtml(list.name);
-    
-    var listTitle = document.getElementById('listTitle');
-    if (listTitle) {
-        listTitle.innerHTML = '📋 ' + listName + 
-            ' (<span id="itemCount">0</span>) ' +
-            '<button class="btn-icon" onclick="editListName()" title="Cambiar nombre">✏️</button>';
-    }
-    
-    // Actualizar products desde la lista actual
-    products = list.products ? list.products.slice() : [];
-    
-    renderProducts();
-    updateTotals();
-    updateListSelector();
-}
-
-function loadSelectedList() {
-    var select = document.getElementById('listSelect');
-    if (!select) return;
-    
-    currentListId = select.value;
-    loadCurrentList();
-    showToast('Lista cargada');
-}
-
-function createNewList() {
-    var name = prompt('Nombre de la nueva lista:', 'Lista ' + (Object.keys(marketLists).length + 1));
-    if (!name || !name.trim()) return;
-    
-    name = name.trim();
-    var newId = 'list_' + Date.now();
-    marketLists[newId] = {
-        id: newId,
-        name: name,
-        products: [],
-        createdAt: new Date().toISOString()
-    };
-    
-    saveLists();
-    currentListId = newId;
-    loadCurrentList();
-    updateListSelector();
-    showToast('Lista "' + name + '" creada');
-    closeListsModal();
-}
-
-function copyCurrentList() {
-    var currentList = getCurrentList();
-    var newName = prompt('Nombre para la copia:', currentList.name + ' (copia)');
-    if (!newName || !newName.trim()) return;
-    
-    newName = newName.trim();
-    var newId = 'list_' + Date.now();
-    
-    // Deep copy de los productos
-    var copiedProducts = [];
-    var sourceProducts = currentList.products || [];
-    for (var i = 0; i < sourceProducts.length; i++) {
-        copiedProducts.push({
-            id: Date.now() + i + 1,
-            name: sourceProducts[i].name,
-            qty: sourceProducts[i].qty,
-            unit: sourceProducts[i].unit || '',
-            price: sourceProducts[i].price,
-            checked: sourceProducts[i].checked
-        });
-    }
-    
-    marketLists[newId] = {
-        id: newId,
-        name: newName,
-        products: copiedProducts,
-        createdAt: new Date().toISOString()
-    };
-    
-    saveLists();
-    currentListId = newId;
-    loadCurrentList();
-    updateListSelector();
-    showToast('Lista copiada como "' + newName + '"');
-}
-
-function deleteCurrentList() {
-    if (currentListId === 'default') {
-        showToast('No se puede eliminar la lista por defecto');
-        return;
-    }
-    
-    if (!confirm('¿Estás seguro de eliminar esta lista? Esta acción no se puede deshacer.')) return;
-    
-    delete marketLists[currentListId];
-    currentListId = 'default';
-    saveLists();
-    loadCurrentList();
-    updateListSelector();
-    showToast('Lista eliminada');
-}
-
-function editListName() {
-    var list = getCurrentList();
-    var inputElement = document.getElementById('newListName');
-    if (inputElement) {
-        inputElement.value = list.name;
-    }
-    document.getElementById('renameModal').classList.add('visible');
-}
-
-function saveListName() {
-    var newName = document.getElementById('newListName').value.trim();
-    if (!newName) {
-        showToast('Ingresa un nombre válido');
-        return;
-    }
-    
-    getCurrentList().name = newName;
-    saveLists();
-    loadCurrentList();
-    closeRenameModal();
-    showToast('Nombre actualizado');
-}
-
-// Funciones de Modales
 function openListsModal() {
     updateListSelector();
     document.getElementById('listsModal').classList.add('visible');
 }
-
 function closeListsModal() {
     document.getElementById('listsModal').classList.remove('visible');
 }
-
 function openImportModal() {
-    closeListsModal();
     document.getElementById('importModal').classList.add('visible');
 }
-
 function closeImportModal() {
     document.getElementById('importModal').classList.remove('visible');
     document.getElementById('importText').value = '';
 }
-
+function editListName() {
+    document.getElementById('newListName').value = getCurrentList().name;
+    document.getElementById('renameModal').classList.add('visible');
+}
 function closeRenameModal() {
     document.getElementById('renameModal').classList.remove('visible');
 }
 
-// Funciones de Exportar/Importar
-function exportCurrentList() {
-    var list = getCurrentList();
-    var exportData = {
-        name: list.name,
-        products: list.products || [],
-        exportedAt: new Date().toISOString(),
-        version: '1.0'
+function saveListName() {
+    const name = document.getElementById('newListName').value.trim();
+    if (!name) { showToast('⚠️ Ingresa un nombre válido'); return; }
+    getCurrentList().name = name;
+    saveLists();
+    renderListTitle();
+    closeRenameModal();
+    showToast('✅ Nombre actualizado');
+}
+
+function createNewList() {
+    const name = prompt('Nombre de la nueva lista:', 'Lista ' + (Object.keys(marketLists).length + 1));
+    if (!name || !name.trim()) return;
+    const id = 'list_' + Date.now();
+    marketLists[id] = { id, name: name.trim(), products: [], createdAt: new Date().toISOString() };
+    saveLists();
+    currentListId = id;
+    renderListTitle();
+    renderProducts();
+    updateTotals();
+    updateListSelector();
+    showToast(`✅ Lista "${name.trim()}" creada`);
+    closeListsModal();
+}
+
+function copyCurrentList() {
+    const src = getCurrentList();
+    const name = prompt('Nombre para la copia:', src.name + ' (copia)');
+    if (!name || !name.trim()) return;
+    const id = 'list_' + Date.now();
+    marketLists[id] = {
+        id, name: name.trim(),
+        products: JSON.parse(JSON.stringify(src.products || [])).map((p, i) => ({ ...p, id: Date.now() + i + 1 })),
+        createdAt: new Date().toISOString()
     };
-    
-    var json = JSON.stringify(exportData, null, 2);
-    var encoded = btoa(unescape(encodeURIComponent(json)));
-    
+    saveLists();
+    currentListId = id;
+    renderListTitle();
+    renderProducts();
+    updateTotals();
+    updateListSelector();
+    showToast(`📋 Lista copiada como "${name.trim()}"`);
+    closeListsModal();
+}
+
+function deleteCurrentList() {
+    if (currentListId === 'default') { showToast('⚠️ No se puede eliminar la lista principal'); return; }
+    if (!confirm(`¿Eliminar la lista "${getCurrentList().name}"? Esta acción no se puede deshacer.`)) return;
+    delete marketLists[currentListId];
+    currentListId = 'default';
+    saveLists();
+    renderListTitle();
+    renderProducts();
+    updateTotals();
+    updateListSelector();
+    showToast('🗑️ Lista eliminada');
+    closeListsModal();
+}
+
+function exportCurrentList() {
+    const list = getCurrentList();
+    const data = { name: list.name, products: list.products || [], exportedAt: new Date().toISOString(), version: '2.0' };
+    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
     if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(encoded).then(function() {
-            showToast('✅ Lista copiada al portapapeles');
-        }).catch(function() {
-            showShareDialog(encoded);
-        });
+        navigator.clipboard.writeText(encoded)
+            .then(() => showToast('✅ Código copiado al portapapeles'))
+            .catch(() => showExportFallback(encoded));
     } else {
-        showShareDialog(encoded);
+        showExportFallback(encoded);
     }
 }
 
-function showShareDialog(code) {
-    // Crear un textarea temporal para mostrar el código
-    var textarea = document.createElement('textarea');
-    textarea.value = code;
-    textarea.style.position = 'fixed';
-    textarea.style.top = '10%';
-    textarea.style.left = '50%';
-    textarea.style.transform = 'translateX(-50%)';
-    textarea.style.width = '80%';
-    textarea.style.height = '200px';
-    textarea.style.zIndex = '2000';
-    textarea.style.padding = '10px';
-    textarea.style.borderRadius = '8px';
-    textarea.style.border = '2px solid var(--primary)';
-    textarea.style.background = 'var(--bg-card)';
-    textarea.style.color = 'var(--text)';
-    textarea.style.fontFamily = 'monospace';
-    textarea.style.fontSize = '0.8rem';
-    textarea.readOnly = true;
-    
-    var overlay = document.createElement('div');
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.right = '0';
-    overlay.style.bottom = '0';
-    overlay.style.background = 'rgba(0,0,0,0.7)';
-    overlay.style.zIndex = '1999';
-    overlay.onclick = function() {
-        document.body.removeChild(overlay);
-        document.body.removeChild(textarea);
-    };
-    
-    document.body.appendChild(overlay);
-    document.body.appendChild(textarea);
-    textarea.select();
-    
-    showToast('Código mostrado en pantalla. Selecciónalo y cópialo.');
+function showExportFallback(code) {
+    document.getElementById('importText').value = code;
+    openImportModal();
+    showToast('Copia este código para compartir la lista');
 }
 
 function importList() {
-    var code = document.getElementById('importText').value.trim();
-    if (!code) {
-        showToast('Pega el código de la lista');
-        return;
-    }
-    
+    const code = document.getElementById('importText').value.trim();
+    if (!code) { showToast('⚠️ Pega el código de la lista'); return; }
     try {
-        var json = decodeURIComponent(escape(atob(code)));
-        var data = JSON.parse(json);
-        
-        if (!data.name || !data.products || !Array.isArray(data.products)) {
-            throw new Error('Formato inválido');
-        }
-        
-        var newName = prompt('Nombre para esta lista importada:', data.name + ' (importada)');
-        if (!newName || !newName.trim()) return;
-        
-        newName = newName.trim();
-        var newId = 'list_' + Date.now();
-        
-        // Asignar nuevos IDs a los productos importados
-        var importedProducts = [];
-        for (var i = 0; i < data.products.length; i++) {
-            var p = data.products[i];
-            importedProducts.push({
+        const data = JSON.parse(decodeURIComponent(escape(atob(code))));
+        if (!data.name || !Array.isArray(data.products)) throw new Error('Formato inválido');
+        const name = prompt('Nombre para esta lista importada:', data.name + ' (importada)');
+        if (!name || !name.trim()) return;
+        const id = 'list_' + Date.now();
+        marketLists[id] = {
+            id, name: name.trim(),
+            products: data.products.map((p, i) => ({
                 id: Date.now() + i + 1,
-                name: p.name || 'Producto sin nombre',
+                name: p.name || 'Producto',
                 qty: parseInt(p.qty) || 1,
                 unit: p.unit || '',
                 price: parseFloat(p.price) || 0,
                 checked: p.checked !== undefined ? p.checked : true
-            });
-        }
-        
-        marketLists[newId] = {
-            id: newId,
-            name: newName,
-            products: importedProducts,
-            createdAt: new Date().toISOString(),
-            importedFrom: data.name
+            })),
+            createdAt: new Date().toISOString()
         };
-        
         saveLists();
-        currentListId = newId;
-        loadCurrentList();
-        updateListSelector();
+        currentListId = id;
+        renderListTitle();
+        renderProducts();
+        updateTotals();
         closeImportModal();
-        showToast('Lista "' + newName + '" importada exitosamente');
+        showToast(`✅ Lista "${name.trim()}" importada`);
     } catch(e) {
-        showToast('Error al importar: Código inválido o corrupto');
-        console.error('Error importando:', e);
+        showToast('❌ Código inválido o corrupto');
     }
 }
 
-function shareCurrentList() {
-    exportCurrentList();
-}
-
-// Funciones de Productos
+// ===== PRODUCTOS =====
 function addProduct() {
-    var nameInput = document.getElementById('prodName');
-    var qtyInput = document.getElementById('prodQty');
-    var unitInput = document.getElementById('prodUnit');
-    var priceInput = document.getElementById('prodPrice');
-    
-    var name = nameInput.value.trim();
-    var qty = parseInt(qtyInput.value) || 1;
-    var unit = unitInput.value.trim();
-    var price = parseFloat(priceInput.value) || 0;
+    const name = document.getElementById('prodName').value.trim();
+    const qty = parseInt(document.getElementById('prodQty').value) || 1;
+    const unit = document.getElementById('prodUnit').value.trim();
+    const price = parseFloat(document.getElementById('prodPrice').value) || 0;
 
-    if (!name) {
-        showToast('⚠️ Ingresa el nombre del producto');
-        nameInput.focus();
-        return;
-    }
-    if (price <= 0) {
-        showToast('⚠️ Ingresa un precio válido mayor a 0');
-        priceInput.focus();
-        return;
-    }
-    if (qty < 1) {
-        showToast('⚠️ La cantidad debe ser al menos 1');
-        qtyInput.focus();
-        return;
-    }
+    if (!name) { showToast('⚠️ Ingresa el nombre del producto'); document.getElementById('prodName').focus(); return; }
+    if (price <= 0) { showToast('⚠️ Ingresa un precio válido'); document.getElementById('prodPrice').focus(); return; }
 
-    var product = {
-        id: Date.now(),
-        name: name,
-        qty: qty,
-        unit: unit,
-        price: price,
-        checked: true
-    };
-
-    var list = getCurrentList();
-    if (!list.products) {
-        list.products = [];
-    }
-    list.products.push(product);
-    
-    saveCurrentList();
-    products = list.products.slice(); // Actualizar la variable global
+    const prods = getProducts();
+    prods.push({ id: Date.now(), name, qty, unit, price, checked: true });
+    setProducts(prods);
     renderProducts();
     updateTotals();
 
-    // Limpiar formulario
-    nameInput.value = '';
-    qtyInput.value = '1';
-    unitInput.value = '';
-    priceInput.value = '';
-    nameInput.focus();
-    
-    showToast('✅ Producto agregado');
+    document.getElementById('prodName').value = '';
+    document.getElementById('prodQty').value = '1';
+    document.getElementById('prodUnit').value = '';
+    document.getElementById('prodPrice').value = '';
+    document.getElementById('prodName').focus();
+    showToast(`✅ ${name} agregado`);
 }
 
 function renderProducts() {
-    var container = document.getElementById('productList');
-    var countEl = document.getElementById('itemCount');
-    var list = getCurrentList();
-    var prods = list.products || [];
-    
-    // Sincronizar la variable global
-    products = prods.slice();
+    const container = document.getElementById('productList');
+    const prods = getProducts();
 
-    if (countEl) {
-        countEl.textContent = prods.length;
-    }
+    // Actualizar contador en el título
+    const countEl = document.getElementById('itemCount');
+    if (countEl) countEl.textContent = prods.length;
 
     if (prods.length === 0) {
-        container.innerHTML = '<div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.<br>Agrega productos para empezar.</p></div>';
-        var totalsSection = document.getElementById('totalsSection');
-        if (totalsSection) totalsSection.style.display = 'none';
+        container.innerHTML = `<div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.<br>Agrega productos para empezar.</p></div>`;
+        document.getElementById('totalsSection').style.display = 'none';
         return;
     }
-    
-    var html = '';
-    for (var i = 0; i < prods.length; i++) {
-        var p = prods[i];
-        var subtotal = p.qty * p.price;
-        var subtotalBs = dollarRate > 0 ? subtotal * dollarRate : 0;
-        var unitText = p.unit ? ' <span class="unit-badge">' + escapeHtml(p.unit) + '</span>' : '';
-        
-        html += '<div class="product-item ' + (p.checked ? 'checked' : '') + '" id="prod-' + p.id + '">';
-        html += '<input type="checkbox" class="product-checkbox" ' + (p.checked ? 'checked' : '') + 
-                ' onchange="toggleProduct(' + p.id + ')">';
-        html += '<div class="product-info">';
-        html += '<div class="product-name">' + escapeHtml(p.name) + unitText + '</div>';
-        html += '<div class="product-details">' + p.qty + ' × $' + p.price.toFixed(2) + '</div>';
-        html += '</div>';
-        html += '<div class="product-price">';
-        html += '<div class="product-price-usd">$' + subtotal.toFixed(2) + '</div>';
-        if (dollarRate > 0) {
-            html += '<div class="product-price-bs">Bs. ' + formatNumber(subtotalBs, 2) + '</div>';
-        }
-        html += '</div>';
-        html += '<button class="product-delete" onclick="deleteProduct(' + p.id + ')" title="Eliminar">✕</button>';
-        html += '</div>';
-    }
-    
-    container.innerHTML = html;
+
+    container.innerHTML = prods.map(p => {
+        const subtotal = p.qty * p.price;
+        const subtotalBs = usdToBs(subtotal);
+        const unitBadge = p.unit ? ` <span class="unit-badge">${escapeHtml(p.unit)}</span>` : '';
+        return `
+            <div class="product-item ${p.checked ? 'checked' : ''}" id="prod-${p.id}">
+                <input type="checkbox" class="product-checkbox" ${p.checked ? 'checked' : ''} onchange="toggleProduct(${p.id})">
+                <div class="product-info">
+                    <div class="product-name">${escapeHtml(p.name)}${unitBadge}</div>
+                    <div class="product-details">${p.qty} × ${formatUSD(p.price)}</div>
+                </div>
+                <div class="product-price">
+                    <div class="product-price-usd">${formatUSD(subtotal)}</div>
+                    ${dollarRate > 0 ? `<div class="product-price-bs">${formatBS(subtotalBs)}</div>` : ''}
+                </div>
+                <button class="product-delete" onclick="deleteProduct(${p.id})" title="Eliminar">✕</button>
+            </div>`;
+    }).join('');
 }
 
 function toggleProduct(id) {
-    var list = getCurrentList();
-    if (!list.products) return;
-    
-    for (var i = 0; i < list.products.length; i++) {
-        if (list.products[i].id === id) {
-            list.products[i].checked = !list.products[i].checked;
-            break;
-        }
-    }
-    
-    saveCurrentList();
-    products = list.products.slice();
-    renderProducts();
-    updateTotals();
+    const prods = getProducts();
+    const p = prods.find(x => x.id === id);
+    if (p) { p.checked = !p.checked; setProducts(prods); renderProducts(); updateTotals(); }
 }
 
 function deleteProduct(id) {
-    var list = getCurrentList();
-    if (!list.products) return;
-    
-    var productName = '';
-    for (var i = 0; i < list.products.length; i++) {
-        if (list.products[i].id === id) {
-            productName = list.products[i].name;
-            break;
-        }
-    }
-    
-    // Filtrar el producto a eliminar
-    var newProducts = [];
-    for (var j = 0; j < list.products.length; j++) {
-        if (list.products[j].id !== id) {
-            newProducts.push(list.products[j]);
-        }
-    }
-    list.products = newProducts;
-    
-    saveCurrentList();
-    products = list.products.slice();
+    const prods = getProducts();
+    const p = prods.find(x => x.id === id);
+    setProducts(prods.filter(x => x.id !== id));
     renderProducts();
     updateTotals();
-    
-    if (productName) {
-        showToast('🗑️ "' + productName + '" eliminado');
-    }
+    if (p) showToast(`🗑️ "${p.name}" eliminado`);
 }
 
 function clearList() {
-    var list = getCurrentList();
-    if (!list.products || list.products.length === 0) {
-        showToast('La lista ya está vacía');
-        return;
-    }
-    
-    if (confirm('¿Borrar todos los productos de esta lista? Esta acción no se puede deshacer.')) {
-        list.products = [];
-        saveCurrentList();
-        products = [];
+    if (getProducts().length === 0) { showToast('La lista ya está vacía'); return; }
+    if (confirm('¿Borrar todos los productos de esta lista?')) {
+        setProducts([]);
         renderProducts();
         updateTotals();
         showToast('🗑️ Lista borrada');
     }
 }
 
-// Funciones de Tema
+// ===== TOTALES =====
+function updateTotals() {
+    const section = document.getElementById('totalsSection');
+    if (!section) return;
+
+    const level = parseInt(document.getElementById('casheaLevel').value) || 2;
+    const casheaPercent = CASHEA_LEVELS[level]; // Lo que Cashea financia
+    const userPercent = 1 - casheaPercent;      // Lo que paga el usuario
+
+    const prods = getProducts();
+    if (prods.length === 0) { section.style.display = 'none'; return; }
+    section.style.display = 'block';
+
+    const total   = prods.reduce((s, p) => s + p.qty * p.price, 0);
+    const checked = prods.filter(p => p.checked).reduce((s, p) => s + p.qty * p.price, 0);
+
+    const casheaUsd = checked * casheaPercent;
+    const userUsd   = checked * userPercent;
+
+    document.getElementById('totalUsd').textContent   = formatUSD(total);
+    document.getElementById('totalBs').textContent    = formatBS(usdToBs(total));
+    document.getElementById('checkedUsd').textContent = formatUSD(checked);
+    document.getElementById('checkedBs').textContent  = formatBS(usdToBs(checked));
+    document.getElementById('casheaPercent').textContent = Math.round(casheaPercent * 100);
+    document.getElementById('casheaUsd').textContent  = formatUSD(casheaUsd);
+    document.getElementById('casheaBs').textContent   = formatBS(usdToBs(casheaUsd));
+    document.getElementById('userPayUsd').textContent = formatUSD(userUsd);
+    document.getElementById('userPayBs').textContent  = formatBS(usdToBs(userUsd));
+
+    // Sincronizar selects de calculadora
+    const calcLevel = document.getElementById('calcCasheaLevel');
+    const imagLevel = document.getElementById('imagCasheaLevel');
+    if (calcLevel) calcLevel.value = level;
+    if (imagLevel) imagLevel.value = level;
+}
+
+// ===== TEMA =====
 function toggleTheme() {
     document.body.classList.toggle('light-theme');
-    var isLight = document.body.classList.contains('light-theme');
+    const isLight = document.body.classList.contains('light-theme');
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
     updateThemeIcon(isLight);
 }
 
 function loadTheme() {
-    var savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-theme');
-    } else if (savedTheme === 'dark') {
-        document.body.classList.remove('light-theme');
-    }
-    // Si no hay tema guardado, usar oscuro por defecto
+    const saved = localStorage.getItem('theme');
+    const isLight = saved === 'light';
+    if (isLight) document.body.classList.add('light-theme');
+    updateThemeIcon(isLight);
 }
 
 function updateThemeIcon(isLight) {
-    var btn = document.getElementById('themeBtn');
-    if (btn) {
-        btn.textContent = isLight ? '☀️ Claro' : '🌙 Oscuro';
-    }
+    const btn = document.getElementById('themeBtn');
+    if (btn) btn.textContent = isLight ? '☀️' : '🌙';
 }
 
-// Funciones de Tasa de Cambio
-function fetchRate() {
-    var display = document.getElementById('rateDisplay');
-    var lastUpdate = document.getElementById('lastUpdate');
-    var manualRateContainer = document.getElementById('manualRateContainer');
-    
-    if (!display || !lastUpdate || !manualRateContainer) return;
-    
+// ===== TASA DE CAMBIO =====
+async function fetchRate() {
+    const display = document.getElementById('rateDisplay');
     display.textContent = 'Cargando...';
-    
-    fetch('https://pydolarve.org/api/v1/dollar?page=bcv')
-        .then(function(response) {
-            if (!response.ok) {
-                throw new Error('Error de red: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(function(data) {
-            // Verificar la estructura de la respuesta
-            if (data && data.monitors && data.monitors.usd && 
-                typeof data.monitors.usd.price === 'number' && data.monitors.usd.price > 0) {
-                
-                dollarRate = data.monitors.usd.price;
-                isOffline = false;
-                
-                // Guardar en localStorage
-                localStorage.setItem('dollarRate', dollarRate.toString());
-                localStorage.setItem('lastUpdate', new Date().toISOString());
-                
-                display.textContent = 'Bs. ' + formatNumber(dollarRate, 2);
-                var now = new Date();
-                lastUpdate.textContent = 'Última actualización: ' + 
-                    now.toLocaleDateString('es-VE') + ' ' + 
-                    now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
-                manualRateContainer.innerHTML = '';
-                
-                updateTotals();
-                renderProducts();
-            } else {
-                throw new Error('Datos de tasa inválidos');
-            }
-        })
-        .catch(function(error) {
-            console.error('Error obteniendo tasa:', error);
-            loadSavedRate();
-        });
+
+    const apis = [
+        async () => {
+            const r = await fetch('https://pydolarve.org/api/v1/dollar?page=bcv');
+            const d = await r.json();
+            return d?.monitors?.usd?.price;
+        },
+        async () => {
+            const r = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
+            const d = await r.json();
+            return d?.promedio;
+        },
+        async () => {
+            const r = await fetch('https://pydolarvenezuela-api.vercel.app/api/v1/dollar?page=bcv');
+            const d = await r.json();
+            return d?.monitors?.usd?.price;
+        }
+    ];
+
+    let rate = null;
+    for (const api of apis) {
+        try { rate = await api(); if (rate && rate > 0) break; } catch(e) {}
+    }
+
+    if (rate && rate > 0) {
+        dollarRate = rate;
+        localStorage.setItem('dollarRate', rate.toString());
+        localStorage.setItem('lastUpdate', new Date().toISOString());
+        display.textContent = `Bs. ${formatNumber(rate, 2)}`;
+        const now = new Date();
+        document.getElementById('lastUpdate').textContent =
+            `Última actualización: ${now.toLocaleDateString('es-VE')} ${now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'})}`;
+        document.getElementById('manualRateContainer').innerHTML = '';
+        renderProducts(); // Actualizar precios en Bs.
+        updateTotals();
+    } else {
+        loadSavedRate();
+    }
 }
 
 function loadSavedRate() {
-    var display = document.getElementById('rateDisplay');
-    var lastUpdate = document.getElementById('lastUpdate');
-    var manualRateContainer = document.getElementById('manualRateContainer');
-    
-    isOffline = true;
-    
-    var savedRate = localStorage.getItem('dollarRate');
-    var savedUpdate = localStorage.getItem('lastUpdate');
-    
-    if (savedRate && !isNaN(parseFloat(savedRate)) && parseFloat(savedRate) > 0) {
+    const savedRate  = localStorage.getItem('dollarRate');
+    const savedDate  = localStorage.getItem('lastUpdate');
+    const display    = document.getElementById('rateDisplay');
+    const lastUpdate = document.getElementById('lastUpdate');
+
+    if (savedRate && parseFloat(savedRate) > 0) {
         dollarRate = parseFloat(savedRate);
-        display.textContent = 'Bs. ' + formatNumber(dollarRate, 2) + ' (guardada)';
-        
-        if (savedUpdate) {
-            var updateDate = new Date(savedUpdate);
-            lastUpdate.textContent = 'Tasa guardada del: ' + 
-                updateDate.toLocaleDateString('es-VE') + ' ' + 
-                updateDate.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
-        } else {
-            lastUpdate.textContent = 'Tasa guardada (sin fecha)';
+        display.textContent = `Bs. ${formatNumber(dollarRate, 2)} (guardada)`;
+        if (savedDate) {
+            const d = new Date(savedDate);
+            lastUpdate.textContent = `Tasa guardada del: ${d.toLocaleDateString('es-VE')} ${d.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'})}`;
         }
-        
-        manualRateContainer.innerHTML = 
-            '<div class="offline-badge">⚠️ Sin conexión - Usando última tasa guardada</div>' +
-            '<div class="manual-rate-section">' +
-                '<div class="form-row">' +
-                    '<div class="form-group">' +
-                        '<label>Tasa del dólar (Bs.)</label>' +
-                        '<input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0">' +
-                    '</div>' +
-                    '<button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0; align-self:flex-end;">Aplicar</button>' +
-                '</div>' +
-            '</div>';
     } else {
         dollarRate = 0;
         display.textContent = 'Sin tasa';
-        lastUpdate.textContent = 'Ingresa la tasa del dólar manualmente';
-        
-        manualRateContainer.innerHTML = 
-            '<div class="offline-badge">⚠️ Ingresa la tasa del dólar</div>' +
-            '<div class="manual-rate-section">' +
-                '<div class="form-row">' +
-                    '<div class="form-group">' +
-                        '<label>Tasa del dólar (Bs.)</label>' +
-                        '<input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0">' +
-                    '</div>' +
-                    '<button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0; align-self:flex-end;">Aplicar</button>' +
-                '</div>' +
-            '</div>';
+        lastUpdate.textContent = 'Ingresa la tasa manualmente';
     }
-    
+
+    document.getElementById('manualRateContainer').innerHTML = `
+        <div class="offline-badge">⚠️ ${dollarRate > 0 ? 'Sin conexión — Usando última tasa guardada' : 'Ingresa la tasa del dólar'}</div>
+        <div class="manual-rate-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Tasa del dólar (Bs.)</label>
+                    <input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0" value="${dollarRate > 0 ? dollarRate : ''}">
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0; align-self:flex-end;">Aplicar</button>
+            </div>
+        </div>`;
     updateTotals();
-    renderProducts();
 }
 
 function setManualRate() {
-    var input = document.getElementById('manualRateInput');
-    if (!input) return;
-    
-    var rate = parseFloat(input.value);
-    
-    if (!isNaN(rate) && rate > 0) {
-        dollarRate = rate;
-        isOffline = true;
-        
-        localStorage.setItem('dollarRate', dollarRate.toString());
-        localStorage.setItem('lastUpdate', new Date().toISOString());
-        
-        var display = document.getElementById('rateDisplay');
-        var lastUpdate = document.getElementById('lastUpdate');
-        
-        if (display) {
-            display.textContent = 'Bs. ' + formatNumber(dollarRate, 2) + ' (manual)';
-        }
-        if (lastUpdate) {
-            var now = new Date();
-            lastUpdate.textContent = 'Tasa manual ingresada: ' + 
-                now.toLocaleDateString('es-VE') + ' ' + 
-                now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
-        }
-        
-        // Limpiar el contenedor manual
-        var manualRateContainer = document.getElementById('manualRateContainer');
-        if (manualRateContainer) manualRateContainer.innerHTML = '';
-        
-        updateTotals();
-        renderProducts(); // Re-renderizar para actualizar precios en Bs.
-        showToast('✅ Tasa actualizada a Bs. ' + formatNumber(dollarRate, 2));
-    } else {
-        showToast('⚠️ Ingresa una tasa válida mayor a 0');
-    }
+    const input = document.getElementById('manualRateInput');
+    const rate = parseFloat(input?.value);
+    if (!rate || rate <= 0) { showToast('⚠️ Ingresa una tasa válida mayor a 0'); return; }
+    dollarRate = rate;
+    localStorage.setItem('dollarRate', rate.toString());
+    localStorage.setItem('lastUpdate', new Date().toISOString());
+    document.getElementById('rateDisplay').textContent = `Bs. ${formatNumber(rate, 2)} (manual)`;
+    const now = new Date();
+    document.getElementById('lastUpdate').textContent =
+        `Tasa manual: ${now.toLocaleDateString('es-VE')} ${now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'})}`;
+    renderProducts();
+    updateTotals();
+    showToast(`✅ Tasa actualizada: Bs. ${formatNumber(rate, 2)}`);
 }
 
-// Funciones de Utilidad
-function formatNumber(num, decimals) {
-    if (isNaN(num) || num === null || num === undefined) return '0.' + '0'.repeat(decimals);
-    
-    return Number(num).toLocaleString('es-VE', {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals
-    });
+// ===== HELPERS =====
+function formatNumber(num, decimals = 2) {
+    return Number(num).toLocaleString('es-VE', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+function formatUSD(num) { return `$${formatNumber(num, 2)}`; }
+function formatBS(num)  { return `Bs. ${formatNumber(num, 2)}`; }
+function usdToBs(usd)   { return dollarRate > 0 ? usd * dollarRate : 0; }
+function bsToUsd(bs)    { return dollarRate > 0 ? bs / dollarRate : 0; }
+function escapeHtml(t)  {
+    const d = document.createElement('div');
+    d.appendChild(document.createTextNode(t || ''));
+    return d.innerHTML;
 }
 
-function formatUSD(num) {
-    return '$' + formatNumber(num, 2);
-}
-
-function formatBS(num) {
-    return 'Bs. ' + formatNumber(num, 2);
-}
-
-function usdToBs(usd) {
-    if (dollarRate <= 0) return 0;
-    return usd * dollarRate;
-}
-
-function bsToUsd(bs) {
-    if (dollarRate <= 0) return 0;
-    return bs / dollarRate;
-}
-
-function escapeHtml(text) {
-    if (!text) return '';
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(text));
-    return div.innerHTML;
-}
-
-// Funciones de Totales
-function updateTotals() {
-    var section = document.getElementById('totalsSection');
-    if (!section) return;
-    
-    var levelSelect = document.getElementById('casheaLevel');
-    var level = levelSelect ? parseInt(levelSelect.value) : 2;
-    
-    // Porcentaje que FINANCIAN (Cashea)
-    var casheaPercent = CASHEA_LEVELS[level] || 0.50;
-    // Porcentaje que PAGA EL USUARIO (Inicial)
-    var userPercent = 1 - casheaPercent;
-    var list = getCurrentList();
-    var prods = list.products || [];
-
-    if (prods.length === 0) {
-        section.style.display = 'none';
-        return;
-    }
-
-    section.style.display = 'block';
-
-    var total = 0;
-    var checked = 0;
-    
-    for (var i = 0; i < prods.length; i++) {
-        var subtotal = prods[i].qty * prods[i].price;
-        total += subtotal;
-        if (prods[i].checked) {
-            checked += subtotal;
-        }
-    }
-    
-    var totalBs = usdToBs(total);
-    var checkedBs = usdToBs(checked);
-    var casheaUsd = checked * casheaPercent;
-    var casheaBs = usdToBs(casheaUsd);
-    var userUsd = checked * userPercent;
-    var userBs = usdToBs(userUsd);
-
-    // Actualizar elementos del DOM
-    var totalUsdEl = document.getElementById('totalUsd');
-    var totalBsEl = document.getElementById('totalBs');
-    var checkedUsdEl = document.getElementById('checkedUsd');
-    var checkedBsEl = document.getElementById('checkedBs');
-    var casheaPercentEl = document.getElementById('casheaPercent');
-    var casheaUsdEl = document.getElementById('casheaUsd');
-    var casheaBsEl = document.getElementById('casheaBs');
-    var userPayUsdEl = document.getElementById('userPayUsd');
-    var userPayBsEl = document.getElementById('userPayBs');
-    
-    if (totalUsdEl) totalUsdEl.textContent = formatUSD(total);
-    if (totalBsEl) totalBsEl.textContent = formatBS(totalBs);
-    if (checkedUsdEl) checkedUsdEl.textContent = formatUSD(checked);
-    if (checkedBsEl) checkedBsEl.textContent = formatBS(checkedBs);
-    if (casheaPercentEl) casheaPercentEl.textContent = Math.round(casheaPercent * 100);
-    if (casheaUsdEl) casheaUsdEl.textContent = formatUSD(casheaUsd);
-    if (casheaBsEl) casheaBsEl.textContent = formatBS(casheaBs);
-    if (userPayUsdEl) userPayUsdEl.textContent = formatUSD(userUsd);
-    if (userPayBsEl) userPayBsEl.textContent = formatBS(userBs);
-    
-    // Sincronizar niveles en calculadora
-    var calcLevel = document.getElementById('calcCasheaLevel');
-    var imagLevel = document.getElementById('imagCasheaLevel');
-    if (calcLevel) calcLevel.value = level;
-    if (imagLevel) imagLevel.value = level;
-}
-
-// Funciones de Navegación
+// ===== NAVEGACIÓN =====
 function setupSwipe() {
-    var startX = 0;
-    var startY = 0;
-    
-    document.addEventListener('touchstart', function(e) {
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
-    }, { passive: true });
-    
-    document.addEventListener('touchend', function(e) {
-        var endX = e.changedTouches[0].clientX;
-        var endY = e.changedTouches[0].clientY;
-        var diffX = endX - startX;
-        var diffY = endY - startY;
-        
-        // Solo si el swipe es más horizontal que vertical
-        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 80) {
-            if (diffX < 0 && currentPage === 0) {
-                openCalculator();
-            } else if (diffX > 0 && currentPage === 1) {
-                closeCalculator();
-            }
+    let startX = 0, startY = 0;
+    document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, { passive: true });
+    document.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 80) {
+            if (dx < 0 && currentPage === 0) openCalculator();
+            else if (dx > 0 && currentPage === 1) closeCalculator();
         }
     }, { passive: true });
 }
 
 function openCalculator() {
     currentPage = 1;
-    var wrapper = document.getElementById('pagesWrapper');
-    if (wrapper) wrapper.style.transform = 'translateX(-50%)';
-    
-    var hintRight = document.getElementById('swipeHintRight');
-    var hintLeft = document.getElementById('swipeHintLeft');
-    if (hintRight) hintRight.classList.add('hidden');
-    if (hintLeft) hintLeft.classList.add('visible');
+    document.getElementById('pagesWrapper').style.transform = 'translateX(-50%)';
+    document.getElementById('swipeHintRight').classList.add('hidden');
+    document.getElementById('swipeHintLeft').classList.add('visible');
 }
 
 function closeCalculator() {
     currentPage = 0;
-    var wrapper = document.getElementById('pagesWrapper');
-    if (wrapper) wrapper.style.transform = 'translateX(0)';
-    
-    var hintRight = document.getElementById('swipeHintRight');
-    var hintLeft = document.getElementById('swipeHintLeft');
-    if (hintRight) hintRight.classList.remove('hidden');
-    if (hintLeft) hintLeft.classList.remove('visible');
+    document.getElementById('pagesWrapper').style.transform = 'translateX(0)';
+    document.getElementById('swipeHintRight').classList.remove('hidden');
+    document.getElementById('swipeHintLeft').classList.remove('visible');
 }
 
-// Funciones de Calculadora
+// ===== CALCULADORA: CONVERSIÓN =====
 function swapConversion() {
-    var select = document.getElementById('convFrom');
-    if (select) {
-        select.value = select.value === 'USD' ? 'BS' : 'USD';
-    }
+    const s = document.getElementById('convFrom');
+    s.value = s.value === 'USD' ? 'BS' : 'USD';
 }
 
 function calculateConversion() {
-    var amountInput = document.getElementById('convAmount');
-    var fromSelect = document.getElementById('convFrom');
-    
-    if (!amountInput || !fromSelect) return;
-    
-    var amount = parseFloat(amountInput.value);
-    var from = fromSelect.value;
-    
-    if (!amount || amount <= 0 || isNaN(amount)) {
-        showToast('⚠️ Ingresa un monto válido');
-        return;
-    }
-    if (dollarRate <= 0) {
-        showToast('⚠️ No hay tasa de cambio disponible');
-        return;
-    }
+    const amount = parseFloat(document.getElementById('convAmount').value);
+    const from   = document.getElementById('convFrom').value;
+    if (!amount || amount <= 0) { showToast('⚠️ Ingresa un monto válido'); return; }
+    if (dollarRate <= 0)        { showToast('⚠️ No hay tasa disponible'); return; }
 
-    var result, resultLabel;
-    if (from === 'USD') {
-        result = usdToBs(amount);
-        resultLabel = formatBS(result);
-    } else {
-        result = bsToUsd(amount);
-        resultLabel = formatUSD(result);
-    }
-
-    var resultValueEl = document.getElementById('convResultValue');
-    var rateUsedEl = document.getElementById('convRateUsed');
-    var resultDiv = document.getElementById('convResult');
-    
-    if (resultValueEl) resultValueEl.textContent = resultLabel;
-    if (rateUsedEl) rateUsedEl.textContent = '1 USD = Bs. ' + formatNumber(dollarRate, 2);
-    if (resultDiv) resultDiv.classList.add('visible');
+    const result = from === 'USD' ? formatBS(usdToBs(amount)) : formatUSD(bsToUsd(amount));
+    document.getElementById('convResultValue').textContent = result;
+    document.getElementById('convRateUsed').textContent = `1 USD = Bs. ${formatNumber(dollarRate, 2)}`;
+    document.getElementById('convResult').classList.add('visible');
 }
 
+// ===== CALCULADORA: COBERTURA =====
 function toggleManualInput() {
-    var isManual = document.getElementById('manualToggle').checked;
-    var manualInputs = document.getElementById('manualInputs');
-    var listInfo = document.getElementById('listInfo');
-    
-    if (manualInputs) manualInputs.classList.toggle('visible', isManual);
-    if (listInfo) listInfo.style.display = isManual ? 'none' : 'flex';
+    const isManual = document.getElementById('manualToggle').checked;
+    document.getElementById('manualInputs').classList.toggle('visible', isManual);
+    document.getElementById('listInfo').style.display = isManual ? 'none' : 'flex';
 }
 
 function calculateCoverage() {
-    var isManual = document.getElementById('manualToggle').checked;
-    var levelSelect = document.getElementById('calcCasheaLevel');
-    
-    if (!levelSelect) return;
-    
-    var level = parseInt(levelSelect.value);
-    var casheaPercent = CASHEA_LEVELS[level] || 0.50;
-    var userPercent = 1 - casheaPercent;
+    const isManual     = document.getElementById('manualToggle').checked;
+    const level        = parseInt(document.getElementById('calcCasheaLevel').value);
+    const casheaPercent = CASHEA_LEVELS[level];
+    const userPercent   = 1 - casheaPercent;
 
-    if (dollarRate <= 0) {
-        showToast('⚠️ No hay tasa de cambio disponible');
-        return;
-    }
+    if (dollarRate <= 0) { showToast('⚠️ No hay tasa disponible'); return; }
 
-    var totalUsd;
+    let totalUsd;
     if (isManual) {
-        var manualInput = document.getElementById('manualAmount');
-        if (!manualInput) return;
-        
-        totalUsd = parseFloat(manualInput.value);
-        if (!totalUsd || totalUsd <= 0 || isNaN(totalUsd)) {
-            showToast('⚠️ Ingresa un monto válido');
-            return;
-        }
+        totalUsd = parseFloat(document.getElementById('manualAmount').value);
+        if (!totalUsd || totalUsd <= 0) { showToast('⚠️ Ingresa un monto válido'); return; }
     } else {
-        var list = getCurrentList();
-        var prods = list.products || [];
-        totalUsd = 0;
-        for (var i = 0; i < prods.length; i++) {
-            if (prods[i].checked) {
-                totalUsd += prods[i].qty * prods[i].price;
-            }
-        }
-        if (totalUsd <= 0) {
-            showToast('⚠️ No hay productos seleccionados en la lista');
-            return;
-        }
+        totalUsd = getProducts().filter(p => p.checked).reduce((s, p) => s + p.qty * p.price, 0);
+        if (totalUsd <= 0) { showToast('⚠️ No hay productos seleccionados'); return; }
     }
 
-    // Para la cobertura, el totalUsd es el pago inicial del usuario
-    // El total de compra posible es totalUsd / userPercent
-    var purchaseUsd = totalUsd / userPercent;
-    var purchaseBs = usdToBs(purchaseUsd);
-    var casheaUsd = purchaseUsd * casheaPercent;
-    var casheaBs = usdToBs(casheaUsd);
-    var userUsd = totalUsd;
-    var userBs = usdToBs(userUsd);
+    const casheaUsd = totalUsd * casheaPercent;
+    const userUsd   = totalUsd * userPercent;
 
-    // Actualizar resultados
-    var covTotalUsdEl = document.getElementById('covTotalUsd');
-    var covTotalBsEl = document.getElementById('covTotalBs');
-    var covCasheaUsdEl = document.getElementById('covCasheaUsd');
-    var covCasheaBsEl = document.getElementById('covCasheaBs');
-    var covUserUsdEl = document.getElementById('covUserUsd');
-    var covUserBsEl = document.getElementById('covUserBs');
-    
-    if (covTotalUsdEl) covTotalUsdEl.textContent = formatUSD(purchaseUsd);
-    if (covTotalBsEl) covTotalBsEl.textContent = formatBS(purchaseBs);
-    if (covCasheaUsdEl) covCasheaUsdEl.textContent = formatUSD(casheaUsd);
-    if (covCasheaBsEl) covCasheaBsEl.textContent = formatBS(casheaBs);
-    if (covUserUsdEl) covUserUsdEl.textContent = formatUSD(userUsd);
-    if (covUserBsEl) covUserBsEl.textContent = formatBS(userBs);
-    
-    var resultDiv = document.getElementById('coverageResult');
-    if (resultDiv) resultDiv.classList.add('visible');
+    document.getElementById('covTotalUsd').textContent  = formatUSD(totalUsd);
+    document.getElementById('covTotalBs').textContent   = formatBS(usdToBs(totalUsd));
+    document.getElementById('covCasheaUsd').textContent = formatUSD(casheaUsd);
+    document.getElementById('covCasheaBs').textContent  = formatBS(usdToBs(casheaUsd));
+    document.getElementById('covUserUsd').textContent   = formatUSD(userUsd);
+    document.getElementById('covUserBs').textContent    = formatBS(usdToBs(userUsd));
+    document.getElementById('coverageResult').classList.add('visible');
 }
 
+// ===== CALCULADORA: COMPRA IMAGINARIA =====
 function calculateImaginary() {
-    var capitalInput = document.getElementById('imagCapital');
-    var remainInput = document.getElementById('imagRemain');
-    var levelSelect = document.getElementById('imagCasheaLevel');
-    
-    if (!capitalInput || !remainInput || !levelSelect) return;
-    
-    var capital = parseFloat(capitalInput.value);
-    var remain = parseFloat(remainInput.value);
-    var level = parseInt(levelSelect.value);
-    var casheaPercent = CASHEA_LEVELS[level] || 0.50;
-    var userPercent = 1 - casheaPercent;
+    const capital      = parseFloat(document.getElementById('imagCapital').value);
+    const remain       = parseFloat(document.getElementById('imagRemain').value);
+    const level        = parseInt(document.getElementById('imagCasheaLevel').value);
+    const casheaPercent = CASHEA_LEVELS[level];
+    const userPercent   = 1 - casheaPercent;
 
-    // Validaciones
-    if (!capital || capital <= 0 || isNaN(capital)) {
-        showToast('⚠️ Ingresa un capital válido');
-        return;
-    }
-    if (isNaN(remain) || remain < 0) {
-        showToast('⚠️ Ingresa un monto a quedar válido (0 o mayor)');
-        return;
-    }
-    if (remain >= capital) {
-        showToast('⚠️ El monto a quedar debe ser menor al capital total');
-        return;
-    }
-    if (dollarRate <= 0) {
-        showToast('⚠️ No hay tasa de cambio disponible');
-        return;
-    }
-    if (userPercent >= 1) {
-        showToast('⚠️ El porcentaje de pago inicial no puede ser 100%');
-        return;
-    }
+    if (!capital || capital <= 0)    { showToast('⚠️ Ingresa un capital válido'); return; }
+    if (isNaN(remain) || remain < 0) { showToast('⚠️ Ingresa un monto a quedar válido'); return; }
+    if (remain >= capital)           { showToast('⚠️ El monto a quedar debe ser menor al capital'); return; }
+    if (dollarRate <= 0)             { showToast('⚠️ No hay tasa disponible'); return; }
+    if (userPercent <= 0)            { showToast('⚠️ Porcentaje de pago inicial inválido'); return; }
 
-    // Cálculo: capital - remain = userPercent * purchaseUsd
-    // purchaseUsd = (capital - remain) / userPercent
-    var purchaseUsd = (capital - remain) / userPercent;
-    var purchaseBs = usdToBs(purchaseUsd);
-    var casheaUsd = purchaseUsd * casheaPercent;
-    var casheaBs = usdToBs(casheaUsd);
-    var userUsd = purchaseUsd * userPercent;
-    var userBs = usdToBs(userUsd);
-    var remainBs = usdToBs(remain);
+    // capital - remain = lo que el usuario va a pagar = userPercent * purchaseTotal
+    const purchaseUsd = (capital - remain) / userPercent;
+    const casheaUsd   = purchaseUsd * casheaPercent;
+    const userUsd     = purchaseUsd * userPercent;
 
-    // Actualizar elementos
-    var imagPurchaseUsdEl = document.getElementById('imagPurchaseUsd');
-    var imagPurchaseBsEl = document.getElementById('imagPurchaseBs');
-    var imagCasheaUsdEl = document.getElementById('imagCasheaUsd');
-    var imagCasheaBsEl = document.getElementById('imagCasheaBs');
-    var imagUserUsdEl = document.getElementById('imagUserUsd');
-    var imagUserBsEl = document.getElementById('imagUserBs');
-    var imagRemainUsdEl = document.getElementById('imagRemainUsd');
-    var imagRemainBsEl = document.getElementById('imagRemainBs');
-    
-    if (imagPurchaseUsdEl) imagPurchaseUsdEl.textContent = formatUSD(purchaseUsd);
-    if (imagPurchaseBsEl) imagPurchaseBsEl.textContent = formatBS(purchaseBs);
-    if (imagCasheaUsdEl) imagCasheaUsdEl.textContent = formatUSD(casheaUsd);
-    if (imagCasheaBsEl) imagCasheaBsEl.textContent = formatBS(casheaBs);
-    if (imagUserUsdEl) imagUserUsdEl.textContent = formatUSD(userUsd);
-    if (imagUserBsEl) imagUserBsEl.textContent = formatBS(userBs);
-    if (imagRemainUsdEl) imagRemainUsdEl.textContent = formatUSD(remain);
-    if (imagRemainBsEl) imagRemainBsEl.textContent = formatBS(remainBs);
-    
-    var resultDiv = document.getElementById('imaginaryResult');
-    if (resultDiv) resultDiv.classList.add('visible');
+    document.getElementById('imagPurchaseUsd').textContent = formatUSD(purchaseUsd);
+    document.getElementById('imagPurchaseBs').textContent  = formatBS(usdToBs(purchaseUsd));
+    document.getElementById('imagCasheaUsd').textContent   = formatUSD(casheaUsd);
+    document.getElementById('imagCasheaBs').textContent    = formatBS(usdToBs(casheaUsd));
+    document.getElementById('imagUserUsd').textContent     = formatUSD(userUsd);
+    document.getElementById('imagUserBs').textContent      = formatBS(usdToBs(userUsd));
+    document.getElementById('imagRemainUsd').textContent   = formatUSD(remain);
+    document.getElementById('imagRemainBs').textContent    = formatBS(usdToBs(remain));
+    document.getElementById('imaginaryResult').classList.add('visible');
 }
 
-// Función de Toast
-function showToast(message) {
-    var toast = document.getElementById('toast');
-    if (!toast) return;
-    
-    toast.textContent = message;
+// ===== TOAST =====
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
     toast.classList.add('show');
-    
-    // Limpiar timeout anterior si existe
-    if (toast._timeout) {
-        clearTimeout(toast._timeout);
-    }
-    
-    toast._timeout = setTimeout(function() {
-        toast.classList.remove('show');
-    }, 2500);
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toast.classList.remove('show'), 2500);
 }
 
-// Atajo de teclado
-document.addEventListener('keydown', function(e) {
-    // Solo en la página de lista
-    if (e.key === 'Enter' && currentPage === 0 && 
-        document.activeElement && document.activeElement.tagName === 'INPUT') {
-        var activeInput = document.activeElement;
-        // Verificar si estamos en el formulario de agregar producto
-        if (activeInput.closest && activeInput.closest('.add-form')) {
-            addProduct();
-        }
+// ===== TECLADO =====
+document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && currentPage === 0 && document.activeElement?.closest?.('.add-form')) {
+        addProduct();
     }
-    
-    // Escape para cerrar modales
     if (e.key === 'Escape') {
         closeListsModal();
         closeImportModal();
