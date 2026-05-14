@@ -2,11 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Mercado + Cashea</title>
     <style>
         :root {
-            /* Dark theme (default) */
             --bg: #0F0F1A;
             --bg-card: #1A1A2E;
             --bg-input: #16213E;
@@ -25,7 +24,6 @@
             --success: #00B894;
             --warning: #FDCB6E;
             --expense-red: #FF4757;
-            --expense-red-dark: #FF3838;
             --cashea-yellow: #FFD700;
             --cashea-black: #1A1A1A;
             --shadow: 0 4px 20px rgba(0,0,0,0.4);
@@ -35,7 +33,6 @@
             --radius-xs: 6px;
         }
 
-        /* Light theme */
         body.light-theme {
             --bg: #F5F5F5;
             --bg-card: #FFFFFF;
@@ -45,26 +42,12 @@
             --text-muted: #666688;
             --text-dim: #8888AA;
             --border: #D0D0E0;
-            --primary: #5A4BD1;
-            --primary-dark: #4A3BC1;
-            --primary-light: #6C5CE7;
-            --accent: #00B5B0;
-            --accent-dark: #009A95;
-            --danger: #EE5A5A;
-            --danger-dark: #DD4A4A;
-            --success: #00A384;
-            --warning: #E5B85E;
-            --expense-red: #E63946;
-            --expense-red-dark: #D32F3C;
-            --cashea-yellow: #FFC700;
-            --cashea-black: #1A1A1A;
             --shadow: 0 4px 20px rgba(0,0,0,0.1);
             --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
         }
 
         * {
-            margin: 0;
-            padding: 0;
+            margin: 0;            padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
@@ -83,7 +66,6 @@
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
 
-        /* ===== HEADER ===== */
         .header {
             background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-input) 100%);
             border-bottom: 1px solid var(--border);
@@ -115,8 +97,7 @@
             gap: 8px;
             align-items: center;
         }
-
-        .calc-toggle, .theme-toggle {
+        .calc-toggle, .theme-toggle, .list-toggle {
             background: var(--primary);
             color: white;
             border: none;
@@ -131,8 +112,7 @@
             gap: 6px;
         }
 
-        .calc-toggle:hover, .theme-toggle:hover,
-        .calc-toggle:active, .theme-toggle:active {
+        .calc-toggle:hover, .theme-toggle:hover, .list-toggle:hover {
             background: var(--primary-dark);
             transform: scale(1.05);
         }
@@ -141,10 +121,6 @@
             background: var(--bg-input);
             border: 1px solid var(--border);
             color: var(--text);
-        }
-
-        .theme-toggle:hover {
-            background: var(--bg-hover);
         }
 
         .header-info {
@@ -169,7 +145,6 @@
             font-size: 1.2rem;
             flex-shrink: 0;
         }
-
         .info-chip .chip-content {
             display: flex;
             flex-direction: column;
@@ -219,22 +194,7 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 0.6rem;
-            color: var(--text-muted);
-            pointer-events: none;
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            color: var(--text-muted);            pointer-events: none;
         }
 
         .last-update {
@@ -244,7 +204,6 @@
             text-align: center;
         }
 
-        /* ===== MAIN CONTAINER ===== */
         .app-container {
             position: relative;
             overflow: hidden;
@@ -263,7 +222,6 @@
             min-height: calc(100vh - 160px);
         }
 
-        /* ===== ADD PRODUCT FORM ===== */
         .add-form {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -285,8 +243,7 @@
         .form-row {
             display: flex;
             gap: 8px;
-            margin-bottom: 8px;
-        }
+            margin-bottom: 8px;        }
 
         .form-group {
             flex: 1;
@@ -336,8 +293,9 @@
             justify-content: center;
             gap: 6px;
         }
-
-        .btn:active { transform: scale(0.96); }
+        .btn:active {
+            transform: scale(0.96);
+        }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -349,9 +307,6 @@
         .btn-primary:hover {
             box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
         }
-
-        .btn-danger { background: var(--danger); color: white; }
-        .btn-danger:hover { background: var(--danger-dark); }
 
         .btn-sm {
             padding: 6px 12px;
@@ -370,22 +325,51 @@
             color: var(--primary-light);
         }
 
-        /* ===== PRODUCT LIST ===== */
+        .btn-icon {
+            padding: 6px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .btn-icon:hover {
+            background: var(--bg-hover);
+            color: var(--primary-light);
+        }
+
         .list-header {
-            display: flex;
-            justify-content: space-between;
+            display: flex;            justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .list-header h3 {
             font-size: 0.95rem;
             color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .list-name-edit {
+            background: var(--bg-input);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-xs);
+            padding: 4px 8px;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .list-actions {
             display: flex;
             gap: 6px;
+            flex-wrap: wrap;
         }
 
         .product-list {
@@ -406,7 +390,6 @@
             transition: all 0.3s;
             animation: slideIn 0.3s ease;
         }
-
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -456,8 +439,7 @@
             color: var(--text);
             white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis;
-        }
+            text-overflow: ellipsis;        }
 
         .product-details {
             font-size: 0.75rem;
@@ -498,6 +480,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .product-delete:hover {
             color: var(--danger);
             background: rgba(255, 107, 107, 0.1);
@@ -505,14 +488,14 @@
 
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
-            color: var(--text-dim);
+            padding: 40px 20px;            color: var(--text-dim);
         }
 
-        .empty-state .empty-icon { font-size: 3rem; margin-bottom: 12px; }
-        .empty-state p { font-size: 0.85rem; }
+        .empty-state .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
 
-        /* ===== TOTALS ===== */
         .totals-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -530,7 +513,9 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .total-row:last-child { border-bottom: none; }
+        .total-row:last-child {
+            border-bottom: none;
+        }
 
         .total-row.highlight {
             background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(0, 206, 201, 0.1));
@@ -538,7 +523,6 @@
 
         .total-row.cashea {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.03));
-            border-bottom: none;
         }
 
         .total-row.expense {
@@ -553,7 +537,6 @@
             color: var(--expense-red) !important;
             opacity: 0.8;
         }
-
         .total-label {
             font-size: 0.8rem;
             color: var(--text-muted);
@@ -562,7 +545,9 @@
             gap: 6px;
         }
 
-        .total-values { text-align: right; }
+        .total-values {
+            text-align: right;
+        }
 
         .total-usd {
             font-size: 1rem;
@@ -589,7 +574,6 @@
             font-weight: 600;
         }
 
-        /* ===== CASHEA LOGO ===== */
         .cashea-logo {
             display: inline-flex;
             align-items: center;
@@ -602,24 +586,15 @@
         }
 
         .cashea-logo .c-letter {
-            font-family: 'Arial Black', 'Segoe UI', sans-serif;
-            font-size: 0.85rem;
+            font-family: 'Arial Black', 'Segoe UI', sans-serif;            font-size: 0.85rem;
             font-weight: 900;
             color: var(--cashea-black);
             line-height: 1;
         }
 
-        .cashea-logo-lg {
-            width: 32px;
-            height: 32px;
+        .calculator-panel {
+            position: relative;
         }
-
-        .cashea-logo-lg .c-letter {
-            font-size: 1.1rem;
-        }
-
-        /* ===== CALCULATOR PANEL ===== */
-        .calculator-panel { position: relative; }
 
         .calc-back-btn {
             position: absolute;
@@ -661,7 +636,6 @@
             align-items: center;
             gap: 8px;
         }
-
         .calc-input-group {
             display: flex;
             gap: 8px;
@@ -669,7 +643,9 @@
             align-items: flex-end;
         }
 
-        .calc-input-group .form-group { flex: 1; }
+        .calc-input-group .form-group {
+            flex: 1;
+        }
 
         .calc-input-group input,
         .calc-input-group select {
@@ -708,8 +684,7 @@
             transform: rotate(180deg);
         }
 
-        .calc-result {
-            background: var(--bg-input);
+        .calc-result {            background: var(--bg-input);
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             padding: 14px;
@@ -745,7 +720,11 @@
             color: var(--text-muted);
         }
 
-        .calc-result-value { font-size: 0.95rem; font-weight: 700; }
+        .calc-result-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
         .calc-result-value.usd { color: var(--accent); }
         .calc-result-value.bs { color: var(--primary-light); }
         .calc-result-value.cashea-val { color: var(--cashea-yellow); }
@@ -754,8 +733,7 @@
         .calc-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: white;
-            border: none;
-            border-radius: var(--radius-sm);
+            border: none;            border-radius: var(--radius-sm);
             padding: 10px 20px;
             font-size: 0.85rem;
             font-weight: 600;
@@ -767,8 +745,6 @@
         .calc-btn:hover {
             box-shadow: 0 4px 15px rgba(0, 206, 201, 0.3);
         }
-
-        .calc-btn:active { transform: scale(0.97); }
 
         .manual-toggle {
             display: flex;
@@ -806,8 +782,7 @@
             position: absolute;
             width: 18px;
             height: 18px;
-            left: 2px;
-            bottom: 2px;
+            left: 2px;            bottom: 2px;
             background: var(--text-muted);
             border-radius: 50%;
             transition: all 0.3s;
@@ -823,14 +798,19 @@
             background: white;
         }
 
-        .toggle-label { font-size: 0.8rem; color: var(--text-muted); }
+        .toggle-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
 
         .manual-inputs {
             display: none;
             margin-bottom: 10px;
         }
 
-        .manual-inputs.visible { display: block; }
+        .manual-inputs.visible {
+            display: block;
+        }
 
         .info-badge {
             display: inline-flex;
@@ -851,8 +831,7 @@
             top: 50%;
             transform: translateY(-50%);
             background: var(--primary);
-            color: white;
-            padding: 12px 8px;
+            color: white;            padding: 12px 8px;
             border-radius: 10px 0 0 10px;
             font-size: 0.7rem;
             writing-mode: vertical-rl;
@@ -863,7 +842,10 @@
             opacity: 0.7;
         }
 
-        .swipe-hint:hover { opacity: 1; padding-right: 14px; }
+        .swipe-hint:hover {
+            opacity: 1;
+            padding-right: 14px;
+        }
 
         .swipe-hint-left {
             left: 0;
@@ -872,8 +854,13 @@
             display: none;
         }
 
-        .swipe-hint-left.visible { display: block; }
-        .swipe-hint-right.hidden { display: none; }
+        .swipe-hint-left.visible {
+            display: block;
+        }
+
+        .swipe-hint-right.hidden {
+            display: none;
+        }
 
         .toast {
             position: fixed;
@@ -894,24 +881,19 @@
             align-items: center;
             gap: 8px;
         }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
 
-        .toast.show { transform: translateX(-50%) translateY(0); }
         @media (min-width: 500px) {
-            .page { max-width: 500px; margin: 0 auto; }
-            .swipe-hint { display: none !important; }
+            .page {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            .swipe-hint {
+                display: none !important;
+            }
         }
-
-        .page-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .divider { height: 1px; background: var(--border); margin: 12px 0; }
 
         .tag {
             display: inline-block;
@@ -921,9 +903,20 @@
             font-weight: 600;
         }
 
-        .tag-cashea { background: rgba(255, 215, 0, 0.15); color: var(--cashea-yellow); }
-        .tag-user { background: rgba(255, 71, 87, 0.15); color: var(--expense-red); }
-        .tag-total { background: rgba(108, 92, 231, 0.15); color: var(--primary-light); }
+        .tag-cashea {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--cashea-yellow);
+        }
+
+        .tag-user {
+            background: rgba(255, 71, 87, 0.15);
+            color: var(--expense-red);
+        }
+
+        .tag-total {
+            background: rgba(108, 92, 231, 0.15);
+            color: var(--primary-light);
+        }
 
         .imaginary-result {
             background: var(--bg-input);
@@ -936,8 +929,7 @@
 
         .imaginary-result.visible {
             display: block;
-            animation: fadeIn 0.3s ease;
-        }
+            animation: fadeIn 0.3s ease;        }
 
         .imaginary-grid {
             display: grid;
@@ -945,6 +937,7 @@
             gap: 10px;
             margin-top: 8px;
         }
+
         .imaginary-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -960,46 +953,186 @@
             letter-spacing: 0.5px;
         }
 
-        .imaginary-card .ic-value { font-size: 1rem; font-weight: 700; margin-top: 4px; }
-        .imaginary-card .ic-sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+        .imaginary-card .ic-value {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 4px;
+        }
 
-        .imaginary-card.cashea-card { border-color: rgba(255, 215, 0, 0.3); }
-        .imaginary-card.cashea-card .ic-value { color: var(--cashea-yellow); }
+        .imaginary-card .ic-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
 
-        .imaginary-card.user-card { border-color: rgba(255, 71, 87, 0.3); }
-        .imaginary-card.user-card .ic-value { color: var(--expense-red); }
+        .imaginary-card.cashea-card {
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .imaginary-card.cashea-card .ic-value {
+            color: var(--cashea-yellow);
+        }
+
+        .imaginary-card.user-card {
+            border-color: rgba(255, 71, 87, 0.3);
+        }
+
+        .imaginary-card.user-card .ic-value {
+            color: var(--expense-red);        }
 
         .imaginary-card.total-card {
             border-color: rgba(108, 92, 231, 0.3);
             grid-column: span 2;
         }
 
-        .imaginary-card.total-card .ic-value { color: var(--accent); }
+        .imaginary-card.total-card .ic-value {
+            color: var(--accent);
+        }
+
+        .manual-rate-input {
+            display: none;
+            margin-top: 8px;
+        }
+
+        .manual-rate-input.visible {
+            display: block;
+        }
+
+        .manual-rate-input .form-row {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .manual-rate-input .btn {
+            flex-shrink: 0;
+        }
+
+        .offline-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 71, 87, 0.15);
+            color: var(--expense-red);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.visible {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .modal h3 {
+            margin-bottom: 16px;
+            color: var(--primary-light);
+            font-size: 1.1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+        }
+
+        .list-selector {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .list-selector label {
+            font-size: 0.7rem;            color: var(--text-muted);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .list-selector select {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 8px 12px;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .share-textarea {
+            width: 100%;
+            min-height: 150px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 12px;
+            color: var(--text);
+            font-family: monospace;
+            font-size: 0.85rem;
+            resize: vertical;
+        }
+
+        .unit-badge {
+            display: inline-block;
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-left: 4px;
+        }
     </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
 <header class="header">
     <div class="header-top">
-        <h1>🛒 Mi Mercado</h1>
+        <h1>Mi Mercado</h1>
         <div class="header-actions">
-            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Cambiar tema">
-                🌙
-            </button>
-            <button class="calc-toggle" onclick="openCalculator()">
-                🧮 Calculadora
-            </button>
-        </div>
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">Tema</button>
+            <button class="list-toggle" onclick="openListsModal()">📋 Listas</button>
+            <button class="calc-toggle" onclick="openCalculator()">Calculadora</button>        </div>
     </div>
     <div class="header-info">
         <div class="info-chip">
             <span class="chip-icon">💵</span>
             <div class="chip-content">
                 <span class="chip-label">Tasa BCV</span>
-                <span class="chip-value" id="rateDisplay">
-                    <span class="loading-spinner"></span>
-                </span>
+                <span class="chip-value" id="rateDisplay">Cargando...</span>
             </div>
         </div>
         <div class="info-chip rate-selector">
@@ -1011,59 +1144,60 @@
             <div class="chip-content">
                 <span class="chip-label">Nivel Cashea</span>
                 <select id="casheaLevel" onchange="updateTotals()">
-                    <option value="1">Nivel 1 — Financia 40%</option>
-                    <option value="2" selected>Nivel 2 — Financia 50%</option>
-                    <option value="3">Nivel 3 — Financia 60%</option>
+                    <option value="1">Nivel 1 — 60%</option>
+                    <option value="2" selected>Nivel 2 — 50%</option>
+                    <option value="3">Nivel 3 — 40%</option>
                 </select>
             </div>
         </div>
     </div>
     <div class="last-update" id="lastUpdate"></div>
+    <div id="offlineControls"></div>
 </header>
 
-<!-- ===== SWIPE HINTS ===== -->
 <div class="swipe-hint swipe-hint-right" id="swipeHintRight" onclick="openCalculator()">
-    🧮 CALCULADORA →
+    CALCULADORA
 </div>
 <div class="swipe-hint swipe-hint-left" id="swipeHintLeft" onclick="closeCalculator()">
-    ← LISTA
+    LISTA
 </div>
 
-<!-- ===== APP CONTAINER ===== -->
 <div class="app-container">
     <div class="pages-wrapper" id="pagesWrapper">
 
-        <!-- ===== PAGE 1: LISTA ===== -->
         <div class="page" id="pageList">
             <div class="add-form">
-                <h3>➕ Agregar Producto</h3>
+                <h3>Agregar Producto</h3>
                 <div class="form-row">
                     <div class="form-group" style="flex:2;">
                         <label>Producto</label>
                         <input type="text" id="prodName" placeholder="Ej: Harina Pan">
                     </div>
                     <div class="form-group">
-                        <label>Cantidad</label>
-                        <input type="number" id="prodQty" placeholder="1" min="1" value="1">
+                        <label>Cantidad</label>                        <input type="number" id="prodQty" placeholder="1" min="1" value="1">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
+                        <label>Unidad</label>
+                        <input type="text" id="prodUnit" placeholder="Ej: Kg, Und, 200gr">
+                    </div>
+                    <div class="form-group">
                         <label>Precio unitario ($)</label>
                         <input type="number" id="prodPrice" placeholder="0.00" step="0.01" min="0">
                     </div>
-                    <div class="form-group" style="flex:0 0 auto; display:flex; align-items:flex-end;">
-                        <button class="btn btn-primary" onclick="addProduct()" style="margin-top:0; padding:10px 24px;">
-                            Agregar
-                        </button>
-                    </div>
                 </div>
+                <button class="btn btn-primary" onclick="addProduct()">Agregar</button>
             </div>
 
             <div class="list-header">
-                <h3>📋 Mi Lista (<span id="itemCount">0</span>)</h3>
+                <h3 id="listTitle">
+                    📋 Mi Lista (<span id="itemCount">0</span>)
+                    <button class="btn-icon" onclick="editListName()" title="Cambiar nombre">✏️</button>
+                </h3>
                 <div class="list-actions">
-                    <button class="btn btn-sm btn-outline" onclick="clearList()">🗑️ Borrar todo</button>
+                    <button class="btn btn-sm btn-outline" onclick="clearList()">Borrar todo</button>
+                    <button class="btn btn-sm btn-outline" onclick="shareCurrentList()">Compartir</button>
                 </div>
             </div>
 
@@ -1074,24 +1208,22 @@
                 </div>
             </div>
 
-            <!-- Totals -->
             <div class="totals-section" id="totalsSection" style="display:none;">
                 <div class="total-row">
-                    <span class="total-label">📦 Total lista</span>
+                    <span class="total-label">Total lista</span>
                     <div class="total-values">
                         <div class="total-usd" id="totalUsd">$0.00</div>
                         <div class="total-bs" id="totalBs">Bs. 0,00</div>
                     </div>
                 </div>
                 <div class="total-row highlight">
-                    <span class="total-label">✅ Seleccionado</span>
+                    <span class="total-label">Seleccionado</span>
                     <div class="total-values">
                         <div class="total-usd" id="checkedUsd">$0.00</div>
                         <div class="total-bs" id="checkedBs">Bs. 0,00</div>
                     </div>
                 </div>
-                <div class="total-row cashea">
-                    <span class="total-label">
+                <div class="total-row cashea">                    <span class="total-label">
                         <div class="cashea-logo">
                             <span class="c-letter">C</span>
                         </div>
@@ -1103,7 +1235,7 @@
                     </div>
                 </div>
                 <div class="total-row expense">
-                    <span class="total-label">💳 Pago inicial</span>
+                    <span class="total-label">Pago inicial</span>
                     <div class="total-values">
                         <div class="total-usd" id="userPayUsd">$0.00</div>
                         <div class="total-bs" id="userPayBs">Bs. 0,00</div>
@@ -1112,13 +1244,11 @@
             </div>
         </div>
 
-        <!-- ===== PAGE 2: CALCULADORA ===== -->
         <div class="page calculator-panel" id="pageCalc">
             <button class="calc-back-btn" onclick="closeCalculator()">← Volver a la lista</button>
 
-            <!-- 1. Conversión -->
             <div class="calc-section">
-                <h3>💱 Conversión Dólar ↔ Bolívares</h3>
+                <h3>Conversión Dólar ↔ Bolívares</h3>
                 <div class="calc-input-group">
                     <div class="form-group">
                         <label>Monto</label>
@@ -1142,24 +1272,23 @@
                     <div class="calc-result-row">
                         <span class="calc-result-label">Tasa usada:</span>
                         <span class="calc-result-value bs" id="convRateUsed"></span>
-                    </div>
-                </div>
+                    </div>                </div>
             </div>
-            <!-- 2. Calculadora de Cobertura -->
+
             <div class="calc-section">
-                <h3>🧾 Calculadora de Cobertura</h3>
+                <h3>Calculadora de Cobertura</h3>
                 <div class="manual-toggle">
                     <label class="toggle-switch">
                         <input type="checkbox" id="manualToggle" onchange="toggleManualInput()">
                         <span class="toggle-slider"></span>
                     </label>
-                    <span class="toggle-label">Ingresar capital manual</span>
+                    <span class="toggle-label">Ingresar monto manual</span>
                 </div>
-                <div id="listInfo" class="info-badge">📋 Usando total seleccionado de la lista</div>
+                <div id="listInfo" class="info-badge">Usando total de la lista</div>
                 <div class="manual-inputs" id="manualInputs">
                     <div class="calc-input-group">
                         <div class="form-group">
-                            <label>Tu capital disponible ($)</label>
+                            <label>Tu monto disponible ($)</label>
                             <input type="number" id="manualAmount" placeholder="0.00" step="0.01" min="0">
                         </div>
                     </div>
@@ -1168,16 +1297,16 @@
                     <div class="form-group">
                         <label>Nivel Cashea</label>
                         <select id="calcCasheaLevel">
-                            <option value="1">Nivel 1 — Financia 40%</option>
-                            <option value="2" selected>Nivel 2 — Financia 50%</option>
-                            <option value="3">Nivel 3 — Financia 60%</option>
+                            <option value="1">Nivel 1 — 60%</option>
+                            <option value="2" selected>Nivel 2 — 50%</option>
+                            <option value="3">Nivel 3 — 40%</option>
                         </select>
                     </div>
                 </div>
                 <button class="calc-btn" onclick="calculateCoverage()">Calcular Cobertura</button>
                 <div class="calc-result" id="coverageResult">
                     <div class="calc-result-row">
-                        <span class="calc-result-label">💰 Total compra posible:</span>
+                        <span class="calc-result-label">Total compra:</span>
                         <span class="calc-result-value usd" id="covTotalUsd"></span>
                     </div>
                     <div class="calc-result-row">
@@ -1192,13 +1321,12 @@
                             Monto a financiar (Cashea):
                         </span>
                         <span class="calc-result-value cashea-val" id="covCasheaUsd"></span>
-                    </div>
-                    <div class="calc-result-row">
+                    </div>                    <div class="calc-result-row">
                         <span class="calc-result-label"> </span>
                         <span class="calc-result-value cashea-val" id="covCasheaBs"></span>
                     </div>
                     <div class="calc-result-row">
-                        <span class="calc-result-label">💳 Pago inicial:</span>
+                        <span class="calc-result-label">Pago inicial:</span>
                         <span class="calc-result-value user-val" id="covUserUsd"></span>
                     </div>
                     <div class="calc-result-row">
@@ -1208,9 +1336,8 @@
                 </div>
             </div>
 
-            <!-- 3. Compra Imaginaria -->
             <div class="calc-section">
-                <h3>💡 Compra Imaginaria</h3>
+                <h3>Compra Imaginaria</h3>
                 <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">
                     ¿Cuánto debes gastar para que te quede exactamente el monto que deseas?
                 </p>
@@ -1230,9 +1357,9 @@
                     <div class="form-group">
                         <label>Nivel Cashea</label>
                         <select id="imagCasheaLevel">
-                            <option value="1">Nivel 1 — Financia 40%</option>
-                            <option value="2" selected>Nivel 2 — Financia 50%</option>
-                            <option value="3">Nivel 3 — Financia 60%</option>
+                            <option value="1">Nivel 1 — 60%</option>
+                            <option value="2" selected>Nivel 2 — 50%</option>
+                            <option value="3">Nivel 3 — 40%</option>
                         </select>
                     </div>
                 </div>
@@ -1243,8 +1370,7 @@
                     </div>
                     <div class="imaginary-grid">
                         <div class="imaginary-card total-card">
-                            <div class="ic-label">Total de tu compra</div>
-                            <div class="ic-value" id="imagPurchaseUsd">$0.00</div>
+                            <div class="ic-label">Total de tu compra</div>                            <div class="ic-value" id="imagPurchaseUsd">$0.00</div>
                             <div class="ic-sub" id="imagPurchaseBs">Bs. 0,00</div>
                         </div>
                         <div class="imaginary-card cashea-card">
@@ -1258,7 +1384,7 @@
                             <div class="ic-sub" id="imagCasheaBs">Bs. 0,00</div>
                         </div>
                         <div class="imaginary-card user-card">
-                            <div class="ic-label">💳 Pago inicial</div>
+                            <div class="ic-label">Pago inicial</div>
                             <div class="ic-value" id="imagUserUsd">$0.00</div>
                             <div class="ic-sub" id="imagUserBs">Bs. 0,00</div>
                         </div>
@@ -1274,399 +1400,829 @@
     </div>
 </div>
 
+<!-- Modal para gestión de listas -->
+<div class="modal-overlay" id="listsModal">
+    <div class="modal">
+        <h3>📋 Gestión de Listas</h3>
+        
+        <div class="list-selector">
+            <label>Seleccionar lista</label>
+            <select id="listSelect" onchange="loadSelectedList()">
+                <option value="">Cargando...</option>
+            </select>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+            <button class="btn btn-primary" onclick="createNewList()">➕ Crear Nueva Lista</button>
+            <button class="btn btn-outline" onclick="copyCurrentList()">📋 Copiar Lista Actual</button>
+            <button class="btn btn-outline" onclick="exportCurrentList()">💾 Exportar Lista</button>
+            <button class="btn btn-outline" onclick="openImportModal()">📥 Importar Lista</button>
+            <button class="btn btn-outline" onclick="deleteCurrentList()" style="color:var(--danger); border-color:var(--danger);">🗑️ Eliminar Lista</button>
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-outline" onclick="closeListsModal()">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para importar -->
+<div class="modal-overlay" id="importModal">
+    <div class="modal">
+        <h3>📥 Importar Lista</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">
+            Pega el código de la lista que quieres importar:
+        </p>
+        <textarea class="share-textarea" id="importText" placeholder="Pega aquí el código de la lista..."></textarea>
+        <div class="modal-actions">
+            <button class="btn btn-outline" onclick="closeImportModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="importList()">Importar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para renombrar -->
+<div class="modal-overlay" id="renameModal">
+    <div class="modal">
+        <h3>✏️ Cambiar Nombre de la Lista</h3>
+        <div class="form-group" style="margin-bottom:16px;">
+            <label>Nombre de la lista</label>
+            <input type="text" id="newListName" placeholder="Ej: Mercado Central, Bodega, etc.">
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-outline" onclick="closeRenameModal()">Cancelar</button>
+            <button class="btn btn-primary" onclick="saveListName()">Guardar</button>
+        </div>
+    </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-    // ===== STATE =====
-    let dollarRate = 0;
-    let products = [];
-    let currentPage = 0;
+var dollarRate = 0;
+var currentListId = 'default';
+var currentPage = 0;
+var isOffline = false;
 
-    // ===== CORRECCIÓN: Porcentajes de Cashea =====
-    // Los niveles de Cashea representan el porcentaje que FINANCIA Cashea
-    // Nivel 1 = Cashea financia 40%, usuario paga 60%
-    // Nivel 2 = Cashea financia 50%, usuario paga 50%
-    // Nivel 3 = Cashea financia 60%, usuario paga 40%
-    const CASHEA_LEVELS = {
-        1: 0.40,  // Cashea financia 40%
-        2: 0.50,  // Cashea financia 50%
-        3: 0.60   // Cashea financia 60%
+var CASHEA_LEVELS = {
+    1: 0.60,
+    2: 0.50,
+    3: 0.40
+};
+document.addEventListener('DOMContentLoaded', function() {
+    fetchRate();
+    loadLists();
+    loadTheme();
+    setupSwipe();
+});
+
+// ========== GESTIÓN DE LISTAS ==========
+function loadLists() {
+    var savedLists = localStorage.getItem('market_lists');
+    var lists = {};
+    
+    if (savedLists) {
+        try {
+            lists = JSON.parse(savedLists);
+        } catch(e) {
+            console.error('Error cargando listas:', e);
+            lists = {};
+        }
+    }
+    
+    // Crear lista por defecto si no existe
+    if (!lists['default']) {
+        lists['default'] = {
+            id: 'default',
+            name: 'Mi Lista',
+            products: [],
+            createdAt: new Date().toISOString()
+        };
+        saveLists(lists);
+    }
+    
+    window.marketLists = lists;
+    updateListSelector();
+    loadCurrentList();
+}
+
+function saveLists(lists) {
+    localStorage.setItem('market_lists', JSON.stringify(lists));
+    window.marketLists = lists;
+}
+
+function getCurrentList() {
+    if (!window.marketLists) {
+        loadLists();
+    }
+    return window.marketLists[currentListId] || window.marketLists['default'];
+}
+
+function saveCurrentList() {    if (!window.marketLists) {
+        loadLists();
+    }
+    window.marketLists[currentListId] = getCurrentList();
+    saveLists(window.marketLists);
+}
+
+function updateListSelector() {
+    var select = document.getElementById('listSelect');
+    var lists = window.marketLists || {};
+    var html = '';
+    
+    for (var id in lists) {
+        var list = lists[id];
+        var selected = id === currentListId ? 'selected' : '';
+        var productCount = list.products ? list.products.length : 0;
+        html += '<option value="' + id + '" ' + selected + '>' + list.name + ' (' + productCount + ' productos)</option>';
+    }
+    
+    select.innerHTML = html;
+}
+
+function loadCurrentList() {
+    var list = getCurrentList();
+    document.getElementById('listTitle').innerHTML = '📋 ' + list.name + ' (<span id="itemCount">0</span>) <button class="btn-icon" onclick="editListName()" title="Cambiar nombre">✏️</button>';
+    
+    if (list.products && list.products.length > 0) {
+        window.products = list.products;
+    } else {
+        window.products = [];
+    }
+    
+    renderProducts();
+    updateTotals();
+    updateListSelector();
+}
+
+function loadSelectedList() {
+    var select = document.getElementById('listSelect');
+    currentListId = select.value;
+    loadCurrentList();
+    showToast('Lista cargada');
+}
+
+function createNewList() {
+    var name = prompt('Nombre de la nueva lista:', 'Lista ' + (Object.keys(window.marketLists).length + 1));
+    if (!name) return;
+    
+    var newId = 'list_' + Date.now();
+    window.marketLists[newId] = {        id: newId,
+        name: name,
+        products: [],
+        createdAt: new Date().toISOString()
+    };
+    
+    saveLists(window.marketLists);
+    currentListId = newId;
+    loadCurrentList();
+    updateListSelector();
+    showToast('Lista "' + name + '" creada');
+    closeListsModal();
+}
+
+function copyCurrentList() {
+    var currentList = getCurrentList();
+    var newName = prompt('Nombre para la copia:', currentList.name + ' (copia)');
+    if (!newName) return;
+    
+    var newId = 'list_' + Date.now();
+    window.marketLists[newId] = {
+        id: newId,
+        name: newName,
+        products: JSON.parse(JSON.stringify(currentList.products || [])),
+        createdAt: new Date().toISOString()
+    };
+    
+    saveLists(window.marketLists);
+    currentListId = newId;
+    loadCurrentList();
+    updateListSelector();
+    showToast('Lista copiada como "' + newName + '"');
+}
+
+function deleteCurrentList() {
+    if (currentListId === 'default') {
+        showToast('No se puede eliminar la lista por defecto');
+        return;
+    }
+    
+    if (!confirm('¿Estás seguro de eliminar esta lista?')) return;
+    
+    delete window.marketLists[currentListId];
+    currentListId = 'default';
+    saveLists(window.marketLists);
+    loadCurrentList();
+    updateListSelector();
+    showToast('Lista eliminada');
+}
+function editListName() {
+    var list = getCurrentList();
+    document.getElementById('newListName').value = list.name;
+    document.getElementById('renameModal').classList.add('visible');
+}
+
+function saveListName() {
+    var newName = document.getElementById('newListName').value.trim();
+    if (!newName) {
+        showToast('Ingresa un nombre válido');
+        return;
+    }
+    
+    getCurrentList().name = newName;
+    saveLists(window.marketLists);
+    loadCurrentList();
+    closeRenameModal();
+    showToast('Nombre actualizado');
+}
+
+function openListsModal() {
+    updateListSelector();
+    document.getElementById('listsModal').classList.add('visible');
+}
+
+function closeListsModal() {
+    document.getElementById('listsModal').classList.remove('visible');
+}
+
+function openImportModal() {
+    closeListsModal();
+    document.getElementById('importModal').classList.add('visible');
+}
+
+function closeImportModal() {
+    document.getElementById('importModal').classList.remove('visible');
+    document.getElementById('importText').value = '';
+}
+
+function closeRenameModal() {
+    document.getElementById('renameModal').classList.remove('visible');
+}
+
+// ========== EXPORTAR/IMPORTAR ==========
+function exportCurrentList() {
+    var list = getCurrentList();
+    var exportData = {
+        name: list.name,
+        products: list.products || [],
+        exportedAt: new Date().toISOString(),        version: '1.0'
+    };
+    
+    var json = JSON.stringify(exportData, null, 2);
+    var encoded = btoa(unescape(encodeURIComponent(json)));
+    
+    // Copiar al portapapeles
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(encoded).then(function() {
+            showToast('Lista copiada al portapapeles');
+        }).catch(function() {
+            showShareDialog(encoded);
+        });
+    } else {
+        showShareDialog(encoded);
+    }
+}
+
+function showShareDialog(code) {
+    var shareCode = prompt('Copia este código para compartir tu lista:\n\n' + code);
+}
+
+function importList() {
+    var code = document.getElementById('importText').value.trim();
+    if (!code) {
+        showToast('Pega el código de la lista');
+        return;
+    }
+    
+    try {
+        var json = decodeURIComponent(escape(atob(code)));
+        var data = JSON.parse(json);
+        
+        if (!data.name || !data.products) {
+            throw new Error('Formato inválido');
+        }
+        
+        var newName = prompt('Nombre para esta lista importada:', data.name + ' (importada)');
+        if (!newName) return;
+        
+        var newId = 'list_' + Date.now();
+        window.marketLists[newId] = {
+            id: newId,
+            name: newName,
+            products: data.products,
+            createdAt: new Date().toISOString(),
+            importedFrom: data.name
+        };
+        
+        saveLists(window.marketLists);        currentListId = newId;
+        loadCurrentList();
+        updateListSelector();
+        closeImportModal();
+        showToast('Lista "' + newName + '" importada exitosamente');
+    } catch(e) {
+        showToast('Error al importar: Código inválido');
+        console.error('Error importando:', e);
+    }
+}
+
+function shareCurrentList() {
+    exportCurrentList();
+}
+
+// ========== PRODUCTOS ==========
+function addProduct() {
+    var name = document.getElementById('prodName').value.trim();
+    var qty = parseInt(document.getElementById('prodQty').value) || 1;
+    var unit = document.getElementById('prodUnit').value.trim();
+    var price = parseFloat(document.getElementById('prodPrice').value) || 0;
+
+    if (!name) {
+        showToast('Ingresa el nombre del producto');
+        return;
+    }
+    if (price <= 0) {
+        showToast('Ingresa un precio válido');
+        return;
+    }
+
+    var product = {
+        id: Date.now(),
+        name: name,
+        qty: qty,
+        unit: unit,
+        price: price,
+        checked: true
     };
 
-    // ===== INIT =====
-    document.addEventListener('DOMContentLoaded', () => {
-        fetchRate();
-        loadProducts();
-        loadTheme();
-        setupSwipe();
-    });
+    var list = getCurrentList();
+    if (!list.products) list.products = [];
+    list.products.push(product);
+    
+    saveCurrentList();
+    window.products = list.products;
+    renderProducts();
+    updateTotals();
 
-    // ===== THEME TOGGLE =====
-    function toggleTheme() {
-        document.body.classList.toggle('light-theme');
-        const isLight = document.body.classList.contains('light-theme');
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        updateThemeIcon(isLight);
+    document.getElementById('prodName').value = '';    document.getElementById('prodQty').value = '1';
+    document.getElementById('prodUnit').value = '';
+    document.getElementById('prodPrice').value = '';
+    document.getElementById('prodName').focus();
+    showToast('Producto agregado');
+}
+
+function renderProducts() {
+    var container = document.getElementById('productList');
+    var countEl = document.getElementById('itemCount');
+    var list = getCurrentList();
+    var products = list.products || [];
+
+    countEl.textContent = products.length;
+
+    if (products.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.<br>Agrega productos para empezar.</p></div>';
+        return;
     }
 
-    function loadTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-theme');
-            updateThemeIcon(true);
+    var html = '';
+    for (var i = 0; i < products.length; i++) {
+        var p = products[i];
+        var subtotal = p.qty * p.price;
+        var subtotalBs = subtotal * dollarRate;
+        var unitText = p.unit ? '<span class="unit-badge">' + p.unit + '</span>' : '';
+        
+        html += '<div class="product-item ' + (p.checked ? 'checked' : '') + '" id="prod-' + p.id + '">';
+        html += '<input type="checkbox" class="product-checkbox" ' + (p.checked ? 'checked' : '') + ' onchange="toggleProduct(' + p.id + ')">';
+        html += '<div class="product-info">';
+        html += '<div class="product-name">' + p.name + unitText + '</div>';
+        html += '<div class="product-details">' + p.qty + ' × $' + p.price.toFixed(2) + '</div>';
+        html += '</div>';
+        html += '<div class="product-price">';
+        html += '<div class="product-price-usd">$' + subtotal.toFixed(2) + '</div>';
+        html += '<div class="product-price-bs">Bs. ' + subtotalBs.toFixed(2) + '</div>';
+        html += '</div>';
+        html += '<button class="product-delete" onclick="deleteProduct(' + p.id + ')" title="Eliminar">✕</button>';
+        html += '</div>';
+    }
+    
+    container.innerHTML = html;
+}
+
+function toggleProduct(id) {
+    var list = getCurrentList();
+    var products = list.products || [];
+    
+    for (var i = 0; i < products.length; i++) {
+        if (products[i].id === id) {            products[i].checked = !products[i].checked;
+            break;
         }
     }
+    
+    saveCurrentList();
+    window.products = products;
+    renderProducts();
+    updateTotals();
+}
 
-    function updateThemeIcon(isLight) {
-        const btn = document.getElementById('themeBtn');
-        btn.textContent = isLight ? '☀️' : '🌙';
+function deleteProduct(id) {
+    var list = getCurrentList();
+    var products = list.products || [];
+    
+    var product = null;
+    for (var i = 0; i < products.length; i++) {
+        if (products[i].id === id) {
+            product = products[i];
+            break;
+        }
     }
+    
+    list.products = products.filter(function(p) { return p.id !== id; });
+    saveCurrentList();
+    window.products = list.products;
+    renderProducts();
+    updateTotals();
+    if (product) showToast('Producto eliminado');
+}
 
-    // ===== FETCH DOLLAR RATE =====
-    async function fetchRate() {
-        const display = document.getElementById('rateDisplay');
-        try {
-            let rate = null;
+function clearList() {
+    var list = getCurrentList();
+    if (!list.products || list.products.length === 0) return;
+    
+    if (confirm('¿Borrar todos los productos de esta lista?')) {
+        list.products = [];
+        saveCurrentList();
+        window.products = [];
+        renderProducts();
+        updateTotals();
+        showToast('Lista borrada');
+    }
+}
 
-            if (!rate) {
-                try {
-                    const res = await fetch('https://pydolarve.org/api/v1/dollar?page=bcv');
-                    const data = await res.json();
-                    if (data && data.monitors && data.monitors.usd) {
-                        rate = data.monitors.usd.price;
-                    }
-                } catch(e) { console.log('API 1 failed:', e); }
-            }
+// ========== TASA DE CAMBIO ==========
+function toggleTheme() {
+    document.body.classList.toggle('light-theme');
+    var isLight = document.body.classList.contains('light-theme');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');    updateThemeIcon(isLight);
+}
 
-            if (!rate) {
-                try {
-                    const res = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
-                    const data = await res.json();
-                    if (data && data.promedio) {
-                        rate = data.promedio;
-                    }
-                } catch(e) { console.log('API 2 failed:', e); }
-            }
+function loadTheme() {
+    var savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        updateThemeIcon(true);
+    }
+}
 
-            if (!rate) {
-                try {
-                    const res = await fetch('https://pydolarvenezuela-api.vercel.app/api/v1/dollar?page=bcv');
-                    const data = await res.json();
-                    if (data && data.monitors && data.monitors.usd) {
-                        rate = data.monitors.usd.price;
-                    }
-                } catch(e) { console.log('API 3 failed:', e); }
-            }
+function updateThemeIcon(isLight) {
+    var btn = document.getElementById('themeBtn');
+    btn.textContent = isLight ? '☀️ Claro' : '🌙 Oscuro';
+}
 
-            if (rate && rate > 0) {
-                dollarRate = rate;
-                display.textContent = `Bs. ${formatNumber(rate, 2)}`;
-                const now = new Date();
-                document.getElementById('lastUpdate').textContent =
-                    `Última actualización: ${now.toLocaleDateString('es-VE')} ${now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'})}`;
+function fetchRate() {
+    var display = document.getElementById('rateDisplay');
+    var lastUpdate = document.getElementById('lastUpdate');
+    var offlineControls = document.getElementById('offlineControls');
+    
+    display.textContent = 'Cargando...';
+    
+    fetch('https://pydolarve.org/api/v1/dollar?page=bcv')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            if (data && data.monitors && data.monitors.usd && data.monitors.usd.price) {
+                dollarRate = data.monitors.usd.price;
+                isOffline = false;
+                localStorage.setItem('dollarRate', dollarRate);
+                localStorage.setItem('lastUpdate', new Date().toISOString());
+                
+                display.textContent = 'Bs. ' + formatNumber(dollarRate, 2);
+                var now = new Date();
+                lastUpdate.textContent = 'Última actualización: ' + now.toLocaleDateString('es-VE') + ' ' + now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
+                offlineControls.innerHTML = '';
+                
                 updateTotals();
             } else {
-                display.textContent = '⚠️ Sin conexión';
-                showToast('⚠️ No se pudo obtener la tasa. Verifica tu conexión.');
+                throw new Error('Datos inválidos');
             }
-        } catch (e) {
-            display.textContent = '⚠️ Error';
-            showToast('⚠️ Error al obtener la tasa del dólar.');
+        })
+        .catch(function(error) {
+            console.error('Error obteniendo tasa:', error);
+            isOffline = true;
+            
+            var savedRate = localStorage.getItem('dollarRate');
+            var savedUpdate = localStorage.getItem('lastUpdate');            
+            if (savedRate && savedRate > 0) {
+                dollarRate = parseFloat(savedRate);
+                display.textContent = 'Bs. ' + formatNumber(dollarRate, 2) + ' (guardada)';
+                
+                if (savedUpdate) {
+                    var updateDate = new Date(savedUpdate);
+                    lastUpdate.textContent = 'Tasa guardada del: ' + updateDate.toLocaleDateString('es-VE') + ' ' + updateDate.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
+                }
+                
+                offlineControls.innerHTML = '<div class="offline-badge">⚠️ Sin conexión - Usando última tasa guardada</div>' +
+                    '<div class="manual-rate-input visible">' +
+                        '<div class="form-row">' +
+                            '<div class="form-group">' +
+                                '<label style="font-size:0.7rem; color:var(--text-muted);">Ingresar tasa manual (Bs.)</label>' +
+                                '<input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0" style="background:var(--bg-input); border:1px solid var(--border); border-radius:6px; padding:8px 12px; color:var(--text); font-size:0.9rem; width:100%;">' +
+                            '</div>' +
+                            '<button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0;">Aplicar</button>' +
+                        '</div>' +
+                    '</div>';
+            } else {
+                display.textContent = 'Sin tasa';
+                lastUpdate.textContent = 'Ingresa la tasa del dólar manualmente';
+                offlineControls.innerHTML = '<div class="offline-badge">⚠️ Ingresa la tasa del dólar</div>' +
+                    '<div class="manual-rate-input visible">' +
+                        '<div class="form-row">' +
+                            '<div class="form-group">' +
+                                '<label style="font-size:0.7rem; color:var(--text-muted);">Tasa del dólar (Bs.)</label>' +
+                                '<input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0" style="background:var(--bg-input); border:1px solid var(--border); border-radius:6px; padding:8px 12px; color:var(--text); font-size:0.9rem; width:100%;">' +
+                            '</div>' +
+                            '<button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0;">Aplicar</button>' +
+                        '</div>' +
+                    '</div>';
+            }
+        });
+}
+
+function setManualRate() {
+    var input = document.getElementById('manualRateInput');
+    var rate = parseFloat(input.value);
+    
+    if (rate && rate > 0) {
+        dollarRate = rate;
+        isOffline = true;
+        localStorage.setItem('dollarRate', dollarRate);
+        localStorage.setItem('lastUpdate', new Date().toISOString());
+        
+        var display = document.getElementById('rateDisplay');
+        var lastUpdate = document.getElementById('lastUpdate');
+                display.textContent = 'Bs. ' + formatNumber(dollarRate, 2) + ' (manual)';
+        var now = new Date();
+        lastUpdate.textContent = 'Tasa manual ingresada: ' + now.toLocaleDateString('es-VE') + ' ' + now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
+        
+        updateTotals();
+        showToast('Tasa actualizada a Bs. ' + formatNumber(dollarRate, 2));
+    } else {
+        showToast('Ingresa una tasa válida');
+    }
+}
+
+// ========== UTILIDADES ==========
+function formatNumber(num, decimals) {
+    return Number(num).toLocaleString('es-VE', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+    });
+}
+
+function formatUSD(num) {
+    return '$' + formatNumber(num, 2);
+}
+
+function formatBS(num) {
+    return 'Bs. ' + formatNumber(num, 2);
+}
+
+function usdToBs(usd) {
+    return usd * dollarRate;
+}
+
+function bsToUsd(bs) {
+    return bs / dollarRate;
+}
+
+function updateTotals() {
+    var section = document.getElementById('totalsSection');
+    var level = parseInt(document.getElementById('casheaLevel').value);
+    var userPercent = CASHEA_LEVELS[level];
+    var casheaPercent = 1 - userPercent;
+
+    var list = getCurrentList();
+    var products = list.products || [];
+
+    if (products.length === 0) {
+        section.style.display = 'none';
+        return;
+    }
+
+    section.style.display = 'block';
+    var total = 0;
+    var checked = 0;
+    
+    for (var i = 0; i < products.length; i++) {
+        total += products[i].qty * products[i].price;
+        if (products[i].checked) {
+            checked += products[i].qty * products[i].price;
         }
     }
+    
+    var totalBs = usdToBs(total);
+    var checkedBs = usdToBs(checked);
+    var casheaUsd = checked * casheaPercent;
+    var casheaBs = usdToBs(casheaUsd);
+    var userUsd = checked * userPercent;
+    var userBs = usdToBs(userUsd);
 
-    // ===== FORMAT HELPERS =====
-    function formatNumber(num, decimals = 2) {
-        return Number(num).toLocaleString('es-VE', {
-            minimumFractionDigits: decimals,
-            maximumFractionDigits: decimals
-        });
+    document.getElementById('totalUsd').textContent = formatUSD(total);
+    document.getElementById('totalBs').textContent = formatBS(totalBs);
+    document.getElementById('checkedUsd').textContent = formatUSD(checked);
+    document.getElementById('checkedBs').textContent = formatBS(checkedBs);
+    document.getElementById('casheaPercent').textContent = Math.round(casheaPercent * 100);
+    document.getElementById('casheaUsd').textContent = formatUSD(casheaUsd);
+    document.getElementById('casheaBs').textContent = formatBS(casheaBs);
+    document.getElementById('userPayUsd').textContent = formatUSD(userUsd);
+    document.getElementById('userPayBs').textContent = formatBS(userBs);
+
+    document.getElementById('calcCasheaLevel').value = level;
+    document.getElementById('imagCasheaLevel').value = level;
+}
+
+// ========== SWIPE ==========
+function setupSwipe() {
+    var startX = 0;
+    var startY = 0;
+    
+    document.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    document.addEventListener('touchend', function(e) {
+        var endX = e.changedTouches[0].clientX;
+        var endY = e.changedTouches[0].clientY;
+        var diffX = endX - startX;
+        var diffY = endY - startY;
+        
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 80) {
+            if (diffX < 0 && currentPage === 0) {                openCalculator();
+            } else if (diffX > 0 && currentPage === 1) {
+                closeCalculator();
+            }
+        }
+    }, { passive: true });
+}
+
+function openCalculator() {
+    currentPage = 1;
+    document.getElementById('pagesWrapper').style.transform = 'translateX(-50%)';
+    document.getElementById('swipeHintRight').classList.add('hidden');
+    document.getElementById('swipeHintLeft').classList.add('visible');
+}
+
+function closeCalculator() {
+    currentPage = 0;
+    document.getElementById('pagesWrapper').style.transform = 'translateX(0)';
+    document.getElementById('swipeHintRight').classList.remove('hidden');
+    document.getElementById('swipeHintLeft').classList.remove('visible');
+}
+
+// ========== CALCULADORA ==========
+function swapConversion() {
+    var select = document.getElementById('convFrom');
+    select.value = select.value === 'USD' ? 'BS' : 'USD';
+}
+
+function calculateConversion() {
+    var amount = parseFloat(document.getElementById('convAmount').value);
+    var from = document.getElementById('convFrom').value;
+    
+    if (!amount || amount <= 0) {
+        showToast('Ingresa un monto válido');
+        return;
+    }
+    if (dollarRate <= 0) {
+        showToast('No hay tasa disponible');
+        return;
     }
 
-    function formatUSD(num) { return `$${formatNumber(num, 2)}`; }
-    function formatBS(num) { return `Bs. ${formatNumber(num, 2)}`; }
-    function usdToBs(usd) { return usd * dollarRate; }
-    function bsToUsd(bs) { return dollarRate > 0 ? bs / dollarRate : 0; }
+    var result, resultLabel;
+    if (from === 'USD') {
+        result = usdToBs(amount);
+        resultLabel = formatBS(result);
+    } else {
+        result = bsToUsd(amount);
+        resultLabel = formatUSD(result);
+    }
+    document.getElementById('convResultValue').textContent = resultLabel;
+    document.getElementById('convRateUsed').textContent = '1 USD = Bs. ' + formatNumber(dollarRate, 2);
+    document.getElementById('convResult').classList.add('visible');
+}
 
-    // ===== PRODUCTS =====
-    function addProduct() {
-        const name = document.getElementById('prodName').value.trim();
-        const qty = parseInt(document.getElementById('prodQty').value) || 1;
-        const price = parseFloat(document.getElementById('prodPrice').value) || 0;
-        if (!name) { showToast('⚠️ Ingresa el nombre del producto'); return; }
-        if (price <= 0) { showToast('⚠️ Ingresa un precio válido'); return; }
+function toggleManualInput() {
+    var isManual = document.getElementById('manualToggle').checked;
+    document.getElementById('manualInputs').classList.toggle('visible', isManual);
+    document.getElementById('listInfo').style.display = isManual ? 'none' : 'flex';
+}
 
-        products.push({ id: Date.now(), name, qty, price, checked: true });
-        saveProducts();
-        renderProducts();
-        updateTotals();
+function calculateCoverage() {
+    var isManual = document.getElementById('manualToggle').checked;
+    var level = parseInt(document.getElementById('calcCasheaLevel').value);
+    var userPercent = CASHEA_LEVELS[level];
+    var casheaPercent = 1 - userPercent;
 
-        document.getElementById('prodName').value = '';
-        document.getElementById('prodQty').value = '1';
-        document.getElementById('prodPrice').value = '';
-        document.getElementById('prodName').focus();
-        showToast(`✅ ${name} agregado`);
+    if (dollarRate <= 0) {
+        showToast('No hay tasa disponible');
+        return;
     }
 
-    function renderProducts() {
-        const container = document.getElementById('productList');
-        document.getElementById('itemCount').textContent = products.length;
-
-        if (products.length === 0) {
-            container.innerHTML = `<div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.<br>Agrega productos para empezar.</p></div>`;
+    var totalUsd;
+    if (isManual) {
+        totalUsd = parseFloat(document.getElementById('manualAmount').value);
+        if (!totalUsd || totalUsd <= 0) {
+            showToast('Ingresa un monto válido');
             return;
         }
-
-        container.innerHTML = products.map(p => {
-            const subtotal = p.qty * p.price;
-            const subtotalBs = usdToBs(subtotal);
-            return `
-                <div class="product-item ${p.checked ? 'checked' : ''}" id="prod-${p.id}">
-                    <input type="checkbox" class="product-checkbox"
-                        ${p.checked ? 'checked' : ''} onchange="toggleProduct(${p.id})">
-                    <div class="product-info">
-                        <div class="product-name">${p.name}</div>
-                        <div class="product-details">${p.qty} × ${formatUSD(p.price)}</div>
-                    </div>
-                    <div class="product-price">
-                        <div class="product-price-usd">${formatUSD(subtotal)}</div>
-                        <div class="product-price-bs">${formatBS(subtotalBs)}</div>
-                    </div>
-                    <button class="product-delete" onclick="deleteProduct(${p.id})" title="Eliminar">✕</button>
-                </div>`;
-        }).join('');
-    }
-
-    function toggleProduct(id) {
-        const product = products.find(p => p.id === id);
-        if (product) {
-            product.checked = !product.checked;
-            saveProducts();
-            renderProducts();
-            updateTotals();
-        }
-    }
-
-    function deleteProduct(id) {
-        const product = products.find(p => p.id === id);
-        products = products.filter(p => p.id !== id);
-        saveProducts();
-        renderProducts();
-        updateTotals();
-        if (product) showToast(`🗑️ ${product.name} eliminado`);
-    }
-
-    function clearList() {
-        if (products.length === 0) return;
-        if (confirm('¿Borrar toda la lista?')) {
-            products = [];
-            saveProducts();
-            renderProducts();
-            updateTotals();
-            showToast('🗑️ Lista borrada');
-        }
-    }
-
-    function saveProducts() {
-        localStorage.setItem('market_products', JSON.stringify(products));
-    }
-
-    function loadProducts() {
-        try {
-            const saved = localStorage.getItem('market_products');
-            if (saved) { products = JSON.parse(saved); renderProducts(); updateTotals(); }
-        } catch(e) {}
-    }
-
-    // ===== TOTALS =====
-    function updateTotals() {
-        const section = document.getElementById('totalsSection');
-        const level = parseInt(document.getElementById('casheaLevel').value);
-        const casheaPercent = CASHEA_LEVELS[level]; // Porcentaje que financia Cashea
-        const userPercent = 1 - casheaPercent;       // Porcentaje que paga el usuario
-
-        if (products.length === 0) { section.style.display = 'none'; return; }
-        section.style.display = 'block';
-
-        const total = products.reduce((sum, p) => sum + (p.qty * p.price), 0);
-        const checked = products.filter(p => p.checked).reduce((sum, p) => sum + (p.qty * p.price), 0);
-        const totalBs = usdToBs(total);
-        const checkedBs = usdToBs(checked);
-
-        // Cashea financia el porcentaje del nivel sobre el total seleccionado
-        const casheaUsd = checked * casheaPercent;
-        const casheaBs = usdToBs(casheaUsd);
-        // El usuario paga el resto
-        const userUsd = checked * userPercent;
-        const userBs = usdToBs(userUsd);
-
-        document.getElementById('totalUsd').textContent = formatUSD(total);
-        document.getElementById('totalBs').textContent = formatBS(totalBs);
-        document.getElementById('checkedUsd').textContent = formatUSD(checked);
-        document.getElementById('checkedBs').textContent = formatBS(checkedBs);
-        document.getElementById('casheaPercent').textContent = Math.round(casheaPercent * 100);
-        document.getElementById('casheaUsd').textContent = formatUSD(casheaUsd);
-        document.getElementById('casheaBs').textContent = formatBS(casheaBs);
-        document.getElementById('userPayUsd').textContent = formatUSD(userUsd);
-        document.getElementById('userPayBs').textContent = formatBS(userBs);
-
-        // Sync other selects
-        document.getElementById('calcCasheaLevel').value = level;
-        document.getElementById('imagCasheaLevel').value = level;
-    }
-
-    // ===== SWIPE =====
-    function setupSwipe() {
-        let startX = 0, startY = 0;
-        document.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-        }, { passive: true });
-        document.addEventListener('touchend', (e) => {
-            const endX = e.changedTouches[0].clientX;
-            const endY = e.changedTouches[0].clientY;
-            const diffX = endX - startX;
-            const diffY = endY - startY;
-            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 80) {
-                if (diffX < 0 && currentPage === 0) openCalculator();
-                else if (diffX > 0 && currentPage === 1) closeCalculator();
+    } else {
+        var list = getCurrentList();
+        var products = list.products || [];
+        totalUsd = 0;
+        for (var i = 0; i < products.length; i++) {
+            if (products[i].checked) {
+                totalUsd += products[i].qty * products[i].price;
             }
-        }, { passive: true });
-    }
-
-    function openCalculator() {
-        currentPage = 1;
-        document.getElementById('pagesWrapper').style.transform = 'translateX(-50%)';
-        document.getElementById('swipeHintRight').classList.add('hidden');
-        document.getElementById('swipeHintLeft').classList.add('visible');
-    }
-
-    function closeCalculator() {
-        currentPage = 0;
-        document.getElementById('pagesWrapper').style.transform = 'translateX(0)';
-        document.getElementById('swipeHintRight').classList.remove('hidden');
-        document.getElementById('swipeHintLeft').classList.remove('visible');
-    }
-
-    // ===== CALCULATOR: CONVERSION =====
-    function swapConversion() {
-        const select = document.getElementById('convFrom');
-        select.value = select.value === 'USD' ? 'BS' : 'USD';
-    }
-
-    function calculateConversion() {
-        const amount = parseFloat(document.getElementById('convAmount').value);
-        const from = document.getElementById('convFrom').value;
-        if (!amount || amount <= 0) { showToast('⚠️ Ingresa un monto válido'); return; }
-        if (dollarRate <= 0) { showToast('⚠️ No hay tasa disponible'); return; }
-
-        let result, resultLabel;
-        if (from === 'USD') {
-            result = usdToBs(amount);
-            resultLabel = formatBS(result);
-        } else {
-            result = bsToUsd(amount);
-            resultLabel = formatUSD(result);
         }
-
-        document.getElementById('convResultValue').textContent = resultLabel;
-        document.getElementById('convRateUsed').textContent = `1 USD = Bs. ${formatNumber(dollarRate, 2)}`;
-        document.getElementById('convResult').classList.add('visible');
-    }
-
-    // ===== CALCULATOR: COVERAGE =====
-    function toggleManualInput() {
-        const isManual = document.getElementById('manualToggle').checked;
-        document.getElementById('manualInputs').classList.toggle('visible', isManual);
-        document.getElementById('listInfo').style.display = isManual ? 'none' : 'flex';
-    }
-
-    function calculateCoverage() {
-        const isManual = document.getElementById('manualToggle').checked;
-        const level = parseInt(document.getElementById('calcCasheaLevel').value);
-        const casheaPercent = CASHEA_LEVELS[level];
-        const userPercent = 1 - casheaPercent;
-
-        if (dollarRate <= 0) { showToast('⚠️ No hay tasa disponible'); return; }
-
-        let capitalUsd; // El dinero que tiene disponible el usuario
-
-        if (isManual) {
-            capitalUsd = parseFloat(document.getElementById('manualAmount').value);
-            if (!capitalUsd || capitalUsd <= 0) { showToast('⚠️ Ingresa un capital válido'); return; }
-        } else {
-            // Si no es manual, usamos el total seleccionado como el pago inicial que haría el usuario
-            capitalUsd = products.filter(p => p.checked).reduce((sum, p) => sum + (p.qty * p.price), 0);
-            if (capitalUsd <= 0) { showToast('⚠️ No hay productos seleccionados en la lista'); return; }
+        if (totalUsd <= 0) {
+            showToast('No hay productos seleccionados en la lista');
+            return;
         }
-
-        // El capital disponible es el pago inicial (userPercent del total)
-        // Total de compra posible = capital / userPercent
-        const totalUsd = capitalUsd / userPercent;
-        const totalBs = usdToBs(totalUsd);
-        const casheaUsd = totalUsd * casheaPercent;
-        const casheaBs = usdToBs(casheaUsd);
-        const userUsd = capitalUsd; // Es exactamente el capital disponible
-        const userBs = usdToBs(userUsd);
-
-        document.getElementById('covTotalUsd').textContent = formatUSD(totalUsd);
-        document.getElementById('covTotalBs').textContent = formatBS(totalBs);
-        document.getElementById('covCasheaUsd').textContent = formatUSD(casheaUsd);
-        document.getElementById('covCasheaBs').textContent = formatBS(casheaBs);
-        document.getElementById('covUserUsd').textContent = formatUSD(userUsd);
-        document.getElementById('covUserBs').textContent = formatBS(userBs);
-        document.getElementById('coverageResult').classList.add('visible');
     }
 
-    // ===== CALCULATOR: IMAGINARY =====
-    function calculateImaginary() {
-        const capital = parseFloat(document.getElementById('imagCapital').value);
-        const remain = parseFloat(document.getElementById('imagRemain').value);
-        const level = parseInt(document.getElementById('imagCasheaLevel').value);
-        const casheaPercent = CASHEA_LEVELS[level];
-        const userPercent = 1 - casheaPercent;
+    var totalBs = usdToBs(totalUsd);
+    var casheaUsd = totalUsd * casheaPercent;
+    var casheaBs = usdToBs(casheaUsd);
+    var userUsd = totalUsd * userPercent;
+    var userBs = usdToBs(userUsd);
+    document.getElementById('covTotalUsd').textContent = formatUSD(totalUsd);
+    document.getElementById('covTotalBs').textContent = formatBS(totalBs);
+    document.getElementById('covCasheaUsd').textContent = formatUSD(casheaUsd);
+    document.getElementById('covCasheaBs').textContent = formatBS(casheaBs);
+    document.getElementById('covUserUsd').textContent = formatUSD(userUsd);
+    document.getElementById('covUserBs').textContent = formatBS(userBs);
+    document.getElementById('coverageResult').classList.add('visible');
+}
 
-        if (!capital || capital <= 0) { showToast('⚠️ Ingresa un capital válido'); return; }
-        if (isNaN(remain) || remain < 0) { showToast('⚠️ Ingresa un monto a quedar válido'); return; }
-        if (remain >= capital) { showToast('⚠️ El monto a quedar debe ser menor al capital'); return; }
-        if (dollarRate <= 0) { showToast('⚠️ No hay tasa disponible'); return; }
-        if (userPercent <= 0) { showToast('⚠️ El porcentaje de pago inicial no puede ser 0%'); return; }
+function calculateImaginary() {
+    var capital = parseFloat(document.getElementById('imagCapital').value);
+    var remain = parseFloat(document.getElementById('imagRemain').value);
+    var level = parseInt(document.getElementById('imagCasheaLevel').value);
+    var userPercent = CASHEA_LEVELS[level];
+    var casheaPercent = 1 - userPercent;
 
-        // El capital disponible para gastar es capital - remain
-        const availableForPayment = capital - remain;
-        // Ese monto es el pago inicial (userPercent del total)
-        // Total de compra = availableForPayment / userPercent
-        const purchaseUsd = availableForPayment / userPercent;
-        const purchaseBs = usdToBs(purchaseUsd);
-        const casheaUsd = purchaseUsd * casheaPercent;
-        const casheaBs = usdToBs(casheaUsd);
-        const userUsd = purchaseUsd * userPercent;
-        const userBs = usdToBs(userUsd);
-
-        document.getElementById('imagPurchaseUsd').textContent = formatUSD(purchaseUsd);
-        document.getElementById('imagPurchaseBs').textContent = formatBS(purchaseBs);
-        document.getElementById('imagCasheaUsd').textContent = formatUSD(casheaUsd);
-        document.getElementById('imagCasheaBs').textContent = formatBS(casheaBs);
-        document.getElementById('imagUserUsd').textContent = formatUSD(userUsd);
-        document.getElementById('imagUserBs').textContent = formatBS(userBs);
-        document.getElementById('imagRemainUsd').textContent = formatUSD(remain);
-        document.getElementById('imagRemainBs').textContent = formatBS(usdToBs(remain));
-        document.getElementById('imaginaryResult').classList.add('visible');
+    if (!capital || capital <= 0) {
+        showToast('Ingresa un capital válido');
+        return;
+    }
+    if (isNaN(remain) || remain < 0) {
+        showToast('Ingresa un monto a quedar válido');
+        return;
+    }
+    if (remain >= capital) {
+        showToast('El monto a quedar debe ser menor al capital');
+        return;
+    }
+    if (dollarRate <= 0) {
+        showToast('No hay tasa disponible');
+        return;
+    }
+    if (userPercent >= 1) {
+        showToast('El nivel de Cashea no puede ser 100%');
+        return;
     }
 
-    // ===== TOAST =====
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        clearTimeout(toast._timeout);
-        toast._timeout = setTimeout(() => toast.classList.remove('show'), 2500);
-    }
+    var purchaseUsd = (capital - remain) / userPercent;
+    var purchaseBs = usdToBs(purchaseUsd);
+    var casheaUsd = purchaseUsd * casheaPercent;
+    var casheaBs = usdToBs(casheaUsd);
+    var userUsd = purchaseUsd * userPercent;
+    var userBs = usdToBs(userUsd);
 
-    // ===== KEYBOARD =====
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && currentPage === 0) addProduct();
-    });
+    document.getElementById('imagPurchaseUsd').textContent = formatUSD(purchaseUsd);
+    document.getElementById('imagPurchaseBs').textContent = formatBS(purchaseBs);
+    document.getElementById('imagCasheaUsd').textContent = formatUSD(casheaUsd);
+    document.getElementById('imagCasheaBs').textContent = formatBS(casheaBs);
+    document.getElementById('imagUserUsd').textContent = formatUSD(userUsd);
+    document.getElementById('imagUserBs').textContent = formatBS(userBs);    document.getElementById('imagRemainUsd').textContent = formatUSD(remain);
+    document.getElementById('imagRemainBs').textContent = formatBS(usdToBs(remain));
+    document.getElementById('imaginaryResult').classList.add('visible');
+}
+
+function showToast(message) {
+    var toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(function() {
+        toast.classList.remove('show');
+    }, 2500);
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && currentPage === 0) {
+        addProduct();
+    }
+});
 </script>
 
 </body>
