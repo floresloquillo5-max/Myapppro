@@ -47,8 +47,7 @@
             --border: #D0D0E0;
             --primary: #5A4BD1;
             --primary-dark: #4A3BC1;
-            --primary-light: #6C5CE7;
-            --accent: #00B5B0;
+            --primary-light: #6C5CE7;            --accent: #00B5B0;
             --accent-dark: #009A95;
             --danger: #EE5A5A;
             --danger-dark: #DD4A4A;
@@ -97,8 +96,7 @@
         .header-top {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
+            align-items: center;            margin-bottom: 12px;
         }
 
         .header h1 {
@@ -147,8 +145,7 @@
             background: var(--bg-hover);
         }
 
-        .header-info {
-            display: flex;
+        .header-info {            display: flex;
             gap: 10px;
             flex-wrap: wrap;
         }
@@ -197,8 +194,7 @@
             appearance: none;
             background: var(--bg-input);
             border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 8px 32px 8px 14px;
+            border-radius: var(--radius-sm);            padding: 8px 32px 8px 14px;
             color: var(--text);
             font-size: 0.85rem;
             font-weight: 600;
@@ -247,8 +243,7 @@
         /* ===== MAIN CONTAINER ===== */
         .app-container {
             position: relative;
-            overflow: hidden;
-        }
+            overflow: hidden;        }
 
         .pages-wrapper {
             display: flex;
@@ -297,8 +292,7 @@
 
         .form-group label {
             font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
+            color: var(--text-muted);            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
@@ -347,8 +341,7 @@
         }
 
         .btn-primary:hover {
-            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
-        }
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);        }
 
         .btn-danger { background: var(--danger); color: white; }
         .btn-danger:hover { background: var(--danger-dark); }
@@ -397,8 +390,7 @@
 
         .product-item {
             background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);            border-radius: var(--radius-sm);
             padding: 12px;
             display: flex;
             align-items: center;
@@ -447,8 +439,7 @@
 
         .product-info {
             flex: 1;
-            min-width: 0;
-        }
+            min-width: 0;        }
 
         .product-name {
             font-size: 0.9rem;
@@ -497,8 +488,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .product-delete:hover {
+        }        .product-delete:hover {
             color: var(--danger);
             background: rgba(255, 107, 107, 0.1);
         }
@@ -548,7 +538,6 @@
         .total-row.expense .total-usd {
             color: var(--expense-red) !important;
         }
-
         .total-row.expense .total-bs {
             color: var(--expense-red) !important;
             opacity: 0.8;
@@ -597,8 +586,7 @@
             width: 24px;
             height: 24px;
             background: var(--cashea-yellow);
-            border-radius: 50%;
-            flex-shrink: 0;
+            border-radius: 50%;            flex-shrink: 0;
         }
 
         .cashea-logo .c-letter {
@@ -647,8 +635,7 @@
         .calc-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 16px;
+            border-radius: var(--radius);            padding: 16px;
             margin-bottom: 12px;
             box-shadow: var(--shadow);
         }
@@ -697,8 +684,7 @@
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
+            display: flex;            align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
@@ -747,8 +733,7 @@
 
         .calc-result-value { font-size: 0.95rem; font-weight: 700; }
         .calc-result-value.usd { color: var(--accent); }
-        .calc-result-value.bs { color: var(--primary-light); }
-        .calc-result-value.cashea-val { color: var(--cashea-yellow); }
+        .calc-result-value.bs { color: var(--primary-light); }        .calc-result-value.cashea-val { color: var(--cashea-yellow); }
         .calc-result-value.user-val { color: var(--expense-red); }
 
         .calc-btn {
@@ -797,8 +782,7 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background: var(--bg-input);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            transition: all 0.3s;
+            border-radius: 12px;            transition: all 0.3s;
         }
 
         .toggle-slider::before {
@@ -847,8 +831,7 @@
 
         .swipe-hint {
             position: fixed;
-            right: 0;
-            top: 50%;
+            right: 0;            top: 50%;
             transform: translateY(-50%);
             background: var(--primary);
             color: white;
@@ -897,8 +880,7 @@
 
         .toast.show { transform: translateX(-50%) translateY(0); }
         @media (min-width: 500px) {
-            .page { max-width: 500px; margin: 0 auto; }
-            .swipe-hint { display: none !important; }
+            .page { max-width: 500px; margin: 0 auto; }            .swipe-hint { display: none !important; }
         }
 
         .page-title {
@@ -947,8 +929,7 @@
         }
         .imaginary-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xs);
+            border: 1px solid var(--border);            border-radius: var(--radius-xs);
             padding: 10px;
             text-align: center;
         }
@@ -975,6 +956,178 @@
         }
 
         .imaginary-card.total-card .ic-value { color: var(--accent); }
+
+        /* ===== LIST MANAGEMENT TOGGLE ===== */
+        .list-management-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .list-management-toggle:hover {
+            border-color: var(--primary);
+            background: var(--bg-hover);
+        }
+
+        .list-management-toggle .toggle-title {
+            display: flex;            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .list-management-toggle .toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .list-management-toggle.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .list-management-section {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            animation: slideDown 0.3s ease;
+        }
+
+        .list-management-section.visible {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .list-management-section h3 {
+            font-size: 0.9rem;
+            color: var(--primary-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.visible {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            max-width: 400px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal h3 {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        .close-modal:hover {
+            background: var(--bg-hover);
+            color: var(--text);
+        }
+
+        .unit-badge {
+            display: inline-block;
+            background: var(--bg-input);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-left: 4px;
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+            border-radius: 50%;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-icon:hover {
+            background: var(--bg-hover);
+            color: var(--primary-light);
+        }
+
+        .offline-badge {
+            background: rgba(255, 107, 107, 0.15);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 8px 12px;
+            border-radius: var(--radius-xs);
+            font-size: 0.75rem;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .manual-rate-section {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);            padding: 12px;
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
@@ -985,7 +1138,6 @@
         <h1>🛒 Mi Mercado</h1>
         <div class="header-actions">
             <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Cambiar tema">🌙</button>
-            <button class="calc-toggle" onclick="openListsModal()" style="background:var(--bg-input); border:1px solid var(--border); color:var(--text);">📋 Listas</button>
             <button class="calc-toggle" onclick="openCalculator()">🧮 Calculadora</button>
         </div>
     </div>
@@ -1022,7 +1174,31 @@
     <div class="pages-wrapper" id="pagesWrapper">
 
         <!-- ===== PAGE 1: LISTA ===== -->
-        <div class="page" id="pageList">
+        <div class="page" id="pageList">            <!-- Toggle para Gestión de Listas -->
+            <div class="list-management-toggle" id="listManagementToggle" onclick="toggleListManagement()">
+                <div class="toggle-title">
+                    <span>📋</span>
+                    <span>Gestión de Listas</span>
+                </div>
+                <span class="toggle-icon">▼</span>
+            </div>
+
+            <!-- Sección de Gestión de Listas (Oculto por defecto) -->
+            <div class="list-management-section" id="listManagementSection">
+                <h3>📋 Gestión de Listas</h3>
+                <div style="margin-bottom:12px;">
+                    <label style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; display:block; margin-bottom:6px;">Lista activa</label>
+                    <select id="listSelect" onchange="switchList(this.value)" style="width:100%; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-xs); padding:10px 12px; color:var(--text); font-size:0.9rem;"></select>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                    <button class="btn btn-primary" onclick="createNewList()">➕ Crear Nueva Lista</button>
+                    <button class="btn btn-outline" onclick="copyCurrentList()">📋 Copiar Lista Actual</button>
+                    <button class="btn btn-outline" onclick="exportCurrentList()">📤 Exportar / Compartir</button>
+                    <button class="btn btn-outline" onclick="openImportModal()">📥 Importar Lista</button>
+                    <button class="btn btn-outline" onclick="deleteCurrentList()" style="color:var(--danger); border-color:var(--danger);">🗑️ Eliminar Lista</button>
+                </div>
+            </div>
+
             <div class="add-form">
                 <h3>➕ Agregar Producto</h3>
                 <div class="form-row">
@@ -1047,7 +1223,6 @@
                 </div>
                 <button class="btn btn-primary" onclick="addProduct()">➕ Agregar</button>
             </div>
-
             <div class="list-header">
                 <h3 id="listTitle">📋 Mi Lista (<span id="itemCount">0</span>) <button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button></h3>
                 <div class="list-actions">
@@ -1097,7 +1272,6 @@
                 </div>
             </div>
         </div>
-
         <!-- ===== PAGE 2: CALCULADORA ===== -->
         <div class="page calculator-panel" id="pageCalc">
             <button class="calc-back-btn" onclick="closeCalculator()">← Volver a la lista</button>
@@ -1147,8 +1321,7 @@
                             <label>Monto de la compra ($)</label>
                             <input type="number" id="manualAmount" placeholder="0.00" step="0.01" min="0">
                         </div>
-                    </div>
-                </div>
+                    </div>                </div>
                 <div class="calc-input-group">
                     <div class="form-group">
                         <label>Nivel Cashea</label>
@@ -1197,8 +1370,7 @@
                     <div class="form-group">
                         <label>Capital total disponible ($)</label>
                         <input type="number" id="imagCapital" placeholder="Ej: 100" step="0.01" min="0">
-                    </div>
-                </div>
+                    </div>                </div>
                 <div class="calc-input-group">
                     <div class="form-group">
                         <label>Monto que quieres que te quede ($)</label>
@@ -1248,26 +1420,6 @@
                 </div>
             </div>
         </div>
-
-    </div>
-</div>
-
-<!-- ===== MODAL: GESTIÓN DE LISTAS ===== -->
-<div class="modal-overlay" id="listsModal" onclick="if(event.target===this)closeListsModal()">
-    <div class="modal">
-        <h3>📋 Gestión de Listas</h3>
-        <div style="margin-bottom:12px;">
-            <label style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; display:block; margin-bottom:6px;">Lista activa</label>
-            <select id="listSelect" onchange="switchList(this.value)" style="width:100%; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-xs); padding:10px 12px; color:var(--text); font-size:0.9rem;"></select>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-            <button class="btn btn-primary" onclick="createNewList()">➕ Crear Nueva Lista</button>
-            <button class="btn btn-outline" onclick="copyCurrentList()">📋 Copiar Lista Actual</button>
-            <button class="btn btn-outline" onclick="exportCurrentList(); closeListsModal();">📤 Exportar / Compartir</button>
-            <button class="btn btn-outline" onclick="closeListsModal(); openImportModal();">📥 Importar Lista</button>
-            <button class="btn btn-outline" onclick="deleteCurrentList()" style="color:var(--danger); border-color:var(--danger);">🗑️ Eliminar Lista</button>
-        </div>
-        <button class="btn btn-outline" onclick="closeListsModal()" style="width:100%;">Cerrar</button>
     </div>
 </div>
 
@@ -1317,7 +1469,6 @@ const CASHEA_LEVELS = {
     2: 0.50,
     3: 0.60
 };
-
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
     loadLists();
@@ -1325,6 +1476,20 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTheme();
     setupSwipe();
 });
+
+// ===== TOGGLE GESTIÓN DE LISTAS =====
+function toggleListManagement() {
+    const toggle = document.getElementById('listManagementToggle');
+    const section = document.getElementById('listManagementSection');
+    
+    toggle.classList.toggle('active');
+    section.classList.toggle('visible');
+    
+    // Actualizar selector de listas cuando se muestra
+    if (section.classList.contains('visible')) {
+        updateListSelector();
+    }
+}
 
 // ===== GESTIÓN DE LISTAS =====
 function loadLists() {
@@ -1353,7 +1518,6 @@ function loadLists() {
 
     // Asegurar que currentListId es válido
     if (!marketLists[currentListId]) currentListId = 'default';
-
     renderListTitle();
     renderProducts();
     updateTotals();
@@ -1402,8 +1566,7 @@ function switchList(id) {
 }
 
 function updateListSelector() {
-    const select = document.getElementById('listSelect');
-    if (!select) return;
+    const select = document.getElementById('listSelect');    if (!select) return;
     select.innerHTML = Object.values(marketLists).map(list => {
         const count = (list.products || []).length;
         const sel = list.id === currentListId ? 'selected' : '';
@@ -1411,13 +1574,6 @@ function updateListSelector() {
     }).join('');
 }
 
-function openListsModal() {
-    updateListSelector();
-    document.getElementById('listsModal').classList.add('visible');
-}
-function closeListsModal() {
-    document.getElementById('listsModal').classList.remove('visible');
-}
 function openImportModal() {
     document.getElementById('importModal').classList.add('visible');
 }
@@ -1455,13 +1611,11 @@ function createNewList() {
     updateTotals();
     updateListSelector();
     showToast(`✅ Lista "${name.trim()}" creada`);
-    closeListsModal();
 }
 
 function copyCurrentList() {
     const src = getCurrentList();
-    const name = prompt('Nombre para la copia:', src.name + ' (copia)');
-    if (!name || !name.trim()) return;
+    const name = prompt('Nombre para la copia:', src.name + ' (copia)');    if (!name || !name.trim()) return;
     const id = 'list_' + Date.now();
     marketLists[id] = {
         id, name: name.trim(),
@@ -1475,7 +1629,6 @@ function copyCurrentList() {
     updateTotals();
     updateListSelector();
     showToast(`📋 Lista copiada como "${name.trim()}"`);
-    closeListsModal();
 }
 
 function deleteCurrentList() {
@@ -1489,7 +1642,6 @@ function deleteCurrentList() {
     updateTotals();
     updateListSelector();
     showToast('🗑️ Lista eliminada');
-    closeListsModal();
 }
 
 function exportCurrentList() {
@@ -1512,8 +1664,7 @@ function showExportFallback(code) {
 }
 
 function importList() {
-    const code = document.getElementById('importText').value.trim();
-    if (!code) { showToast('⚠️ Pega el código de la lista'); return; }
+    const code = document.getElementById('importText').value.trim();    if (!code) { showToast('⚠️ Pega el código de la lista'); return; }
     try {
         const data = JSON.parse(decodeURIComponent(escape(atob(code))));
         if (!data.name || !Array.isArray(data.products)) throw new Error('Formato inválido');
@@ -1562,8 +1713,7 @@ function addProduct() {
 
     document.getElementById('prodName').value = '';
     document.getElementById('prodQty').value = '1';
-    document.getElementById('prodUnit').value = '';
-    document.getElementById('prodPrice').value = '';
+    document.getElementById('prodUnit').value = '';    document.getElementById('prodPrice').value = '';
     document.getElementById('prodName').focus();
     showToast(`✅ ${name} agregado`);
 }
@@ -1612,8 +1762,7 @@ function deleteProduct(id) {
     const prods = getProducts();
     const p = prods.find(x => x.id === id);
     setProducts(prods.filter(x => x.id !== id));
-    renderProducts();
-    updateTotals();
+    renderProducts();    updateTotals();
     if (p) showToast(`🗑️ "${p.name}" eliminado`);
 }
 
@@ -1662,7 +1811,6 @@ function updateTotals() {
     if (calcLevel) calcLevel.value = level;
     if (imagLevel) imagLevel.value = level;
 }
-
 // ===== TEMA =====
 function toggleTheme() {
     document.body.classList.toggle('light-theme');
@@ -1712,8 +1860,7 @@ async function fetchRate() {
     }
 
     if (rate && rate > 0) {
-        dollarRate = rate;
-        localStorage.setItem('dollarRate', rate.toString());
+        dollarRate = rate;        localStorage.setItem('dollarRate', rate.toString());
         localStorage.setItem('lastUpdate', new Date().toISOString());
         display.textContent = `Bs. ${formatNumber(rate, 2)}`;
         const now = new Date();
@@ -1762,8 +1909,7 @@ function loadSavedRate() {
 
 function setManualRate() {
     const input = document.getElementById('manualRateInput');
-    const rate = parseFloat(input?.value);
-    if (!rate || rate <= 0) { showToast('⚠️ Ingresa una tasa válida mayor a 0'); return; }
+    const rate = parseFloat(input?.value);    if (!rate || rate <= 0) { showToast('⚠️ Ingresa una tasa válida mayor a 0'); return; }
     dollarRate = rate;
     localStorage.setItem('dollarRate', rate.toString());
     localStorage.setItem('lastUpdate', new Date().toISOString());
@@ -1812,8 +1958,7 @@ function openCalculator() {
 }
 
 function closeCalculator() {
-    currentPage = 0;
-    document.getElementById('pagesWrapper').style.transform = 'translateX(0)';
+    currentPage = 0;    document.getElementById('pagesWrapper').style.transform = 'translateX(0)';
     document.getElementById('swipeHintRight').classList.remove('hidden');
     document.getElementById('swipeHintLeft').classList.remove('visible');
 }
@@ -1862,7 +2007,6 @@ function calculateCoverage() {
 
     const casheaUsd = totalUsd * casheaPercent;
     const userUsd   = totalUsd * userPercent;
-
     document.getElementById('covTotalUsd').textContent  = formatUSD(totalUsd);
     document.getElementById('covTotalBs').textContent   = formatBS(usdToBs(totalUsd));
     document.getElementById('covCasheaUsd').textContent = formatUSD(casheaUsd);
@@ -1912,12 +2056,10 @@ function showToast(msg) {
 }
 
 // ===== TECLADO =====
-document.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && currentPage === 0 && document.activeElement?.closest?.('.add-form')) {
+document.addEventListener('keydown', e => {    if (e.key === 'Enter' && currentPage === 0 && document.activeElement?.closest?.('.add-form')) {
         addProduct();
     }
     if (e.key === 'Escape') {
-        closeListsModal();
         closeImportModal();
         closeRenameModal();
     }
