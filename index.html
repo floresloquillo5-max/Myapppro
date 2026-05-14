@@ -47,7 +47,8 @@
         }
 
         * {
-            margin: 0;            padding: 0;
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
@@ -96,7 +97,8 @@
 
         .header-actions {
             display: flex;
-            gap: 8px;            align-items: center;
+            gap: 8px;
+            align-items: center;
             flex-wrap: wrap;
         }
 
@@ -145,7 +147,8 @@
         }
 
         .info-chip .chip-icon {
-            font-size: 1.2rem;            flex-shrink: 0;
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
         .info-chip .chip-content {
@@ -194,7 +197,8 @@
             content: '▼';
             position: absolute;
             right: 10px;
-            top: 50%;            transform: translateY(-50%);
+            top: 50%;
+            transform: translateY(-50%);
             font-size: 0.6rem;
             color: var(--text-muted);
             pointer-events: none;
@@ -243,7 +247,8 @@
         }
 
         .offline-badge {
-            display: inline-flex;            align-items: center;
+            display: inline-flex;
+            align-items: center;
             gap: 4px;
             background: rgba(255, 71, 87, 0.15);
             color: var(--expense-red);
@@ -292,7 +297,8 @@
 
         .form-row {
             display: flex;
-            gap: 8px;            margin-bottom: 8px;
+            gap: 8px;
+            margin-bottom: 8px;
         }
 
         .form-group {
@@ -341,7 +347,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;        }
+            gap: 6px;
+        }
 
         .btn:active {
             transform: scale(0.96);
@@ -390,6 +397,7 @@
             background: var(--bg-hover);
             color: var(--primary-light);
         }
+
         .list-header {
             display: flex;
             justify-content: space-between;
@@ -439,7 +447,8 @@
 
         .product-item.checked {
             border-color: var(--success);
-            background: rgba(0, 184, 148, 0.05);        }
+            background: rgba(0, 184, 148, 0.05);
+        }
 
         .product-checkbox {
             appearance: none;
@@ -488,6 +497,7 @@
             color: var(--text-muted);
             margin-top: 2px;
         }
+
         .product-price {
             text-align: right;
             flex-shrink: 0;
@@ -537,6 +547,7 @@
             font-size: 3rem;
             margin-bottom: 12px;
         }
+
         .totals-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -586,6 +597,7 @@
             align-items: center;
             gap: 6px;
         }
+
         .total-values {
             text-align: right;
         }
@@ -635,7 +647,8 @@
         }
 
         .calculator-panel {
-            position: relative;        }
+            position: relative;
+        }
 
         .calc-back-btn {
             position: absolute;
@@ -684,6 +697,7 @@
             margin-bottom: 10px;
             align-items: flex-end;
         }
+
         .calc-input-group .form-group {
             flex: 1;
         }
@@ -733,6 +747,7 @@
             margin-top: 10px;
             display: none;
         }
+
         .calc-result.visible {
             display: block;
             animation: fadeIn 0.3s ease;
@@ -783,6 +798,7 @@
             transition: all 0.3s;
             width: 100%;
         }
+
         .calc-btn:hover {
             box-shadow: 0 4px 15px rgba(0, 206, 201, 0.3);
         }
@@ -831,7 +847,8 @@
         }
 
         .toggle-switch input:checked + .toggle-slider {
-            background: var(--primary);            border-color: var(--primary);
+            background: var(--primary);
+            border-color: var(--primary);
         }
 
         .toggle-switch input:checked + .toggle-slider::before {
@@ -880,7 +897,8 @@
             letter-spacing: 1px;
             cursor: pointer;
             z-index: 50;
-            transition: all 0.3s;            opacity: 0.7;
+            transition: all 0.3s;
+            opacity: 0.7;
         }
 
         .swipe-hint:hover {
@@ -929,7 +947,8 @@
 
         @media (min-width: 500px) {
             .page {
-                max-width: 500px;                margin: 0 auto;
+                max-width: 500px;
+                margin: 0 auto;
             }
             .swipe-hint {
                 display: none !important;
@@ -979,6 +998,7 @@
             gap: 10px;
             margin-top: 8px;
         }
+
         .imaginary-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -1027,7 +1047,8 @@
             grid-column: span 2;
         }
 
-        .imaginary-card.total-card .ic-value {            color: var(--accent);
+        .imaginary-card.total-card .ic-value {
+            color: var(--accent);
         }
 
         .unit-badge {
@@ -1076,6 +1097,7 @@
             color: var(--primary-light);
             font-size: 1.1rem;
         }
+
         .modal-actions {
             display: flex;
             gap: 8px;
@@ -1125,15 +1147,16 @@
             resize: vertical;
         }
     </style>
-</head><body>
+</head>
+<body>
 
 <header class="header">
     <div class="header-top">
         <h1>Mi Mercado</h1>
         <div class="header-actions">
-            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">Tema</button>
-            <button class="list-toggle" onclick="openListsModal()">Listas</button>
-            <button class="calc-toggle" onclick="openCalculator()">Calculadora</button>
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙 Oscuro</button>
+            <button class="list-toggle" onclick="openListsModal()">📋 Listas</button>
+            <button class="calc-toggle" onclick="openCalculator()">🧮 Calculadora</button>
         </div>
     </div>
     <div class="header-info">
@@ -1174,8 +1197,10 @@
 <div class="app-container">
     <div class="pages-wrapper" id="pagesWrapper">
 
-        <div class="page" id="pageList">            <div class="add-form">
-                <h3>Agregar Producto</h3>
+        <!-- Página de Lista -->
+        <div class="page" id="pageList">
+            <div class="add-form">
+                <h3>➕ Agregar Producto</h3>
                 <div class="form-row">
                     <div class="form-group" style="flex:2;">
                         <label>Producto</label>
@@ -1188,7 +1213,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Unidad</label>
+                        <label>Unidad (opcional)</label>
                         <input type="text" id="prodUnit" placeholder="Ej: Kg, Und, 200gr">
                     </div>
                     <div class="form-group">
@@ -1196,7 +1221,7 @@
                         <input type="number" id="prodPrice" placeholder="0.00" step="0.01" min="0">
                     </div>
                 </div>
-                <button class="btn btn-primary" onclick="addProduct()">Agregar</button>
+                <button class="btn btn-primary" onclick="addProduct()">➕ Agregar</button>
             </div>
 
             <div class="list-header">
@@ -1205,8 +1230,8 @@
                     <button class="btn-icon" onclick="editListName()" title="Cambiar nombre">✏️</button>
                 </h3>
                 <div class="list-actions">
-                    <button class="btn btn-sm btn-outline" onclick="clearList()">Borrar todo</button>
-                    <button class="btn btn-sm btn-outline" onclick="shareCurrentList()">Compartir</button>
+                    <button class="btn btn-sm btn-outline" onclick="clearList()">🗑️ Borrar todo</button>
+                    <button class="btn btn-sm btn-outline" onclick="shareCurrentList()">📤 Compartir</button>
                 </div>
             </div>
 
@@ -1219,13 +1244,14 @@
 
             <div class="totals-section" id="totalsSection" style="display:none;">
                 <div class="total-row">
-                    <span class="total-label">Total lista</span>
+                    <span class="total-label">📊 Total lista</span>
                     <div class="total-values">
                         <div class="total-usd" id="totalUsd">$0.00</div>
                         <div class="total-bs" id="totalBs">Bs. 0,00</div>
-                    </div>                </div>
+                    </div>
+                </div>
                 <div class="total-row highlight">
-                    <span class="total-label">Seleccionado</span>
+                    <span class="total-label">✅ Seleccionado</span>
                     <div class="total-values">
                         <div class="total-usd" id="checkedUsd">$0.00</div>
                         <div class="total-bs" id="checkedBs">Bs. 0,00</div>
@@ -1244,7 +1270,7 @@
                     </div>
                 </div>
                 <div class="total-row expense">
-                    <span class="total-label">Pago inicial</span>
+                    <span class="total-label">💳 Pago inicial</span>
                     <div class="total-values">
                         <div class="total-usd" id="userPayUsd">$0.00</div>
                         <div class="total-bs" id="userPayBs">Bs. 0,00</div>
@@ -1253,11 +1279,12 @@
             </div>
         </div>
 
+        <!-- Página de Calculadora -->
         <div class="page calculator-panel" id="pageCalc">
             <button class="calc-back-btn" onclick="closeCalculator()">← Volver a la lista</button>
 
-            <div class="calc-section">
-                <h3>Conversión Dólar ↔ Bolívares</h3>
+            <div class="calc-section" style="margin-top: 40px;">
+                <h3>💱 Conversión Dólar ↔ Bolívares</h3>
                 <div class="calc-input-group">
                     <div class="form-group">
                         <label>Monto</label>
@@ -1272,7 +1299,8 @@
                     </div>
                     <button class="swap-btn" onclick="swapConversion()" title="Intercambiar">⇄</button>
                 </div>
-                <button class="calc-btn" onclick="calculateConversion()">Convertir</button>                <div class="calc-result" id="convResult">
+                <button class="calc-btn" onclick="calculateConversion()">🔄 Convertir</button>
+                <div class="calc-result" id="convResult">
                     <div class="calc-result-row">
                         <span class="calc-result-label">Resultado:</span>
                         <span class="calc-result-value usd" id="convResultValue"></span>
@@ -1285,7 +1313,7 @@
             </div>
 
             <div class="calc-section">
-                <h3>Calculadora de Cobertura</h3>
+                <h3>🛡️ Calculadora de Cobertura</h3>
                 <div class="manual-toggle">
                     <label class="toggle-switch">
                         <input type="checkbox" id="manualToggle" onchange="toggleManualInput()">
@@ -1293,7 +1321,7 @@
                     </label>
                     <span class="toggle-label">Ingresar monto manual</span>
                 </div>
-                <div id="listInfo" class="info-badge">Usando total de la lista</div>
+                <div id="listInfo" class="info-badge">📋 Usando total de la lista</div>
                 <div class="manual-inputs" id="manualInputs">
                     <div class="calc-input-group">
                         <div class="form-group">
@@ -1312,7 +1340,7 @@
                         </select>
                     </div>
                 </div>
-                <button class="calc-btn" onclick="calculateCoverage()">Calcular Cobertura</button>
+                <button class="calc-btn" onclick="calculateCoverage()">📊 Calcular Cobertura</button>
                 <div class="calc-result" id="coverageResult">
                     <div class="calc-result-row">
                         <span class="calc-result-label">Total compra:</span>
@@ -1321,7 +1349,8 @@
                     <div class="calc-result-row">
                         <span class="calc-result-label"> </span>
                         <span class="calc-result-value bs" id="covTotalBs"></span>
-                    </div>                    <div class="calc-result-row">
+                    </div>
+                    <div class="calc-result-row">
                         <span class="calc-result-label">
                             <div class="cashea-logo" style="width:20px;height:20px;">
                                 <span class="c-letter" style="font-size:0.7rem;">C</span>
@@ -1346,7 +1375,7 @@
             </div>
 
             <div class="calc-section">
-                <h3>Compra Imaginaria</h3>
+                <h3>🧠 Compra Imaginaria</h3>
                 <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">
                     ¿Cuánto debes gastar para que te quede exactamente el monto que deseas?
                 </p>
@@ -1370,8 +1399,9 @@
                             <option value="2" selected>Nivel 2 — 50%</option>
                             <option value="3">Nivel 3 — 40%</option>
                         </select>
-                    </div>                </div>
-                <button class="calc-btn" onclick="calculateImaginary()">Calcular</button>
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calculateImaginary()">🧮 Calcular</button>
                 <div class="imaginary-result" id="imaginaryResult">
                     <div style="text-align:center; margin-bottom:10px;">
                         <span class="tag tag-total">COMPRA QUE DEBES HACER</span>
@@ -1409,6 +1439,7 @@
     </div>
 </div>
 
+<!-- Modal de Gestión de Listas -->
 <div class="modal-overlay" id="listsModal">
     <div class="modal">
         <h3>📋 Gestión de Listas</h3>
@@ -1433,6 +1464,7 @@
     </div>
 </div>
 
+<!-- Modal de Importación -->
 <div class="modal-overlay" id="importModal">
     <div class="modal">
         <h3>📥 Importar Lista</h3>
@@ -1447,6 +1479,7 @@
     </div>
 </div>
 
+<!-- Modal de Renombrar -->
 <div class="modal-overlay" id="renameModal">
     <div class="modal">
         <h3>✏️ Cambiar Nombre de la Lista</h3>
@@ -1464,11 +1497,13 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// Variables globales
 var dollarRate = 0;
 var currentListId = 'default';
 var currentPage = 0;
 var isOffline = false;
-var products = [];var marketLists = {};
+var products = [];
+var marketLists = {};
 
 var CASHEA_LEVELS = {
     1: 0.60,
@@ -1476,13 +1511,16 @@ var CASHEA_LEVELS = {
     3: 0.40
 };
 
+// Inicialización
 document.addEventListener('DOMContentLoaded', function() {
     fetchRate();
     loadLists();
     loadTheme();
     setupSwipe();
+    updateThemeIcon(document.body.classList.contains('light-theme'));
 });
 
+// Funciones de Listas
 function loadLists() {
     var savedLists = localStorage.getItem('market_lists');
     
@@ -1495,6 +1533,7 @@ function loadLists() {
         }
     }
     
+    // Asegurar que existe la lista por defecto
     if (!marketLists['default']) {
         marketLists['default'] = {
             id: 'default',
@@ -1510,26 +1549,47 @@ function loadLists() {
 }
 
 function saveLists() {
-    localStorage.setItem('market_lists', JSON.stringify(marketLists));
+    try {
+        localStorage.setItem('market_lists', JSON.stringify(marketLists));
+    } catch(e) {
+        console.error('Error guardando listas:', e);
+        showToast('Error al guardar las listas');
+    }
 }
 
 function getCurrentList() {
-    return marketLists[currentListId] || marketLists['default'];
+    if (!marketLists[currentListId]) {
+        currentListId = 'default';
+        if (!marketLists['default']) {
+            marketLists['default'] = {
+                id: 'default',
+                name: 'Mi Lista',
+                products: [],
+                createdAt: new Date().toISOString()
+            };
+        }
+    }
+    return marketLists[currentListId];
 }
 
-function saveCurrentList() {    marketLists[currentListId] = getCurrentList();
+function saveCurrentList() {
     saveLists();
 }
 
 function updateListSelector() {
     var select = document.getElementById('listSelect');
+    if (!select) return;
+    
     var html = '';
     
     for (var id in marketLists) {
-        var list = marketLists[id];
-        var selected = id === currentListId ? 'selected' : '';
-        var productCount = list.products ? list.products.length : 0;
-        html += '<option value="' + id + '" ' + selected + '>' + list.name + ' (' + productCount + ' productos)</option>';
+        if (marketLists.hasOwnProperty(id)) {
+            var list = marketLists[id];
+            var selected = id === currentListId ? 'selected' : '';
+            var productCount = list.products ? list.products.length : 0;
+            html += '<option value="' + id + '" ' + selected + '>' + 
+                    escapeHtml(list.name) + ' (' + productCount + ' productos)</option>';
+        }
     }
     
     select.innerHTML = html;
@@ -1537,13 +1597,14 @@ function updateListSelector() {
 
 function loadCurrentList() {
     var list = getCurrentList();
-    document.getElementById('listTitle').innerHTML = '📋 ' + list.name + ' (<span id="itemCount">0</span>) <button class="btn-icon" onclick="editListName()" title="Cambiar nombre">✏️</button>';
+    var listName = escapeHtml(list.name);
     
-    if (list.products && list.products.length > 0) {
-        products = list.products;
-    } else {
-        products = [];
-    }
+    document.getElementById('listTitle').innerHTML = '📋 ' + listName + 
+        ' (<span id="itemCount">0</span>) ' +
+        '<button class="btn-icon" onclick="editListName()" title="Cambiar nombre">✏️</button>';
+    
+    // Actualizar products desde la lista actual
+    products = list.products ? list.products.slice() : [];
     
     renderProducts();
     updateTotals();
@@ -1552,6 +1613,8 @@ function loadCurrentList() {
 
 function loadSelectedList() {
     var select = document.getElementById('listSelect');
+    if (!select) return;
+    
     currentListId = select.value;
     loadCurrentList();
     showToast('Lista cargada');
@@ -1559,14 +1622,16 @@ function loadSelectedList() {
 
 function createNewList() {
     var name = prompt('Nombre de la nueva lista:', 'Lista ' + (Object.keys(marketLists).length + 1));
-    if (!name) return;
+    if (!name || !name.trim()) return;
     
+    name = name.trim();
     var newId = 'list_' + Date.now();
     marketLists[newId] = {
         id: newId,
         name: name,
         products: [],
-        createdAt: new Date().toISOString()    };
+        createdAt: new Date().toISOString()
+    };
     
     saveLists();
     currentListId = newId;
@@ -1579,13 +1644,29 @@ function createNewList() {
 function copyCurrentList() {
     var currentList = getCurrentList();
     var newName = prompt('Nombre para la copia:', currentList.name + ' (copia)');
-    if (!newName) return;
+    if (!newName || !newName.trim()) return;
     
+    newName = newName.trim();
     var newId = 'list_' + Date.now();
+    
+    // Deep copy de los productos
+    var copiedProducts = [];
+    var sourceProducts = currentList.products || [];
+    for (var i = 0; i < sourceProducts.length; i++) {
+        copiedProducts.push({
+            id: Date.now() + i + 1,
+            name: sourceProducts[i].name,
+            qty: sourceProducts[i].qty,
+            unit: sourceProducts[i].unit || '',
+            price: sourceProducts[i].price,
+            checked: sourceProducts[i].checked
+        });
+    }
+    
     marketLists[newId] = {
         id: newId,
         name: newName,
-        products: JSON.parse(JSON.stringify(currentList.products || [])),
+        products: copiedProducts,
         createdAt: new Date().toISOString()
     };
     
@@ -1602,7 +1683,7 @@ function deleteCurrentList() {
         return;
     }
     
-    if (!confirm('¿Estás seguro de eliminar esta lista?')) return;
+    if (!confirm('¿Estás seguro de eliminar esta lista? Esta acción no se puede deshacer.')) return;
     
     delete marketLists[currentListId];
     currentListId = 'default';
@@ -1615,7 +1696,8 @@ function deleteCurrentList() {
 function editListName() {
     var list = getCurrentList();
     document.getElementById('newListName').value = list.name;
-    document.getElementById('renameModal').classList.add('visible');}
+    document.getElementById('renameModal').classList.add('visible');
+}
 
 function saveListName() {
     var newName = document.getElementById('newListName').value.trim();
@@ -1631,6 +1713,7 @@ function saveListName() {
     showToast('Nombre actualizado');
 }
 
+// Funciones de Modales
 function openListsModal() {
     updateListSelector();
     document.getElementById('listsModal').classList.add('visible');
@@ -1654,6 +1737,7 @@ function closeRenameModal() {
     document.getElementById('renameModal').classList.remove('visible');
 }
 
+// Funciones de Exportar/Importar
 function exportCurrentList() {
     var list = getCurrentList();
     var exportData = {
@@ -1664,10 +1748,11 @@ function exportCurrentList() {
     };
     
     var json = JSON.stringify(exportData, null, 2);
-    var encoded = btoa(unescape(encodeURIComponent(json)));    
-    if (navigator.clipboard) {
+    var encoded = btoa(unescape(encodeURIComponent(json)));
+    
+    if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(encoded).then(function() {
-            showToast('Lista copiada al portapapeles');
+            showToast('✅ Lista copiada al portapapeles');
         }).catch(function() {
             showShareDialog(encoded);
         });
@@ -1677,7 +1762,43 @@ function exportCurrentList() {
 }
 
 function showShareDialog(code) {
-    var shareCode = prompt('Copia este código para compartir tu lista:\n\n' + code);
+    // Crear un textarea temporal para mostrar el código
+    var textarea = document.createElement('textarea');
+    textarea.value = code;
+    textarea.style.position = 'fixed';
+    textarea.style.top = '10%';
+    textarea.style.left = '50%';
+    textarea.style.transform = 'translateX(-50%)';
+    textarea.style.width = '80%';
+    textarea.style.height = '200px';
+    textarea.style.zIndex = '2000';
+    textarea.style.padding = '10px';
+    textarea.style.borderRadius = '8px';
+    textarea.style.border = '2px solid var(--primary)';
+    textarea.style.background = 'var(--bg-card)';
+    textarea.style.color = 'var(--text)';
+    textarea.style.fontFamily = 'monospace';
+    textarea.style.fontSize = '0.8rem';
+    textarea.readOnly = true;
+    
+    var overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.right = '0';
+    overlay.style.bottom = '0';
+    overlay.style.background = 'rgba(0,0,0,0.7)';
+    overlay.style.zIndex = '1999';
+    overlay.onclick = function() {
+        document.body.removeChild(overlay);
+        document.body.removeChild(textarea);
+    };
+    
+    document.body.appendChild(overlay);
+    document.body.appendChild(textarea);
+    textarea.select();
+    
+    showToast('Código mostrado en pantalla. Selecciónalo y cópialo.');
 }
 
 function importList() {
@@ -1691,18 +1812,34 @@ function importList() {
         var json = decodeURIComponent(escape(atob(code)));
         var data = JSON.parse(json);
         
-        if (!data.name || !data.products) {
+        if (!data.name || !data.products || !Array.isArray(data.products)) {
             throw new Error('Formato inválido');
         }
         
         var newName = prompt('Nombre para esta lista importada:', data.name + ' (importada)');
-        if (!newName) return;
+        if (!newName || !newName.trim()) return;
         
+        newName = newName.trim();
         var newId = 'list_' + Date.now();
+        
+        // Asignar nuevos IDs a los productos importados
+        var importedProducts = [];
+        for (var i = 0; i < data.products.length; i++) {
+            var p = data.products[i];
+            importedProducts.push({
+                id: Date.now() + i + 1,
+                name: p.name || 'Producto sin nombre',
+                qty: parseInt(p.qty) || 1,
+                unit: p.unit || '',
+                price: parseFloat(p.price) || 0,
+                checked: p.checked !== undefined ? p.checked : true
+            });
+        }
+        
         marketLists[newId] = {
             id: newId,
             name: newName,
-            products: data.products,
+            products: importedProducts,
             createdAt: new Date().toISOString(),
             importedFrom: data.name
         };
@@ -1713,7 +1850,8 @@ function importList() {
         updateListSelector();
         closeImportModal();
         showToast('Lista "' + newName + '" importada exitosamente');
-    } catch(e) {        showToast('Error al importar: Código inválido');
+    } catch(e) {
+        showToast('Error al importar: Código inválido o corrupto');
         console.error('Error importando:', e);
     }
 }
@@ -1722,18 +1860,31 @@ function shareCurrentList() {
     exportCurrentList();
 }
 
+// Funciones de Productos
 function addProduct() {
-    var name = document.getElementById('prodName').value.trim();
-    var qty = parseInt(document.getElementById('prodQty').value) || 1;
-    var unit = document.getElementById('prodUnit').value.trim();
-    var price = parseFloat(document.getElementById('prodPrice').value) || 0;
+    var nameInput = document.getElementById('prodName');
+    var qtyInput = document.getElementById('prodQty');
+    var unitInput = document.getElementById('prodUnit');
+    var priceInput = document.getElementById('prodPrice');
+    
+    var name = nameInput.value.trim();
+    var qty = parseInt(qtyInput.value) || 1;
+    var unit = unitInput.value.trim();
+    var price = parseFloat(priceInput.value) || 0;
 
     if (!name) {
-        showToast('Ingresa el nombre del producto');
+        showToast('⚠️ Ingresa el nombre del producto');
+        nameInput.focus();
         return;
     }
     if (price <= 0) {
-        showToast('Ingresa un precio válido');
+        showToast('⚠️ Ingresa un precio válido mayor a 0');
+        priceInput.focus();
+        return;
+    }
+    if (qty < 1) {
+        showToast('⚠️ La cantidad debe ser al menos 1');
+        qtyInput.focus();
         return;
     }
 
@@ -1747,31 +1898,42 @@ function addProduct() {
     };
 
     var list = getCurrentList();
-    if (!list.products) list.products = [];
+    if (!list.products) {
+        list.products = [];
+    }
     list.products.push(product);
     
     saveCurrentList();
-    products = list.products;
+    products = list.products.slice(); // Actualizar la variable global
     renderProducts();
     updateTotals();
 
-    document.getElementById('prodName').value = '';
-    document.getElementById('prodQty').value = '1';
-    document.getElementById('prodUnit').value = '';
-    document.getElementById('prodPrice').value = '';
-    document.getElementById('prodName').focus();
-    showToast('Producto agregado');
+    // Limpiar formulario
+    nameInput.value = '';
+    qtyInput.value = '1';
+    unitInput.value = '';
+    priceInput.value = '';
+    nameInput.focus();
+    
+    showToast('✅ Producto agregado');
 }
+
 function renderProducts() {
     var container = document.getElementById('productList');
     var countEl = document.getElementById('itemCount');
     var list = getCurrentList();
     var prods = list.products || [];
+    
+    // Sincronizar la variable global
+    products = prods.slice();
 
-    countEl.textContent = prods.length;
+    if (countEl) {
+        countEl.textContent = prods.length;
+    }
 
     if (prods.length === 0) {
         container.innerHTML = '<div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.<br>Agrega productos para empezar.</p></div>';
+        document.getElementById('totalsSection').style.display = 'none';
         return;
     }
 
@@ -1779,18 +1941,21 @@ function renderProducts() {
     for (var i = 0; i < prods.length; i++) {
         var p = prods[i];
         var subtotal = p.qty * p.price;
-        var subtotalBs = subtotal * dollarRate;
-        var unitText = p.unit ? '<span class="unit-badge">' + p.unit + '</span>' : '';
+        var subtotalBs = dollarRate > 0 ? subtotal * dollarRate : 0;
+        var unitText = p.unit ? ' <span class="unit-badge">' + escapeHtml(p.unit) + '</span>' : '';
         
         html += '<div class="product-item ' + (p.checked ? 'checked' : '') + '" id="prod-' + p.id + '">';
-        html += '<input type="checkbox" class="product-checkbox" ' + (p.checked ? 'checked' : '') + ' onchange="toggleProduct(' + p.id + ')">';
+        html += '<input type="checkbox" class="product-checkbox" ' + (p.checked ? 'checked' : '') + 
+                ' onchange="toggleProduct(' + p.id + ')">';
         html += '<div class="product-info">';
-        html += '<div class="product-name">' + p.name + unitText + '</div>';
+        html += '<div class="product-name">' + escapeHtml(p.name) + unitText + '</div>';
         html += '<div class="product-details">' + p.qty + ' × $' + p.price.toFixed(2) + '</div>';
         html += '</div>';
         html += '<div class="product-price">';
         html += '<div class="product-price-usd">$' + subtotal.toFixed(2) + '</div>';
-        html += '<div class="product-price-bs">Bs. ' + subtotalBs.toFixed(2) + '</div>';
+        if (dollarRate > 0) {
+            html += '<div class="product-price-bs">Bs. ' + formatNumber(subtotalBs, 2) + '</div>';
+        }
         html += '</div>';
         html += '<button class="product-delete" onclick="deleteProduct(' + p.id + ')" title="Eliminar">✕</button>';
         html += '</div>';
@@ -1801,54 +1966,70 @@ function renderProducts() {
 
 function toggleProduct(id) {
     var list = getCurrentList();
-    var prods = list.products || [];
+    if (!list.products) return;
     
-    for (var i = 0; i < prods.length; i++) {
-        if (prods[i].id === id) {
-            prods[i].checked = !prods[i].checked;
+    for (var i = 0; i < list.products.length; i++) {
+        if (list.products[i].id === id) {
+            list.products[i].checked = !list.products[i].checked;
             break;
         }
     }
     
     saveCurrentList();
-    products = prods;    renderProducts();
+    products = list.products.slice();
+    renderProducts();
     updateTotals();
 }
 
 function deleteProduct(id) {
     var list = getCurrentList();
-    var prods = list.products || [];
+    if (!list.products) return;
     
-    var product = null;
-    for (var i = 0; i < prods.length; i++) {
-        if (prods[i].id === id) {
-            product = prods[i];
+    var productName = '';
+    for (var i = 0; i < list.products.length; i++) {
+        if (list.products[i].id === id) {
+            productName = list.products[i].name;
             break;
         }
     }
     
-    list.products = prods.filter(function(p) { return p.id !== id; });
+    // Filtrar el producto a eliminar
+    var newProducts = [];
+    for (var j = 0; j < list.products.length; j++) {
+        if (list.products[j].id !== id) {
+            newProducts.push(list.products[j]);
+        }
+    }
+    list.products = newProducts;
+    
     saveCurrentList();
-    products = list.products;
+    products = list.products.slice();
     renderProducts();
     updateTotals();
-    if (product) showToast('Producto eliminado');
+    
+    if (productName) {
+        showToast('🗑️ "' + productName + '" eliminado');
+    }
 }
 
 function clearList() {
     var list = getCurrentList();
-    if (!list.products || list.products.length === 0) return;
+    if (!list.products || list.products.length === 0) {
+        showToast('La lista ya está vacía');
+        return;
+    }
     
-    if (confirm('¿Borrar todos los productos de esta lista?')) {
+    if (confirm('¿Borrar todos los productos de esta lista? Esta acción no se puede deshacer.')) {
         list.products = [];
         saveCurrentList();
         products = [];
         renderProducts();
         updateTotals();
-        showToast('Lista borrada');
+        showToast('🗑️ Lista borrada');
     }
 }
 
+// Funciones de Tema
 function toggleTheme() {
     document.body.classList.toggle('light-theme');
     var isLight = document.body.classList.contains('light-theme');
@@ -1860,108 +2041,157 @@ function loadTheme() {
     var savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
-        updateThemeIcon(true);    }
+    } else if (savedTheme === 'dark') {
+        document.body.classList.remove('light-theme');
+    }
+    // Si no hay tema guardado, usar oscuro por defecto
 }
 
 function updateThemeIcon(isLight) {
     var btn = document.getElementById('themeBtn');
-    btn.textContent = isLight ? '☀️ Claro' : '🌙 Oscuro';
+    if (btn) {
+        btn.textContent = isLight ? '☀️ Claro' : '🌙 Oscuro';
+    }
 }
 
+// Funciones de Tasa de Cambio
 function fetchRate() {
     var display = document.getElementById('rateDisplay');
     var lastUpdate = document.getElementById('lastUpdate');
     var manualRateContainer = document.getElementById('manualRateContainer');
     
+    if (!display || !lastUpdate || !manualRateContainer) return;
+    
     display.textContent = 'Cargando...';
     
     fetch('https://pydolarve.org/api/v1/dollar?page=bcv')
         .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Error de red: ' + response.status);
+            }
             return response.json();
         })
         .then(function(data) {
-            if (data && data.monitors && data.monitors.usd && data.monitors.usd.price) {
+            // Verificar la estructura de la respuesta
+            if (data && data.monitors && data.monitors.usd && 
+                typeof data.monitors.usd.price === 'number' && data.monitors.usd.price > 0) {
+                
                 dollarRate = data.monitors.usd.price;
                 isOffline = false;
-                localStorage.setItem('dollarRate', dollarRate);
+                
+                // Guardar en localStorage
+                localStorage.setItem('dollarRate', dollarRate.toString());
                 localStorage.setItem('lastUpdate', new Date().toISOString());
                 
                 display.textContent = 'Bs. ' + formatNumber(dollarRate, 2);
                 var now = new Date();
-                lastUpdate.textContent = 'Última actualización: ' + now.toLocaleDateString('es-VE') + ' ' + now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
+                lastUpdate.textContent = 'Última actualización: ' + 
+                    now.toLocaleDateString('es-VE') + ' ' + 
+                    now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
                 manualRateContainer.innerHTML = '';
                 
                 updateTotals();
             } else {
-                throw new Error('Datos inválidos');
+                throw new Error('Datos de tasa inválidos');
             }
         })
         .catch(function(error) {
             console.error('Error obteniendo tasa:', error);
-            isOffline = true;
-            
-            var savedRate = localStorage.getItem('dollarRate');
-            var savedUpdate = localStorage.getItem('lastUpdate');
-            
-            if (savedRate && savedRate > 0) {
-                dollarRate = parseFloat(savedRate);
-                display.textContent = 'Bs. ' + formatNumber(dollarRate, 2) + ' (guardada)';
-                
-                if (savedUpdate) {
-                    var updateDate = new Date(savedUpdate);
-                    lastUpdate.textContent = 'Tasa guardada del: ' + updateDate.toLocaleDateString('es-VE') + ' ' + updateDate.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});                }
-                
-                manualRateContainer.innerHTML = '<div class="offline-badge">⚠️ Sin conexión - Usando última tasa guardada</div>' +
-                    '<div class="manual-rate-section">' +
-                        '<div class="form-row">' +
-                            '<div class="form-group">' +
-                                '<label>Tasa del dólar (Bs.)</label>' +
-                                '<input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0">' +
-                            '</div>' +
-                            '<button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0;">Aplicar</button>' +
-                        '</div>' +
-                    '</div>';
-            } else {
-                display.textContent = 'Sin tasa';
-                lastUpdate.textContent = 'Ingresa la tasa del dólar manualmente';
-                manualRateContainer.innerHTML = '<div class="offline-badge">⚠️ Ingresa la tasa del dólar</div>' +
-                    '<div class="manual-rate-section">' +
-                        '<div class="form-row">' +
-                            '<div class="form-group">' +
-                                '<label>Tasa del dólar (Bs.)</label>' +
-                                '<input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0">' +
-                            '</div>' +
-                            '<button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0;">Aplicar</button>' +
-                        '</div>' +
-                    '</div>';
-            }
+            loadSavedRate();
         });
+}
+
+function loadSavedRate() {
+    var display = document.getElementById('rateDisplay');
+    var lastUpdate = document.getElementById('lastUpdate');
+    var manualRateContainer = document.getElementById('manualRateContainer');
+    
+    isOffline = true;
+    
+    var savedRate = localStorage.getItem('dollarRate');
+    var savedUpdate = localStorage.getItem('lastUpdate');
+    
+    if (savedRate && !isNaN(parseFloat(savedRate)) && parseFloat(savedRate) > 0) {
+        dollarRate = parseFloat(savedRate);
+        display.textContent = 'Bs. ' + formatNumber(dollarRate, 2) + ' (guardada)';
+        
+        if (savedUpdate) {
+            var updateDate = new Date(savedUpdate);
+            lastUpdate.textContent = 'Tasa guardada del: ' + 
+                updateDate.toLocaleDateString('es-VE') + ' ' + 
+                updateDate.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
+        }
+        
+        manualRateContainer.innerHTML = 
+            '<div class="offline-badge">⚠️ Sin conexión - Usando última tasa guardada</div>' +
+            '<div class="manual-rate-section">' +
+                '<div class="form-row">' +
+                    '<div class="form-group">' +
+                        '<label>Tasa del dólar (Bs.)</label>' +
+                        '<input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0">' +
+                    '</div>' +
+                    '<button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0; align-self:flex-end;">Aplicar</button>' +
+                '</div>' +
+            '</div>';
+    } else {
+        dollarRate = 0;
+        display.textContent = 'Sin tasa';
+        lastUpdate.textContent = 'Ingresa la tasa del dólar manualmente';
+        
+        manualRateContainer.innerHTML = 
+            '<div class="offline-badge">⚠️ Ingresa la tasa del dólar</div>' +
+            '<div class="manual-rate-section">' +
+                '<div class="form-row">' +
+                    '<div class="form-group">' +
+                        '<label>Tasa del dólar (Bs.)</label>' +
+                        '<input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0">' +
+                    '</div>' +
+                    '<button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0; align-self:flex-end;">Aplicar</button>' +
+                '</div>' +
+            '</div>';
+    }
+    
+    updateTotals();
 }
 
 function setManualRate() {
     var input = document.getElementById('manualRateInput');
+    if (!input) return;
+    
     var rate = parseFloat(input.value);
     
-    if (rate && rate > 0) {
+    if (!isNaN(rate) && rate > 0) {
         dollarRate = rate;
         isOffline = true;
-        localStorage.setItem('dollarRate', dollarRate);
+        
+        localStorage.setItem('dollarRate', dollarRate.toString());
         localStorage.setItem('lastUpdate', new Date().toISOString());
         
         var display = document.getElementById('rateDisplay');
         var lastUpdate = document.getElementById('lastUpdate');
         
-        display.textContent = 'Bs. ' + formatNumber(dollarRate, 2) + ' (manual)';
-        var now = new Date();
-        lastUpdate.textContent = 'Tasa manual ingresada: ' + now.toLocaleDateString('es-VE') + ' ' + now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
+        if (display) {
+            display.textContent = 'Bs. ' + formatNumber(dollarRate, 2) + ' (manual)';
+        }
+        if (lastUpdate) {
+            var now = new Date();
+            lastUpdate.textContent = 'Tasa manual ingresada: ' + 
+                now.toLocaleDateString('es-VE') + ' ' + 
+                now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
+        }
         
         updateTotals();
-        showToast('Tasa actualizada a Bs. ' + formatNumber(dollarRate, 2));
+        renderProducts(); // Re-renderizar para actualizar precios en Bs.
+        showToast('✅ Tasa actualizada a Bs. ' + formatNumber(dollarRate, 2));
     } else {
-        showToast('Ingresa una tasa válida');    }
+        showToast('⚠️ Ingresa una tasa válida mayor a 0');
+    }
 }
 
+// Funciones de Utilidad
 function formatNumber(num, decimals) {
+    if (isNaN(num) || num === null || num === undefined) return '0.' + '0'.repeat(decimals);
+    
     return Number(num).toLocaleString('es-VE', {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals
@@ -1977,17 +2207,31 @@ function formatBS(num) {
 }
 
 function usdToBs(usd) {
+    if (dollarRate <= 0) return 0;
     return usd * dollarRate;
 }
 
 function bsToUsd(bs) {
+    if (dollarRate <= 0) return 0;
     return bs / dollarRate;
 }
 
+function escapeHtml(text) {
+    if (!text) return '';
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(text));
+    return div.innerHTML;
+}
+
+// Funciones de Totales
 function updateTotals() {
     var section = document.getElementById('totalsSection');
-    var level = parseInt(document.getElementById('casheaLevel').value);
-    var userPercent = CASHEA_LEVELS[level];
+    if (!section) return;
+    
+    var levelSelect = document.getElementById('casheaLevel');
+    var level = levelSelect ? parseInt(levelSelect.value) : 2;
+    
+    var userPercent = CASHEA_LEVELS[level] || 0.50;
     var casheaPercent = 1 - userPercent;
 
     var list = getCurrentList();
@@ -2004,10 +2248,12 @@ function updateTotals() {
     var checked = 0;
     
     for (var i = 0; i < prods.length; i++) {
-        total += prods[i].qty * prods[i].price;
+        var subtotal = prods[i].qty * prods[i].price;
+        total += subtotal;
         if (prods[i].checked) {
-            checked += prods[i].qty * prods[i].price;
-        }    }
+            checked += subtotal;
+        }
+    }
     
     var totalBs = usdToBs(total);
     var checkedBs = usdToBs(checked);
@@ -2016,20 +2262,36 @@ function updateTotals() {
     var userUsd = checked * userPercent;
     var userBs = usdToBs(userUsd);
 
-    document.getElementById('totalUsd').textContent = formatUSD(total);
-    document.getElementById('totalBs').textContent = formatBS(totalBs);
-    document.getElementById('checkedUsd').textContent = formatUSD(checked);
-    document.getElementById('checkedBs').textContent = formatBS(checkedBs);
-    document.getElementById('casheaPercent').textContent = Math.round(casheaPercent * 100);
-    document.getElementById('casheaUsd').textContent = formatUSD(casheaUsd);
-    document.getElementById('casheaBs').textContent = formatBS(casheaBs);
-    document.getElementById('userPayUsd').textContent = formatUSD(userUsd);
-    document.getElementById('userPayBs').textContent = formatBS(userBs);
+    // Actualizar elementos del DOM
+    var elements = {
+        'totalUsd': formatUSD(total),
+        'totalBs': formatBS(totalBs),
+        'checkedUsd': formatUSD(checked),
+        'checkedBs': formatBS(checkedBs),
+        'casheaPercent': Math.round(casheaPercent * 100),
+        'casheaUsd': formatUSD(casheaUsd),
+        'casheaBs': formatBS(casheaBs),
+        'userPayUsd': formatUSD(userUsd),
+        'userPayBs': formatBS(userBs)
+    };
+    
+    for (var id in elements) {
+        if (elements.hasOwnProperty(id)) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.textContent = elements[id];
+            }
+        }
+    }
 
-    document.getElementById('calcCasheaLevel').value = level;
-    document.getElementById('imagCasheaLevel').value = level;
+    // Sincronizar niveles en calculadora
+    var calcLevel = document.getElementById('calcCasheaLevel');
+    var imagLevel = document.getElementById('imagCasheaLevel');
+    if (calcLevel) calcLevel.value = level;
+    if (imagLevel) imagLevel.value = level;
 }
 
+// Funciones de Navegación
 function setupSwipe() {
     var startX = 0;
     var startY = 0;
@@ -2045,6 +2307,7 @@ function setupSwipe() {
         var diffX = endX - startX;
         var diffY = endY - startY;
         
+        // Solo si el swipe es más horizontal que vertical
         if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 80) {
             if (diffX < 0 && currentPage === 0) {
                 openCalculator();
@@ -2056,33 +2319,50 @@ function setupSwipe() {
 }
 
 function openCalculator() {
-    currentPage = 1;    document.getElementById('pagesWrapper').style.transform = 'translateX(-50%)';
-    document.getElementById('swipeHintRight').classList.add('hidden');
-    document.getElementById('swipeHintLeft').classList.add('visible');
+    currentPage = 1;
+    var wrapper = document.getElementById('pagesWrapper');
+    if (wrapper) wrapper.style.transform = 'translateX(-50%)';
+    
+    var hintRight = document.getElementById('swipeHintRight');
+    var hintLeft = document.getElementById('swipeHintLeft');
+    if (hintRight) hintRight.classList.add('hidden');
+    if (hintLeft) hintLeft.classList.add('visible');
 }
 
 function closeCalculator() {
     currentPage = 0;
-    document.getElementById('pagesWrapper').style.transform = 'translateX(0)';
-    document.getElementById('swipeHintRight').classList.remove('hidden');
-    document.getElementById('swipeHintLeft').classList.remove('visible');
+    var wrapper = document.getElementById('pagesWrapper');
+    if (wrapper) wrapper.style.transform = 'translateX(0)';
+    
+    var hintRight = document.getElementById('swipeHintRight');
+    var hintLeft = document.getElementById('swipeHintLeft');
+    if (hintRight) hintRight.classList.remove('hidden');
+    if (hintLeft) hintLeft.classList.remove('visible');
 }
 
+// Funciones de Calculadora
 function swapConversion() {
     var select = document.getElementById('convFrom');
-    select.value = select.value === 'USD' ? 'BS' : 'USD';
+    if (select) {
+        select.value = select.value === 'USD' ? 'BS' : 'USD';
+    }
 }
 
 function calculateConversion() {
-    var amount = parseFloat(document.getElementById('convAmount').value);
-    var from = document.getElementById('convFrom').value;
+    var amountInput = document.getElementById('convAmount');
+    var fromSelect = document.getElementById('convFrom');
     
-    if (!amount || amount <= 0) {
-        showToast('Ingresa un monto válido');
+    if (!amountInput || !fromSelect) return;
+    
+    var amount = parseFloat(amountInput.value);
+    var from = fromSelect.value;
+    
+    if (!amount || amount <= 0 || isNaN(amount)) {
+        showToast('⚠️ Ingresa un monto válido');
         return;
     }
     if (dollarRate <= 0) {
-        showToast('No hay tasa disponible');
+        showToast('⚠️ No hay tasa de cambio disponible');
         return;
     }
 
@@ -2095,32 +2375,47 @@ function calculateConversion() {
         resultLabel = formatUSD(result);
     }
 
-    document.getElementById('convResultValue').textContent = resultLabel;
-    document.getElementById('convRateUsed').textContent = '1 USD = Bs. ' + formatNumber(dollarRate, 2);
-    document.getElementById('convResult').classList.add('visible');
+    var resultValueEl = document.getElementById('convResultValue');
+    var rateUsedEl = document.getElementById('convRateUsed');
+    var resultDiv = document.getElementById('convResult');
+    
+    if (resultValueEl) resultValueEl.textContent = resultLabel;
+    if (rateUsedEl) rateUsedEl.textContent = '1 USD = Bs. ' + formatNumber(dollarRate, 2);
+    if (resultDiv) resultDiv.classList.add('visible');
 }
 
 function toggleManualInput() {
     var isManual = document.getElementById('manualToggle').checked;
-    document.getElementById('manualInputs').classList.toggle('visible', isManual);
-    document.getElementById('listInfo').style.display = isManual ? 'none' : 'flex';
+    var manualInputs = document.getElementById('manualInputs');
+    var listInfo = document.getElementById('listInfo');
+    
+    if (manualInputs) manualInputs.classList.toggle('visible', isManual);
+    if (listInfo) listInfo.style.display = isManual ? 'none' : 'flex';
 }
+
 function calculateCoverage() {
     var isManual = document.getElementById('manualToggle').checked;
-    var level = parseInt(document.getElementById('calcCasheaLevel').value);
-    var userPercent = CASHEA_LEVELS[level];
+    var levelSelect = document.getElementById('calcCasheaLevel');
+    
+    if (!levelSelect) return;
+    
+    var level = parseInt(levelSelect.value);
+    var userPercent = CASHEA_LEVELS[level] || 0.50;
     var casheaPercent = 1 - userPercent;
 
     if (dollarRate <= 0) {
-        showToast('No hay tasa disponible');
+        showToast('⚠️ No hay tasa de cambio disponible');
         return;
     }
 
     var totalUsd;
     if (isManual) {
-        totalUsd = parseFloat(document.getElementById('manualAmount').value);
-        if (!totalUsd || totalUsd <= 0) {
-            showToast('Ingresa un monto válido');
+        var manualInput = document.getElementById('manualAmount');
+        if (!manualInput) return;
+        
+        totalUsd = parseFloat(manualInput.value);
+        if (!totalUsd || totalUsd <= 0 || isNaN(totalUsd)) {
+            showToast('⚠️ Ingresa un monto válido');
             return;
         }
     } else {
@@ -2133,7 +2428,7 @@ function calculateCoverage() {
             }
         }
         if (totalUsd <= 0) {
-            showToast('No hay productos seleccionados en la lista');
+            showToast('⚠️ No hay productos seleccionados en la lista');
             return;
         }
     }
@@ -2144,72 +2439,130 @@ function calculateCoverage() {
     var userUsd = totalUsd * userPercent;
     var userBs = usdToBs(userUsd);
 
-    document.getElementById('covTotalUsd').textContent = formatUSD(totalUsd);
-    document.getElementById('covTotalBs').textContent = formatBS(totalBs);
-    document.getElementById('covCasheaUsd').textContent = formatUSD(casheaUsd);
-    document.getElementById('covCasheaBs').textContent = formatBS(casheaBs);
-    document.getElementById('covUserUsd').textContent = formatUSD(userUsd);
-    document.getElementById('covUserBs').textContent = formatBS(userBs);
-    document.getElementById('coverageResult').classList.add('visible');
+    // Actualizar resultados
+    var coverageElements = {
+        'covTotalUsd': formatUSD(totalUsd),
+        'covTotalBs': formatBS(totalBs),
+        'covCasheaUsd': formatUSD(casheaUsd),
+        'covCasheaBs': formatBS(casheaBs),
+        'covUserUsd': formatUSD(userUsd),
+        'covUserBs': formatBS(userBs)
+    };
+    
+    for (var id in coverageElements) {
+        if (coverageElements.hasOwnProperty(id)) {
+            var el = document.getElementById(id);
+            if (el) el.textContent = coverageElements[id];
+        }
+    }
+    
+    var resultDiv = document.getElementById('coverageResult');
+    if (resultDiv) resultDiv.classList.add('visible');
 }
 
 function calculateImaginary() {
-    var capital = parseFloat(document.getElementById('imagCapital').value);    var remain = parseFloat(document.getElementById('imagRemain').value);
-    var level = parseInt(document.getElementById('imagCasheaLevel').value);
-    var userPercent = CASHEA_LEVELS[level];
+    var capitalInput = document.getElementById('imagCapital');
+    var remainInput = document.getElementById('imagRemain');
+    var levelSelect = document.getElementById('imagCasheaLevel');
+    
+    if (!capitalInput || !remainInput || !levelSelect) return;
+    
+    var capital = parseFloat(capitalInput.value);
+    var remain = parseFloat(remainInput.value);
+    var level = parseInt(levelSelect.value);
+    var userPercent = CASHEA_LEVELS[level] || 0.50;
     var casheaPercent = 1 - userPercent;
 
-    if (!capital || capital <= 0) {
-        showToast('Ingresa un capital válido');
+    // Validaciones
+    if (!capital || capital <= 0 || isNaN(capital)) {
+        showToast('⚠️ Ingresa un capital válido');
         return;
     }
     if (isNaN(remain) || remain < 0) {
-        showToast('Ingresa un monto a quedar válido');
+        showToast('⚠️ Ingresa un monto a quedar válido (0 o mayor)');
         return;
     }
     if (remain >= capital) {
-        showToast('El monto a quedar debe ser menor al capital');
+        showToast('⚠️ El monto a quedar debe ser menor al capital total');
         return;
     }
     if (dollarRate <= 0) {
-        showToast('No hay tasa disponible');
+        showToast('⚠️ No hay tasa de cambio disponible');
         return;
     }
     if (userPercent >= 1) {
-        showToast('El nivel de Cashea no puede ser 100%');
+        showToast('⚠️ El porcentaje de pago inicial no puede ser 100%');
         return;
     }
 
+    // Cálculo: capital - remain = userPercent * purchaseUsd
+    // purchaseUsd = (capital - remain) / userPercent
     var purchaseUsd = (capital - remain) / userPercent;
     var purchaseBs = usdToBs(purchaseUsd);
     var casheaUsd = purchaseUsd * casheaPercent;
     var casheaBs = usdToBs(casheaUsd);
     var userUsd = purchaseUsd * userPercent;
     var userBs = usdToBs(userUsd);
+    var remainBs = usdToBs(remain);
 
-    document.getElementById('imagPurchaseUsd').textContent = formatUSD(purchaseUsd);
-    document.getElementById('imagPurchaseBs').textContent = formatBS(purchaseBs);
-    document.getElementById('imagCasheaUsd').textContent = formatUSD(casheaUsd);
-    document.getElementById('imagCasheaBs').textContent = formatBS(casheaBs);
-    document.getElementById('imagUserUsd').textContent = formatUSD(userUsd);
-    document.getElementById('imagUserBs').textContent = formatBS(userBs);
-    document.getElementById('imagRemainUsd').textContent = formatUSD(remain);
-    document.getElementById('imagRemainBs').textContent = formatBS(usdToBs(remain));
-    document.getElementById('imaginaryResult').classList.add('visible');
+    // Actualizar elementos
+    var imaginaryElements = {
+        'imagPurchaseUsd': formatUSD(purchaseUsd),
+        'imagPurchaseBs': formatBS(purchaseBs),
+        'imagCasheaUsd': formatUSD(casheaUsd),
+        'imagCasheaBs': formatBS(casheaBs),
+        'imagUserUsd': formatUSD(userUsd),
+        'imagUserBs': formatBS(userBs),
+        'imagRemainUsd': formatUSD(remain),
+        'imagRemainBs': formatBS(remainBs)
+    };
+    
+    for (var id in imaginaryElements) {
+        if (imaginaryElements.hasOwnProperty(id)) {
+            var el = document.getElementById(id);
+            if (el) el.textContent = imaginaryElements[id];
+        }
+    }
+    
+    var resultDiv = document.getElementById('imaginaryResult');
+    if (resultDiv) resultDiv.classList.add('visible');
 }
 
+// Función de Toast
 function showToast(message) {
     var toast = document.getElementById('toast');
+    if (!toast) return;
+    
     toast.textContent = message;
     toast.classList.add('show');
-    clearTimeout(toast._timeout);
-    toast._timeout = setTimeout(function() {        toast.classList.remove('show');
+    
+    // Limpiar timeout anterior si existe
+    if (toast._timeout) {
+        clearTimeout(toast._timeout);
+    }
+    
+    toast._timeout = setTimeout(function() {
+        toast.classList.remove('show');
     }, 2500);
 }
 
+// Atajo de teclado
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && currentPage === 0) {
-        addProduct();
+    // Solo en la página de lista
+    if (e.key === 'Enter' && currentPage === 0 && 
+        document.activeElement && document.activeElement.tagName === 'INPUT') {
+        var activeInput = document.activeElement;
+        // Verificar si estamos en el formulario de agregar producto
+        if (activeInput.closest('.add-form')) {
+            addProduct();
+        }
+    }
+    
+    // Escape para cerrar modales
+    if (e.key === 'Escape') {
+        closeListsModal();
+        closeImportModal();
+        closeRenameModal();
     }
 });
 </script>
