@@ -47,7 +47,8 @@
         }
 
         * {
-            margin: 0;            padding: 0;
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
@@ -96,7 +97,8 @@
 
         .header-actions {
             display: flex;
-            gap: 8px;            align-items: center;
+            gap: 8px;
+            align-items: center;
             flex-wrap: wrap;
         }
 
@@ -145,7 +147,8 @@
         }
 
         .info-chip .chip-icon {
-            font-size: 1.2rem;            flex-shrink: 0;
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
         .info-chip .chip-content {
@@ -194,7 +197,8 @@
             content: '▼';
             position: absolute;
             right: 10px;
-            top: 50%;            transform: translateY(-50%);
+            top: 50%;
+            transform: translateY(-50%);
             font-size: 0.6rem;
             color: var(--text-muted);
             pointer-events: none;
@@ -243,7 +247,8 @@
         }
 
         .offline-badge {
-            display: inline-flex;            align-items: center;
+            display: inline-flex;
+            align-items: center;
             gap: 4px;
             background: rgba(255, 71, 87, 0.15);
             color: var(--expense-red);
@@ -258,7 +263,7 @@
             position: relative;
             overflow: hidden;
             width: 100%;
-            max-width: 600px; /* Limite ancho en desktop */
+            max-width: 600px;
             margin: 0 auto;
         }
 
@@ -292,6 +297,7 @@
             align-items: center;
             gap: 8px;
         }
+
         .form-row {
             display: flex;
             gap: 8px;
@@ -341,7 +347,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;            align-items: center;
+            display: flex;
+            align-items: center;
             justify-content: center;
             gap: 6px;
         }
@@ -390,7 +397,8 @@
         }
 
         .btn-icon:hover {
-            background: var(--bg-hover);            color: var(--primary-light);
+            background: var(--bg-hover);
+            color: var(--primary-light);
         }
 
         .list-header {
@@ -439,6 +447,7 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         .product-item.checked {
             border-color: var(--success);
             background: rgba(0, 184, 148, 0.05);
@@ -488,7 +497,8 @@
 
         .product-details {
             font-size: 0.75rem;
-            color: var(--text-muted);            margin-top: 2px;
+            color: var(--text-muted);
+            margin-top: 2px;
         }
 
         .product-price {
@@ -537,7 +547,8 @@
         }
 
         .empty-state .empty-icon {
-            font-size: 3rem;            margin-bottom: 12px;
+            font-size: 3rem;
+            margin-bottom: 12px;
         }
 
         .totals-section {
@@ -586,7 +597,8 @@
             font-size: 0.8rem;
             color: var(--text-muted);
             display: flex;
-            align-items: center;            gap: 6px;
+            align-items: center;
+            gap: 6px;
         }
 
         .total-values {
@@ -636,6 +648,7 @@
             color: var(--cashea-black);
             line-height: 1;
         }
+
         .calculator-panel {
             position: relative;
         }
@@ -684,7 +697,8 @@
         .calc-input-group {
             display: flex;
             gap: 8px;
-            margin-bottom: 10px;            align-items: flex-end;
+            margin-bottom: 10px;
+            align-items: flex-end;
         }
 
         .calc-input-group .form-group {
@@ -733,7 +747,8 @@
             border: 1px solid var(--border);
             border-radius: var(--radius-sm);
             padding: 14px;
-            margin-top: 10px;            display: none;
+            margin-top: 10px;
+            display: none;
         }
 
         .calc-result.visible {
@@ -782,7 +797,8 @@
             padding: 10px 20px;
             font-size: 0.85rem;
             font-weight: 600;
-            cursor: pointer;            transition: all 0.3s;
+            cursor: pointer;
+            transition: all 0.3s;
             width: 100%;
         }
 
@@ -832,6 +848,7 @@
             border-radius: 50%;
             transition: all 0.3s;
         }
+
         .toggle-switch input:checked + .toggle-slider {
             background: var(--primary);
             border-color: var(--primary);
@@ -880,7 +897,8 @@
             border-radius: 10px 0 0 10px;
             font-size: 0.7rem;
             writing-mode: vertical-rl;
-            letter-spacing: 1px;            cursor: pointer;
+            letter-spacing: 1px;
+            cursor: pointer;
             z-index: 50;
             transition: all 0.3s;
             opacity: 0.7;
@@ -929,6 +947,7 @@
             text-align: center;
             justify-content: center;
         }
+
         .toast.show {
             transform: translateX(-50%) translateY(0);
         }
@@ -941,7 +960,7 @@
             .swipe-hint {
                 display: none !important;
             }
-        } /* <--- ESTA LLAVE FALTABA EN TU CÓDIGO ORIGINAL */
+        }
 
         .tag {
             display: inline-block;
@@ -979,6 +998,7 @@
             display: block;
             animation: fadeIn 0.3s ease;
         }
+
         .imaginary-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1028,6 +1048,7 @@
         .imaginary-card.user-card .ic-value {
             color: var(--expense-red);
         }
+
         .imaginary-card.total-card {
             border-color: rgba(108, 92, 231, 0.3);
             grid-column: span 2;
@@ -1077,6 +1098,7 @@
             overflow-y: auto;
             box-shadow: var(--shadow-lg);
         }
+
         .modal h3 {
             margin-bottom: 16px;
             color: var(--primary-light);
@@ -1125,7 +1147,8 @@
             background: var(--bg-input);
             border: 1px solid var(--border);
             border-radius: var(--radius-xs);
-            padding: 12px;            color: var(--text);
+            padding: 12px;
+            color: var(--text);
             font-family: monospace;
             font-size: 0.85rem;
             resize: vertical;
@@ -1136,7 +1159,7 @@
 
 <header class="header">
     <div class="header-top">
-        <h1>Mi Mercado</h1>
+        <h1>🛒 Mi Mercado</h1>
         <div class="header-actions">
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙 Oscuro</button>
             <button class="list-toggle" onclick="openListsModal()">📋 Listas</button>
@@ -1159,7 +1182,6 @@
             </span>
             <div class="chip-content">
                 <span class="chip-label">Nivel Cashea</span>
-                <!-- NOTA: Nivel 1 suele financiar MÁS (60%), Nivel 3 MENOS (40%) -->
                 <select id="casheaLevel" onchange="updateTotals()">
                     <option value="1">Nivel 1 — 60%</option>
                     <option value="2" selected>Nivel 2 — 50%</option>
@@ -1173,9 +1195,10 @@
 </header>
 
 <div class="swipe-hint swipe-hint-right" id="swipeHintRight" onclick="openCalculator()">
-    CALCULADORA
-</div><div class="swipe-hint swipe-hint-left" id="swipeHintLeft" onclick="closeCalculator()">
-    LISTA
+    🧮 CALCULADORA →
+</div>
+<div class="swipe-hint swipe-hint-left" id="swipeHintLeft" onclick="closeCalculator()">
+    ← LISTA
 </div>
 
 <div class="app-container">
@@ -1223,7 +1246,8 @@
                 <div class="empty-state">
                     <div class="empty-icon">🛒</div>
                     <p>Tu lista está vacía.<br>Agrega productos para empezar.</p>
-                </div>            </div>
+                </div>
+            </div>
 
             <div class="totals-section" id="totalsSection" style="display:none;">
                 <div class="total-row">
@@ -1272,7 +1296,8 @@
                     <div class="form-group">
                         <label>Monto</label>
                         <input type="number" id="convAmount" placeholder="0.00" step="0.01" min="0">
-                    </div>                    <div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <label>De</label>
                         <select id="convFrom">
                             <option value="USD">Dólares ($)</option>
@@ -1303,7 +1328,7 @@
                     </label>
                     <span class="toggle-label">Ingresar monto manual</span>
                 </div>
-                <div id="listInfo" class="info-badge">📋 Usando total de la lista</div>
+                <div id="listInfo" class="info-badge">📋 Usando total seleccionado de la lista</div>
                 <div class="manual-inputs" id="manualInputs">
                     <div class="calc-input-group">
                         <div class="form-group">
@@ -1321,7 +1346,8 @@
                             <option value="3">Nivel 3 — 40%</option>
                         </select>
                     </div>
-                </div>                <button class="calc-btn" onclick="calculateCoverage()">📊 Calcular Cobertura</button>
+                </div>
+                <button class="calc-btn" onclick="calculateCoverage()">📊 Calcular Cobertura</button>
                 <div class="calc-result" id="coverageResult">
                     <div class="calc-result-row">
                         <span class="calc-result-label">Total compra:</span>
@@ -1370,7 +1396,8 @@
                     <div class="form-group">
                         <label>Monto que quieres que te quede ($)</label>
                         <input type="number" id="imagRemain" placeholder="Ej: 25" step="0.01" min="0">
-                    </div>                </div>
+                    </div>
+                </div>
                 <div class="calc-input-group">
                     <div class="form-group">
                         <label>Nivel Cashea</label>
@@ -1419,7 +1446,8 @@
     </div>
 </div>
 
-<!-- Modal de Gestión de Listas --><div class="modal-overlay" id="listsModal">
+<!-- Modal de Gestión de Listas -->
+<div class="modal-overlay" id="listsModal">
     <div class="modal">
         <h3>📋 Gestión de Listas</h3>
         
@@ -1468,7 +1496,8 @@
         </div>
         <div class="modal-actions">
             <button class="btn btn-outline" onclick="closeRenameModal()">Cancelar</button>
-            <button class="btn btn-primary" onclick="saveListName()">Guardar</button>        </div>
+            <button class="btn btn-primary" onclick="saveListName()">Guardar</button>
+        </div>
     </div>
 </div>
 
@@ -1517,7 +1546,8 @@ function loadLists() {
     
     // Asegurar que existe la lista por defecto
     if (!marketLists['default']) {
-        marketLists['default'] = {            id: 'default',
+        marketLists['default'] = {
+            id: 'default',
             name: 'Mi Lista',
             products: [],
             createdAt: new Date().toISOString()
@@ -1566,7 +1596,8 @@ function updateListSelector() {
     for (var id in marketLists) {
         if (marketLists.hasOwnProperty(id)) {
             var list = marketLists[id];
-            var selected = id === currentListId ? 'selected' : '';            var productCount = list.products ? list.products.length : 0;
+            var selected = id === currentListId ? 'selected' : '';
+            var productCount = list.products ? list.products.length : 0;
             html += '<option value="' + id + '" ' + selected + '>' + 
                     escapeHtml(list.name) + ' (' + productCount + ' productos)</option>';
         }
@@ -1579,9 +1610,12 @@ function loadCurrentList() {
     var list = getCurrentList();
     var listName = escapeHtml(list.name);
     
-    document.getElementById('listTitle').innerHTML = '📋 ' + listName + 
-        ' (<span id="itemCount">0</span>) ' +
-        '<button class="btn-icon" onclick="editListName()" title="Cambiar nombre">✏️</button>';
+    var listTitle = document.getElementById('listTitle');
+    if (listTitle) {
+        listTitle.innerHTML = '📋 ' + listName + 
+            ' (<span id="itemCount">0</span>) ' +
+            '<button class="btn-icon" onclick="editListName()" title="Cambiar nombre">✏️</button>';
+    }
     
     // Actualizar products desde la lista actual
     products = list.products ? list.products.slice() : [];
@@ -1615,7 +1649,8 @@ function createNewList() {
     
     saveLists();
     currentListId = newId;
-    loadCurrentList();    updateListSelector();
+    loadCurrentList();
+    updateListSelector();
     showToast('Lista "' + name + '" creada');
     closeListsModal();
 }
@@ -1664,7 +1699,8 @@ function deleteCurrentList() {
     
     if (!confirm('¿Estás seguro de eliminar esta lista? Esta acción no se puede deshacer.')) return;
     
-    delete marketLists[currentListId];    currentListId = 'default';
+    delete marketLists[currentListId];
+    currentListId = 'default';
     saveLists();
     loadCurrentList();
     updateListSelector();
@@ -1673,7 +1709,10 @@ function deleteCurrentList() {
 
 function editListName() {
     var list = getCurrentList();
-    document.getElementById('newListName').value = list.name;
+    var inputElement = document.getElementById('newListName');
+    if (inputElement) {
+        inputElement.value = list.name;
+    }
     document.getElementById('renameModal').classList.add('visible');
 }
 
@@ -1714,6 +1753,7 @@ function closeImportModal() {
 function closeRenameModal() {
     document.getElementById('renameModal').classList.remove('visible');
 }
+
 // Funciones de Exportar/Importar
 function exportCurrentList() {
     var list = getCurrentList();
@@ -1762,7 +1802,8 @@ function showShareDialog(code) {
     overlay.style.position = 'fixed';
     overlay.style.top = '0';
     overlay.style.left = '0';
-    overlay.style.right = '0';    overlay.style.bottom = '0';
+    overlay.style.right = '0';
+    overlay.style.bottom = '0';
     overlay.style.background = 'rgba(0,0,0,0.7)';
     overlay.style.zIndex = '1999';
     overlay.onclick = function() {
@@ -1811,7 +1852,8 @@ function importList() {
                 checked: p.checked !== undefined ? p.checked : true
             });
         }
-                marketLists[newId] = {
+        
+        marketLists[newId] = {
             id: newId,
             name: newName,
             products: importedProducts,
@@ -1860,7 +1902,8 @@ function addProduct() {
     if (qty < 1) {
         showToast('⚠️ La cantidad debe ser al menos 1');
         qtyInput.focus();
-        return;    }
+        return;
+    }
 
     var product = {
         id: Date.now(),
@@ -1907,9 +1950,11 @@ function renderProducts() {
 
     if (prods.length === 0) {
         container.innerHTML = '<div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.<br>Agrega productos para empezar.</p></div>';
-        document.getElementById('totalsSection').style.display = 'none';
+        var totalsSection = document.getElementById('totalsSection');
+        if (totalsSection) totalsSection.style.display = 'none';
         return;
     }
+    
     var html = '';
     for (var i = 0; i < prods.length; i++) {
         var p = prods[i];
@@ -1958,7 +2003,8 @@ function deleteProduct(id) {
     var list = getCurrentList();
     if (!list.products) return;
     
-    var productName = '';    for (var i = 0; i < list.products.length; i++) {
+    var productName = '';
+    for (var i = 0; i < list.products.length; i++) {
         if (list.products[i].id === id) {
             productName = list.products[i].name;
             break;
@@ -2008,6 +2054,7 @@ function toggleTheme() {
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
     updateThemeIcon(isLight);
 }
+
 function loadTheme() {
     var savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
@@ -2056,11 +2103,13 @@ function fetchRate() {
                 
                 display.textContent = 'Bs. ' + formatNumber(dollarRate, 2);
                 var now = new Date();
-                lastUpdate.textContent = 'Última actualización: ' +                     now.toLocaleDateString('es-VE') + ' ' + 
+                lastUpdate.textContent = 'Última actualización: ' + 
+                    now.toLocaleDateString('es-VE') + ' ' + 
                     now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
                 manualRateContainer.innerHTML = '';
                 
                 updateTotals();
+                renderProducts();
             } else {
                 throw new Error('Datos de tasa inválidos');
             }
@@ -2090,6 +2139,8 @@ function loadSavedRate() {
             lastUpdate.textContent = 'Tasa guardada del: ' + 
                 updateDate.toLocaleDateString('es-VE') + ' ' + 
                 updateDate.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
+        } else {
+            lastUpdate.textContent = 'Tasa guardada (sin fecha)';
         }
         
         manualRateContainer.innerHTML = 
@@ -2105,7 +2156,8 @@ function loadSavedRate() {
             '</div>';
     } else {
         dollarRate = 0;
-        display.textContent = 'Sin tasa';        lastUpdate.textContent = 'Ingresa la tasa del dólar manualmente';
+        display.textContent = 'Sin tasa';
+        lastUpdate.textContent = 'Ingresa la tasa del dólar manualmente';
         
         manualRateContainer.innerHTML = 
             '<div class="offline-badge">⚠️ Ingresa la tasa del dólar</div>' +
@@ -2121,6 +2173,7 @@ function loadSavedRate() {
     }
     
     updateTotals();
+    renderProducts();
 }
 
 function setManualRate() {
@@ -2149,12 +2202,17 @@ function setManualRate() {
                 now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'});
         }
         
+        // Limpiar el contenedor manual
+        var manualRateContainer = document.getElementById('manualRateContainer');
+        if (manualRateContainer) manualRateContainer.innerHTML = '';
+        
         updateTotals();
         renderProducts(); // Re-renderizar para actualizar precios en Bs.
         showToast('✅ Tasa actualizada a Bs. ' + formatNumber(dollarRate, 2));
     } else {
         showToast('⚠️ Ingresa una tasa válida mayor a 0');
-    }}
+    }
+}
 
 // Funciones de Utilidad
 function formatNumber(num, decimals) {
@@ -2232,26 +2290,26 @@ function updateTotals() {
     var userBs = usdToBs(userUsd);
 
     // Actualizar elementos del DOM
-    var elements = {
-        'totalUsd': formatUSD(total),
-        'totalBs': formatBS(totalBs),
-        'checkedUsd': formatUSD(checked),
-        'checkedBs': formatBS(checkedBs),
-        'casheaPercent': Math.round(casheaPercent * 100),
-        'casheaUsd': formatUSD(casheaUsd),
-        'casheaBs': formatBS(casheaBs),
-        'userPayUsd': formatUSD(userUsd),
-        'userPayBs': formatBS(userBs)
-    };
+    var totalUsdEl = document.getElementById('totalUsd');
+    var totalBsEl = document.getElementById('totalBs');
+    var checkedUsdEl = document.getElementById('checkedUsd');
+    var checkedBsEl = document.getElementById('checkedBs');
+    var casheaPercentEl = document.getElementById('casheaPercent');
+    var casheaUsdEl = document.getElementById('casheaUsd');
+    var casheaBsEl = document.getElementById('casheaBs');
+    var userPayUsdEl = document.getElementById('userPayUsd');
+    var userPayBsEl = document.getElementById('userPayBs');
     
-    for (var id in elements) {
-        if (elements.hasOwnProperty(id)) {
-            var el = document.getElementById(id);
-            if (el) {
-                el.textContent = elements[id];
-            }
-        }
-    }
+    if (totalUsdEl) totalUsdEl.textContent = formatUSD(total);
+    if (totalBsEl) totalBsEl.textContent = formatBS(totalBs);
+    if (checkedUsdEl) checkedUsdEl.textContent = formatUSD(checked);
+    if (checkedBsEl) checkedBsEl.textContent = formatBS(checkedBs);
+    if (casheaPercentEl) casheaPercentEl.textContent = Math.round(casheaPercent * 100);
+    if (casheaUsdEl) casheaUsdEl.textContent = formatUSD(casheaUsd);
+    if (casheaBsEl) casheaBsEl.textContent = formatBS(casheaBs);
+    if (userPayUsdEl) userPayUsdEl.textContent = formatUSD(userUsd);
+    if (userPayBsEl) userPayBsEl.textContent = formatBS(userBs);
+    
     // Sincronizar niveles en calculadora
     var calcLevel = document.getElementById('calcCasheaLevel');
     var imagLevel = document.getElementById('imagCasheaLevel');
@@ -2301,7 +2359,8 @@ function closeCalculator() {
     currentPage = 0;
     var wrapper = document.getElementById('pagesWrapper');
     if (wrapper) wrapper.style.transform = 'translateX(0)';
-        var hintRight = document.getElementById('swipeHintRight');
+    
+    var hintRight = document.getElementById('swipeHintRight');
     var hintLeft = document.getElementById('swipeHintLeft');
     if (hintRight) hintRight.classList.remove('hidden');
     if (hintLeft) hintLeft.classList.remove('visible');
@@ -2350,6 +2409,7 @@ function calculateConversion() {
     if (rateUsedEl) rateUsedEl.textContent = '1 USD = Bs. ' + formatNumber(dollarRate, 2);
     if (resultDiv) resultDiv.classList.add('visible');
 }
+
 function toggleManualInput() {
     var isManual = document.getElementById('manualToggle').checked;
     var manualInputs = document.getElementById('manualInputs');
@@ -2399,27 +2459,29 @@ function calculateCoverage() {
         }
     }
 
-    var totalBs = usdToBs(totalUsd);    var casheaUsd = totalUsd * casheaPercent;
+    // Para la cobertura, el totalUsd es el pago inicial del usuario
+    // El total de compra posible es totalUsd / userPercent
+    var purchaseUsd = totalUsd / userPercent;
+    var purchaseBs = usdToBs(purchaseUsd);
+    var casheaUsd = purchaseUsd * casheaPercent;
     var casheaBs = usdToBs(casheaUsd);
-    var userUsd = totalUsd * userPercent;
+    var userUsd = totalUsd;
     var userBs = usdToBs(userUsd);
 
     // Actualizar resultados
-    var coverageElements = {
-        'covTotalUsd': formatUSD(totalUsd),
-        'covTotalBs': formatBS(totalBs),
-        'covCasheaUsd': formatUSD(casheaUsd),
-        'covCasheaBs': formatBS(casheaBs),
-        'covUserUsd': formatUSD(userUsd),
-        'covUserBs': formatBS(userBs)
-    };
+    var covTotalUsdEl = document.getElementById('covTotalUsd');
+    var covTotalBsEl = document.getElementById('covTotalBs');
+    var covCasheaUsdEl = document.getElementById('covCasheaUsd');
+    var covCasheaBsEl = document.getElementById('covCasheaBs');
+    var covUserUsdEl = document.getElementById('covUserUsd');
+    var covUserBsEl = document.getElementById('covUserBs');
     
-    for (var id in coverageElements) {
-        if (coverageElements.hasOwnProperty(id)) {
-            var el = document.getElementById(id);
-            if (el) el.textContent = coverageElements[id];
-        }
-    }
+    if (covTotalUsdEl) covTotalUsdEl.textContent = formatUSD(purchaseUsd);
+    if (covTotalBsEl) covTotalBsEl.textContent = formatBS(purchaseBs);
+    if (covCasheaUsdEl) covCasheaUsdEl.textContent = formatUSD(casheaUsd);
+    if (covCasheaBsEl) covCasheaBsEl.textContent = formatBS(casheaBs);
+    if (covUserUsdEl) covUserUsdEl.textContent = formatUSD(userUsd);
+    if (covUserBsEl) covUserBsEl.textContent = formatBS(userBs);
     
     var resultDiv = document.getElementById('coverageResult');
     if (resultDiv) resultDiv.classList.add('visible');
@@ -2448,7 +2510,8 @@ function calculateImaginary() {
         return;
     }
     if (remain >= capital) {
-        showToast('⚠️ El monto a quedar debe ser menor al capital total');        return;
+        showToast('⚠️ El monto a quedar debe ser menor al capital total');
+        return;
     }
     if (dollarRate <= 0) {
         showToast('⚠️ No hay tasa de cambio disponible');
@@ -2470,23 +2533,23 @@ function calculateImaginary() {
     var remainBs = usdToBs(remain);
 
     // Actualizar elementos
-    var imaginaryElements = {
-        'imagPurchaseUsd': formatUSD(purchaseUsd),
-        'imagPurchaseBs': formatBS(purchaseBs),
-        'imagCasheaUsd': formatUSD(casheaUsd),
-        'imagCasheaBs': formatBS(casheaBs),
-        'imagUserUsd': formatUSD(userUsd),
-        'imagUserBs': formatBS(userBs),
-        'imagRemainUsd': formatUSD(remain),
-        'imagRemainBs': formatBS(remainBs)
-    };
+    var imagPurchaseUsdEl = document.getElementById('imagPurchaseUsd');
+    var imagPurchaseBsEl = document.getElementById('imagPurchaseBs');
+    var imagCasheaUsdEl = document.getElementById('imagCasheaUsd');
+    var imagCasheaBsEl = document.getElementById('imagCasheaBs');
+    var imagUserUsdEl = document.getElementById('imagUserUsd');
+    var imagUserBsEl = document.getElementById('imagUserBs');
+    var imagRemainUsdEl = document.getElementById('imagRemainUsd');
+    var imagRemainBsEl = document.getElementById('imagRemainBs');
     
-    for (var id in imaginaryElements) {
-        if (imaginaryElements.hasOwnProperty(id)) {
-            var el = document.getElementById(id);
-            if (el) el.textContent = imaginaryElements[id];
-        }
-    }
+    if (imagPurchaseUsdEl) imagPurchaseUsdEl.textContent = formatUSD(purchaseUsd);
+    if (imagPurchaseBsEl) imagPurchaseBsEl.textContent = formatBS(purchaseBs);
+    if (imagCasheaUsdEl) imagCasheaUsdEl.textContent = formatUSD(casheaUsd);
+    if (imagCasheaBsEl) imagCasheaBsEl.textContent = formatBS(casheaBs);
+    if (imagUserUsdEl) imagUserUsdEl.textContent = formatUSD(userUsd);
+    if (imagUserBsEl) imagUserBsEl.textContent = formatBS(userBs);
+    if (imagRemainUsdEl) imagRemainUsdEl.textContent = formatUSD(remain);
+    if (imagRemainBsEl) imagRemainBsEl.textContent = formatBS(remainBs);
     
     var resultDiv = document.getElementById('imaginaryResult');
     if (resultDiv) resultDiv.classList.add('visible');
@@ -2497,7 +2560,8 @@ function showToast(message) {
     var toast = document.getElementById('toast');
     if (!toast) return;
     
-    toast.textContent = message;    toast.classList.add('show');
+    toast.textContent = message;
+    toast.classList.add('show');
     
     // Limpiar timeout anterior si existe
     if (toast._timeout) {
@@ -2516,7 +2580,7 @@ document.addEventListener('keydown', function(e) {
         document.activeElement && document.activeElement.tagName === 'INPUT') {
         var activeInput = document.activeElement;
         // Verificar si estamos en el formulario de agregar producto
-        if (activeInput.closest('.add-form')) {
+        if (activeInput.closest && activeInput.closest('.add-form')) {
             addProduct();
         }
     }
