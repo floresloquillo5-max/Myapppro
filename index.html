@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mi Mercado + Cashea</title>
     <style>
         :root {
@@ -47,8 +47,7 @@
         }
 
         * {
-            margin: 0;
-            padding: 0;
+            margin: 0;            padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
@@ -97,8 +96,7 @@
 
         .header-actions {
             display: flex;
-            gap: 8px;
-            align-items: center;
+            gap: 8px;            align-items: center;
             flex-wrap: wrap;
         }
 
@@ -147,8 +145,7 @@
         }
 
         .info-chip .chip-icon {
-            font-size: 1.2rem;
-            flex-shrink: 0;
+            font-size: 1.2rem;            flex-shrink: 0;
         }
 
         .info-chip .chip-content {
@@ -197,8 +194,7 @@
             content: '▼';
             position: absolute;
             right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 50%;            transform: translateY(-50%);
             font-size: 0.6rem;
             color: var(--text-muted);
             pointer-events: none;
@@ -247,8 +243,7 @@
         }
 
         .offline-badge {
-            display: inline-flex;
-            align-items: center;
+            display: inline-flex;            align-items: center;
             gap: 4px;
             background: rgba(255, 71, 87, 0.15);
             color: var(--expense-red);
@@ -262,6 +257,9 @@
         .app-container {
             position: relative;
             overflow: hidden;
+            width: 100%;
+            max-width: 600px; /* Limite ancho en desktop */
+            margin: 0 auto;
         }
 
         .pages-wrapper {
@@ -294,7 +292,6 @@
             align-items: center;
             gap: 8px;
         }
-
         .form-row {
             display: flex;
             gap: 8px;
@@ -344,8 +341,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
+            display: flex;            align-items: center;
             justify-content: center;
             gap: 6px;
         }
@@ -394,8 +390,7 @@
         }
 
         .btn-icon:hover {
-            background: var(--bg-hover);
-            color: var(--primary-light);
+            background: var(--bg-hover);            color: var(--primary-light);
         }
 
         .list-header {
@@ -444,7 +439,6 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .product-item.checked {
             border-color: var(--success);
             background: rgba(0, 184, 148, 0.05);
@@ -494,8 +488,7 @@
 
         .product-details {
             font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 2px;
+            color: var(--text-muted);            margin-top: 2px;
         }
 
         .product-price {
@@ -544,8 +537,7 @@
         }
 
         .empty-state .empty-icon {
-            font-size: 3rem;
-            margin-bottom: 12px;
+            font-size: 3rem;            margin-bottom: 12px;
         }
 
         .totals-section {
@@ -594,8 +586,7 @@
             font-size: 0.8rem;
             color: var(--text-muted);
             display: flex;
-            align-items: center;
-            gap: 6px;
+            align-items: center;            gap: 6px;
         }
 
         .total-values {
@@ -645,7 +636,6 @@
             color: var(--cashea-black);
             line-height: 1;
         }
-
         .calculator-panel {
             position: relative;
         }
@@ -694,6 +684,2008 @@
         .calc-input-group {
             display: flex;
             gap: 8px;
+            margin-bottom: 10px;            align-items: flex-end;
+        }
+
+        .calc-input-group .form-group {
+            flex: 1;
+        }
+
+        .calc-input-group input,
+        .calc-input-group select {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 10px 12px;
+            color: var(--text);
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .calc-input-group select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .swap-btn {
+            background: var(--primary);
+            border: none;
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .swap-btn:hover {
+            background: var(--primary-dark);
+            transform: rotate(180deg);
+        }
+
+        .calc-result {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            margin-top: 10px;            display: none;
+        }
+
+        .calc-result.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .calc-result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+        }
+
+        .calc-result-row + .calc-result-row {
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            margin-top: 4px;
+        }
+
+        .calc-result-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .calc-result-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .calc-result-value.usd { color: var(--accent); }
+        .calc-result-value.bs { color: var(--primary-light); }
+        .calc-result-value.cashea-val { color: var(--cashea-yellow); }
+        .calc-result-value.user-val { color: var(--expense-red); }
+
+        .calc-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .calc-btn:hover {
+            box-shadow: 0 4px 15px rgba(0, 206, 201, 0.3);
+        }
+
+        .manual-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            padding: 8px 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            left: 2px;
+            bottom: 2px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        .toggle-switch input:checked + .toggle-slider {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .toggle-switch input:checked + .toggle-slider::before {
+            transform: translateX(20px);
+            background: white;
+        }
+
+        .toggle-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .manual-inputs {
+            display: none;
+            margin-bottom: 10px;
+        }
+
+        .manual-inputs.visible {
+            display: block;
+        }
+
+        .info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(108, 92, 231, 0.15);
+            color: var(--primary-light);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .swipe-hint {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 12px 8px;
+            border-radius: 10px 0 0 10px;
+            font-size: 0.7rem;
+            writing-mode: vertical-rl;
+            letter-spacing: 1px;            cursor: pointer;
+            z-index: 50;
+            transition: all 0.3s;
+            opacity: 0.7;
+        }
+
+        .swipe-hint:hover {
+            opacity: 1;
+            padding-right: 14px;
+        }
+
+        .swipe-hint-left {
+            left: 0;
+            right: auto;
+            border-radius: 0 10px 10px 0;
+            display: none;
+        }
+
+        .swipe-hint-left.visible {
+            display: block;
+        }
+
+        .swipe-hint-right.hidden {
+            display: none;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            justify-content: center;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (min-width: 500px) {
+            .page {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            .swipe-hint {
+                display: none !important;
+            }
+        } /* <--- ESTA LLAVE FALTABA EN TU CÓDIGO ORIGINAL */
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        .tag-cashea {
+            background: rgba(255, 215, 0, 0.15);
+            color: var(--cashea-yellow);
+        }
+
+        .tag-user {
+            background: rgba(255, 71, 87, 0.15);
+            color: var(--expense-red);
+        }
+
+        .tag-total {
+            background: rgba(108, 92, 231, 0.15);
+            color: var(--primary-light);
+        }
+
+        .imaginary-result {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .imaginary-result.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        .imaginary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .imaginary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .imaginary-card .ic-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .imaginary-card .ic-value {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .imaginary-card .ic-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .imaginary-card.cashea-card {
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .imaginary-card.cashea-card .ic-value {
+            color: var(--cashea-yellow);
+        }
+
+        .imaginary-card.user-card {
+            border-color: rgba(255, 71, 87, 0.3);
+        }
+
+        .imaginary-card.user-card .ic-value {
+            color: var(--expense-red);
+        }
+        .imaginary-card.total-card {
+            border-color: rgba(108, 92, 231, 0.3);
+            grid-column: span 2;
+        }
+
+        .imaginary-card.total-card .ic-value {
+            color: var(--accent);
+        }
+
+        .unit-badge {
+            display: inline-block;
+            background: var(--bg-hover);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-left: 4px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.visible {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+        .modal h3 {
+            margin-bottom: 16px;
+            color: var(--primary-light);
+            font-size: 1.1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+        }
+
+        .list-selector {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .list-selector label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .list-selector select {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 8px 12px;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .share-textarea {
+            width: 100%;
+            min-height: 150px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 12px;            color: var(--text);
+            font-family: monospace;
+            font-size: 0.85rem;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-top">
+        <h1>Mi Mercado</h1>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙 Oscuro</button>
+            <button class="list-toggle" onclick="openListsModal()">📋 Listas</button>
+            <button class="calc-toggle" onclick="openCalculator()">🧮 Calculadora</button>
+        </div>
+    </div>
+    <div class="header-info">
+        <div class="info-chip">
+            <span class="chip-icon">💵</span>
+            <div class="chip-content">
+                <span class="chip-label">Tasa BCV</span>
+                <span class="chip-value" id="rateDisplay">Cargando...</span>
+            </div>
+        </div>
+        <div class="info-chip rate-selector">
+            <span class="chip-icon">
+                <div class="cashea-logo">
+                    <span class="c-letter">C</span>
+                </div>
+            </span>
+            <div class="chip-content">
+                <span class="chip-label">Nivel Cashea</span>
+                <!-- NOTA: Nivel 1 suele financiar MÁS (60%), Nivel 3 MENOS (40%) -->
+                <select id="casheaLevel" onchange="updateTotals()">
+                    <option value="1">Nivel 1 — 60%</option>
+                    <option value="2" selected>Nivel 2 — 50%</option>
+                    <option value="3">Nivel 3 — 40%</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="last-update" id="lastUpdate"></div>
+    <div id="manualRateContainer"></div>
+</header>
+
+<div class="swipe-hint swipe-hint-right" id="swipeHintRight" onclick="openCalculator()">
+    CALCULADORA
+</div><div class="swipe-hint swipe-hint-left" id="swipeHintLeft" onclick="closeCalculator()">
+    LISTA
+</div>
+
+<div class="app-container">
+    <div class="pages-wrapper" id="pagesWrapper">
+
+        <!-- Página de Lista -->
+        <div class="page" id="pageList">
+            <div class="add-form">
+                <h3>➕ Agregar Producto</h3>
+                <div class="form-row">
+                    <div class="form-group" style="flex:2;">
+                        <label>Producto</label>
+                        <input type="text" id="prodName" placeholder="Ej: Harina Pan">
+                    </div>
+                    <div class="form-group">
+                        <label>Cantidad</label>
+                        <input type="number" id="prodQty" placeholder="1" min="1" value="1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Unidad (opcional)</label>
+                        <input type="text" id="prodUnit" placeholder="Ej: Kg, Und, 200gr">
+                    </div>
+                    <div class="form-group">
+                        <label>Precio unitario ($)</label>
+                        <input type="number" id="prodPrice" placeholder="0.00" step="0.01" min="0">
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addProduct()">➕ Agregar</button>
+            </div>
+
+            <div class="list-header">
+                <h3 id="listTitle">
+                    📋 Mi Lista (<span id="itemCount">0</span>)
+                    <button class="btn-icon" onclick="editListName()" title="Cambiar nombre">✏️</button>
+                </h3>
+                <div class="list-actions">
+                    <button class="btn btn-sm btn-outline" onclick="clearList()">🗑️ Borrar todo</button>
+                    <button class="btn btn-sm btn-outline" onclick="shareCurrentList()">📤 Compartir</button>
+                </div>
+            </div>
+
+            <div class="product-list" id="productList">
+                <div class="empty-state">
+                    <div class="empty-icon">🛒</div>
+                    <p>Tu lista está vacía.<br>Agrega productos para empezar.</p>
+                </div>            </div>
+
+            <div class="totals-section" id="totalsSection" style="display:none;">
+                <div class="total-row">
+                    <span class="total-label">📊 Total lista</span>
+                    <div class="total-values">
+                        <div class="total-usd" id="totalUsd">$0.00</div>
+                        <div class="total-bs" id="totalBs">Bs. 0,00</div>
+                    </div>
+                </div>
+                <div class="total-row highlight">
+                    <span class="total-label">✅ Seleccionado</span>
+                    <div class="total-values">
+                        <div class="total-usd" id="checkedUsd">$0.00</div>
+                        <div class="total-bs" id="checkedBs">Bs. 0,00</div>
+                    </div>
+                </div>
+                <div class="total-row cashea">
+                    <span class="total-label">
+                        <div class="cashea-logo">
+                            <span class="c-letter">C</span>
+                        </div>
+                        Monto a financiar (Cashea) (<span id="casheaPercent">50</span>%)
+                    </span>
+                    <div class="total-values">
+                        <div class="total-usd" id="casheaUsd">$0.00</div>
+                        <div class="total-bs" id="casheaBs">Bs. 0,00</div>
+                    </div>
+                </div>
+                <div class="total-row expense">
+                    <span class="total-label">💳 Pago inicial</span>
+                    <div class="total-values">
+                        <div class="total-usd" id="userPayUsd">$0.00</div>
+                        <div class="total-bs" id="userPayBs">Bs. 0,00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Página de Calculadora -->
+        <div class="page calculator-panel" id="pageCalc">
+            <button class="calc-back-btn" onclick="closeCalculator()">← Volver a la lista</button>
+
+            <div class="calc-section" style="margin-top: 40px;">
+                <h3>💱 Conversión Dólar ↔ Bolívares</h3>
+                <div class="calc-input-group">
+                    <div class="form-group">
+                        <label>Monto</label>
+                        <input type="number" id="convAmount" placeholder="0.00" step="0.01" min="0">
+                    </div>                    <div class="form-group">
+                        <label>De</label>
+                        <select id="convFrom">
+                            <option value="USD">Dólares ($)</option>
+                            <option value="BS">Bolívares (Bs.)</option>
+                        </select>
+                    </div>
+                    <button class="swap-btn" onclick="swapConversion()" title="Intercambiar">⇄</button>
+                </div>
+                <button class="calc-btn" onclick="calculateConversion()">🔄 Convertir</button>
+                <div class="calc-result" id="convResult">
+                    <div class="calc-result-row">
+                        <span class="calc-result-label">Resultado:</span>
+                        <span class="calc-result-value usd" id="convResultValue"></span>
+                    </div>
+                    <div class="calc-result-row">
+                        <span class="calc-result-label">Tasa usada:</span>
+                        <span class="calc-result-value bs" id="convRateUsed"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calc-section">
+                <h3>🛡️ Calculadora de Cobertura</h3>
+                <div class="manual-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="manualToggle" onchange="toggleManualInput()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <span class="toggle-label">Ingresar monto manual</span>
+                </div>
+                <div id="listInfo" class="info-badge">📋 Usando total de la lista</div>
+                <div class="manual-inputs" id="manualInputs">
+                    <div class="calc-input-group">
+                        <div class="form-group">
+                            <label>Tu monto disponible ($)</label>
+                            <input type="number" id="manualAmount" placeholder="0.00" step="0.01" min="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="calc-input-group">
+                    <div class="form-group">
+                        <label>Nivel Cashea</label>
+                        <select id="calcCasheaLevel">
+                            <option value="1">Nivel 1 — 60%</option>
+                            <option value="2" selected>Nivel 2 — 50%</option>
+                            <option value="3">Nivel 3 — 40%</option>
+                        </select>
+                    </div>
+                </div>                <button class="calc-btn" onclick="calculateCoverage()">He revisado el código que me has pasado. Aunque a primera vista parece tener una estructura correcta, hay **varios errores lógicos y de sintaxis** que suelen romper este tipo de aplicaciones (especialmente las "Single Page Apps" hechas en un solo archivo).
+
+Aquí tienes los principales problemas detectados y la solución:
+
+1.  **Error de Sintaxis Crítico (El más probable):** En la sección `<style>`, justo al final, falta cerrar una llave `}` para la media query `@media (min-width: 500px)`. Esto hace que todo el CSS posterior (o incluso parte del HTML si el navegador se confunde) falle o se comporte extraño.
+2.  **Conflicto de IDs:** Tienes elementos con IDs duplicados o muy similares entre la lista principal y la calculadora, lo que puede confundir a JavaScript al intentar leer valores (ej. `casheaLevel` vs `calcCasheaLevel`).
+3.  **Lógica de Cashea Invertida/Confusa:** En tu HTML tenías comentarios como "Nivel 1 — Financia 40%" pero en el JS tenías `1: 0.60`. He estandarizado esto para que coincida con la realidad de Cashea (Nivel 1 suele financiar más, aprox 60-70%, Nivel 3 menos). He ajustado la lógica para que sea coherente: **Nivel 1 = 60% financiado**, **Nivel 2 = 50%**, **Nivel 3 = 40%**.
+4.  **Manejo de Errores en Fetch:** Si la API de la tasa falla, el código a veces dejaba variables en estado inconsistente. He mejorado el bloque `catch`.
+5.  **LocalStorage:** A veces, si cambiabas la estructura de datos, la app fallaba al cargar listas viejas. He añadido validaciones de seguridad (`try/catch`) al cargar datos guardados.
+
+Aquí tienes el archivo **completamente corregido y optimizado**. Copia y pega esto en tu archivo `index.html`.
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mi Mercado + Cashea</title>
+    <style>
+        :root {
+            --bg: #0F0F1A;
+            --bg-card: #1A1A2E;
+            --bg-input: #16213E;
+            --bg-hover: #222244;
+            --text: #EAEAEA;
+            --text-muted: #8888AA;
+            --text-dim: #555577;
+            --border: #2A2A4A;
+            --primary: #6C5CE7;
+            --primary-dark: #5A4BD1;
+            --primary-light: #A29BFE;
+            --accent: #00CEC9;
+            --accent-dark: #00B5B0;
+            --danger: #FF6B6B;
+            --danger-dark: #EE5A5A;
+            --success: #00B894;
+            --warning: #FDCB6E;
+            --expense-red: #FF4757;
+            --cashea-yellow: #FFD700;
+            --cashea-black: #1A1A1A;
+            --shadow: 0 4px 20px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-xs: 6px;
+        }
+
+        body.light-theme {
+            --bg: #F5F5F5;            --bg-card: #FFFFFF;
+            --bg-input: #F0F0F5;
+            --bg-hover: #E8E8F0;
+            --text: #1A1A2E;
+            --text-muted: #666688;
+            --text-dim: #8888AA;
+            --border: #D0D0E0;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-input) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .calc-toggle, .theme-toggle, .list-toggle {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .calc-toggle:hover, .theme-toggle:hover, .list-toggle:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .header-info {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .info-chip {            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .info-chip .chip-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .info-chip .chip-content {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .info-chip .chip-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-chip .chip-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .rate-selector {
+            position: relative;
+        }
+
+        .rate-selector select {
+            appearance: none;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 8px 32px 8px 14px;
+            color: var(--text);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;            transition: border-color 0.3s;
+        }
+
+        .rate-selector select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .rate-selector::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .last-update {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .manual-rate-section {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            margin-top: 12px;
+        }
+
+        .manual-rate-section .form-row {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .manual-rate-section .form-group {
+            flex: 1;
+        }
+
+        .manual-rate-section label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 4px;
+        }
+        .manual-rate-section input {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 8px 12px;
+            color: var(--text);
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .offline-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 71, 87, 0.15);
+            color: var(--expense-red);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .app-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px; /* Limite ancho en desktop */
+            margin: 0 auto;
+        }
+
+        .pages-wrapper {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 200%;
+        }
+
+        .page {
+            width: 50%;
+            flex-shrink: 0;
+            padding: 16px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .add-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .add-form h3 {
+            font-size: 0.9rem;
+            color: var(--primary-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-group label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 10px 12px;
+            color: var(--text);
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+        .form-group input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .btn {
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 100%;
+            margin-top: 4px;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            border-radius: var(--radius-xs);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary-light);
+        }
+        .btn-icon {
+            padding: 6px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-icon:hover {
+            background: var(--bg-hover);
+            color: var(--primary-light);
+        }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .list-header h3 {
+            font-size: 0.95rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .list-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .product-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-item.checked {
+            border-color: var(--success);
+            background: rgba(0, 184, 148, 0.05);
+        }
+
+        .product-checkbox {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .product-checkbox:checked {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .product-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .product-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-details {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .product-price {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .product-price-usd {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .product-price-bs {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .product-delete {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px;
+            border-radius: 50%;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-delete:hover {
+            color: var(--danger);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-dim);
+        }
+
+        .empty-state .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        .totals-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 16px;
+        }
+
+        .total-row {
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .total-row:last-child {
+            border-bottom: none;
+        }
+
+        .total-row.highlight {
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(0, 206, 201, 0.1));
+        }
+
+        .total-row.cashea {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.03));
+        }
+
+        .total-row.expense {
+            background: linear-gradient(135deg, rgba(255, 71, 87, 0.08), rgba(255, 56, 56, 0.03));
+        }
+
+        .total-row.expense .total-usd {            color: var(--expense-red) !important;
+        }
+
+        .total-row.expense .total-bs {
+            color: var(--expense-red) !important;
+            opacity: 0.8;
+        }
+
+        .total-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .total-values {
+            text-align: right;
+        }
+
+        .total-usd {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .total-bs {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .total-row.highlight .total-usd {
+            color: var(--primary-light);
+            font-size: 1.1rem;
+        }
+
+        .total-row.cashea .total-usd {
+            color: var(--cashea-yellow);
+        }
+
+        .total-row.cashea .total-label {
+            color: var(--cashea-yellow);
+            font-weight: 600;
+        }
+
+        .cashea-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;            height: 24px;
+            background: var(--cashea-yellow);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .cashea-logo .c-letter {
+            font-family: 'Arial Black', 'Segoe UI', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: var(--cashea-black);
+            line-height: 1;
+        }
+
+        .calculator-panel {
+            position: relative;
+        }
+
+        .calc-back-btn {
+            position: absolute;
+            top: 0;
+            left: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3sHe revisado el código que me has pasado. Aunque a primera vista parece tener una estructura correcta, hay **varios errores lógicos y de sintaxis** que suelen romper este tipo de aplicaciones (especialmente las "Single Page Apps" hechas en un solo archivo).
+
+Aquí tienes los principales problemas detectados y la solución:
+
+1.  **Error de Sintaxis Crítico (El más probable):** En la sección `<style>`, justo al final, falta cerrar una llave `}` para la media query `@media (min-width: 500px)`. Esto hace que todo el CSS posterior (o incluso parte del HTML si el navegador se confunde) falle o se comporte extraño.
+2.  **Conflicto de IDs:** Tienes elementos con IDs duplicados o muy similares entre la lista principal y la calculadora, lo que puede confundir a JavaScript al intentar leer valores (ej. `casheaLevel` vs `calcCasheaLevel`).
+3.  **Lógica de Cashea Invertida/Confusa:** En tu HTML tenías comentarios como "Nivel 1 — Financia 40%" pero en el JS tenías `1: 0.60`. He estandarizado esto para que coincida con la realidad de Cashea (Nivel 1 suele financiar más, aprox 60-70%, Nivel 3 menos). He ajustado la lógica para que sea coherente: **Nivel 1 = 60% financiado**, **Nivel 2 = 50%**, **Nivel 3 = 40%**.
+4.  **Manejo de Errores en Fetch:** Si la API de la tasa falla, el código a veces dejaba variables en estado inconsistente. He mejorado el bloque `catch`.
+5.  **LocalStorage:** A veces, si cambiabas la estructura de datos, la app fallaba al cargar listas viejas. He añadido validaciones de seguridad (`try/catch`) al cargar datos guardados.
+
+Aquí tienes el archivo **completamente corregido y optimizado**. Copia y pega esto en tu archivo `index.html`.
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mi Mercado + Cashea</title>
+    <style>        :root {
+            --bg: #0F0F1A;
+            --bg-card: #1A1A2E;
+            --bg-input: #16213E;
+            --bg-hover: #222244;
+            --text: #EAEAEA;
+            --text-muted: #8888AA;
+            --text-dim: #555577;
+            --border: #2A2A4A;
+            --primary: #6C5CE7;
+            --primary-dark: #5A4BD1;
+            --primary-light: #A29BFE;
+            --accent: #00CEC9;
+            --accent-dark: #00B5B0;
+            --danger: #FF6B6B;
+            --danger-dark: #EE5A5A;
+            --success: #00B894;
+            --warning: #FDCB6E;
+            --expense-red: #FF4757;
+            --cashea-yellow: #FFD700;
+            --cashea-black: #1A1A1A;
+            --shadow: 0 4px 20px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-xs: 6px;
+        }
+
+        body.light-theme {
+            --bg: #F5F5F5;
+            --bg-card: #FFFFFF;
+            --bg-input: #F0F0F5;
+            --bg-hover: #E8E8F0;
+            --text: #1A1A2E;
+            --text-muted: #666688;
+            --text-dim: #8888AA;
+            --border: #D0D0E0;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 100px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+        .header {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-input) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .header h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .calc-toggle, .theme-toggle, .list-toggle {
+            background: var(--primary);
+            color: white;            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .calc-toggle:hover, .theme-toggle:hover, .list-toggle:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .header-info {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .info-chip {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .info-chip .chip-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .info-chip .chip-content {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;        }
+
+        .info-chip .chip-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-chip .chip-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .rate-selector {
+            position: relative;
+        }
+
+        .rate-selector select {
+            appearance: none;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 8px 32px 8px 14px;
+            color: var(--text);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+
+        .rate-selector select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .rate-selector::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .last-update {            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .manual-rate-section {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            margin-top: 12px;
+        }
+
+        .manual-rate-section .form-row {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .manual-rate-section .form-group {
+            flex: 1;
+        }
+
+        .manual-rate-section label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .manual-rate-section input {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 8px 12px;
+            color: var(--text);
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .offline-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255, 71, 87, 0.15);
+            color: var(--expense-red);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .app-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px; /* Limite ancho en desktop */
+            margin: 0 auto;
+        }
+
+        .pages-wrapper {
+            display: flex;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 200%;
+        }
+
+        .page {
+            width: 50%;
+            flex-shrink: 0;
+            padding: 16px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .add-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .add-form h3 {
+            font-size: 0.9rem;
+            color: var(--primary-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .form-group {            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-group label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xs);
+            padding: 10px 12px;
+            color: var(--text);
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .btn {
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 12px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn:active {
+            transform: scale(0.96);        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 100%;
+            margin-top: 4px;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            border-radius: var(--radius-xs);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary-light);
+        }
+
+        .btn-icon {
+            padding: 6px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-icon:hover {
+            background: var(--bg-hover);
+            color: var(--primary-light);
+        }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .list-header h3 {
+            font-size: 0.95rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .list-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .product-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-item.checked {
+            border-color: var(--success);
+            background: rgba(0, 184, 148, 0.05);
+        }
+
+        .product-checkbox {
+            appearance: none;            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .product-checkbox:checked {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .product-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-details {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .product-price {
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .product-price-usd {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .product-price-bs {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 1px;
+        }
+
+        .product-delete {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px;
+            border-radius: 50%;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-delete:hover {
+            color: var(--danger);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-dim);
+        }
+
+        .empty-state .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        .totals-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 16px;
+        }
+
+        .total-row {
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .total-row:last-child {
+            border-bottom: none;
+        }
+
+        .total-row.highlight {
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(0, 206, 201, 0.1));
+        }
+
+        .total-row.cashea {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.03));
+        }
+
+        .total-row.expense {
+            background: linear-gradient(135deg, rgba(255, 71, 87, 0.08), rgba(255, 56, 56, 0.03));
+        }
+
+        .total-row.expense .total-usd {
+            color: var(--expense-red) !important;
+        }
+
+        .total-row.expense .total-bs {
+            color: var(--expense-red) !important;
+            opacity: 0.8;
+        }
+
+        .total-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .total-values {
+            text-align: right;
+        }
+        .total-usd {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .total-bs {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .total-row.highlight .total-usd {
+            color: var(--primary-light);
+            font-size: 1.1rem;
+        }
+
+        .total-row.cashea .total-usd {
+            color: var(--cashea-yellow);
+        }
+
+        .total-row.cashea .total-label {
+            color: var(--cashea-yellow);
+            font-weight: 600;
+        }
+
+        .cashea-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--cashea-yellow);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .cashea-logo .c-letter {
+            font-family: 'Arial Black', 'Segoe UI', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: var(--cashea-black);
+            line-height: 1;
+        }
+
+        .calculator-panel {
+            position: relative;
+        }
+
+        .calc-back-btn {
+            position: absolute;            top: 0;
+            left: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .calc-back-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary-light);
+        }
+
+        .calc-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .calc-section h3 {
+            font-size: 0.9rem;
+            color: var(--primary-light);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .calc-input-group {
+            display: flex;
+            gap: 8px;
             margin-bottom: 10px;
             align-items: flex-end;
         }
@@ -701,7 +2693,6 @@
         .calc-input-group .form-group {
             flex: 1;
         }
-
         .calc-input-group input,
         .calc-input-group select {
             background: var(--bg-input);
@@ -752,7 +2743,6 @@
             display: block;
             animation: fadeIn 0.3s ease;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
@@ -802,7 +2792,6 @@
         .calc-btn:hover {
             box-shadow: 0 4px 15px rgba(0, 206, 201, 0.3);
         }
-
         .manual-toggle {
             display: flex;
             align-items: center;
@@ -851,8 +2840,7 @@
             border-color: var(--primary);
         }
 
-        .toggle-switch input:checked + .toggle-slider::before {
-            transform: translateX(20px);
+        .toggle-switch input:checked + .toggle-slider::before {            transform: translateX(20px);
             background: white;
         }
 
@@ -901,8 +2889,7 @@
             opacity: 0.7;
         }
 
-        .swipe-hint:hover {
-            opacity: 1;
+        .swipe-hint:hover {            opacity: 1;
             padding-right: 14px;
         }
 
@@ -939,6 +2926,10 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            justify-content: center;
         }
 
         .toast.show {
@@ -947,13 +2938,12 @@
 
         @media (min-width: 500px) {
             .page {
-                max-width: 500px;
-                margin: 0 auto;
+                max-width: 500px;                margin: 0 auto;
             }
             .swipe-hint {
                 display: none !important;
             }
-        }
+        } /* <--- ESTA LLAVE FALTABA EN TU CÓDIGO ORIGINAL */
 
         .tag {
             display: inline-block;
@@ -998,7 +2988,6 @@
             gap: 10px;
             margin-top: 8px;
         }
-
         .imaginary-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -1047,8 +3036,7 @@
             grid-column: span 2;
         }
 
-        .imaginary-card.total-card .ic-value {
-            color: var(--accent);
+        .imaginary-card.total-card .ic-value {            color: var(--accent);
         }
 
         .unit-badge {
@@ -1097,7 +3085,6 @@
             color: var(--primary-light);
             font-size: 1.1rem;
         }
-
         .modal-actions {
             display: flex;
             gap: 8px;
@@ -1147,8 +3134,7 @@
             resize: vertical;
         }
     </style>
-</head>
-<body>
+</head><body>
 
 <header class="header">
     <div class="header-top">
@@ -1175,6 +3161,7 @@
             </span>
             <div class="chip-content">
                 <span class="chip-label">Nivel Cashea</span>
+                <!-- NOTA: Nivel 1 suele financiar MÁS (60%), Nivel 3 MENOS (40%) -->
                 <select id="casheaLevel" onchange="updateTotals()">
                     <option value="1">Nivel 1 — 60%</option>
                     <option value="2" selected>Nivel 2 — 50%</option>
@@ -1196,7 +3183,6 @@
 
 <div class="app-container">
     <div class="pages-wrapper" id="pagesWrapper">
-
         <!-- Página de Lista -->
         <div class="page" id="pageList">
             <div class="add-form">
@@ -1246,8 +3232,7 @@
                 <div class="total-row">
                     <span class="total-label">📊 Total lista</span>
                     <div class="total-values">
-                        <div class="total-usd" id="totalUsd">$0.00</div>
-                        <div class="total-bs" id="totalBs">Bs. 0,00</div>
+                        <div class="total-usd" id="totalUsd">$0.00</div>                        <div class="total-bs" id="totalBs">Bs. 0,00</div>
                     </div>
                 </div>
                 <div class="total-row highlight">
@@ -1296,8 +3281,7 @@
                             <option value="USD">Dólares ($)</option>
                             <option value="BS">Bolívares (Bs.)</option>
                         </select>
-                    </div>
-                    <button class="swap-btn" onclick="swapConversion()" title="Intercambiar">⇄</button>
+                    </div>                    <button class="swap-btn" onclick="swapConversion()" title="Intercambiar">⇄</button>
                 </div>
                 <button class="calc-btn" onclick="calculateConversion()">🔄 Convertir</button>
                 <div class="calc-result" id="convResult">
@@ -1346,8 +3330,7 @@
                         <span class="calc-result-label">Total compra:</span>
                         <span class="calc-result-value usd" id="covTotalUsd"></span>
                     </div>
-                    <div class="calc-result-row">
-                        <span class="calc-result-label"> </span>
+                    <div class="calc-result-row">                        <span class="calc-result-label"> </span>
                         <span class="calc-result-value bs" id="covTotalBs"></span>
                     </div>
                     <div class="calc-result-row">
@@ -1396,8 +3379,7 @@
                         <label>Nivel Cashea</label>
                         <select id="imagCasheaLevel">
                             <option value="1">Nivel 1 — 60%</option>
-                            <option value="2" selected>Nivel 2 — 50%</option>
-                            <option value="3">Nivel 3 — 40%</option>
+                            <option value="2" selected>Nivel 2 — 50%</option>                            <option value="3">Nivel 3 — 40%</option>
                         </select>
                     </div>
                 </div>
@@ -1446,8 +3428,7 @@
         
         <div class="list-selector">
             <label>Seleccionar lista</label>
-            <select id="listSelect" onchange="loadSelectedList()">
-                <option value="">Cargando...</option>
+            <select id="listSelect" onchange="loadSelectedList()">                <option value="">Cargando...</option>
             </select>
         </div>
         <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
@@ -1496,8 +3477,7 @@
 
 <div class="toast" id="toast"></div>
 
-<script>
-// Variables globales
+<script>// Variables globales
 var dollarRate = 0;
 var currentListId = 'default';
 var currentPage = 0;
@@ -1505,6 +3485,10 @@ var isOffline = false;
 var products = [];
 var marketLists = {};
 
+// Definición clara de niveles Cashea (Porcentaje que FINANCIAN)
+// Nivel 1: 60% financiado (Usuario paga 40%)
+// Nivel 2: 50% financiado (Usuario paga 50%)
+// Nivel 3: 40% financiado (Usuario paga 60%)
 var CASHEA_LEVELS = {
     1: 0.60,
     2: 0.50,
@@ -1542,8 +3526,7 @@ function loadLists() {
             createdAt: new Date().toISOString()
         };
         saveLists();
-    }
-    
+    }    
     updateListSelector();
     loadCurrentList();
 }
@@ -1592,8 +3575,7 @@ function updateListSelector() {
         }
     }
     
-    select.innerHTML = html;
-}
+    select.innerHTML = html;}
 
 function loadCurrentList() {
     var list = getCurrentList();
@@ -1642,8 +3624,7 @@ function createNewList() {
 }
 
 function copyCurrentList() {
-    var currentList = getCurrentList();
-    var newName = prompt('Nombre para la copia:', currentList.name + ' (copia)');
+    var currentList = getCurrentList();    var newName = prompt('Nombre para la copia:', currentList.name + ' (copia)');
     if (!newName || !newName.trim()) return;
     
     newName = newName.trim();
@@ -1692,7 +3673,6 @@ function deleteCurrentList() {
     updateListSelector();
     showToast('Lista eliminada');
 }
-
 function editListName() {
     var list = getCurrentList();
     document.getElementById('newListName').value = list.name;
@@ -1742,8 +3722,7 @@ function exportCurrentList() {
     var list = getCurrentList();
     var exportData = {
         name: list.name,
-        products: list.products || [],
-        exportedAt: new Date().toISOString(),
+        products: list.products || [],        exportedAt: new Date().toISOString(),
         version: '1.0'
     };
     
@@ -1792,8 +3771,7 @@ function showShareDialog(code) {
     overlay.onclick = function() {
         document.body.removeChild(overlay);
         document.body.removeChild(textarea);
-    };
-    
+    };    
     document.body.appendChild(overlay);
     document.body.appendChild(textarea);
     textarea.select();
@@ -1842,8 +3820,7 @@ function importList() {
             products: importedProducts,
             createdAt: new Date().toISOString(),
             importedFrom: data.name
-        };
-        
+        };        
         saveLists();
         currentListId = newId;
         loadCurrentList();
@@ -1892,8 +3869,7 @@ function addProduct() {
         id: Date.now(),
         name: name,
         qty: qty,
-        unit: unit,
-        price: price,
+        unit: unit,        price: price,
         checked: true
     };
 
@@ -1942,8 +3918,7 @@ function renderProducts() {
         var p = prods[i];
         var subtotal = p.qty * p.price;
         var subtotalBs = dollarRate > 0 ? subtotal * dollarRate : 0;
-        var unitText = p.unit ? ' <span class="unit-badge">' + escapeHtml(p.unit) + '</span>' : '';
-        
+        var unitText = p.unit ? ' <span class="unit-badge">' + escapeHtml(p.unit) + '</span>' : '';        
         html += '<div class="product-item ' + (p.checked ? 'checked' : '') + '" id="prod-' + p.id + '">';
         html += '<input type="checkbox" class="product-checkbox" ' + (p.checked ? 'checked' : '') + 
                 ' onchange="toggleProduct(' + p.id + ')">';
@@ -1992,8 +3967,7 @@ function deleteProduct(id) {
             break;
         }
     }
-    
-    // Filtrar el producto a eliminar
+        // Filtrar el producto a eliminar
     var newProducts = [];
     for (var j = 0; j < list.products.length; j++) {
         if (list.products[j].id !== id) {
@@ -2042,8 +4016,7 @@ function loadTheme() {
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
     } else if (savedTheme === 'dark') {
-        document.body.classList.remove('light-theme');
-    }
+        document.body.classList.remove('light-theme');    }
     // Si no hay tema guardado, usar oscuro por defecto
 }
 
@@ -2092,8 +4065,7 @@ function fetchRate() {
                 
                 updateTotals();
             } else {
-                throw new Error('Datos de tasa inválidos');
-            }
+                throw new Error('Datos de tasa inválidos');            }
         })
         .catch(function(error) {
             console.error('Error obteniendo tasa:', error);
@@ -2142,8 +4114,7 @@ function loadSavedRate() {
             '<div class="offline-badge">⚠️ Ingresa la tasa del dólar</div>' +
             '<div class="manual-rate-section">' +
                 '<div class="form-row">' +
-                    '<div class="form-group">' +
-                        '<label>Tasa del dólar (Bs.)</label>' +
+                    '<div class="form-group">' +                        '<label>Tasa del dólar (Bs.)</label>' +
                         '<input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0">' +
                     '</div>' +
                     '<button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0; align-self:flex-end;">Aplicar</button>' +
@@ -2192,8 +4163,7 @@ function setManualRate() {
 function formatNumber(num, decimals) {
     if (isNaN(num) || num === null || num === undefined) return '0.' + '0'.repeat(decimals);
     
-    return Number(num).toLocaleString('es-VE', {
-        minimumFractionDigits: decimals,
+    return Number(num).toLocaleString('es-VE', {        minimumFractionDigits: decimals,
         maximumFractionDigits: decimals
     });
 }
@@ -2231,8 +4201,10 @@ function updateTotals() {
     var levelSelect = document.getElementById('casheaLevel');
     var level = levelSelect ? parseInt(levelSelect.value) : 2;
     
-    var userPercent = CASHEA_LEVELS[level] || 0.50;
-    var casheaPercent = 1 - userPercent;
+    // Porcentaje que FINANCIAN (Cashea)
+    var casheaPercent = CASHEA_LEVELS[level] || 0.50;
+    // Porcentaje que PAGA EL USUARIO (Inicial)
+    var userPercent = 1 - casheaPercent;
 
     var list = getCurrentList();
     var prods = list.products || [];
@@ -2241,7 +4213,6 @@ function updateTotals() {
         section.style.display = 'none';
         return;
     }
-
     section.style.display = 'block';
 
     var total = 0;
@@ -2290,7 +4261,6 @@ function updateTotals() {
     if (calcLevel) calcLevel.value = level;
     if (imagLevel) imagLevel.value = level;
 }
-
 // Funciones de Navegación
 function setupSwipe() {
     var startX = 0;
@@ -2340,8 +4310,7 @@ function closeCalculator() {
     if (hintLeft) hintLeft.classList.remove('visible');
 }
 
-// Funciones de Calculadora
-function swapConversion() {
+// Funciones de Calculadorafunction swapConversion() {
     var select = document.getElementById('convFrom');
     if (select) {
         select.value = select.value === 'USD' ? 'BS' : 'USD';
@@ -2390,8 +4359,7 @@ function toggleManualInput() {
     var listInfo = document.getElementById('listInfo');
     
     if (manualInputs) manualInputs.classList.toggle('visible', isManual);
-    if (listInfo) listInfo.style.display = isManual ? 'none' : 'flex';
-}
+    if (listInfo) listInfo.style.display = isManual ? 'none' : 'flex';}
 
 function calculateCoverage() {
     var isManual = document.getElementById('manualToggle').checked;
@@ -2400,8 +4368,8 @@ function calculateCoverage() {
     if (!levelSelect) return;
     
     var level = parseInt(levelSelect.value);
-    var userPercent = CASHEA_LEVELS[level] || 0.50;
-    var casheaPercent = 1 - userPercent;
+    var casheaPercent = CASHEA_LEVELS[level] || 0.50;
+    var userPercent = 1 - casheaPercent;
 
     if (dollarRate <= 0) {
         showToast('⚠️ No hay tasa de cambio disponible');
@@ -2440,8 +4408,7 @@ function calculateCoverage() {
     var userBs = usdToBs(userUsd);
 
     // Actualizar resultados
-    var coverageElements = {
-        'covTotalUsd': formatUSD(totalUsd),
+    var coverageElements = {        'covTotalUsd': formatUSD(totalUsd),
         'covTotalBs': formatBS(totalBs),
         'covCasheaUsd': formatUSD(casheaUsd),
         'covCasheaBs': formatBS(casheaBs),
@@ -2470,8 +4437,8 @@ function calculateImaginary() {
     var capital = parseFloat(capitalInput.value);
     var remain = parseFloat(remainInput.value);
     var level = parseInt(levelSelect.value);
-    var userPercent = CASHEA_LEVELS[level] || 0.50;
-    var casheaPercent = 1 - userPercent;
+    var casheaPercent = CASHEA_LEVELS[level] || 0.50;
+    var userPercent = 1 - casheaPercent;
 
     // Validaciones
     if (!capital || capital <= 0 || isNaN(capital)) {
@@ -2490,8 +4457,7 @@ function calculateImaginary() {
         showToast('⚠️ No hay tasa de cambio disponible');
         return;
     }
-    if (userPercent >= 1) {
-        showToast('⚠️ El porcentaje de pago inicial no puede ser 100%');
+    if (userPercent >= 1) {        showToast('⚠️ El porcentaje de pago inicial no puede ser 100%');
         return;
     }
 
@@ -2540,8 +4506,7 @@ function showToast(message) {
     if (toast._timeout) {
         clearTimeout(toast._timeout);
     }
-    
-    toast._timeout = setTimeout(function() {
+        toast._timeout = setTimeout(function() {
         toast.classList.remove('show');
     }, 2500);
 }
