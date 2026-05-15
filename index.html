@@ -1533,6 +1533,7 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- El HTML completo es idéntico al último que compartiste, solo copio la sección <script> modificada -->
 <script>
 // ===== ESTADO GLOBAL =====
 let dollarRate = 0;
@@ -1594,6 +1595,7 @@ function toggleListManagement() {
     }
 }
 
+// ===== GESTIÓN DE LISTAS (con persistencia de currentListId) =====
 function loadLists() {
     try {
         const saved = localStorage.getItem('market_lists_v2');
@@ -1602,6 +1604,7 @@ function loadLists() {
         marketLists = {};
     }
 
+    // Migrar datos del sistema antiguo si no existe default
     if (!marketLists['default']) {
         let migratedProducts = [];
         try {
@@ -1617,7 +1620,15 @@ function loadLists() {
         saveLists();
     }
 
-    if (!marketLists[currentListId]) currentListId = 'default';
+    // Restaurar currentListId si estaba guardado y es válido
+    const savedListId = localStorage.getItem('currentListId');
+    if (savedListId && marketLists[savedListId]) {
+        currentListId = savedListId;
+    } else {
+        currentListId = 'default';
+        localStorage.setItem('currentListId', currentListId);
+    }
+
     renderListTitle();
     renderProducts();
     updateTotals();
@@ -1629,6 +1640,10 @@ function saveLists() {
     } catch(e) {
         showToast('⚠️ Error al guardar');
     }
+}
+
+function persistCurrentListId() {
+    localStorage.setItem('currentListId', currentListId);
 }
 
 function getCurrentList() {
@@ -1645,7 +1660,6 @@ function setProducts(arr) {
     saveLists();
 }
 
-// Función corregida: sin contador de productos
 function renderListTitle() {
     const list = getCurrentList();
     const titleEl = document.getElementById('listTitle');
@@ -1657,6 +1671,7 @@ function renderListTitle() {
 function switchList(id) {
     if (!marketLists[id]) return;
     currentListId = id;
+    persistCurrentListId();
     renderListTitle();
     renderProducts();
     updateTotals();
@@ -1705,6 +1720,7 @@ function createNewList() {
     marketLists[id] = { id, name: name.trim(), products: [], createdAt: new Date().toISOString() };
     saveLists();
     currentListId = id;
+    persistCurrentListId();
     renderListTitle();
     renderProducts();
     updateTotals();
@@ -1724,6 +1740,7 @@ function copyCurrentList() {
     };
     saveLists();
     currentListId = id;
+    persistCurrentListId();
     renderListTitle();
     renderProducts();
     updateTotals();
@@ -1736,6 +1753,7 @@ function deleteCurrentList() {
     if (!confirm(`¿Eliminar la lista "${getCurrentList().name}"? Esta acción no se puede deshacer.`)) return;
     delete marketLists[currentListId];
     currentListId = 'default';
+    persistCurrentListId();
     saveLists();
     renderListTitle();
     renderProducts();
@@ -1786,6 +1804,7 @@ function importList() {
         };
         saveLists();
         currentListId = id;
+        persistCurrentListId(); // Importante: guardar la selección actual
         renderListTitle();
         renderProducts();
         updateTotals();
@@ -1820,7 +1839,6 @@ function addProduct() {
     showToast(`✅ ${name} agregado`);
 }
 
-// Se eliminó la actualización del contador, ya que no existe más
 function renderProducts() {
     const container = document.getElementById('productList');
     const prods = getProducts();
