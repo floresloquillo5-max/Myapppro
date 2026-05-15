@@ -1667,7 +1667,7 @@ function renderListTitle() {
     const titleEl = document.getElementById('listTitle');
     const countEl = document.getElementById('itemCount');
     if (titleEl) {
-        titleEl.innerHTML = `📋 ${escapeHtml(list.name)} (<span id="itemCount">${getProducts().length}</span>) <button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button>`;
+        titleEl.innerHTML = `📋 ${escapeHtml(list.name)} ${getProducts().length}<button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button>`;
     } else if (countEl) {
         countEl.textContent = getProducts().length;
     }
