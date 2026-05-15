@@ -1128,6 +1128,327 @@
             border-radius: var(--radius-sm);            padding: 12px;
             margin-top: 8px;
         }
+ /* ===== RESPONSIVE DESIGN ===== */
+
+/* TABLET: 500px - 1023px */
+@media (min-width: 500px) and (max-width: 1023px) {
+  body {
+    padding-bottom: 50px;
+  }
+  
+  .page {
+    width: 100% !important;
+  }
+  
+  .header {
+    position: relative;
+    padding: 20px 24px;
+  }
+  
+  .header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .header-info {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .info-chip {
+    padding: 10px 16px;
+    flex: 0 1 auto;
+  }
+  
+  .info-chip .chip-value {
+    font-size: 1.1rem;
+  }
+  
+  .add-form,
+  .totals-section,
+  .list-management-toggle,
+  .calc-section {
+    padding: 20px;
+  }
+  
+  .product-item {
+    padding: 14px;
+    gap: 12px;
+  }
+  
+  .product-name {
+    font-size: 1rem;
+  }
+  
+  .product-details {
+    font-size: 0.8rem;
+  }
+  
+  .product-price-usd {
+    font-size: 1.1rem;
+  }
+  
+  .total-row {
+    padding: 16px 20px;
+  }
+  
+  .total-usd {
+    font-size: 1.2rem;
+  }
+  
+  .swipe-hint {
+    display: none !important;
+  }
+  
+  .swipe-hint-left {
+    display: none !important;
+  }
+  
+  .calc-input-group {
+    gap: 12px;
+  }
+  
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+  
+  .empty-state {
+    padding: 60px 30px;
+  }
+  
+  .empty-state .empty-icon {
+    font-size: 4rem;
+  }
+  
+  .calc-back-btn {
+    display: none !important;
+  }
+}
+
+/* DESKTOP: 1024px+ */
+@media (min-width: 1024px) {
+  body {
+    padding-bottom: 0;
+  }
+  
+  /* Layout de dos columnas */
+  .pages-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    gap: 0;
+    overflow: hidden;
+  }
+  
+  .page {
+    width: 100% !important;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 32px;
+  }
+  
+  .page:first-child {
+    border-right: 1px solid var(--border);
+    padding-top: 32px;
+  }
+  
+  .page:last-child {
+    border-right: none;
+  }
+  
+  /* Header fijo en la parte superior */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    padding: 20px 32px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+  }
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  .header-actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .header-info {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .info-chip {
+    padding: 12px 18px;
+    min-width: 140px;
+  }
+  
+  .info-chip .chip-value {
+    font-size: 1.3rem;
+  }
+  
+  /* Ajustar el padding superior de las páginas para el header fijo */
+  .page {
+    padding-top: calc(200px + 32px);
+  }
+  
+  .add-form,
+  .totals-section,
+  .list-management-toggle,
+  .calc-section {
+    padding: 24px;
+    border-radius: 20px;
+  }
+  
+  .product-item {
+    padding: 16px;
+    gap: 14px;
+  }
+  
+  .product-name {
+    font-size: 1.05rem;
+  }
+  
+  .product-details {
+    font-size: 0.85rem;
+  }
+  
+  .product-price-usd {
+    font-size: 1.25rem;
+  }
+  
+  .total-row {
+    padding: 18px 24px;
+  }
+  
+  .total-usd {
+    font-size: 1.4rem;
+  }
+  
+  .total-row.highlight .total-usd {
+    font-size: 1.5rem;
+  }
+  
+  .total-label {
+    font-size: 0.9rem;
+  }
+  
+  /* Ocultar elementos móviles */
+  .swipe-hint,
+  .swipe-hint-left {
+    display: none !important;
+  }
+  
+  .calc-toggle {
+    display: none;
+  }
+  
+  .calc-back-btn {
+    display: none !important;
+  }
+  
+  .list-management-toggle {
+    cursor: default;
+  }
+  
+  .list-management-toggle:hover {
+    border-color: var(--border);
+    background: var(--bg-card);
+  }
+  
+  .list-management-section {
+    display: block !important;
+  }
+  
+  .calculator-panel {
+    display: block !important;
+  }
+  
+  .btn {
+    padding: 14px 28px;
+    font-size: 1rem;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 14px 16px;
+    font-size: 1rem;
+  }
+  
+  .form-group label {
+    font-size: 0.75rem;
+  }
+  
+  .empty-state {
+    padding: 80px 40px;
+  }
+  
+  .empty-state .empty-icon {
+    font-size: 5rem;
+  }
+  
+  .calc-input-group {
+    gap: 14px;
+  }
+  
+  .page-title {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Ajustar inputs */
+  .form-row {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .form-group {
+    flex: 1;
+  }
+}
+
+/* DESKTOP GRANDE: 1400px+ */
+@media (min-width: 1400px) {
+  .page {
+    padding: 40px;
+    padding-top: calc(200px + 40px);
+  }
+  
+  .header {
+    padding: 24px 40px;
+  }
+  
+  .info-chip {
+    min-width: 160px;
+  }
+  
+  .add-form,
+  .totals-section,
+  .list-management-toggle,
+  .calc-section {
+    padding: 28px;
+  }
+}
     </style>
 </head>
 <body>
@@ -1170,7 +1491,7 @@
 <div class="swipe-hint swipe-hint-right" id="swipeHintRight" onclick="openCalculator()">CALCULADORA</div>
 <div class="swipe-hint swipe-hint-left" id="swipeHintLeft" onclick="closeCalculator()">LISTA</div>
 
-<div class="app-container">
+<div class="app-container" id="appContainer">
     <div class="pages-wrapper" id="pagesWrapper">
 
         <!-- ===== PAGE 1: LISTA ===== -->
