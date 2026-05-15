@@ -1128,6 +1128,253 @@
             border-radius: var(--radius-sm);            padding: 12px;
             margin-top: 8px;
         }
+        <!-- ==========================================
+     🖥️ ADAPTACIÓN ESCRITORIO - Mi Mercado + Cashea
+     Agregar antes de </head> o al final de tu <style>
+     Breakpoint: 992px+ | Sin alterar lógica existente
+     ========================================== -->
+<style>
+@media (min-width: 992px) {
+  
+  /* === 1. RESET DE VIEWPORT PARA DESKTOP === */
+  body {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    min-height: 100vh !important;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%) !important;
+    padding: 2rem !important;
+    box-sizing: border-box !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  }
+
+  /* === 2. CONTENEDOR PRINCIPAL CENTRADO === */
+  body > div:first-of-type,
+  .app-container,
+  [class*="container"],
+  body > div:not([style*="display:none"]):not(.modal-overlay):not(.toast) {
+    width: 100% !important;
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    background: #fff !important;
+    border-radius: 20px !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15) !important;
+    padding: 2.5rem !important;
+    box-sizing: border-box !important;
+  }
+
+  /* === 3. TIPOGRAFÍA ESCALADA (clamp para fluidez) === */
+  :root {
+    --app-dk-font-xs: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
+    --app-dk-font-sm: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --app-dk-font-md: clamp(1.125rem, 1rem + 0.4vw, 1.25rem);
+    --app-dk-font-lg: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    --app-dk-font-xl: clamp(2rem, 1.8rem + 1.2vw, 2.5rem);
+  }
+
+  body, p, span, label, input, select, button {
+    font-size: var(--app-dk-font-sm) !important;
+    line-height: 1.6 !important;
+  }
+
+  h1, .page-title, [class*="title"] {
+    font-size: var(--app-dk-font-xl) !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  h2, h3, .section-title {
+    font-size: var(--app-dk-font-lg) !important;
+    margin: 1.25rem 0 1rem !important;
+  }
+
+  small, .badge, .unit, .text-small {
+    font-size: var(--app-dk-font-xs) !important;
+  }
+
+  /* === 4. INPUTS Y BOTONES MÁS ERGONÓMICOS === */
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea,
+  button,
+  .btn,
+  [role="button"] {
+    font-size: var(--app-dk-font-sm) !important;
+    padding: 0.875rem 1.5rem !important;
+    min-height: 48px !important;
+    border-radius: 10px !important;
+  }
+
+  .form-group, .input-row {
+    margin-bottom: 1.5rem !important;
+    display: flex !important;
+    gap: 1rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  .form-group > *, .input-row > * {
+    flex: 1 1 200px !important;
+    min-width: 180px !important;
+  }
+
+  /* === 5. LAYOUT DE PRODUCTOS: GRID 2-3 COLUMNAS === */
+  .product-list,
+  [class*="list"],
+  ul[class*="items"] {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 1.25rem !important;
+    padding: 0 !important;
+  }
+
+  .product-item,
+  li[class*="item"],
+  [class*="card"] {
+    padding: 1.25rem !important;
+    border-radius: 12px !important;
+    border: 1px solid #eee !important;
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+
+  .product-item:hover,
+  [class*="card"]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08) !important;
+  }
+
+  /* === 6. TOTALES Y RESUMEN: LAYOUT HORIZONTAL === */
+  .totals-section,
+  .summary-row,
+  [class*="total"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .total-row, .summary-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 1rem 1.5rem !important;
+    background: #f8f9fa !important;
+    border-radius: 10px !important;
+  }
+
+  /* === 7. CALCULADORA: DOS COLUMNAS PARA SECCIONES === */
+  .calculator-panel,
+  [class*="calc"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem !important;
+  }
+
+  .calc-section,
+  [class*="panel"] > div {
+    break-inside: avoid !important;
+  }
+
+  /* === 8. MODALES Y TOASTS: POSICIÓN OPTIMIZADA === */
+  .modal,
+  .modal-overlay > div {
+    max-width: 650px !important;
+    margin: 8vh auto !important;
+    border-radius: 16px !important;
+    padding: 2rem !important;
+  }
+
+  .toast {
+    top: 2rem !important;
+    right: 2rem !important;
+    left: auto !important;
+    bottom: auto !important;
+    max-width: 420px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important;
+  }
+
+  /* === 9. SCROLL SUAVE PARA SECCIONES LARGAS === */
+  .page,
+  [class*="scroll"],
+  body > div > div[style*="overflow"] {
+    max-height: 75vh !important;
+    overflow-y: auto !important;
+    padding-right: 0.75rem !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: #4a90e2 transparent !important;
+  }
+
+  .page::-webkit-scrollbar,
+  [class*="scroll"]::-webkit-scrollbar { width: 6px !important; }
+  
+  .page::-webkit-scrollbar-track,
+  [class*="scroll"]::-webkit-scrollbar-track { background: transparent !important; }
+  
+  .page::-webkit-scrollbar-thumb,
+  [class*="scroll"]::-webkit-scrollbar-thumb {
+    background: #4a90e2 !important;
+    border-radius: 3px !important;
+  }
+
+  /* === 10. HEADER/NAVEGACIÓN: FIJO EN DESKTOP (OPCIONAL) === */
+  header,
+  nav,
+  [class*="header"],
+  [class*="nav"] {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    background: rgba(255,255,255,0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    padding: 1rem 2rem !important;
+    margin: -2.5rem -2.5rem 2rem -2.5rem !important;
+    border-radius: 20px 20px 0 0 !important;
+    border-bottom: 1px solid #eee !important;
+  }
+
+  /* === 11. UTILIDADES VISUALES === */
+  .divider, hr {
+    margin: 2rem 0 !important;
+    border-color: #e0e0e0 !important;
+  }
+
+  .badge, .pill, [class*="level"] {
+    padding: 0.4rem 0.8rem !important;
+    font-weight: 600 !important;
+  }
+
+  /* === 12. ACCESIBILIDAD: FOCUS VISIBLE EN DESKTOP === */
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 3px solid #4a90e2 !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* === EXTRA: DARK MODE DESKTOP (si tu app lo soporta) === */
+@media (min-width: 992px) and (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+  }
+  body > div:first-of-type,
+  .app-container {
+    background: #1e1e2f !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4) !important;
+  }
+  .product-item, [class*="card"] {
+    background: #252538 !important;
+    border-color: #3a3a5a !important;
+  }
+  .total-row, .summary-item {
+    background: #2a2a40 !important;
+  }
+}
+</style>
+<!-- ==========================================
+     FIN ADAPTACIÓN ESCRITORIO
+     ========================================== -->
     </style>
 </head>
 <body>
