@@ -1077,7 +1077,7 @@
 
       <!-- Lista de productos -->
       <div class="list-header">
-        <h2 class="list-title" id="listTitle">📋 Mi Lista (<span id="itemCount">0</span>)</h2>
+        <h2 class="list-title" id="listTitle">📋 Mi Lista</h2>
         <div class="list-actions">
           <select id="casheaLevel" class="btn btn-sm btn-outline" onchange="updateTotals()" aria-label="Seleccionar nivel Cashea">
             <option value="1">Nivel 1 — 40%</option>
@@ -1425,9 +1425,8 @@
     function renderListTitle() {
       const list = getCurrentList();
       const titleEl = document.getElementById('listTitle');
-      const countEl = document.getElementById('itemCount');
       if (titleEl) {
-        titleEl.innerHTML = `📋 ${escapeHtml(list.name)} (<span id="itemCount">${getProducts().length}</span>) <button class="btn-icon" onclick="editListName()" title="Renombrar" aria-label="Renombrar lista">✏️</button>`;
+        titleEl.innerHTML = `📋 ${escapeHtml(list.name)} <button class="btn-icon" onclick="editListName()" title="Renombrar" aria-label="Renombrar lista">✏️</button>`;
       }
       if (countEl) countEl.textContent = getProducts().length;
     }
@@ -1636,7 +1635,6 @@
       const prods = getProducts();
       
       // Actualizar contador en el título
-      const countEl = document.getElementById('itemCount');
       if (countEl) countEl.textContent = prods.length;
       
       if (prods.length === 0) {
