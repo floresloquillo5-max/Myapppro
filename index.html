@@ -2,12 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <!-- ✅ Viewport ajustado: permite escalado en desktop sin romper móvil -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
     <title>Mi Mercado + Cashea</title>
     <style>
         :root {
-            /* Dark theme (default) */
             --bg: #0F0F1A;
             --bg-card: #1A1A2E;
             --bg-input: #16213E;
@@ -36,7 +34,6 @@
             --radius-xs: 6px;
         }
 
-        /* Light theme */
         body.light-theme {
             --bg: #F5F5F5;
             --bg-card: #FFFFFF;
@@ -84,7 +81,6 @@
         ::-webkit-scrollbar-track { background: var(--bg); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
 
-        /* ===== HEADER ===== */
         .header {
             background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-input) 100%);
             border-bottom: 1px solid var(--border);
@@ -190,54 +186,6 @@
             color: var(--accent);
         }
 
-        .rate-selector {
-            position: relative;
-        }
-
-        .rate-selector select {
-            appearance: none;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 8px 32px 8px 14px;
-            color: var(--text);
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: border-color 0.3s;
-        }
-
-        .rate-selector select:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .rate-selector::after {
-            content: '▼';
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.6rem;
-            color: var(--text-muted);
-            pointer-events: none;
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
         .last-update {
             font-size: 0.65rem;
             color: var(--text-dim);
@@ -245,7 +193,6 @@
             text-align: center;
         }
 
-        /* ===== MAIN CONTAINER ===== */
         .app-container {
             position: relative;
             overflow: hidden;
@@ -264,7 +211,6 @@
             min-height: calc(100vh - 160px);
         }
 
-        /* ===== ADD PRODUCT FORM ===== */
         .add-form {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -371,7 +317,6 @@
             color: var(--primary-light);
         }
 
-        /* ===== PRODUCT LIST ===== */
         .list-header {
             display: flex;
             justify-content: space-between;
@@ -514,7 +459,6 @@
         .empty-state .empty-icon { font-size: 3rem; margin-bottom: 12px; }
         .empty-state p { font-size: 0.85rem; }
 
-        /* ===== TOTALS ===== */
         .totals-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -590,7 +534,6 @@
             font-weight: 600;
         }
 
-        /* ===== CASHEA LOGO ===== */
         .cashea-logo {
             display: inline-flex;
             align-items: center;
@@ -619,7 +562,6 @@
             font-size: 1.1rem;
         }
 
-        /* ===== CALCULATOR PANEL ===== */
         .calculator-panel { position: relative; }
 
         .calc-back-btn {
@@ -978,7 +920,6 @@
 
         .imaginary-card.total-card .ic-value { color: var(--accent); }
 
-        /* ===== LIST MANAGEMENT TOGGLE ===== */
         .list-management-toggle {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -1154,33 +1095,29 @@
         }
 
         /* ==========================================
-           🖥️ ADAPTACIÓN ESCRITORIO - Mi Mercado + Cashea
-           Breakpoint: 992px+ | Sin alterar lógica existente
+           🖥️ ADAPTACIÓN ESCRITORIO - CORREGIDA
            ========================================== */
         @media (min-width: 992px) {
-            /* === 1. BODY: centrado, padding amplio, fondo suave === */
             body {
                 display: flex !important;
                 justify-content: center !important;
                 align-items: flex-start !important;
                 min-height: 100vh !important;
                 padding: 2rem !important;
-                font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem) !important;
             }
 
-            /* === 2. CONTENEDOR PRINCIPAL: tarjeta centrada con sombra === */
             .app-container {
                 width: 100% !important;
-                max-width: 1100px !important;
+                max-width: 1200px !important;
                 margin: 0 auto !important;
                 background: var(--bg-card) !important;
                 border-radius: 20px !important;
                 box-shadow: 0 20px 60px rgba(0,0,0,0.2) !important;
-                padding: 2rem !important;
+                padding: 2.5rem !important;
                 box-sizing: border-box !important;
             }
 
-            /* === 3. PÁGINAS: layout horizontal optimizado === */
+            /* ✅ PÁGINAS: Mostrar solo una a la vez */
             .pages-wrapper {
                 width: 100% !important;
                 transform: none !important;
@@ -1188,92 +1125,124 @@
 
             .page {
                 width: 100% !important;
-                padding: 1rem !important;
+                padding: 0 !important;
                 min-height: auto !important;
             }
 
-            #pageCalc { display: none !important; }
-            #pageCalc.active { display: block !important; }
-
-            /* === 4. TIPOGRAFÍA FLUIDA PARA DESKTOP === */
-            :root {
-                --dk-font-xs: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
-                --dk-font-sm: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-                --dk-font-md: clamp(1.125rem, 1rem + 0.4vw, 1.25rem);
-                --dk-font-lg: clamp(1.5rem, 1.3rem + 1vw, 2rem);
-                --dk-font-xl: clamp(2rem, 1.8rem + 1.2vw, 2.5rem);
+            /* Ocultar calculadora por defecto */
+            #pageCalc { 
+                display: none !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+            }
+            
+            /* Mostrar calculadora cuando está activa */
+            #pageCalc.active { 
+                display: block !important;
+                position: static;
+            }
+            
+            /* Ocultar lista cuando calculadora está activa */
+            #pageList.hidden {
+                display: none !important;
             }
 
+            /* === TIPOGRAFÍA GRANDE === */
             body, p, span, label, input, select, button {
-                font-size: var(--dk-font-sm) !important;
+                font-size: 1.125rem !important;
                 line-height: 1.6 !important;
             }
 
-            h1, .header h1 { font-size: var(--dk-font-xl) !important; }
-            h2, h3, .page-title, .section-title { font-size: var(--dk-font-lg) !important; }
-            small, .badge, .unit, .text-small, .chip-label { font-size: var(--dk-font-xs) !important; }
-            .chip-value { font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.1rem) !important; }
+            h1, .header h1 { font-size: 2.25rem !important; }
+            h2, h3, .page-title, .section-title, .add-form h3, .calc-section h3 { 
+                font-size: 1.5rem !important;
+                margin-bottom: 1.25rem !important;
+            }
+            
+            small, .badge, .unit, .text-small, .chip-label { 
+                font-size: 0.875rem !important;
+            }
+            
+            .chip-value { 
+                font-size: 1.125rem !important;
+            }
 
-            /* === 5. HEADER: sticky con backdrop === */
+            /* === HEADER === */
             .header {
                 position: sticky !important;
                 top: 0 !important;
                 z-index: 100 !important;
-                padding: 1.25rem 2rem !important;
-                margin: -2rem -2rem 2rem -2rem !important;
+                padding: 1.5rem 2.5rem !important;
+                margin: -2.5rem -2.5rem 2rem -2.5rem !important;
                 border-radius: 20px 20px 0 0 !important;
                 backdrop-filter: blur(10px) !important;
             }
 
-            .header-info { gap: 1rem !important; }
-            .info-chip { padding: 10px 16px !important; }
+            .header-info { gap: 1.5rem !important; }
+            .info-chip { 
+                padding: 1rem 1.5rem !important;
+                font-size: 1rem !important;
+            }
 
-            /* === 6. FORMULARIOS: inputs más grandes y ergonómicos === */
+            /* === FORMULARIOS === */
             .form-group input,
             .form-group select,
             input[type="text"],
             input[type="number"],
             select,
             textarea {
-                padding: 0.875rem 1rem !important;
-                font-size: var(--dk-font-sm) !important;
-                min-height: 48px !important;
+                padding: 1rem 1.25rem !important;
+                font-size: 1.125rem !important;
+                min-height: 52px !important;
             }
 
-            .form-row { gap: 1rem !important; margin-bottom: 1rem !important; }
-            .form-group { gap: 6px !important; }
-            .form-group label { font-size: 0.75rem !important; }
+            .form-row { 
+                gap: 1.5rem !important; 
+                margin-bottom: 1.25rem !important;
+            }
+            
+            .form-group { 
+                gap: 0.5rem !important;
+            }
+            
+            .form-group label { 
+                font-size: 0.875rem !important;
+                font-weight: 600 !important;
+            }
 
-            /* === 7. BOTONES: tamaño desktop === */
+            /* === BOTONES === */
             .btn {
-                padding: 0.875rem 1.5rem !important;
-                font-size: var(--dk-font-sm) !important;
-                min-height: 48px !important;
+                padding: 1rem 2rem !important;
+                font-size: 1.125rem !important;
+                min-height: 52px !important;
                 border-radius: 12px !important;
             }
 
             .btn-sm {
-                padding: 0.5rem 1rem !important;
-                font-size: 0.875rem !important;
-                min-height: 40px !important;
+                padding: 0.75rem 1.25rem !important;
+                font-size: 1rem !important;
+                min-height: 44px !important;
             }
 
             .calc-toggle, .theme-toggle {
-                padding: 10px 20px !important;
-                font-size: 0.9rem !important;
+                padding: 0.875rem 1.75rem !important;
+                font-size: 1rem !important;
             }
 
-            /* === 8. LISTA DE PRODUCTOS: GRID 2 COLUMNAS === */
+            /* === LISTA DE PRODUCTOS - GRID ESPACIOSA === */
             .product-list {
                 display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 1rem !important;
+                grid-template-columns: 1fr !important; /* UNA COLUMNA ANCHA */
+                gap: 1.25rem !important;
             }
 
             .product-item {
-                padding: 1rem 1.25rem !important;
+                padding: 1.5rem 2rem !important;
                 border-radius: 12px !important;
                 transition: transform 0.2s, box-shadow 0.2s !important;
+                gap: 1.5rem !important;
             }
 
             .product-item:hover {
@@ -1281,72 +1250,151 @@
                 box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
             }
 
-            .product-name { font-size: 1rem !important; }
-            .product-price-usd { font-size: 1.1rem !important; }
+            /* ✅ NOMBRE DE PRODUCTO: permitir wrap y más grande */
+            .product-name { 
+                font-size: 1.25rem !important;
+                font-weight: 700 !important;
+                white-space: normal !important; /* Permitir salto de línea */
+                overflow: visible !important;
+                text-overflow: clip !important;
+                word-break: break-word !important;
+                line-height: 1.4 !important;
+            }
+            
+            .product-details {
+                font-size: 1rem !important;
+                margin-top: 0.5rem !important;
+            }
 
-            /* === 9. TOTALES: layout horizontal de 2 columnas === */
+            .product-price {
+                text-align: right;
+            }
+            
+            .product-price-usd { 
+                font-size: 1.5rem !important;
+                font-weight: 700 !important;
+            }
+            
+            .product-price-bs { 
+                font-size: 1.125rem !important;
+                margin-top: 0.25rem !important;
+            }
+
+            .product-checkbox {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            .product-delete {
+                width: 40px !important;
+                height: 40px !important;
+                font-size: 1.25rem !important;
+            }
+
+            /* === TOTALES === */
             .totals-section {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
-                gap: 1rem !important;
+                gap: 1.25rem !important;
             }
 
             .total-row {
-                padding: 1rem 1.5rem !important;
+                padding: 1.5rem 2rem !important;
                 border-radius: 12px !important;
                 border-bottom: none !important;
             }
 
-            .total-usd { font-size: 1.2rem !important; }
-            .total-bs { font-size: 0.875rem !important; }
+            .total-label {
+                font-size: 1rem !important;
+            }
+            
+            .total-usd { 
+                font-size: 1.75rem !important;
+                font-weight: 700 !important;
+            }
+            
+            .total-bs { 
+                font-size: 1.125rem !important;
+            }
 
-            /* === 10. CALCULADORA: DOS COLUMNAS PARA SECCIONES === */
+            /* === CALCULADORA === */
             .calculator-panel {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
-                gap: 2rem !important;
-                padding-top: 4rem !important;
+                gap: 2.5rem !important;
+                padding-top: 1rem !important;
             }
 
             .calc-section {
                 margin-bottom: 0 !important;
-                padding: 1.5rem !important;
+                padding: 2rem !important;
             }
 
             .calc-back-btn {
-                left: 2rem !important;
-                padding: 10px 20px !important;
-                font-size: 0.9rem !important;
+                left: 2.5rem !important;
+                padding: 0.875rem 1.75rem !important;
+                font-size: 1rem !important;
+                top: 1rem !important;
             }
 
-            .calc-input-group { gap: 1rem !important; }
-            .swap-btn { width: 44px !important; height: 44px !important; }
+            .calc-input-group { 
+                gap: 1.25rem !important;
+                margin-bottom: 1.25rem !important;
+            }
+            
+            .swap-btn { 
+                width: 52px !important; 
+                height: 52px !important;
+                font-size: 1.25rem !important;
+            }
 
-            /* === 11. MODALES: centrados y con máximo ancho === */
+            .calc-btn {
+                padding: 1rem 2rem !important;
+                font-size: 1.125rem !important;
+            }
+
+            .calc-result-label {
+                font-size: 1rem !important;
+            }
+            
+            .calc-result-value {
+                font-size: 1.25rem !important;
+            }
+
+            /* === MODALES === */
             .modal {
-                max-width: 600px !important;
+                max-width: 650px !important;
                 margin: 10vh auto !important;
-                padding: 2rem !important;
+                padding: 2.5rem !important;
                 border-radius: 16px !important;
             }
 
-            .modal h3 { font-size: 1.25rem !important; }
-            .close-modal { width: 36px !important; height: 36px !important; }
+            .modal h3 { 
+                font-size: 1.5rem !important;
+            }
+            
+            .close-modal { 
+                width: 40px !important; 
+                height: 40px !important;
+                font-size: 1.75rem !important;
+            }
 
-            /* === 12. TOAST: posición superior derecha en desktop === */
+            /* === TOAST === */
             .toast {
-                top: 2rem !important;
-                right: 2rem !important;
+                top: 2.5rem !important;
+                right: 2.5rem !important;
                 left: auto !important;
                 bottom: auto !important;
-                transform: translateX(400px) !important;
-                max-width: 420px !important;
+                transform: translateX(450px) !important;
+                max-width: 450px !important;
+                padding: 1.25rem 2rem !important;
+                font-size: 1.125rem !important;
                 border-radius: 12px !important;
             }
 
             .toast.show { transform: translateX(0) !important; }
 
-            /* === 13. SCROLL PERSONALIZADO PARA SECCIONES LARGAS === */
+            /* === SCROLL === */
             .page,
             .modal,
             [style*="overflow"] {
@@ -1355,18 +1403,22 @@
             }
 
             .page::-webkit-scrollbar,
-            .modal::-webkit-scrollbar { width: 8px !important; }
+            .modal::-webkit-scrollbar { 
+                width: 10px !important;
+            }
 
             .page::-webkit-scrollbar-track,
-            .modal::-webkit-scrollbar-track { background: transparent !important; }
+            .modal::-webkit-scrollbar-track { 
+                background: transparent !important;
+            }
 
             .page::-webkit-scrollbar-thumb,
             .modal::-webkit-scrollbar-thumb {
                 background: var(--primary) !important;
-                border-radius: 4px !important;
+                border-radius: 5px !important;
             }
 
-            /* === 14. ACCESIBILIDAD: FOCUS VISIBLE CON TECLADO === */
+            /* === ACCESIBILIDAD === */
             button:focus-visible,
             input:focus-visible,
             select:focus-visible,
@@ -1375,15 +1427,45 @@
                 outline-offset: 2px !important;
             }
 
-            /* === 15. UTILIDADES VISUALES === */
-            .divider { margin: 2rem 0 !important; }
-            .badge, .pill, [class*="level"] { padding: 0.5rem 1rem !important; }
+            /* === UTILIDADES === */
+            .divider { margin: 2.5rem 0 !important; }
+            .badge, .pill, [class*="level"] { 
+                padding: 0.625rem 1.25rem !important;
+                font-size: 1rem !important;
+            }
 
-            /* === 16. OCULTAR HINTS DE SWIPE EN DESKTOP === */
+            .unit-badge {
+                padding: 0.375rem 0.75rem !important;
+                font-size: 0.875rem !important;
+                margin-left: 0.5rem !important;
+            }
+
             .swipe-hint { display: none !important; }
+            
+            .list-management-toggle {
+                padding: 1.25rem 1.75rem !important;
+                margin-bottom: 2rem !important;
+            }
+            
+            .list-management-section {
+                padding: 2rem !important;
+                margin-bottom: 2rem !important;
+            }
+            
+            .add-form {
+                padding: 2rem !important;
+                margin-bottom: 2.5rem !important;
+            }
+            
+            .list-header {
+                margin-bottom: 2rem !important;
+            }
+            
+            .list-header h3 {
+                font-size: 1.5rem !important;
+            }
         }
 
-        /* === DARK MODE DESKTOP: respeta preferencia del sistema === */
         @media (min-width: 992px) and (prefers-color-scheme: dark) {
             body {
                 background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%) !important;
@@ -1399,9 +1481,6 @@
                 background: var(--bg-input) !important;
             }
         }
-        /* ==========================================
-           FIN ADAPTACIÓN ESCRITORIO
-           ========================================== */
     </style>
 </head>
 <body>
@@ -1738,10 +1817,6 @@ let currentPage = 0;
 let currentListId = 'default';
 let marketLists = {};
 
-// CASHEA_LEVELS: porcentaje que CASHEA FINANCIA (lo que paga Cashea)
-// Nivel 1: Cashea financia 40% → usuario paga 60%
-// Nivel 2: Cashea financia 50% → usuario paga 50%
-// Nivel 3: Cashea financia 60% → usuario paga 40%
 const CASHEA_LEVELS = {
     1: 0.40,
     2: 0.50,
@@ -1764,7 +1839,6 @@ function toggleListManagement() {
     toggle.classList.toggle('active');
     section.classList.toggle('visible');
     
-    // Actualizar selector de listas cuando se muestra
     if (section.classList.contains('visible')) {
         updateListSelector();
     }
@@ -1779,7 +1853,6 @@ function loadLists() {
         marketLists = {};
     }
 
-    // Migrar datos del sistema antiguo (market_products) si existen
     if (!marketLists['default']) {
         let migratedProducts = [];
         try {
@@ -1795,7 +1868,6 @@ function loadLists() {
         saveLists();
     }
 
-    // Asegurar que currentListId es válido
     if (!marketLists[currentListId]) currentListId = 'default';
     renderListTitle();
     renderProducts();
@@ -2005,7 +2077,6 @@ function renderProducts() {
     const container = document.getElementById('productList');
     const prods = getProducts();
 
-    // Actualizar contador en el título
     const countEl = document.getElementById('itemCount');
     if (countEl) countEl.textContent = prods.length;
 
@@ -2066,8 +2137,8 @@ function updateTotals() {
     if (!section) return;
 
     const level = parseInt(document.getElementById('casheaLevel').value) || 2;
-    const casheaPercent = CASHEA_LEVELS[level]; // Lo que Cashea financia
-    const userPercent = 1 - casheaPercent;      // Lo que paga el usuario
+    const casheaPercent = CASHEA_LEVELS[level];
+    const userPercent = 1 - casheaPercent;
 
     const prods = getProducts();
     if (prods.length === 0) { section.style.display = 'none'; return; }
@@ -2089,7 +2160,6 @@ function updateTotals() {
     document.getElementById('userPayUsd').textContent = formatUSD(userUsd);
     document.getElementById('userPayBs').textContent  = formatBS(usdToBs(userUsd));
 
-    // Sincronizar selects de calculadora
     const calcLevel = document.getElementById('calcCasheaLevel');
     const imagLevel = document.getElementById('imagCasheaLevel');
     if (calcLevel) calcLevel.value = level;
@@ -2153,7 +2223,7 @@ async function fetchRate() {
         document.getElementById('lastUpdate').textContent =
             `Última actualización: ${now.toLocaleDateString('es-VE')} ${now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'})}`;
         document.getElementById('manualRateContainer').innerHTML = '';
-        renderProducts(); // Actualizar precios en Bs.
+        renderProducts();
         updateTotals();
     } else {
         loadSavedRate();
@@ -2243,9 +2313,10 @@ function openCalculator() {
     document.getElementById('swipeHintRight').classList.add('hidden');
     document.getElementById('swipeHintLeft').classList.add('visible');
     
-    // ✅ En desktop: mostrar calculadora como bloque activo
+    // ✅ Desktop: Mostrar calculadora y ocultar lista
     if (window.innerWidth >= 992) {
         document.getElementById('pageCalc').classList.add('active');
+        document.getElementById('pageList').classList.add('hidden');
     }
 }
 
@@ -2255,21 +2326,27 @@ function closeCalculator() {
     document.getElementById('swipeHintRight').classList.remove('hidden');
     document.getElementById('swipeHintLeft').classList.remove('visible');
     
-    // ✅ En desktop: ocultar calculadora
+    // ✅ Desktop: Ocultar calculadora y mostrar lista
     if (window.innerWidth >= 992) {
         document.getElementById('pageCalc').classList.remove('active');
+        document.getElementById('pageList').classList.remove('hidden');
     }
 }
 
-// ✅ Detectar resize para alternar vista desktop/móvil
+// ✅ Detectar resize
 window.addEventListener('resize', () => {
     if (window.innerWidth < 992) {
         document.getElementById('pageCalc').classList.remove('active');
+        document.getElementById('pageList').classList.remove('hidden');
         document.getElementById('pagesWrapper').style.transform = currentPage === 1 ? 'translateX(-50%)' : 'translateX(0)';
     } else {
         document.getElementById('pagesWrapper').style.transform = 'none';
         if (currentPage === 1) {
             document.getElementById('pageCalc').classList.add('active');
+            document.getElementById('pageList').classList.add('hidden');
+        } else {
+            document.getElementById('pageCalc').classList.remove('active');
+            document.getElementById('pageList').classList.remove('hidden');
         }
     }
 });
@@ -2341,7 +2418,6 @@ function calculateImaginary() {
     if (dollarRate <= 0)             { showToast('⚠️ No hay tasa disponible'); return; }
     if (userPercent <= 0)            { showToast('⚠️ Porcentaje de pago inicial inválido'); return; }
 
-    // capital - remain = lo que el usuario va a pagar = userPercent * purchaseTotal
     const purchaseUsd = (capital - remain) / userPercent;
     const casheaUsd   = purchaseUsd * casheaPercent;
     const userUsd     = purchaseUsd * userPercent;
