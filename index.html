@@ -236,7 +236,7 @@
         }
 
         .last-update {
-            font-size: 0.82rem;
+            font-size: 0.65rem;
             color: var(--text-dim);
             margin-top: 8px;
             text-align: center;
@@ -896,13 +896,11 @@
 
         .toast.show { transform: translateX(-50%) translateY(0); }
 
-        /* Mobile first: max-width y esconder hints */
         @media (min-width: 500px) {
             .page { max-width: 500px; margin: 0 auto; }
             .swipe-hint { display: none !important; }
         }
 
-        /* ===== DESKTOP LAYOUT (≥768px) ===== */
         @media (min-width: 768px) {
             body {
                 padding-bottom: 40px;
@@ -931,7 +929,6 @@
                 transition: none;
             }
 
-            /* En escritorio no hay swipe, se muestran ambas columnas */
             .page {
                 width: 100%;
                 min-height: auto;
@@ -943,7 +940,7 @@
             }
 
             .calc-back-btn {
-                display: none; /* no necesitamos volver */
+                display: none;
             }
 
             .swipe-hint {
@@ -951,16 +948,14 @@
             }
 
             .calc-toggle {
-                display: none; /* ocultar botón de calculadora porque siempre está a la vista */
+                display: none;
             }
 
-            /* Ajustar espaciados */
             .header h1 { font-size: 1.5rem; }
             .page-title { font-size: 1.2rem; }
         }
 
         @media (max-width: 767px) {
-            /* Mantener el swipe para móviles */
             .pages-wrapper {
                 display: flex;
             }
@@ -1219,7 +1214,6 @@
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
 <header class="header">
     <div class="header-top">
         <h1>🛒 Mi Mercado</h1>
@@ -1260,9 +1254,7 @@
 <div class="app-container">
     <div class="pages-wrapper" id="pagesWrapper">
 
-        <!-- ===== PAGE 1: LISTA ===== -->
         <div class="page" id="pageList">
-            <!-- Toggle para Gestión de Listas -->
             <div class="list-management-toggle" id="listManagementToggle" onclick="toggleListManagement()">
                 <div class="toggle-title">
                     <span>📋</span>
@@ -1271,7 +1263,6 @@
                 <span class="toggle-icon">▼</span>
             </div>
 
-            <!-- Sección de Gestión de Listas (Oculto por defecto) -->
             <div class="list-management-section" id="listManagementSection">
                 <h3>📋 Gestión de Listas</h3>
                 <div style="margin-bottom:12px;">
@@ -1302,7 +1293,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Unidad (opcional)</label>
-                        <input type="text" id="prodUnit" placeholder="Ej: 1Kg,100gr">
+                        <input type="text" id="prodUnit" placeholder="Ej: Kg, Und, 200gr">
                     </div>
                     <div class="form-group">
                         <label>Precio unitario ($)</label>
@@ -1312,7 +1303,8 @@
                 <button class="btn btn-primary" onclick="addProduct()">➕ Agregar</button>
             </div>
             <div class="list-header">
-                <h3 id="listTitle">📋 Mi Lista  <button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button></h3>
+                <!-- Título sin contador de productos -->
+                <h3 id="listTitle">📋 Mi Lista <button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button></h3>
                 <div class="list-actions">
                     <button class="btn btn-sm btn-outline" onclick="clearList()">🗑️ Borrar todo</button>
                     <button class="btn btn-sm btn-outline" onclick="exportCurrentList()">📤 Compartir</button>
@@ -1360,7 +1352,7 @@
                 </div>
             </div>
         </div>
-        <!-- ===== PAGE 2: CALCULADORA ===== -->
+
         <div class="page calculator-panel" id="pageCalc">
             <button class="calc-back-btn" onclick="closeCalculator()">← Volver a la lista</button>
 
@@ -1513,7 +1505,6 @@
     </div>
 </div>
 
-<!-- ===== MODAL: IMPORTAR ===== -->
 <div class="modal-overlay" id="importModal" onclick="if(event.target===this)closeImportModal()">
     <div class="modal">
         <h3>📥 Importar Lista</h3>
@@ -1526,7 +1517,6 @@
     </div>
 </div>
 
-<!-- ===== MODAL: RENOMBRAR ===== -->
 <div class="modal-overlay" id="renameModal" onclick="if(event.target===this)closeRenameModal()">
     <div class="modal">
         <h3>✏️ Renombrar Lista</h3>
@@ -1566,23 +1556,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', adjustLayoutForScreen);
 });
 
-// Ajusta el layout según el tamaño de pantalla
 function adjustLayoutForScreen() {
     const wrapper = document.getElementById('pagesWrapper');
     if (window.innerWidth >= 768) {
-        // Escritorio: mostramos ambas columnas, sin transform
         wrapper.style.transform = 'none';
         wrapper.style.width = '100%';
-        // Aseguramos que el botón "Volver" no sea necesario
         currentPage = 0;
     } else {
-        // Móvil: comportamiento normal
         wrapper.style.width = '200%';
         wrapper.style.transform = `translateX(-${currentPage * 50}%)`;
     }
 }
 
-// Sobreescribimos las funciones de navegación para que en escritorio no hagan swipe
 const originalOpenCalculator = openCalculator;
 openCalculator = function() {
     if (window.innerWidth < 768) {
@@ -1597,7 +1582,6 @@ closeCalculator = function() {
     }
 };
 
-// ===== TOGGLE GESTIÓN DE LISTAS =====
 function toggleListManagement() {
     const toggle = document.getElementById('listManagementToggle');
     const section = document.getElementById('listManagementSection');
@@ -1610,7 +1594,6 @@ function toggleListManagement() {
     }
 }
 
-// ===== GESTIÓN DE LISTAS =====
 function loadLists() {
     try {
         const saved = localStorage.getItem('market_lists_v2');
@@ -1662,14 +1645,12 @@ function setProducts(arr) {
     saveLists();
 }
 
+// Función corregida: sin contador de productos
 function renderListTitle() {
     const list = getCurrentList();
     const titleEl = document.getElementById('listTitle');
-    const countEl = document.getElementById('itemCount');
     if (titleEl) {
-        titleEl.innerHTML = `📋 ${escapeHtml(list.name)} ${getProducts().length}<button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button>`;
-    } else if (countEl) {
-        countEl.textContent = getProducts().length;
+        titleEl.innerHTML = `📋 ${escapeHtml(list.name)} <button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button>`;
     }
 }
 
@@ -1839,12 +1820,10 @@ function addProduct() {
     showToast(`✅ ${name} agregado`);
 }
 
+// Se eliminó la actualización del contador, ya que no existe más
 function renderProducts() {
     const container = document.getElementById('productList');
     const prods = getProducts();
-
-    const countEl = document.getElementById('itemCount');
-    if (countEl) countEl.textContent = prods.length;
 
     if (prods.length === 0) {
         container.innerHTML = `<div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.<br>Agrega productos para empezar.</p></div>`;
@@ -2172,7 +2151,6 @@ function calculateImaginary() {
     const casheaPercent = CASHEA_LEVELS[level];
     const userPercent = 1 - casheaPercent;
 
-    // capital - (compra * userPercent) = remain → compra = (capital - remain) / userPercent
     const purchase = (capital - remain) / userPercent;
     if (purchase <= 0) { showToast('⚠️ El monto a quedar es demasiado grande'); return; }
 
