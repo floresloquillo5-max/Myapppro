@@ -2,9 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
-    <title>Mi Mercado + Cashea</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Mi Mercado + Cashea | Responsive</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         :root {
             --bg: #0F0F1A;
             --bg-card: #1A1A2E;
@@ -20,15 +27,12 @@
             --accent: #00CEC9;
             --accent-dark: #00B5B0;
             --danger: #FF6B6B;
-            --danger-dark: #EE5A5A;
             --success: #00B894;
             --warning: #FDCB6E;
             --expense-red: #FF4757;
-            --expense-red-dark: #FF3838;
             --cashea-yellow: #FFD700;
             --cashea-black: #1A1A1A;
             --shadow: 0 4px 20px rgba(0,0,0,0.4);
-            --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
             --radius: 16px;
             --radius-sm: 10px;
             --radius-xs: 6px;
@@ -47,24 +51,10 @@
             --primary-dark: #4A3BC1;
             --primary-light: #6C5CE7;
             --accent: #00B5B0;
-            --accent-dark: #009A95;
             --danger: #EE5A5A;
-            --danger-dark: #DD4A4A;
             --success: #00A384;
-            --warning: #E5B85E;
-            --expense-red: #E63946;
-            --expense-red-dark: #D32F3C;
             --cashea-yellow: #FFC700;
-            --cashea-black: #1A1A1A;
             --shadow: 0 4px 20px rgba(0,0,0,0.1);
-            --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -72,15 +62,100 @@
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            overflow-x: hidden;
-            padding-bottom: 100px;
             transition: background 0.3s, color 0.3s;
         }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+        /* ===== LAYOUT RESPONSIVE ===== */
+        .app-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px;
+        }
 
+        /* Desktop: dos columnas lado a lado */
+        @media (min-width: 1024px) {
+            .two-columns {
+                display: flex;
+                gap: 24px;
+                align-items: flex-start;
+            }
+            .column-left {
+                flex: 1.2;
+                min-width: 0;
+            }
+            .column-right {
+                flex: 0.9;
+                min-width: 0;
+                position: sticky;
+                top: 20px;
+            }
+            .mobile-swipe-hint {
+                display: none !important;
+            }
+            .pages-wrapper {
+                display: block !important;
+                transform: none !important;
+                width: auto !important;
+            }
+            .page {
+                width: auto !important;
+                padding: 0 !important;
+                min-height: auto !important;
+            }
+            .calc-back-btn {
+                display: none !important;
+            }
+            .page-title.mobile-only {
+                display: none;
+            }
+        }
+
+        /* Mobile: solo una columna con swipe */
+        @media (max-width: 1023px) {
+            .app-wrapper {
+                padding: 0;
+            }
+            .desktop-only {
+                display: none;
+            }
+            .pages-wrapper {
+                display: flex;
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                width: 200%;
+            }
+            .page {
+                width: 50%;
+                flex-shrink: 0;
+                padding: 16px;
+                min-height: calc(100vh - 160px);
+            }
+            .swipe-hint {
+                position: fixed;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                background: var(--primary);
+                color: white;
+                padding: 12px 8px;
+                border-radius: 10px 0 0 10px;
+                font-size: 0.7rem;
+                writing-mode: vertical-rl;
+                letter-spacing: 1px;
+                cursor: pointer;
+                z-index: 50;
+                opacity: 0.7;
+            }
+            .swipe-hint-left {
+                left: 0;
+                right: auto;
+                border-radius: 0 10px 10px 0;
+                display: none;
+            }
+            .swipe-hint-left.visible { display: block; }
+            .swipe-hint-right.hidden { display: none; }
+        }
+
+        /* Header responsivo */
         .header {
             background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-input) 100%);
             border-bottom: 1px solid var(--border);
@@ -93,8 +168,10 @@
 
         .header-top {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
             margin-bottom: 12px;
         }
 
@@ -111,6 +188,7 @@
             display: flex;
             gap: 8px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .calc-toggle, .theme-toggle {
@@ -123,25 +201,12 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .calc-toggle:hover, .theme-toggle:hover,
-        .calc-toggle:active, .theme-toggle:active {
-            background: var(--primary-dark);
-            transform: scale(1.05);
         }
 
         .theme-toggle {
             background: var(--bg-input);
             border: 1px solid var(--border);
             color: var(--text);
-        }
-
-        .theme-toggle:hover {
-            background: var(--bg-hover);
         }
 
         .header-info {
@@ -159,59 +224,11 @@
             align-items: center;
             gap: 8px;
             flex: 1;
-            min-width: 0;
+            min-width: 120px;
         }
 
-        .info-chip .chip-icon {
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .info-chip .chip-content {
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-        }
-
-        .info-chip .chip-label {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .info-chip .chip-value {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .last-update {
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            margin-top: 8px;
-            text-align: center;
-        }
-
-        .app-container {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pages-wrapper {
-            display: flex;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 200%;
-        }
-
-        .page {
-            width: 50%;
-            flex-shrink: 0;
-            padding: 16px;
-            min-height: calc(100vh - 160px);
-        }
-
-        .add-form {
+        /* Formulario responsivo */
+        .add-form, .list-management-section, .totals-section, .calc-section {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
@@ -220,54 +237,25 @@
             box-shadow: var(--shadow);
         }
 
-        .add-form h3 {
-            font-size: 0.9rem;
-            color: var(--primary-light);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
         .form-row {
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 8px;
         }
 
         .form-group {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            min-width: 100px;
         }
 
-        .form-group label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .form-group input {
+        .form-group input, .form-group select {
+            width: 100%;
             background: var(--bg-input);
             border: 1px solid var(--border);
             border-radius: var(--radius-xs);
             padding: 10px 12px;
             color: var(--text);
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            width: 100%;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
-        }
-
-        .form-group input::placeholder {
-            color: var(--text-dim);
         }
 
         .btn {
@@ -278,32 +266,13 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            text-align: center;
         }
-
-        .btn:active { transform: scale(0.96); }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             width: 100%;
-            margin-top: 4px;
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
-        }
-
-        .btn-danger { background: var(--danger); color: white; }
-        .btn-danger:hover { background: var(--danger-dark); }
-
-        .btn-sm {
-            padding: 6px 12px;
-            font-size: 0.75rem;
-            border-radius: var(--radius-xs);
         }
 
         .btn-outline {
@@ -312,28 +281,7 @@
             color: var(--text-muted);
         }
 
-        .btn-outline:hover {
-            border-color: var(--primary);
-            color: var(--primary-light);
-        }
-
-        .list-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .list-header h3 {
-            font-size: 0.95rem;
-            color: var(--text);
-        }
-
-        .list-actions {
-            display: flex;
-            gap: 6px;
-        }
-
+        /* Lista de productos responsiva */
         .product-list {
             display: flex;
             flex-direction: column;
@@ -347,476 +295,68 @@
             border-radius: var(--radius-sm);
             padding: 12px;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 10px;
-            transition: all 0.3s;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .product-item.checked {
-            border-color: var(--success);
-            background: rgba(0, 184, 148, 0.05);
-        }
-
-        .product-checkbox {
-            appearance: none;
-            width: 22px;
-            height: 22px;
-            border: 2px solid var(--border);
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-            flex-shrink: 0;
-            position: relative;
-        }
-
-        .product-checkbox:checked {
-            background: var(--success);
-            border-color: var(--success);
-        }
-
-        .product-checkbox:checked::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: bold;
         }
 
         .product-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .product-name {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .product-details {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 2px;
+            flex: 2;
+            min-width: 120px;
         }
 
         .product-price {
             text-align: right;
-            flex-shrink: 0;
+            min-width: 100px;
         }
 
-        .product-price-usd {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--accent);
+        @media (max-width: 480px) {
+            .product-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .product-price {
+                text-align: left;
+                width: 100%;
+            }
+            .product-delete {
+                align-self: flex-end;
+            }
         }
 
-        .product-price-bs {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 1px;
-        }
-
-        .product-delete {
-            background: none;
-            border: none;
-            color: var(--text-dim);
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 4px;
-            border-radius: 50%;
-            transition: all 0.3s;
-            flex-shrink: 0;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .product-delete:hover {
-            color: var(--danger);
-            background: rgba(255, 107, 107, 0.1);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-dim);
-        }
-
-        .empty-state .empty-icon { font-size: 3rem; margin-bottom: 12px; }
-        .empty-state p { font-size: 0.85rem; }
-
-        .totals-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            margin-bottom: 16px;
-        }
-
+        /* Totales responsivo */
         .total-row {
             padding: 14px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
             border-bottom: 1px solid var(--border);
         }
 
-        .total-row:last-child { border-bottom: none; }
-
-        .total-row.highlight {
-            background: linear-gradient(135deg, rgba(108, 92, 231, 0.15), rgba(0, 206, 201, 0.1));
-        }
-
-        .total-row.cashea {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.03));
-            border-bottom: none;
-        }
-
-        .total-row.expense {
-            background: linear-gradient(135deg, rgba(255, 71, 87, 0.08), rgba(255, 56, 56, 0.03));
-        }
-
-        .total-row.expense .total-usd {
-            color: var(--expense-red) !important;
-        }
-        .total-row.expense .total-bs {
-            color: var(--expense-red) !important;
-            opacity: 0.8;
-        }
-
-        .total-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .total-values { text-align: right; }
-
-        .total-usd {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .total-bs {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .total-row.highlight .total-usd {
-            color: var(--primary-light);
-            font-size: 1.1rem;
-        }
-
-        .total-row.cashea .total-usd {
-            color: var(--cashea-yellow);
-        }
-
-        .total-row.cashea .total-label {
-            color: var(--cashea-yellow);
-            font-weight: 600;
-        }
-
-        .cashea-logo {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: var(--cashea-yellow);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .cashea-logo .c-letter {
-            font-family: 'Arial Black', 'Segoe UI', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 900;
-            color: var(--cashea-black);
-            line-height: 1;
-        }
-
-        .cashea-logo-lg {
-            width: 32px;
-            height: 32px;
-        }
-
-        .cashea-logo-lg .c-letter {
-            font-size: 1.1rem;
-        }
-
-        .calculator-panel { position: relative; }
-
-        .calc-back-btn {
-            position: absolute;
-            top: 0;
-            left: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .calc-back-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary-light);
-        }
-
-        .calc-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 16px;
-            margin-bottom: 12px;
-            box-shadow: var(--shadow);
-        }
-
-        .calc-section h3 {
-            font-size: 0.9rem;
-            color: var(--primary-light);
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .calc-input-group {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
-            align-items: flex-end;
-        }
-
-        .calc-input-group .form-group { flex: 1; }
-
-        .calc-input-group input,
-        .calc-input-group select {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xs);
-            padding: 10px 12px;
-            color: var(--text);
-            font-size: 0.9rem;
-            width: 100%;
-        }
-
-        .calc-input-group select {
-            appearance: none;
-            cursor: pointer;
-        }
-
-        .swap-btn {
-            background: var(--primary);
-            border: none;
-            color: white;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .swap-btn:hover {
-            background: var(--primary-dark);
-            transform: rotate(180deg);
-        }
-
-        .calc-result {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 14px;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .calc-result.visible {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .calc-result-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 0;
-        }
-
-        .calc-result-row + .calc-result-row {
-            border-top: 1px solid var(--border);
-            padding-top: 10px;
-            margin-top: 4px;
-        }
-
-        .calc-result-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .calc-result-value { font-size: 0.95rem; font-weight: 700; }
-        .calc-result-value.usd { color: var(--accent); }
-        .calc-result-value.bs { color: var(--primary-light); }
-        .calc-result-value.cashea-val { color: var(--cashea-yellow); }
-        .calc-result-value.user-val { color: var(--expense-red); }
-
-        .calc-btn {
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            padding: 10px 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-        }
-
-        .calc-btn:hover {
-            box-shadow: 0 4px 15px rgba(0, 206, 201, 0.3);
-        }
-
-        .calc-btn:active { transform: scale(0.97); }
-
-        .manual-toggle {
-            display: flex;
-            align-items: center;
+        /* Grid de resultados imaginarios */
+        .imaginary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 10px;
-            margin-bottom: 12px;
-            padding: 8px 0;
+            margin-top: 8px;
         }
 
-        .toggle-switch {
-            position: relative;
-            width: 44px;
-            height: 24px;
-            flex-shrink: 0;
+        /* Modal responsivo */
+        .modal {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 24px;
+            max-width: 500px;
+            width: 90%;
+            margin: 20px;
         }
 
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
-
-        .toggle-slider::before {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            left: 2px;
-            bottom: 2px;
-            background: var(--text-muted);
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .toggle-switch input:checked + .toggle-slider {
-            background: var(--primary);
-            border-color: var(--primary);
-        }
-
-        .toggle-switch input:checked + .toggle-slider::before {
-            transform: translateX(20px);
-            background: white;
-        }
-
-        .toggle-label { font-size: 0.8rem; color: var(--text-muted); }
-
-        .manual-inputs {
-            display: none;
-            margin-bottom: 10px;
-        }
-
-        .manual-inputs.visible { display: block; }
-
-        .info-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(108, 92, 231, 0.15);
-            color: var(--primary-light);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .swipe-hint {
-            position: fixed;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--primary);
-            color: white;
-            padding: 12px 8px;
-            border-radius: 10px 0 0 10px;
-            font-size: 0.7rem;
-            writing-mode: vertical-rl;
-            letter-spacing: 1px;
-            cursor: pointer;
-            z-index: 50;
-            transition: all 0.3s;
-            opacity: 0.7;
-        }
-
-        .swipe-hint:hover { opacity: 1; padding-right: 14px; }
-
-        .swipe-hint-left {
-            left: 0;
-            right: auto;
-            border-radius: 0 10px 10px 0;
-            display: none;
-        }
-
-        .swipe-hint-left.visible { display: block; }
-        .swipe-hint-right.hidden { display: none; }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
 
         .toast {
             position: fixed;
@@ -825,989 +365,106 @@
             transform: translateX(-50%) translateY(100px);
             background: var(--bg-card);
             border: 1px solid var(--border);
-            color: var(--text);
             padding: 12px 24px;
             border-radius: var(--radius-sm);
-            font-size: 0.85rem;
-            font-weight: 500;
-            box-shadow: var(--shadow-lg);
             z-index: 1000;
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            transition: transform 0.4s;
         }
-
         .toast.show { transform: translateX(-50%) translateY(0); }
-
-        @media (min-width: 500px) {
-            .page { max-width: 500px; margin: 0 auto; }
-            .swipe-hint { display: none !important; }
-        }
-
-        .page-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .divider { height: 1px; background: var(--border); margin: 12px 0; }
-
-        .tag {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 8px;
-            font-size: 0.65rem;
-            font-weight: 600;
-        }
-
+        
+        .loading-spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .cashea-logo { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--cashea-yellow); border-radius: 50%; }
+        .cashea-logo .c-letter { font-family: 'Arial Black', sans-serif; font-size: 0.85rem; font-weight: 900; color: var(--cashea-black); }
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-dim); }
+        .list-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 12px; gap: 8px; }
         .tag-cashea { background: rgba(255, 215, 0, 0.15); color: var(--cashea-yellow); }
-        .tag-user { background: rgba(255, 71, 87, 0.15); color: var(--expense-red); }
-        .tag-total { background: rgba(108, 92, 231, 0.15); color: var(--primary-light); }
-
-        .imaginary-result {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 14px;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .imaginary-result.visible {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .imaginary-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 8px;
-        }
-        .imaginary-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xs);
-            padding: 10px;
-            text-align: center;
-        }
-
-        .imaginary-card .ic-label {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .imaginary-card .ic-value { font-size: 1rem; font-weight: 700; margin-top: 4px; }
-        .imaginary-card .ic-sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
-
-        .imaginary-card.cashea-card { border-color: rgba(255, 215, 0, 0.3); }
-        .imaginary-card.cashea-card .ic-value { color: var(--cashea-yellow); }
-
-        .imaginary-card.user-card { border-color: rgba(255, 71, 87, 0.3); }
-        .imaginary-card.user-card .ic-value { color: var(--expense-red); }
-
-        .imaginary-card.total-card {
-            border-color: rgba(108, 92, 231, 0.3);
-            grid-column: span 2;
-        }
-
-        .imaginary-card.total-card .ic-value { color: var(--accent); }
-
-        .list-management-toggle {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 12px 16px;
-            margin-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: var(--shadow);
-        }
-
-        .list-management-toggle:hover {
-            border-color: var(--primary);
-            background: var(--bg-hover);
-        }
-
-        .list-management-toggle .toggle-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .list-management-toggle .toggle-icon {
-            font-size: 1.2rem;
-            transition: transform 0.3s;
-        }
-
-        .list-management-toggle.active .toggle-icon {
-            transform: rotate(180deg);
-        }
-
-        .list-management-section {
-            display: none;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 16px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow);
-            animation: slideDown 0.3s ease;
-        }
-
-        .list-management-section.visible {
-            display: block;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .list-management-section h3 {
-            font-size: 0.9rem;
-            color: var(--primary-light);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 20px;
-        }
-
-        .modal-overlay.visible {
-            display: flex;
-        }
-
-        .modal {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
-            max-width: 400px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: modalIn 0.3s ease;
-        }
-
-        @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .modal h3 {
-            font-size: 1.1rem;
-            margin-bottom: 16px;
-            color: var(--text);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-        .close-modal:hover {
-            background: var(--bg-hover);
-            color: var(--text);
-        }
-
-        .unit-badge {
-            display: inline-block;
-            background: var(--bg-input);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-left: 4px;
-        }
-
-        .btn-icon {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 1rem;
-            padding: 4px;
-            border-radius: 50%;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-icon:hover {
-            background: var(--bg-hover);
-            color: var(--primary-light);
-        }
-
-        .offline-badge {
-            background: rgba(255, 107, 107, 0.15);
-            border: 1px solid var(--danger);
-            color: var(--danger);
-            padding: 8px 12px;
-            border-radius: var(--radius-xs);
-            font-size: 0.75rem;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-
-        .manual-rate-section {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 12px;
-            margin-top: 8px;
-        }
-
-        /* ==========================================
-           🖥️ ADAPTACIÓN ESCRITORIO - CORREGIDA
-           ========================================== */
-        @media (min-width: 992px) {
-            body {
-                display: flex !important;
-                justify-content: center !important;
-                align-items: flex-start !important;
-                min-height: 100vh !important;
-                padding: 2rem !important;
-            }
-
-            .app-container {
-                width: 100% !important;
-                max-width: 1200px !important;
-                margin: 0 auto !important;
-                background: var(--bg-card) !important;
-                border-radius: 20px !important;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.2) !important;
-                padding: 2.5rem !important;
-                box-sizing: border-box !important;
-            }
-
-            /* ✅ PÁGINAS: Mostrar solo una a la vez */
-            .pages-wrapper {
-                width: 100% !important;
-                transform: none !important;
-            }
-
-            .page {
-                width: 100% !important;
-                padding: 0 !important;
-                min-height: auto !important;
-            }
-
-            /* Ocultar calculadora por defecto */
-            #pageCalc { 
-                display: none !important;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-            }
-            
-            /* Mostrar calculadora cuando está activa */
-            #pageCalc.active { 
-                display: block !important;
-                position: static;
-            }
-            
-            /* Ocultar lista cuando calculadora está activa */
-            #pageList.hidden {
-                display: none !important;
-            }
-
-            /* === TIPOGRAFÍA GRANDE === */
-            body, p, span, label, input, select, button {
-                font-size: 1.125rem !important;
-                line-height: 1.6 !important;
-            }
-
-            h1, .header h1 { font-size: 2.25rem !important; }
-            h2, h3, .page-title, .section-title, .add-form h3, .calc-section h3 { 
-                font-size: 1.5rem !important;
-                margin-bottom: 1.25rem !important;
-            }
-            
-            small, .badge, .unit, .text-small, .chip-label { 
-                font-size: 0.875rem !important;
-            }
-            
-            .chip-value { 
-                font-size: 1.125rem !important;
-            }
-
-            /* === HEADER === */
-            .header {
-                position: sticky !important;
-                top: 0 !important;
-                z-index: 100 !important;
-                padding: 1.5rem 2.5rem !important;
-                margin: -2.5rem -2.5rem 2rem -2.5rem !important;
-                border-radius: 20px 20px 0 0 !important;
-                backdrop-filter: blur(10px) !important;
-            }
-
-            .header-info { gap: 1.5rem !important; }
-            .info-chip { 
-                padding: 1rem 1.5rem !important;
-                font-size: 1rem !important;
-            }
-
-            /* === FORMULARIOS === */
-            .form-group input,
-            .form-group select,
-            input[type="text"],
-            input[type="number"],
-            select,
-            textarea {
-                padding: 1rem 1.25rem !important;
-                font-size: 1.125rem !important;
-                min-height: 52px !important;
-            }
-
-            .form-row { 
-                gap: 1.5rem !important; 
-                margin-bottom: 1.25rem !important;
-            }
-            
-            .form-group { 
-                gap: 0.5rem !important;
-            }
-            
-            .form-group label { 
-                font-size: 0.875rem !important;
-                font-weight: 600 !important;
-            }
-
-            /* === BOTONES === */
-            .btn {
-                padding: 1rem 2rem !important;
-                font-size: 1.125rem !important;
-                min-height: 52px !important;
-                border-radius: 12px !important;
-            }
-
-            .btn-sm {
-                padding: 0.75rem 1.25rem !important;
-                font-size: 1rem !important;
-                min-height: 44px !important;
-            }
-
-            .calc-toggle, .theme-toggle {
-                padding: 0.875rem 1.75rem !important;
-                font-size: 1rem !important;
-            }
-
-            /* === LISTA DE PRODUCTOS - GRID ESPACIOSA === */
-            .product-list {
-                display: grid !important;
-                grid-template-columns: 1fr !important; /* UNA COLUMNA ANCHA */
-                gap: 1.25rem !important;
-            }
-
-            .product-item {
-                padding: 1.5rem 2rem !important;
-                border-radius: 12px !important;
-                transition: transform 0.2s, box-shadow 0.2s !important;
-                gap: 1.5rem !important;
-            }
-
-            .product-item:hover {
-                transform: translateY(-2px) !important;
-                box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
-            }
-
-            /* ✅ NOMBRE DE PRODUCTO: permitir wrap y más grande */
-            .product-name { 
-                font-size: 1.25rem !important;
-                font-weight: 700 !important;
-                white-space: normal !important; /* Permitir salto de línea */
-                overflow: visible !important;
-                text-overflow: clip !important;
-                word-break: break-word !important;
-                line-height: 1.4 !important;
-            }
-            
-            .product-details {
-                font-size: 1rem !important;
-                margin-top: 0.5rem !important;
-            }
-
-            .product-price {
-                text-align: right;
-            }
-            
-            .product-price-usd { 
-                font-size: 1.5rem !important;
-                font-weight: 700 !important;
-            }
-            
-            .product-price-bs { 
-                font-size: 1.125rem !important;
-                margin-top: 0.25rem !important;
-            }
-
-            .product-checkbox {
-                width: 28px !important;
-                height: 28px !important;
-            }
-
-            .product-delete {
-                width: 40px !important;
-                height: 40px !important;
-                font-size: 1.25rem !important;
-            }
-
-            /* === TOTALES === */
-            .totals-section {
-                display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 1.25rem !important;
-            }
-
-            .total-row {
-                padding: 1.5rem 2rem !important;
-                border-radius: 12px !important;
-                border-bottom: none !important;
-            }
-
-            .total-label {
-                font-size: 1rem !important;
-            }
-            
-            .total-usd { 
-                font-size: 1.75rem !important;
-                font-weight: 700 !important;
-            }
-            
-            .total-bs { 
-                font-size: 1.125rem !important;
-            }
-
-            /* === CALCULADORA === */
-            .calculator-panel {
-                display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 2.5rem !important;
-                padding-top: 1rem !important;
-            }
-
-            .calc-section {
-                margin-bottom: 0 !important;
-                padding: 2rem !important;
-            }
-
-            .calc-back-btn {
-                left: 2.5rem !important;
-                padding: 0.875rem 1.75rem !important;
-                font-size: 1rem !important;
-                top: 1rem !important;
-            }
-
-            .calc-input-group { 
-                gap: 1.25rem !important;
-                margin-bottom: 1.25rem !important;
-            }
-            
-            .swap-btn { 
-                width: 52px !important; 
-                height: 52px !important;
-                font-size: 1.25rem !important;
-            }
-
-            .calc-btn {
-                padding: 1rem 2rem !important;
-                font-size: 1.125rem !important;
-            }
-
-            .calc-result-label {
-                font-size: 1rem !important;
-            }
-            
-            .calc-result-value {
-                font-size: 1.25rem !important;
-            }
-
-            /* === MODALES === */
-            .modal {
-                max-width: 650px !important;
-                margin: 10vh auto !important;
-                padding: 2.5rem !important;
-                border-radius: 16px !important;
-            }
-
-            .modal h3 { 
-                font-size: 1.5rem !important;
-            }
-            
-            .close-modal { 
-                width: 40px !important; 
-                height: 40px !important;
-                font-size: 1.75rem !important;
-            }
-
-            /* === TOAST === */
-            .toast {
-                top: 2.5rem !important;
-                right: 2.5rem !important;
-                left: auto !important;
-                bottom: auto !important;
-                transform: translateX(450px) !important;
-                max-width: 450px !important;
-                padding: 1.25rem 2rem !important;
-                font-size: 1.125rem !important;
-                border-radius: 12px !important;
-            }
-
-            .toast.show { transform: translateX(0) !important; }
-
-            /* === SCROLL === */
-            .page,
-            .modal,
-            [style*="overflow"] {
-                scrollbar-width: thin !important;
-                scrollbar-color: var(--primary) transparent !important;
-            }
-
-            .page::-webkit-scrollbar,
-            .modal::-webkit-scrollbar { 
-                width: 10px !important;
-            }
-
-            .page::-webkit-scrollbar-track,
-            .modal::-webkit-scrollbar-track { 
-                background: transparent !important;
-            }
-
-            .page::-webkit-scrollbar-thumb,
-            .modal::-webkit-scrollbar-thumb {
-                background: var(--primary) !important;
-                border-radius: 5px !important;
-            }
-
-            /* === ACCESIBILIDAD === */
-            button:focus-visible,
-            input:focus-visible,
-            select:focus-visible,
-            [tabindex]:focus-visible {
-                outline: 3px solid var(--accent) !important;
-                outline-offset: 2px !important;
-            }
-
-            /* === UTILIDADES === */
-            .divider { margin: 2.5rem 0 !important; }
-            .badge, .pill, [class*="level"] { 
-                padding: 0.625rem 1.25rem !important;
-                font-size: 1rem !important;
-            }
-
-            .unit-badge {
-                padding: 0.375rem 0.75rem !important;
-                font-size: 0.875rem !important;
-                margin-left: 0.5rem !important;
-            }
-
-            .swipe-hint { display: none !important; }
-            
-            .list-management-toggle {
-                padding: 1.25rem 1.75rem !important;
-                margin-bottom: 2rem !important;
-            }
-            
-            .list-management-section {
-                padding: 2rem !important;
-                margin-bottom: 2rem !important;
-            }
-            
-            .add-form {
-                padding: 2rem !important;
-                margin-bottom: 2.5rem !important;
-            }
-            
-            .list-header {
-                margin-bottom: 2rem !important;
-            }
-            
-            .list-header h3 {
-                font-size: 1.5rem !important;
-            }
-        }
-
-        @media (min-width: 992px) and (prefers-color-scheme: dark) {
-            body {
-                background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%) !important;
-            }
-            .app-container {
-                background: var(--bg-card) !important;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.4) !important;
-            }
-            .product-item, .calc-section, .modal {
-                border-color: var(--border) !important;
-            }
-            .total-row, .summary-item {
-                background: var(--bg-input) !important;
-            }
-        }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-overlay.visible { display: flex; }
     </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
 <header class="header">
     <div class="header-top">
-        <h1>🛒 Mi Mercado</h1>
+        <h1>🛒 Mi Mercado + Cashea</h1>
         <div class="header-actions">
-            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Cambiar tema">🌙</button>
-            <button class="calc-toggle" onclick="openCalculator()">🧮 Calculadora</button>
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+            <button class="calc-toggle mobile-only" onclick="openCalculator()">🧮 Calculadora</button>
         </div>
     </div>
     <div class="header-info">
-        <div class="info-chip">
-            <span class="chip-icon">💵</span>
-            <div class="chip-content">
-                <span class="chip-label">Tasa BCV</span>
-                <span class="chip-value" id="rateDisplay">Cargando...</span>
-            </div>
-        </div>
-        <div class="info-chip" style="flex:0 0 auto;">
-            <span class="chip-icon">
-                <div class="cashea-logo"><span class="c-letter">C</span></div>
-            </span>
-            <div class="chip-content">
-                <span class="chip-label">Nivel Cashea</span>
-                <select id="casheaLevel" onchange="updateTotals()" style="background:transparent; border:none; color:var(--text); font-size:0.85rem; font-weight:700; cursor:pointer; padding:0;">
-                    <option value="1">Nivel 1 — 40%</option>
-                    <option value="2" selected>Nivel 2 — 50%</option>
-                    <option value="3">Nivel 3 — 60%</option>
-                </select>
-            </div>
-        </div>
+        <div class="info-chip"><span class="chip-icon">💵</span><div class="chip-content"><span class="chip-label">Tasa BCV</span><span class="chip-value" id="rateDisplay">Cargando...</span></div></div>
+        <div class="info-chip"><span class="chip-icon"><div class="cashea-logo"><span class="c-letter">C</span></div></span><div class="chip-content"><span class="chip-label">Nivel Cashea</span><select id="casheaLevel" onchange="updateTotals()"><option value="1">Nivel 1 — 40%</option><option value="2" selected>Nivel 2 — 50%</option><option value="3">Nivel 3 — 60%</option></select></div></div>
     </div>
     <div class="last-update" id="lastUpdate"></div>
     <div id="manualRateContainer"></div>
 </header>
 
-<div class="swipe-hint swipe-hint-right" id="swipeHintRight" onclick="openCalculator()">CALCULADORA</div>
-<div class="swipe-hint swipe-hint-left" id="swipeHintLeft" onclick="closeCalculator()">LISTA</div>
+<div class="swipe-hint swipe-hint-right mobile-only" id="swipeHintRight" onclick="openCalculator()">📱 CALCULADORA →</div>
+<div class="swipe-hint swipe-hint-left mobile-only" id="swipeHintLeft" onclick="closeCalculator()">← LISTA</div>
 
-<div class="app-container">
-    <div class="pages-wrapper" id="pagesWrapper">
+<div class="app-wrapper">
+    <div class="two-columns">
+        <div class="column-left">
+            <div class="pages-wrapper" id="pagesWrapper">
+                <!-- Página LISTA -->
+                <div class="page" id="pageList">
+                    <div class="list-management-toggle" onclick="toggleListManagement()" style="background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; cursor:pointer;">
+                        <div class="toggle-title"><span>📋</span><span>Gestión de Listas</span></div>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="list-management-section" id="listManagementSection" style="display:none;">
+                        <h3>📋 Gestión de Listas</h3>
+                        <div style="margin-bottom:12px;"><label>Lista activa</label><select id="listSelect" onchange="switchList(this.value)" style="width:100%; background:var(--bg-input); padding:10px;"></select></div>
+                        <div style="display:flex; flex-direction:column; gap:8px;">
+                            <button class="btn btn-primary" onclick="createNewList()">➕ Crear Nueva Lista</button>
+                            <button class="btn btn-outline" onclick="copyCurrentList()">📋 Copiar Lista Actual</button>
+                            <button class="btn btn-outline" onclick="exportCurrentList()">📤 Exportar / Compartir</button>
+                            <button class="btn btn-outline" onclick="openImportModal()">📥 Importar Lista</button>
+                            <button class="btn btn-outline" onclick="deleteCurrentList()" style="color:var(--danger);">🗑️ Eliminar Lista</button>
+                        </div>
+                    </div>
 
-        <!-- ===== PAGE 1: LISTA ===== -->
-        <div class="page" id="pageList">
-            <!-- Toggle para Gestión de Listas -->
-            <div class="list-management-toggle" id="listManagementToggle" onclick="toggleListManagement()">
-                <div class="toggle-title">
-                    <span>📋</span>
-                    <span>Gestión de Listas</span>
-                </div>
-                <span class="toggle-icon">▼</span>
-            </div>
+                    <div class="add-form">
+                        <h3>➕ Agregar Producto</h3>
+                        <div class="form-row"><div class="form-group" style="flex:2;"><label>Producto</label><input type="text" id="prodName" placeholder="Ej: Harina Pan"></div><div class="form-group"><label>Cantidad</label><input type="number" id="prodQty" placeholder="1" min="1" value="1"></div></div>
+                        <div class="form-row"><div class="form-group"><label>Unidad</label><input type="text" id="prodUnit" placeholder="Kg, Und"></div><div class="form-group"><label>Precio ($)</label><input type="number" id="prodPrice" placeholder="0.00" step="0.01"></div></div>
+                        <button class="btn btn-primary" onclick="addProduct()">➕ Agregar</button>
+                    </div>
 
-            <!-- Sección de Gestión de Listas (Oculto por defecto) -->
-            <div class="list-management-section" id="listManagementSection">
-                <h3>📋 Gestión de Listas</h3>
-                <div style="margin-bottom:12px;">
-                    <label style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; display:block; margin-bottom:6px;">Lista activa</label>
-                    <select id="listSelect" onchange="switchList(this.value)" style="width:100%; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-xs); padding:10px 12px; color:var(--text); font-size:0.9rem;"></select>
-                </div>
-                <div style="display:flex; flex-direction:column; gap:8px;">
-                    <button class="btn btn-primary" onclick="createNewList()">➕ Crear Nueva Lista</button>
-                    <button class="btn btn-outline" onclick="copyCurrentList()">📋 Copiar Lista Actual</button>
-                    <button class="btn btn-outline" onclick="exportCurrentList()">📤 Exportar / Compartir</button>
-                    <button class="btn btn-outline" onclick="openImportModal()">📥 Importar Lista</button>
-                    <button class="btn btn-outline" onclick="deleteCurrentList()" style="color:var(--danger); border-color:var(--danger);">🗑️ Eliminar Lista</button>
-                </div>
-            </div>
+                    <div class="list-header"><h3>📋 <span id="listNameDisplay">Mi Lista</span> (<span id="itemCount">0</span>) <button class="btn-icon" onclick="editListName()">✏️</button></h3><div class="list-actions"><button class="btn btn-sm btn-outline" onclick="clearList()">🗑️ Borrar todo</button><button class="btn btn-sm btn-outline" onclick="exportCurrentList()">📤 Compartir</button></div></div>
+                    <div class="product-list" id="productList"><div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.</p></div></div>
 
-            <div class="add-form">
-                <h3>➕ Agregar Producto</h3>
-                <div class="form-row">
-                    <div class="form-group" style="flex:2;">
-                        <label>Producto</label>
-                        <input type="text" id="prodName" placeholder="Ej: Harina Pan">
-                    </div>
-                    <div class="form-group">
-                        <label>Cantidad</label>
-                        <input type="number" id="prodQty" placeholder="1" min="1" value="1">
+                    <div class="totals-section" id="totalsSection" style="display:none;">
+                        <div class="total-row"><span>📦 Total lista</span><div><div class="total-usd" id="totalUsd">$0.00</div><div class="total-bs" id="totalBs">Bs. 0,00</div></div></div>
+                        <div class="total-row highlight"><span>✅ Seleccionado</span><div><div class="total-usd" id="checkedUsd">$0.00</div><div class="total-bs" id="checkedBs">Bs. 0,00</div></div></div>
+                        <div class="total-row cashea"><span><div class="cashea-logo"><span class="c-letter">C</span></div> Cashea financia (<span id="casheaPercent">50</span>%)</span><div><div class="total-usd" id="casheaUsd">$0.00</div><div class="total-bs" id="casheaBs">Bs. 0,00</div></div></div>
+                        <div class="total-row expense"><span>💳 Pago inicial</span><div><div class="total-usd" id="userPayUsd">$0.00</div><div class="total-bs" id="userPayBs">Bs. 0,00</div></div></div>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Unidad (opcional)</label>
-                        <input type="text" id="prodUnit" placeholder="Ej: Kg, Und, 200gr">
-                    </div>
-                    <div class="form-group">
-                        <label>Precio unitario ($)</label>
-                        <input type="number" id="prodPrice" placeholder="0.00" step="0.01" min="0">
-                    </div>
-                </div>
-                <button class="btn btn-primary" onclick="addProduct()">➕ Agregar</button>
-            </div>
-            <div class="list-header">
-                <h3 id="listTitle">📋 Mi Lista (<span id="itemCount">0</span>) <button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button></h3>
-                <div class="list-actions">
-                    <button class="btn btn-sm btn-outline" onclick="clearList()">🗑️ Borrar todo</button>
-                    <button class="btn btn-sm btn-outline" onclick="exportCurrentList()">📤 Compartir</button>
-                </div>
-            </div>
 
-            <div class="product-list" id="productList">
-                <div class="empty-state">
-                    <div class="empty-icon">🛒</div>
-                    <p>Tu lista está vacía.<br>Agrega productos para empezar.</p>
-                </div>
-            </div>
-
-            <div class="totals-section" id="totalsSection" style="display:none;">
-                <div class="total-row">
-                    <span class="total-label">📦 Total lista</span>
-                    <div class="total-values">
-                        <div class="total-usd" id="totalUsd">$0.00</div>
-                        <div class="total-bs" id="totalBs">Bs. 0,00</div>
-                    </div>
-                </div>
-                <div class="total-row highlight">
-                    <span class="total-label">✅ Seleccionado</span>
-                    <div class="total-values">
-                        <div class="total-usd" id="checkedUsd">$0.00</div>
-                        <div class="total-bs" id="checkedBs">Bs. 0,00</div>
-                    </div>
-                </div>
-                <div class="total-row cashea">
-                    <span class="total-label">
-                        <div class="cashea-logo"><span class="c-letter">C</span></div>
-                        Cashea financia (<span id="casheaPercent">50</span>%)
-                    </span>
-                    <div class="total-values">
-                        <div class="total-usd" id="casheaUsd">$0.00</div>
-                        <div class="total-bs" id="casheaBs">Bs. 0,00</div>
-                    </div>
-                </div>
-                <div class="total-row expense">
-                    <span class="total-label">💳 Pago inicial</span>
-                    <div class="total-values">
-                        <div class="total-usd" id="userPayUsd">$0.00</div>
-                        <div class="total-bs" id="userPayBs">Bs. 0,00</div>
-                    </div>
+                <!-- Página CALCULADORA (mobile) -->
+                <div class="page" id="pageCalc">
+                    <button class="calc-back-btn mobile-only" onclick="closeCalculator()" style="margin-bottom:12px;">← Volver</button>
+                    <div class="calc-section"><h3>💱 Conversión</h3><div class="form-row"><div class="form-group"><input type="number" id="convAmount" placeholder="Monto"></div><div class="form-group"><select id="convFrom"><option value="USD">USD</option><option value="BS">Bs.</option></select></div><button class="btn btn-sm" onclick="swapConversion()">⇄</button></div><button class="btn btn-primary" onclick="calculateConversion()">Convertir</button><div id="convResult" class="calc-result" style="display:none; margin-top:10px;"></div></div>
+                    <div class="calc-section"><h3>🛡️ Cobertura</h3><div class="manual-toggle"><label class="toggle-switch"><input type="checkbox" id="manualToggle" onchange="toggleManualInput()"><span class="toggle-slider"></span></label><span>Manual</span></div><div id="manualInputs" style="display:none;"><input type="number" id="manualAmount" placeholder="Monto en USD"></div><button class="btn btn-primary" onclick="calculateCoverage()">Calcular</button><div id="coverageResult" class="calc-result" style="display:none; margin-top:10px;"></div></div>
+                    <div class="calc-section"><h3>🧠 Compra Imaginaria</h3><div class="form-group"><input type="number" id="imagCapital" placeholder="Capital total ($)"></div><div class="form-group"><input type="number" id="imagRemain" placeholder="Monto que quieres que te quede ($)"></div><button class="btn btn-primary" onclick="calculateImaginary()">Calcular</button><div id="imaginaryResult" class="imaginary-result" style="display:none; margin-top:10px;"></div></div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== PAGE 2: CALCULADORA ===== -->
-        <div class="page calculator-panel" id="pageCalc">
-            <button class="calc-back-btn" onclick="closeCalculator()">← Volver a la lista</button>
-
-            <div class="calc-section" style="margin-top:48px;">
-                <h3>💱 Conversión Dólar ↔ Bolívares</h3>
-                <div class="calc-input-group">
-                    <div class="form-group">
-                        <label>Monto</label>
-                        <input type="number" id="convAmount" placeholder="0.00" step="0.01" min="0">
-                    </div>
-                    <div class="form-group">
-                        <label>De</label>
-                        <select id="convFrom">
-                            <option value="USD">Dólares ($)</option>
-                            <option value="BS">Bolívares (Bs.)</option>
-                        </select>
-                    </div>
-                    <button class="swap-btn" onclick="swapConversion()" title="Intercambiar">⇄</button>
-                </div>
-                <button class="calc-btn" onclick="calculateConversion()">🔄 Convertir</button>
-                <div class="calc-result" id="convResult">
-                    <div class="calc-result-row">
-                        <span class="calc-result-label">Resultado:</span>
-                        <span class="calc-result-value usd" id="convResultValue"></span>
-                    </div>
-                    <div class="calc-result-row">
-                        <span class="calc-result-label">Tasa usada:</span>
-                        <span class="calc-result-value bs" id="convRateUsed"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="calc-section">
-                <h3>🛡️ Calculadora de Cobertura</h3>
-                <div class="manual-toggle">
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="manualToggle" onchange="toggleManualInput()">
-                        <span class="toggle-slider"></span>
-                    </label>
-                    <span class="toggle-label">Ingresar monto manual</span>
-                </div>
-                <div id="listInfo" class="info-badge">📋 Usando total seleccionado de la lista</div>
-                <div class="manual-inputs" id="manualInputs">
-                    <div class="calc-input-group">
-                        <div class="form-group">
-                            <label>Monto de la compra ($)</label>
-                            <input type="number" id="manualAmount" placeholder="0.00" step="0.01" min="0">
-                        </div>
-                    </div>
-                </div>
-                <div class="calc-input-group">
-                    <div class="form-group">
-                        <label>Nivel Cashea</label>
-                        <select id="calcCasheaLevel">
-                            <option value="1">Nivel 1 — 40%</option>
-                            <option value="2" selected>Nivel 2 — 50%</option>
-                            <option value="3">Nivel 3 — 60%</option>
-                        </select>
-                    </div>
-                </div>
-                <button class="calc-btn" onclick="calculateCoverage()">📊 Calcular Cobertura</button>
-                <div class="calc-result" id="coverageResult">
-                    <div class="calc-result-row">
-                        <span class="calc-result-label">Total compra:</span>
-                        <span class="calc-result-value usd" id="covTotalUsd"></span>
-                    </div>
-                    <div class="calc-result-row">
-                        <span class="calc-result-label"> </span>
-                        <span class="calc-result-value bs" id="covTotalBs"></span>
-                    </div>
-                    <div class="calc-result-row">
-                        <span class="calc-result-label">Cashea financia:</span>
-                        <span class="calc-result-value cashea-val" id="covCasheaUsd"></span>
-                    </div>
-                    <div class="calc-result-row">
-                        <span class="calc-result-label"> </span>
-                        <span class="calc-result-value cashea-val" id="covCasheaBs"></span>
-                    </div>
-                    <div class="calc-result-row">
-                        <span class="calc-result-label">Pago inicial:</span>
-                        <span class="calc-result-value user-val" id="covUserUsd"></span>
-                    </div>
-                    <div class="calc-result-row">
-                        <span class="calc-result-label"> </span>
-                        <span class="calc-result-value user-val" id="covUserBs"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="calc-section">
-                <h3>🧠 Compra Imaginaria</h3>
-                <p style="font-size:0.75rem; color:var(--text-muted); margin-bottom:12px;">
-                    ¿Cuánto debes gastar para que te quede exactamente el monto que deseas?
-                </p>
-                <div class="calc-input-group">
-                    <div class="form-group">
-                        <label>Capital total disponible ($)</label>
-                        <input type="number" id="imagCapital" placeholder="Ej: 100" step="0.01" min="0">
-                    </div>
-                </div>
-                <div class="calc-input-group">
-                    <div class="form-group">
-                        <label>Monto que quieres que te quede ($)</label>
-                        <input type="number" id="imagRemain" placeholder="Ej: 25" step="0.01" min="0">
-                    </div>
-                </div>
-                <div class="calc-input-group">
-                    <div class="form-group">
-                        <label>Nivel Cashea</label>
-                        <select id="imagCasheaLevel">
-                            <option value="1">Nivel 1 — 40%</option>
-                            <option value="2" selected>Nivel 2 — 50%</option>
-                            <option value="3">Nivel 3 — 60%</option>
-                        </select>
-                    </div>
-                </div>
-                <button class="calc-btn" onclick="calculateImaginary()">🧮 Calcular</button>
-                <div class="imaginary-result" id="imaginaryResult">
-                    <div style="text-align:center; margin-bottom:10px;">
-                        <span class="tag tag-total">COMPRA QUE DEBES HACER</span>
-                    </div>
-                    <div class="imaginary-grid">
-                        <div class="imaginary-card total-card">
-                            <div class="ic-label">Total de tu compra</div>
-                            <div class="ic-value" id="imagPurchaseUsd">$0.00</div>
-                            <div class="ic-sub" id="imagPurchaseBs">Bs. 0,00</div>
-                        </div>
-                        <div class="imaginary-card cashea-card">
-                            <div class="ic-label">
-                                <div class="cashea-logo" style="width:18px;height:18px;margin:0 auto 4px;"><span class="c-letter" style="font-size:0.65rem;">C</span></div>
-                                Cashea financia
-                            </div>
-                            <div class="ic-value" id="imagCasheaUsd">$0.00</div>
-                            <div class="ic-sub" id="imagCasheaBs">Bs. 0,00</div>
-                        </div>
-                        <div class="imaginary-card user-card">
-                            <div class="ic-label">💳 Pago inicial</div>
-                            <div class="ic-value" id="imagUserUsd">$0.00</div>
-                            <div class="ic-sub" id="imagUserBs">Bs. 0,00</div>
-                        </div>
-                    </div>
-                    <div style="text-align:center; margin-top:12px;">
-                        <div style="font-size:0.75rem; color:var(--text-muted);">Te quedarían exactamente:</div>
-                        <div style="font-size:1.2rem; font-weight:700; color:var(--accent); margin-top:4px;" id="imagRemainUsd">$0.00</div>
-                        <div style="font-size:0.8rem; color:var(--text-muted);" id="imagRemainBs">Bs. 0,00</div>
-                    </div>
-                </div>
-            </div>
+        <!-- COLUMNA DERECHA: CALCULADORA (solo en desktop) -->
+        <div class="column-right desktop-only">
+            <div class="calc-section"><h3>💱 Conversión Dólar ↔ Bolívares</h3><div class="form-row"><div class="form-group"><input type="number" id="convAmountDesktop" placeholder="Monto"></div><div class="form-group"><select id="convFromDesktop"><option value="USD">USD</option><option value="BS">Bs.</option></select></div><button class="btn btn-sm" onclick="swapConversionDesktop()">⇄</button></div><button class="btn btn-primary" onclick="calculateConversionDesktop()">Convertir</button><div id="convResultDesktop" class="calc-result" style="display:none; margin-top:10px;"></div></div>
+            <div class="calc-section"><h3>🛡️ Calculadora de Cobertura</h3><div class="manual-toggle"><label class="toggle-switch"><input type="checkbox" id="manualToggleDesktop" onchange="toggleManualInputDesktop()"><span class="toggle-slider"></span></label><span>Ingresar monto manual</span></div><div id="manualInputsDesktop" style="display:none;"><input type="number" id="manualAmountDesktop" placeholder="Monto de compra ($)"></div><div class="form-group"><label>Nivel Cashea</label><select id="calcCasheaLevelDesktop"><option value="1">Nivel 1 — 40%</option><option value="2" selected>Nivel 2 — 50%</option><option value="3">Nivel 3 — 60%</option></select></div><button class="btn btn-primary" onclick="calculateCoverageDesktop()">Calcular Cobertura</button><div id="coverageResultDesktop" class="calc-result" style="display:none; margin-top:10px;"></div></div>
+            <div class="calc-section"><h3>🧠 Compra Imaginaria</h3><div class="form-group"><input type="number" id="imagCapitalDesktop" placeholder="Capital total disponible ($)"></div><div class="form-group"><input type="number" id="imagRemainDesktop" placeholder="Monto que quieres que te quede ($)"></div><div class="form-group"><select id="imagCasheaLevelDesktop"><option value="1">Nivel 1 — 40%</option><option value="2" selected>Nivel 2 — 50%</option><option value="3">Nivel 3 — 60%</option></select></div><button class="btn btn-primary" onclick="calculateImaginaryDesktop()">Calcular</button><div id="imaginaryResultDesktop" class="imaginary-result" style="display:none; margin-top:10px;"></div></div>
         </div>
     </div>
 </div>
 
-<!-- ===== MODAL: IMPORTAR ===== -->
-<div class="modal-overlay" id="importModal" onclick="if(event.target===this)closeImportModal()">
-    <div class="modal">
-        <h3>📥 Importar Lista</h3>
-        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Pega el código de la lista que quieres importar:</p>
-        <textarea id="importText" style="width:100%; min-height:120px; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius-xs); padding:12px; color:var(--text); font-family:monospace; font-size:0.8rem; resize:vertical;" placeholder="Pega aquí el código..."></textarea>
-        <div style="display:flex; gap:8px; margin-top:12px;">
-            <button class="btn btn-outline" onclick="closeImportModal()" style="flex:1;">Cancelar</button>
-            <button class="btn btn-primary" onclick="importList()" style="flex:1;">Importar</button>
-        </div>
-    </div>
-</div>
-
-<!-- ===== MODAL: RENOMBRAR ===== -->
-<div class="modal-overlay" id="renameModal" onclick="if(event.target===this)closeRenameModal()">
-    <div class="modal">
-        <h3>✏️ Renombrar Lista</h3>
-        <div class="form-group" style="margin-bottom:16px;">
-            <label>Nuevo nombre</label>
-            <input type="text" id="newListName" placeholder="Ej: Mercado Central">
-        </div>
-        <div style="display:flex; gap:8px;">
-            <button class="btn btn-outline" onclick="closeRenameModal()" style="flex:1;">Cancelar</button>
-            <button class="btn btn-primary" onclick="saveListName()" style="flex:1;">Guardar</button>
-        </div>
-    </div>
-</div>
-
+<div class="modal-overlay" id="importModal" onclick="if(event.target===this)closeImportModal()"><div class="modal"><h3>📥 Importar Lista</h3><textarea id="importText" rows="4" style="width:100%; background:var(--bg-input); padding:10px;"></textarea><div style="display:flex; gap:8px; margin-top:12px;"><button class="btn btn-outline" onclick="closeImportModal()">Cancelar</button><button class="btn btn-primary" onclick="importList()">Importar</button></div></div></div>
+<div class="modal-overlay" id="renameModal" onclick="if(event.target===this)closeRenameModal()"><div class="modal"><h3>✏️ Renombrar Lista</h3><input type="text" id="newListName" style="width:100%; background:var(--bg-input); padding:10px;"><div style="display:flex; gap:8px; margin-top:12px;"><button class="btn btn-outline" onclick="closeRenameModal()">Cancelar</button><button class="btn btn-primary" onclick="saveListName()">Guardar</button></div></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1816,643 +473,108 @@ let dollarRate = 0;
 let currentPage = 0;
 let currentListId = 'default';
 let marketLists = {};
+const CASHEA_LEVELS = { 1: 0.40, 2: 0.50, 3: 0.60 };
 
-const CASHEA_LEVELS = {
-    1: 0.40,
-    2: 0.50,
-    3: 0.60
-};
+// ===== INICIALIZACIÓN =====
+document.addEventListener('DOMContentLoaded', () => { loadLists(); fetchRate(); loadTheme(); setupSwipe(); });
 
-// ===== INIT =====
-document.addEventListener('DOMContentLoaded', () => {
-    loadLists();
-    fetchRate();
-    loadTheme();
-    setupSwipe();
-});
-
-// ===== TOGGLE GESTIÓN DE LISTAS =====
-function toggleListManagement() {
-    const toggle = document.getElementById('listManagementToggle');
-    const section = document.getElementById('listManagementSection');
-    
-    toggle.classList.toggle('active');
-    section.classList.toggle('visible');
-    
-    if (section.classList.contains('visible')) {
-        updateListSelector();
-    }
-}
-
-// ===== GESTIÓN DE LISTAS =====
 function loadLists() {
-    try {
-        const saved = localStorage.getItem('market_lists_v2');
-        if (saved) marketLists = JSON.parse(saved);
-    } catch(e) {
-        marketLists = {};
-    }
+    try { const saved = localStorage.getItem('market_lists_v2'); if (saved) marketLists = JSON.parse(saved); } catch(e) { marketLists = {}; }
+    if (!marketLists['default']) marketLists['default'] = { id: 'default', name: 'Mi Lista', products: [], createdAt: new Date().toISOString() };
+    saveLists(); if (!marketLists[currentListId]) currentListId = 'default';
+    renderListTitle(); renderProducts(); updateTotals();
+}
+function saveLists() { localStorage.setItem('market_lists_v2', JSON.stringify(marketLists)); }
+function getCurrentList() { return marketLists[currentListId] || marketLists['default']; }
+function getProducts() { return getCurrentList().products || []; }
+function setProducts(arr) { getCurrentList().products = arr; saveLists(); }
+function renderListTitle() { document.getElementById('listNameDisplay').innerText = getCurrentList().name; document.getElementById('itemCount').innerText = getProducts().length; }
+function switchList(id) { if(marketLists[id]) { currentListId = id; renderListTitle(); renderProducts(); updateTotals(); showToast(`📋 ${marketLists[id].name}`); } }
+function updateListSelector() { let html = ''; for(let id in marketLists) html += `<option value="${id}" ${id===currentListId?'selected':''}>${marketLists[id].name} (${marketLists[id].products.length})</option>`; document.getElementById('listSelect').innerHTML = html; }
+function toggleListManagement() { let sec = document.getElementById('listManagementSection'); if(sec.style.display === 'none') { sec.style.display = 'block'; updateListSelector(); } else sec.style.display = 'none'; }
+function createNewList() { let name = prompt('Nombre:'); if(name) { let id = 'list_'+Date.now(); marketLists[id] = { id, name: name.trim(), products: [], createdAt: new Date().toISOString() }; saveLists(); currentListId = id; renderListTitle(); renderProducts(); updateTotals(); showToast(`✅ ${name}`); } }
+function copyCurrentList() { let name = prompt('Copia:', getCurrentList().name+' (copia)'); if(name) { let id = 'list_'+Date.now(); marketLists[id] = { id, name: name.trim(), products: JSON.parse(JSON.stringify(getProducts())), createdAt: new Date().toISOString() }; saveLists(); currentListId = id; renderListTitle(); renderProducts(); updateTotals(); showToast('✅ Lista copiada'); } }
+function deleteCurrentList() { if(currentListId==='default') { showToast('No se puede eliminar la principal'); return; } if(confirm('Eliminar?')) { delete marketLists[currentListId]; currentListId='default'; saveLists(); renderListTitle(); renderProducts(); updateTotals(); showToast('Lista eliminada'); } }
+function exportCurrentList() { let data = { name: getCurrentList().name, products: getProducts() }; let encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data)))); navigator.clipboard.writeText(encoded); showToast('✅ Código copiado'); }
+function openImportModal() { document.getElementById('importModal').classList.add('visible'); }
+function closeImportModal() { document.getElementById('importModal').classList.remove('visible'); }
+function importList() { try { let data = JSON.parse(decodeURIComponent(escape(atob(document.getElementById('importText').value)))); let name = prompt('Nombre para la lista:', data.name+' (importada)'); if(name && data.products) { let id = 'list_'+Date.now(); marketLists[id] = { id, name: name.trim(), products: data.products, createdAt: new Date().toISOString() }; saveLists(); currentListId = id; renderListTitle(); renderProducts(); updateTotals(); closeImportModal(); showToast('✅ Importada'); } } catch(e) { showToast('❌ Código inválido'); } }
+function editListName() { document.getElementById('newListName').value = getCurrentList().name; document.getElementById('renameModal').classList.add('visible'); }
+function closeRenameModal() { document.getElementById('renameModal').classList.remove('visible'); }
+function saveListName() { let name = document.getElementById('newListName').value.trim(); if(name) { getCurrentList().name = name; saveLists(); renderListTitle(); closeRenameModal(); showToast('✅ Nombre actualizado'); } }
 
-    if (!marketLists['default']) {
-        let migratedProducts = [];
-        try {
-            const old = localStorage.getItem('market_products');
-            if (old) migratedProducts = JSON.parse(old);
-        } catch(e) {}
-        marketLists['default'] = {
-            id: 'default',
-            name: 'Mi Lista',
-            products: migratedProducts,
-            createdAt: new Date().toISOString()
-        };
-        saveLists();
-    }
-
-    if (!marketLists[currentListId]) currentListId = 'default';
-    renderListTitle();
-    renderProducts();
-    updateTotals();
-}
-
-function saveLists() {
-    try {
-        localStorage.setItem('market_lists_v2', JSON.stringify(marketLists));
-    } catch(e) {
-        showToast('⚠️ Error al guardar');
-    }
-}
-
-function getCurrentList() {
-    if (!marketLists[currentListId]) currentListId = 'default';
-    return marketLists[currentListId];
-}
-
-function getProducts() {
-    return getCurrentList().products || [];
-}
-
-function setProducts(arr) {
-    getCurrentList().products = arr;
-    saveLists();
-}
-
-function renderListTitle() {
-    const list = getCurrentList();
-    const titleEl = document.getElementById('listTitle');
-    const countEl = document.getElementById('itemCount');
-    if (titleEl) {
-        titleEl.innerHTML = `📋 ${escapeHtml(list.name)} (<span id="itemCount">${getProducts().length}</span>) <button class="btn-icon" onclick="editListName()" title="Renombrar">✏️</button>`;
-    } else if (countEl) {
-        countEl.textContent = getProducts().length;
-    }
-}
-
-function switchList(id) {
-    if (!marketLists[id]) return;
-    currentListId = id;
-    renderListTitle();
-    renderProducts();
-    updateTotals();
-    showToast(`📋 Lista "${marketLists[id].name}" cargada`);
-}
-
-function updateListSelector() {
-    const select = document.getElementById('listSelect');
-    if (!select) return;
-    select.innerHTML = Object.values(marketLists).map(list => {
-        const count = (list.products || []).length;
-        const sel = list.id === currentListId ? 'selected' : '';
-        return `<option value="${list.id}" ${sel}>${escapeHtml(list.name)} (${count})</option>`;
-    }).join('');
-}
-
-function openImportModal() {
-    document.getElementById('importModal').classList.add('visible');
-}
-function closeImportModal() {
-    document.getElementById('importModal').classList.remove('visible');
-    document.getElementById('importText').value = '';
-}
-function editListName() {
-    document.getElementById('newListName').value = getCurrentList().name;
-    document.getElementById('renameModal').classList.add('visible');
-}
-function closeRenameModal() {
-    document.getElementById('renameModal').classList.remove('visible');
-}
-
-function saveListName() {
-    const name = document.getElementById('newListName').value.trim();
-    if (!name) { showToast('⚠️ Ingresa un nombre válido'); return; }
-    getCurrentList().name = name;
-    saveLists();
-    renderListTitle();
-    closeRenameModal();
-    showToast('✅ Nombre actualizado');
-}
-
-function createNewList() {
-    const name = prompt('Nombre de la nueva lista:', 'Lista ' + (Object.keys(marketLists).length + 1));
-    if (!name || !name.trim()) return;
-    const id = 'list_' + Date.now();
-    marketLists[id] = { id, name: name.trim(), products: [], createdAt: new Date().toISOString() };
-    saveLists();
-    currentListId = id;
-    renderListTitle();
-    renderProducts();
-    updateTotals();
-    updateListSelector();
-    showToast(`✅ Lista "${name.trim()}" creada`);
-}
-
-function copyCurrentList() {
-    const src = getCurrentList();
-    const name = prompt('Nombre para la copia:', src.name + ' (copia)');
-    if (!name || !name.trim()) return;
-    const id = 'list_' + Date.now();
-    marketLists[id] = {
-        id, name: name.trim(),
-        products: JSON.parse(JSON.stringify(src.products || [])).map((p, i) => ({ ...p, id: Date.now() + i + 1 })),
-        createdAt: new Date().toISOString()
-    };
-    saveLists();
-    currentListId = id;
-    renderListTitle();
-    renderProducts();
-    updateTotals();
-    updateListSelector();
-    showToast(`📋 Lista copiada como "${name.trim()}"`);
-}
-
-function deleteCurrentList() {
-    if (currentListId === 'default') { showToast('⚠️ No se puede eliminar la lista principal'); return; }
-    if (!confirm(`¿Eliminar la lista "${getCurrentList().name}"? Esta acción no se puede deshacer.`)) return;
-    delete marketLists[currentListId];
-    currentListId = 'default';
-    saveLists();
-    renderListTitle();
-    renderProducts();
-    updateTotals();
-    updateListSelector();
-    showToast('🗑️ Lista eliminada');
-}
-
-function exportCurrentList() {
-    const list = getCurrentList();
-    const data = { name: list.name, products: list.products || [], exportedAt: new Date().toISOString(), version: '2.0' };
-    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(encoded)
-            .then(() => showToast('✅ Código copiado al portapapeles'))
-            .catch(() => showExportFallback(encoded));
-    } else {
-        showExportFallback(encoded);
-    }
-}
-
-function showExportFallback(code) {
-    document.getElementById('importText').value = code;
-    openImportModal();
-    showToast('Copia este código para compartir la lista');
-}
-
-function importList() {
-    const code = document.getElementById('importText').value.trim();
-    if (!code) { showToast('⚠️ Pega el código de la lista'); return; }
-    try {
-        const data = JSON.parse(decodeURIComponent(escape(atob(code))));
-        if (!data.name || !Array.isArray(data.products)) throw new Error('Formato inválido');
-        const name = prompt('Nombre para esta lista importada:', data.name + ' (importada)');
-        if (!name || !name.trim()) return;
-        const id = 'list_' + Date.now();
-        marketLists[id] = {
-            id, name: name.trim(),
-            products: data.products.map((p, i) => ({
-                id: Date.now() + i + 1,
-                name: p.name || 'Producto',
-                qty: parseInt(p.qty) || 1,
-                unit: p.unit || '',
-                price: parseFloat(p.price) || 0,
-                checked: p.checked !== undefined ? p.checked : true
-            })),
-            createdAt: new Date().toISOString()
-        };
-        saveLists();
-        currentListId = id;
-        renderListTitle();
-        renderProducts();
-        updateTotals();
-        closeImportModal();
-        showToast(`✅ Lista "${name.trim()}" importada`);
-    } catch(e) {
-        showToast('❌ Código inválido o corrupto');
-    }
-}
-
-// ===== PRODUCTOS =====
 function addProduct() {
-    const name = document.getElementById('prodName').value.trim();
-    const qty = parseInt(document.getElementById('prodQty').value) || 1;
-    const unit = document.getElementById('prodUnit').value.trim();
-    const price = parseFloat(document.getElementById('prodPrice').value) || 0;
-
-    if (!name) { showToast('⚠️ Ingresa el nombre del producto'); document.getElementById('prodName').focus(); return; }
-    if (price <= 0) { showToast('⚠️ Ingresa un precio válido'); document.getElementById('prodPrice').focus(); return; }
-
-    const prods = getProducts();
+    let name = document.getElementById('prodName').value.trim();
+    let qty = parseInt(document.getElementById('prodQty').value) || 1;
+    let unit = document.getElementById('prodUnit').value.trim();
+    let price = parseFloat(document.getElementById('prodPrice').value) || 0;
+    if(!name || price<=0) { showToast('⚠️ Nombre y precio válidos'); return; }
+    let prods = getProducts();
     prods.push({ id: Date.now(), name, qty, unit, price, checked: true });
-    setProducts(prods);
-    renderProducts();
-    updateTotals();
-
-    document.getElementById('prodName').value = '';
-    document.getElementById('prodQty').value = '1';
-    document.getElementById('prodUnit').value = '';
-    document.getElementById('prodPrice').value = '';
-    document.getElementById('prodName').focus();
+    setProducts(prods); renderProducts(); updateTotals();
+    document.getElementById('prodName').value = ''; document.getElementById('prodPrice').value = '';
     showToast(`✅ ${name} agregado`);
 }
-
 function renderProducts() {
-    const container = document.getElementById('productList');
-    const prods = getProducts();
-
-    const countEl = document.getElementById('itemCount');
-    if (countEl) countEl.textContent = prods.length;
-
-    if (prods.length === 0) {
-        container.innerHTML = `<div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.<br>Agrega productos para empezar.</p></div>`;
-        document.getElementById('totalsSection').style.display = 'none';
-        return;
-    }
-
-    container.innerHTML = prods.map(p => {
-        const subtotal = p.qty * p.price;
-        const subtotalBs = usdToBs(subtotal);
-        const unitBadge = p.unit ? ` <span class="unit-badge">${escapeHtml(p.unit)}</span>` : '';
-        return `
-            <div class="product-item ${p.checked ? 'checked' : ''}" id="prod-${p.id}">
-                <input type="checkbox" class="product-checkbox" ${p.checked ? 'checked' : ''} onchange="toggleProduct(${p.id})">
-                <div class="product-info">
-                    <div class="product-name">${escapeHtml(p.name)}${unitBadge}</div>
-                    <div class="product-details">${p.qty} × ${formatUSD(p.price)}</div>
-                </div>
-                <div class="product-price">
-                    <div class="product-price-usd">${formatUSD(subtotal)}</div>
-                    ${dollarRate > 0 ? `<div class="product-price-bs">${formatBS(subtotalBs)}</div>` : ''}
-                </div>
-                <button class="product-delete" onclick="deleteProduct(${p.id})" title="Eliminar">✕</button>
-            </div>`;
-    }).join('');
+    let prods = getProducts();
+    if(prods.length===0) { document.getElementById('productList').innerHTML = '<div class="empty-state"><div class="empty-icon">🛒</div><p>Tu lista está vacía.</p></div>'; document.getElementById('totalsSection').style.display = 'none'; return; }
+    document.getElementById('totalsSection').style.display = 'block';
+    document.getElementById('productList').innerHTML = prods.map(p => `<div class="product-item ${p.checked?'checked':''}"><input type="checkbox" ${p.checked?'checked':''} onchange="toggleProduct(${p.id})"><div class="product-info"><div class="product-name">${escapeHtml(p.name)}${p.unit?` <small>(${p.unit})</small>`:''}</div><div class="product-details">${p.qty} × $${p.price.toFixed(2)}</div></div><div class="product-price"><div>$${(p.qty*p.price).toFixed(2)}</div>${dollarRate>0?`<small>Bs. ${(p.qty*p.price*dollarRate).toFixed(2)}</small>`:''}</div><button class="product-delete" onclick="deleteProduct(${p.id})">✕</button></div>`).join('');
 }
+function toggleProduct(id) { let p = getProducts().find(x=>x.id===id); if(p) { p.checked = !p.checked; setProducts(getProducts()); renderProducts(); updateTotals(); } }
+function deleteProduct(id) { let p = getProducts().find(x=>x.id===id); setProducts(getProducts().filter(x=>x.id!==id)); renderProducts(); updateTotals(); if(p) showToast(`🗑️ ${p.name}`); }
+function clearList() { if(confirm('Borrar todo?')) { setProducts([]); renderProducts(); updateTotals(); } }
 
-function toggleProduct(id) {
-    const prods = getProducts();
-    const p = prods.find(x => x.id === id);
-    if (p) { p.checked = !p.checked; setProducts(prods); renderProducts(); updateTotals(); }
-}
-
-function deleteProduct(id) {
-    const prods = getProducts();
-    const p = prods.find(x => x.id === id);
-    setProducts(prods.filter(x => x.id !== id));
-    renderProducts();
-    updateTotals();
-    if (p) showToast(`🗑️ "${p.name}" eliminado`);
-}
-
-function clearList() {
-    if (getProducts().length === 0) { showToast('La lista ya está vacía'); return; }
-    if (confirm('¿Borrar todos los productos de esta lista?')) {
-        setProducts([]);
-        renderProducts();
-        updateTotals();
-        showToast('🗑️ Lista borrada');
-    }
-}
-
-// ===== TOTALES =====
 function updateTotals() {
-    const section = document.getElementById('totalsSection');
-    if (!section) return;
-
-    const level = parseInt(document.getElementById('casheaLevel').value) || 2;
-    const casheaPercent = CASHEA_LEVELS[level];
-    const userPercent = 1 - casheaPercent;
-
-    const prods = getProducts();
-    if (prods.length === 0) { section.style.display = 'none'; return; }
-    section.style.display = 'block';
-
-    const total   = prods.reduce((s, p) => s + p.qty * p.price, 0);
-    const checked = prods.filter(p => p.checked).reduce((s, p) => s + p.qty * p.price, 0);
-
-    const casheaUsd = checked * casheaPercent;
-    const userUsd   = checked * userPercent;
-
-    document.getElementById('totalUsd').textContent   = formatUSD(total);
-    document.getElementById('totalBs').textContent    = formatBS(usdToBs(total));
-    document.getElementById('checkedUsd').textContent = formatUSD(checked);
-    document.getElementById('checkedBs').textContent  = formatBS(usdToBs(checked));
-    document.getElementById('casheaPercent').textContent = Math.round(casheaPercent * 100);
-    document.getElementById('casheaUsd').textContent  = formatUSD(casheaUsd);
-    document.getElementById('casheaBs').textContent   = formatBS(usdToBs(casheaUsd));
-    document.getElementById('userPayUsd').textContent = formatUSD(userUsd);
-    document.getElementById('userPayBs').textContent  = formatBS(usdToBs(userUsd));
-
-    const calcLevel = document.getElementById('calcCasheaLevel');
-    const imagLevel = document.getElementById('imagCasheaLevel');
-    if (calcLevel) calcLevel.value = level;
-    if (imagLevel) imagLevel.value = level;
+    let level = parseInt(document.getElementById('casheaLevel').value);
+    let casheaPercent = CASHEA_LEVELS[level];
+    let userPercent = 1 - casheaPercent;
+    let prods = getProducts();
+    if(prods.length===0) { document.getElementById('totalsSection').style.display='none'; return; }
+    let total = prods.reduce((s,p)=>s + p.qty*p.price,0);
+    let checked = prods.filter(p=>p.checked).reduce((s,p)=>s + p.qty*p.price,0);
+    document.getElementById('totalUsd').innerText = `$${total.toFixed(2)}`;
+    document.getElementById('totalBs').innerText = `Bs. ${(total*dollarRate).toFixed(2)}`;
+    document.getElementById('checkedUsd').innerText = `$${checked.toFixed(2)}`;
+    document.getElementById('checkedBs').innerText = `Bs. ${(checked*dollarRate).toFixed(2)}`;
+    document.getElementById('casheaPercent').innerText = Math.round(casheaPercent*100);
+    document.getElementById('casheaUsd').innerText = `$${(checked*casheaPercent).toFixed(2)}`;
+    document.getElementById('casheaBs').innerText = `Bs. ${(checked*casheaPercent*dollarRate).toFixed(2)}`;
+    document.getElementById('userPayUsd').innerText = `$${(checked*userPercent).toFixed(2)}`;
+    document.getElementById('userPayBs').innerText = `Bs. ${(checked*userPercent*dollarRate).toFixed(2)}`;
 }
 
-// ===== TEMA =====
-function toggleTheme() {
-    document.body.classList.toggle('light-theme');
-    const isLight = document.body.classList.contains('light-theme');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    updateThemeIcon(isLight);
-}
-
-function loadTheme() {
-    const saved = localStorage.getItem('theme');
-    const isLight = saved === 'light';
-    if (isLight) document.body.classList.add('light-theme');
-    updateThemeIcon(isLight);
-}
-
-function updateThemeIcon(isLight) {
-    const btn = document.getElementById('themeBtn');
-    if (btn) btn.textContent = isLight ? '☀️' : '🌙';
-}
-
-// ===== TASA DE CAMBIO =====
+// ===== TASA =====
 async function fetchRate() {
-    const display = document.getElementById('rateDisplay');
-    display.textContent = 'Cargando...';
-
-    const apis = [
-        async () => {
-            const r = await fetch('https://pydolarve.org/api/v1/dollar?page=bcv');
-            const d = await r.json();
-            return d?.monitors?.usd?.price;
-        },
-        async () => {
-            const r = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
-            const d = await r.json();
-            return d?.promedio;
-        },
-        async () => {
-            const r = await fetch('https://pydolarvenezuela-api.vercel.app/api/v1/dollar?page=bcv');
-            const d = await r.json();
-            return d?.monitors?.usd?.price;
-        }
-    ];
-
-    let rate = null;
-    for (const api of apis) {
-        try { rate = await api(); if (rate && rate > 0) break; } catch(e) {}
-    }
-
-    if (rate && rate > 0) {
-        dollarRate = rate;
-        localStorage.setItem('dollarRate', rate.toString());
-        localStorage.setItem('lastUpdate', new Date().toISOString());
-        display.textContent = `Bs. ${formatNumber(rate, 2)}`;
-        const now = new Date();
-        document.getElementById('lastUpdate').textContent =
-            `Última actualización: ${now.toLocaleDateString('es-VE')} ${now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'})}`;
-        document.getElementById('manualRateContainer').innerHTML = '';
-        renderProducts();
-        updateTotals();
-    } else {
-        loadSavedRate();
-    }
+    try { let r = await fetch('https://pydolarve.org/api/v1/dollar?page=bcv'); let d = await r.json(); dollarRate = d?.monitors?.usd?.price; } catch(e) {}
+    if(!dollarRate || dollarRate<=0) { let saved = localStorage.getItem('dollarRate'); if(saved && parseFloat(saved)>0) dollarRate = parseFloat(saved); else dollarRate = 0; }
+    if(dollarRate>0) { localStorage.setItem('dollarRate', dollarRate); document.getElementById('rateDisplay').innerText = `Bs. ${dollarRate.toFixed(2)}`; document.getElementById('lastUpdate').innerText = `Actualizado: ${new Date().toLocaleString()}`; document.getElementById('manualRateContainer').innerHTML = ''; }
+    else { document.getElementById('rateDisplay').innerText = 'Sin tasa'; document.getElementById('manualRateContainer').innerHTML = `<div><input type="number" id="manualRateInput" placeholder="Tasa Bs."><button onclick="setManualRate()">Aplicar</button></div>`; }
+    renderProducts(); updateTotals();
 }
+function setManualRate() { let r = parseFloat(document.getElementById('manualRateInput')?.value); if(r>0) { dollarRate=r; localStorage.setItem('dollarRate',r); fetchRate(); showToast(`✅ Tasa: Bs. ${r.toFixed(2)}`); } }
 
-function loadSavedRate() {
-    const savedRate  = localStorage.getItem('dollarRate');
-    const savedDate  = localStorage.getItem('lastUpdate');
-    const display    = document.getElementById('rateDisplay');
-    const lastUpdate = document.getElementById('lastUpdate');
+// ===== CALCULADORA (mobile + desktop sincronizadas) =====
+function calculateConversion() { let amount = parseFloat(document.getElementById('convAmount').value); let from = document.getElementById('convFrom').value; if(!amount || dollarRate<=0) return; let res = from==='USD' ? `Bs. ${(amount*dollarRate).toFixed(2)}` : `$${(amount/dollarRate).toFixed(2)}`; document.getElementById('convResult').innerHTML = `<div>Resultado: ${res}</div><div>Tasa: 1 USD = Bs. ${dollarRate.toFixed(2)}</div>`; document.getElementById('convResult').style.display='block'; }
+function swapConversion() { let s = document.getElementById('convFrom'); s.value = s.value==='USD'?'BS':'USD'; }
+function toggleManualInput() { document.getElementById('manualInputs').style.display = document.getElementById('manualToggle').checked ? 'block' : 'none'; }
+function calculateCoverage() { let isManual = document.getElementById('manualToggle').checked; let level = parseInt(document.getElementById('calcCasheaLevel')?.value||2); let totalUsd = isManual ? parseFloat(document.getElementById('manualAmount').value) : getProducts().filter(p=>p.checked).reduce((s,p)=>s+p.qty*p.price,0); if(!totalUsd || dollarRate<=0) return; let casheaP = CASHEA_LEVELS[level]; let userP = 1-casheaP; document.getElementById('coverageResult').innerHTML = `<div>Total: $${totalUsd.toFixed(2)} / Bs. ${(totalUsd*dollarRate).toFixed(2)}</div><div>Cashea: $${(totalUsd*casheaP).toFixed(2)} / Bs. ${(totalUsd*casheaP*dollarRate).toFixed(2)}</div><div>Pago inicial: $${(totalUsd*userP).toFixed(2)} / Bs. ${(totalUsd*userP*dollarRate).toFixed(2)}</div>`; document.getElementById('coverageResult').style.display='block'; }
+function calculateImaginary() { let capital = parseFloat(document.getElementById('imagCapital').value); let remain = parseFloat(document.getElementById('imagRemain').value); let level = parseInt(document.getElementById('imagCasheaLevel')?.value||2); if(!capital || remain>=capital || dollarRate<=0) return; let userP = 1-CASHEA_LEVELS[level]; let purchase = (capital-remain)/userP; let cashea = purchase*CASHEA_LEVELS[level]; let userPay = purchase*userP; document.getElementById('imaginaryResult').innerHTML = `<div><strong>Compra: $${purchase.toFixed(2)} (Bs. ${(purchase*dollarRate).toFixed(2)})</strong></div><div>Cashea financia: $${cashea.toFixed(2)} (Bs. ${(cashea*dollarRate).toFixed(2)})</div><div>Pago inicial: $${userPay.toFixed(2)} (Bs. ${(userPay*dollarRate).toFixed(2)})</div><div>Te quedan: $${remain.toFixed(2)} (Bs. ${(remain*dollarRate).toFixed(2)})</div>`; document.getElementById('imaginaryResult').style.display='block'; }
 
-    if (savedRate && parseFloat(savedRate) > 0) {
-        dollarRate = parseFloat(savedRate);
-        display.textContent = `Bs. ${formatNumber(dollarRate, 2)} (guardada)`;
-        if (savedDate) {
-            const d = new Date(savedDate);
-            lastUpdate.textContent = `Tasa guardada del: ${d.toLocaleDateString('es-VE')} ${d.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'})}`;
-        }
-    } else {
-        dollarRate = 0;
-        display.textContent = 'Sin tasa';
-        lastUpdate.textContent = 'Ingresa la tasa manualmente';
-    }
+// Desktop versions
+function calculateConversionDesktop() { let amount = parseFloat(document.getElementById('convAmountDesktop').value); let from = document.getElementById('convFromDesktop').value; if(!amount || dollarRate<=0) return; let res = from==='USD' ? `Bs. ${(amount*dollarRate).toFixed(2)}` : `$${(amount/dollarRate).toFixed(2)}`; document.getElementById('convResultDesktop').innerHTML = `<div>Resultado: ${res}</div><div>Tasa: 1 USD = Bs. ${dollarRate.toFixed(2)}</div>`; document.getElementById('convResultDesktop').style.display='block'; }
+function swapConversionDesktop() { let s = document.getElementById('convFromDesktop'); s.value = s.value==='USD'?'BS':'USD'; }
+function toggleManualInputDesktop() { document.getElementById('manualInputsDesktop').style.display = document.getElementById('manualToggleDesktop').checked ? 'block' : 'none'; }
+function calculateCoverageDesktop() { let isManual = document.getElementById('manualToggleDesktop').checked; let level = parseInt(document.getElementById('calcCasheaLevelDesktop').value); let totalUsd = isManual ? parseFloat(document.getElementById('manualAmountDesktop').value) : getProducts().filter(p=>p.checked).reduce((s,p)=>s+p.qty*p.price,0); if(!totalUsd || dollarRate<=0) return; let casheaP = CASHEA_LEVELS[level]; let userP = 1-casheaP; document.getElementById('coverageResultDesktop').innerHTML = `<div>Total: $${totalUsd.toFixed(2)} / Bs. ${(totalUsd*dollarRate).toFixed(2)}</div><div>Cashea: $${(totalUsd*casheaP).toFixed(2)} / Bs. ${(totalUsd*casheaP*dollarRate).toFixed(2)}</div><div>Pago inicial: $${(totalUsd*userP).toFixed(2)} / Bs. ${(totalUsd*userP*dollarRate).toFixed(2)}</div>`; document.getElementById('coverageResultDesktop').style.display='block'; }
+function calculateImaginaryDesktop() { let capital = parseFloat(document.getElementById('imagCapitalDesktop').value); let remain = parseFloat(document.getElementById('imagRemainDesktop').value); let level = parseInt(document.getElementById('imagCasheaLevelDesktop').value); if(!capital || remain>=capital || dollarRate<=0) return; let userP = 1-CASHEA_LEVELS[level]; let purchase = (capital-remain)/userP; let cashea = purchase*CASHEA_LEVELS[level]; let userPay = purchase*userP; document.getElementById('imaginaryResultDesktop').innerHTML = `<div><strong>Compra: $${purchase.toFixed(2)} (Bs. ${(purchase*dollarRate).toFixed(2)})</strong></div><div>Cashea: $${cashea.toFixed(2)} (Bs. ${(cashea*dollarRate).toFixed(2)})</div><div>Pago inicial: $${userPay.toFixed(2)} (Bs. ${(userPay*dollarRate).toFixed(2)})</div><div>Te quedan: $${remain.toFixed(2)} (Bs. ${(remain*dollarRate).toFixed(2)})</div>`; document.getElementById('imaginaryResultDesktop').style.display='block'; }
 
-    document.getElementById('manualRateContainer').innerHTML = `
-        <div class="offline-badge">⚠️ ${dollarRate > 0 ? 'Sin conexión — Usando última tasa guardada' : 'Ingresa la tasa del dólar'}</div>
-        <div class="manual-rate-section">
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Tasa del dólar (Bs.)</label>
-                    <input type="number" id="manualRateInput" placeholder="Ej: 36.50" step="0.01" min="0" value="${dollarRate > 0 ? dollarRate : ''}">
-                </div>
-                <button class="btn btn-sm btn-primary" onclick="setManualRate()" style="flex-shrink:0; align-self:flex-end;">Aplicar</button>
-            </div>
-        </div>`;
-    updateTotals();
-}
-
-function setManualRate() {
-    const input = document.getElementById('manualRateInput');
-    const rate = parseFloat(input?.value);
-    if (!rate || rate <= 0) { showToast('⚠️ Ingresa una tasa válida mayor a 0'); return; }
-    dollarRate = rate;
-    localStorage.setItem('dollarRate', rate.toString());
-    localStorage.setItem('lastUpdate', new Date().toISOString());
-    document.getElementById('rateDisplay').textContent = `Bs. ${formatNumber(rate, 2)} (manual)`;
-    const now = new Date();
-    document.getElementById('lastUpdate').textContent =
-        `Tasa manual: ${now.toLocaleDateString('es-VE')} ${now.toLocaleTimeString('es-VE', {hour:'2-digit', minute:'2-digit'})}`;
-    renderProducts();
-    updateTotals();
-    showToast(`✅ Tasa actualizada: Bs. ${formatNumber(rate, 2)}`);
-}
-
-// ===== HELPERS =====
-function formatNumber(num, decimals = 2) {
-    return Number(num).toLocaleString('es-VE', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
-}
-function formatUSD(num) { return `$${formatNumber(num, 2)}`; }
-function formatBS(num)  { return `Bs. ${formatNumber(num, 2)}`; }
-function usdToBs(usd)   { return dollarRate > 0 ? usd * dollarRate : 0; }
-function bsToUsd(bs)    { return dollarRate > 0 ? bs / dollarRate : 0; }
-function escapeHtml(t)  {
-    const d = document.createElement('div');
-    d.appendChild(document.createTextNode(t || ''));
-    return d.innerHTML;
-}
-
-// ===== NAVEGACIÓN =====
-function setupSwipe() {
-    let startX = 0, startY = 0;
-    document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, { passive: true });
-    document.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - startX;
-        const dy = e.changedTouches[0].clientY - startY;
-        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 80) {
-            if (dx < 0 && currentPage === 0) openCalculator();
-            else if (dx > 0 && currentPage === 1) closeCalculator();
-        }
-    }, { passive: true });
-}
-
-function openCalculator() {
-    currentPage = 1;
-    document.getElementById('pagesWrapper').style.transform = 'translateX(-50%)';
-    document.getElementById('swipeHintRight').classList.add('hidden');
-    document.getElementById('swipeHintLeft').classList.add('visible');
-    
-    // ✅ Desktop: Mostrar calculadora y ocultar lista
-    if (window.innerWidth >= 992) {
-        document.getElementById('pageCalc').classList.add('active');
-        document.getElementById('pageList').classList.add('hidden');
-    }
-}
-
-function closeCalculator() {
-    currentPage = 0;
-    document.getElementById('pagesWrapper').style.transform = 'translateX(0)';
-    document.getElementById('swipeHintRight').classList.remove('hidden');
-    document.getElementById('swipeHintLeft').classList.remove('visible');
-    
-    // ✅ Desktop: Ocultar calculadora y mostrar lista
-    if (window.innerWidth >= 992) {
-        document.getElementById('pageCalc').classList.remove('active');
-        document.getElementById('pageList').classList.remove('hidden');
-    }
-}
-
-// ✅ Detectar resize
-window.addEventListener('resize', () => {
-    if (window.innerWidth < 992) {
-        document.getElementById('pageCalc').classList.remove('active');
-        document.getElementById('pageList').classList.remove('hidden');
-        document.getElementById('pagesWrapper').style.transform = currentPage === 1 ? 'translateX(-50%)' : 'translateX(0)';
-    } else {
-        document.getElementById('pagesWrapper').style.transform = 'none';
-        if (currentPage === 1) {
-            document.getElementById('pageCalc').classList.add('active');
-            document.getElementById('pageList').classList.add('hidden');
-        } else {
-            document.getElementById('pageCalc').classList.remove('active');
-            document.getElementById('pageList').classList.remove('hidden');
-        }
-    }
-});
-
-// ===== CALCULADORA: CONVERSIÓN =====
-function swapConversion() {
-    const s = document.getElementById('convFrom');
-    s.value = s.value === 'USD' ? 'BS' : 'USD';
-}
-
-function calculateConversion() {
-    const amount = parseFloat(document.getElementById('convAmount').value);
-    const from   = document.getElementById('convFrom').value;
-    if (!amount || amount <= 0) { showToast('⚠️ Ingresa un monto válido'); return; }
-    if (dollarRate <= 0)        { showToast('⚠️ No hay tasa disponible'); return; }
-
-    const result = from === 'USD' ? formatBS(usdToBs(amount)) : formatUSD(bsToUsd(amount));
-    document.getElementById('convResultValue').textContent = result;
-    document.getElementById('convRateUsed').textContent = `1 USD = Bs. ${formatNumber(dollarRate, 2)}`;
-    document.getElementById('convResult').classList.add('visible');
-}
-
-// ===== CALCULADORA: COBERTURA =====
-function toggleManualInput() {
-    const isManual = document.getElementById('manualToggle').checked;
-    document.getElementById('manualInputs').classList.toggle('visible', isManual);
-    document.getElementById('listInfo').style.display = isManual ? 'none' : 'flex';
-}
-
-function calculateCoverage() {
-    const isManual     = document.getElementById('manualToggle').checked;
-    const level        = parseInt(document.getElementById('calcCasheaLevel').value);
-    const casheaPercent = CASHEA_LEVELS[level];
-    const userPercent   = 1 - casheaPercent;
-
-    if (dollarRate <= 0) { showToast('⚠️ No hay tasa disponible'); return; }
-
-    let totalUsd;
-    if (isManual) {
-        totalUsd = parseFloat(document.getElementById('manualAmount').value);
-        if (!totalUsd || totalUsd <= 0) { showToast('⚠️ Ingresa un monto válido'); return; }
-    } else {
-        totalUsd = getProducts().filter(p => p.checked).reduce((s, p) => s + p.qty * p.price, 0);
-        if (totalUsd <= 0) { showToast('⚠️ No hay productos seleccionados'); return; }
-    }
-
-    const casheaUsd = totalUsd * casheaPercent;
-    const userUsd   = totalUsd * userPercent;
-    document.getElementById('covTotalUsd').textContent  = formatUSD(totalUsd);
-    document.getElementById('covTotalBs').textContent   = formatBS(usdToBs(totalUsd));
-    document.getElementById('covCasheaUsd').textContent = formatUSD(casheaUsd);
-    document.getElementById('covCasheaBs').textContent  = formatBS(usdToBs(casheaUsd));
-    document.getElementById('covUserUsd').textContent   = formatUSD(userUsd);
-    document.getElementById('covUserBs').textContent    = formatBS(usdToBs(userUsd));
-    document.getElementById('coverageResult').classList.add('visible');
-}
-
-// ===== CALCULADORA: COMPRA IMAGINARIA =====
-function calculateImaginary() {
-    const capital      = parseFloat(document.getElementById('imagCapital').value);
-    const remain       = parseFloat(document.getElementById('imagRemain').value);
-    const level        = parseInt(document.getElementById('imagCasheaLevel').value);
-    const casheaPercent = CASHEA_LEVELS[level];
-    const userPercent   = 1 - casheaPercent;
-
-    if (!capital || capital <= 0)    { showToast('⚠️ Ingresa un capital válido'); return; }
-    if (isNaN(remain) || remain < 0) { showToast('⚠️ Ingresa un monto a quedar válido'); return; }
-    if (remain >= capital)           { showToast('⚠️ El monto a quedar debe ser menor al capital'); return; }
-    if (dollarRate <= 0)             { showToast('⚠️ No hay tasa disponible'); return; }
-    if (userPercent <= 0)            { showToast('⚠️ Porcentaje de pago inicial inválido'); return; }
-
-    const purchaseUsd = (capital - remain) / userPercent;
-    const casheaUsd   = purchaseUsd * casheaPercent;
-    const userUsd     = purchaseUsd * userPercent;
-
-    document.getElementById('imagPurchaseUsd').textContent = formatUSD(purchaseUsd);
-    document.getElementById('imagPurchaseBs').textContent  = formatBS(usdToBs(purchaseUsd));
-    document.getElementById('imagCasheaUsd').textContent   = formatUSD(casheaUsd);
-    document.getElementById('imagCasheaBs').textContent    = formatBS(usdToBs(casheaUsd));
-    document.getElementById('imagUserUsd').textContent     = formatUSD(userUsd);
-    document.getElementById('imagUserBs').textContent      = formatBS(usdToBs(userUsd));
-    document.getElementById('imagRemainUsd').textContent   = formatUSD(remain);
-    document.getElementById('imagRemainBs').textContent    = formatBS(usdToBs(remain));
-    document.getElementById('imaginaryResult').classList.add('visible');
-}
-
-// ===== TOAST =====
-function showToast(msg) {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg;
-    toast.classList.add('show');
-    clearTimeout(toast._t);
-    toast._t = setTimeout(() => toast.classList.remove('show'), 2500);
-}
-
-// ===== TECLADO =====
-document.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && currentPage === 0 && document.activeElement?.closest?.('.add-form')) {
-        addProduct();
-    }
-    if (e.key === 'Escape') {
-        closeImportModal();
-        closeRenameModal();
-    }
-});
+function toggleTheme() { document.body.classList.toggle('light-theme'); localStorage.setItem('theme', document.body.classList.contains('light-theme')?'light':'dark'); document.getElementById('themeBtn').innerText = document.body.classList.contains('light-theme')?'☀️':'🌙'; }
+function loadTheme() { if(localStorage.getItem('theme')==='light') document.body.classList.add('light-theme'); document.getElementById('themeBtn').innerText = document.body.classList.contains('light-theme')?'☀️':'🌙'; }
+function setupSwipe() { let startX=0; document.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;}); document.addEventListener('touchend',e=>{let dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>80 && window.innerWidth<1024){ if(dx<0 && currentPage===0) openCalculator(); else if(dx>0 && currentPage===1) closeCalculator(); } }); }
+function openCalculator() { if(window.innerWidth>=1024) return; currentPage=1; document.getElementById('pagesWrapper').style.transform='translateX(-50%)'; document.getElementById('swipeHintRight').classList.add('hidden'); document.getElementById('swipeHintLeft').classList.add('visible'); }
+function closeCalculator() { if(window.innerWidth>=1024) return; currentPage=0; document.getElementById('pagesWrapper').style.transform='translateX(0)'; document.getElementById('swipeHintRight').classList.remove('hidden'); document.getElementById('swipeHintLeft').classList.remove('visible'); }
+function showToast(msg) { let t=document.getElementById('toast'); t.innerText=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
+function escapeHtml(str) { let d=document.createElement('div'); d.appendChild(document.createTextNode(str||'')); return d.innerHTML; }
 </script>
-
 </body>
 </html>
